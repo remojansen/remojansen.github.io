@@ -1,0 +1,11 @@
+{
+	"image_path" : "./website/assets/me.jpg",
+    "name": "Remo H. Jansen",
+    "main_paragraph": "Web development ninja, <a class=\"link\" href=\"https://github.com/ower89\">open-source contributor</a>, entrepreneur, technology lover, <a class=\"link\" href=\"https://live.xbox.com/en-US/Profile?gamertag=OweR%20ReLoaDeD\">Xbox hardcore gamer</a> and Internet enthusiast. Lead UX Engineer <a class=\"link\" href=\"http://www.moneymate.com\">@MoneyMate</a> & CEO <a class=\"link\" href=\"http://www.wolksoftware.com\">@WolkSoftwareLtd</a>.",
+    "paragraph": [
+        "I'm a web engineer with intense focus on web and mobile development. Strong interest in user experience. Coding is my passion (particularly in JavaScript). Interested in experimental technologies, user experience and cross-platform development.",
+        "I have worked on a variety of languages (JavaScript, C#, Typescript, CoffeeScript, Node.js, C, Java, PHP, SQL, PLSQL...), frameworks (.NET, Spring, GDK, XNA, SAP R/3...) and operating systems (Mac OS X, Windows, Linux, Android iOS). I have strong coding and debugging skills. My current focus is web apps and cross-platform native apps, UX and WebGL.",
+        "Experienced defining and managing agile UX processes. Trained, coached and managed offshore teams in different geographical places to encouraging self organization, come up with reusable elements, use the best practices, provide visibility to team impediments/risks, help to come up with quality shippable product that meet the product goals and provides a good user experience.",
+        "Please feel free to contact me via <a class=\"link\" href=\"https://twitter.com/OweR_ReLoaDeD\">twitter</a>, <a class=\"link\" href=\"http://www.linkedin.com/in/remojansen\">linkedin</a> or <a class=\"link\" href=\"mailto:remo.jansen@wolksoftware.com\">email</a>."
+    ]
+}

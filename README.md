@@ -1,2 +1,6 @@
-# remojansen.github.io
-My personal website
+www.remojansen.com
+==============
+
+Here you will find the code of my personal website, It is a single-page application hosted on github pages. It uses static json files as database.
+
+![web](https://raw.githubusercontent.com/ower89/ower89.github.io/master/website/assets/promo.png)

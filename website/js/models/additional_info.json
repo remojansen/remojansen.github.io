@@ -1,0 +1,12 @@
+{
+	"title" : "Additional Information",
+	"paragraph" : [
+		"I'm a cool-friendly geek. In my free time I enjoy the company of my family, friends and girlfriend, playing rock n' roll, travelling, playing halo, reading graphic novels, watching a good sci-fi movie and learning something new."
+	],
+	"featured": [
+		"I can speak fluent <span><img src=\"./website/assets/gb.png\"/> English</span> &amp; <span><img src=\"./website/assets/es.png\"/> Spanish</span>.",
+		"<img src=\"./website/assets/europeanunion.png\"/> EU driving licence (Type B).",
+		"<img src=\"./website/assets/es.png\"/> Spanish Citizenship.",
+		"<img src=\"./website/assets/ie.png\"/> Living in Dublin."
+	]
+}

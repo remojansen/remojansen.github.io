@@ -1,0 +1,59 @@
+{
+	"title" : "Personal Projects",
+	"license": [
+		{
+			"title" : "Open Source",
+			"icon_class": "glyphicon glyphicon-cloud",
+			"project" : [
+				{ 
+					"year" : 2014, 
+					"country_icon_path": "./website/assets/ie.png", 
+					"name" : "www.dev-conf.org",
+					"url" : "http://www.dev-conf.org",
+					"paragraph" : [
+						"An open-source website that allows the global comunity of software developers to access all the software conferences arround the world in one place to help them to stay always on the edge."
+					],
+					"skill" : {
+						"title" : "SKILLS",
+						"item" : [
+							"JavaScript","Git","Travis CI","Jasmine","Grunt.js","AMD","MV*", "Node", "Ember", "MongoDB"
+						]
+					},
+					"display_break": true
+				},
+				{ 
+					"year" : 2014, 
+					"country_icon_path": "./website/assets/ie.png", 
+					"name" : "www.unsc.info",
+					"url" : "http://www.unsc.info",
+					"paragraph" : [
+						"A Halo universe wiki website, I created this site because I'm a big fan of the Halo series."
+					],
+					"skill" : {
+						"title" : "SKILLS",
+						"item" : [
+							"JavaScript","Git","Handlebars","Grunt.js","AMD","MV*", "Node", "MongoDB", "C#", "JSON"
+						]
+					},
+					"display_break": true
+				},
+				{ 
+					"year" : 2013, 
+					"country_icon_path": "./website/assets/ie.png", 
+					"name" : "Dublin RTPI",
+					"url" : "http://www.wolksoftware.com/DublinRTPI",
+					"paragraph" : [
+						"Dublin RTPI is a cross-platform native mobile app that allows users to access real-time public transport information."
+					],
+					"skill" : {
+						"title" : "SKILLS",
+						"item" : [
+							"Xamarin","Android","iOS","REST","JSON","XML","PLC"
+						]
+					},
+					"display_break": true
+				}
+			]
+		}
+	]
+}

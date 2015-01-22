@@ -1,0 +1,69 @@
+<div class="fadeInDown animated">
+    <h3 class="notopmargin">About Me</h3>
+    <p>
+        Here you can find a detailed summary of my entire career as software engineer.
+    </p>
+</div>
+<!-- welcome -->
+<div class="jumbotron fadeInUp animated">
+    <div class="row">
+        <div id="summary_content">
+            {{view view.CvSummaryView}}
+        </div>
+    </div>
+</div>
+<!-- cv -->
+<div class="row cvblock">
+    <div class="col-md-6 col-xs-12">
+        <!-- work experience -->
+        <div class="well fadeInLeft animated">
+            <div id="work_content">
+                {{view view.CvWorkExperienceView}}
+            </div>
+        </div>
+        <!-- education -->
+        <div class="well fadeInLeft animated">
+            <div id="education_content">
+                {{view view.CvEducationView}}
+            </div>
+        </div>
+        <!-- self education -->
+        <div class="well fadeInLeft animated">
+            <div id="self_education_content">
+                {{view view.CvSelfEducationView}}
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-xs-12 printNotVisible">
+        <!-- skills -->
+        <div class="well fadeInRight animated">
+            <div id="skills_content">
+                {{view view.CvSkillsEducationView}}
+            </div>
+        </div>
+        <!-- awards -->
+        <div class="well fadeInRight animated">
+            <div id="awards_content">
+                {{view view.CvAwardsEducationView}}
+            </div>
+        </div>
+        <!-- personal projects -->
+        <div class="well fadeInRight animated">
+            <div id="projects_content">
+                    {{view view.CvProjectsView}}
+            </div>
+        </div>
+        <!-- recommendations -->
+        <div class="well fadeInRight animated">
+            <div id="recommendations_content">
+                {{view view.CvRecommendationsView}}
+            </div>
+        </div>
+        <!-- additional information -->
+        <div class="well fadeInRight animated">
+            <div id="additional_info_content">
+                {{view view.CvAdditionalInformationView}}
+            </div>
+        </div>
+    </div>
+</div>

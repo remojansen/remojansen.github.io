@@ -1,0 +1,10 @@
+<div class="col-md-12 printNotVisible" style="text-align: center;">
+    <img src="{{unbound summary.image_path}}" style="width:45%; margin-top: 5%;" class="img-circle"/>
+</div>
+<div class="col-md-12">
+    <h2 class="center">{{unbound summary.name}}</h2>
+    <p class="center">{{{unbound summary.main_paragraph}}}</p>
+    {{#each summary.paragraph}}
+        <p class="paragraph">{{{unbound this}}}</p>
+    {{/each}}
+</div>

@@ -1,0 +1,22 @@
+{
+	"title" : "Skills",
+	"skill" : [
+		{ "name" : "HTML5 & CSS3", "rank" : "100", "class" : "success"},
+		{ "name" : "JavaScript", "rank" : "100", "class" : "success"},
+		{ "name" : "UX &amp; ALM", "rank" : "100", "class" : "success"},
+		{ "name" : "SOA &amp; REST", "rank" : "100", "class" : "success"},
+		{ "name" : "Responsive Design", "rank" : "100", "class" : "success"},
+		{ "name" : "C# &amp; ASP MVC", "rank" : "95", "class" : "success"},
+		{ "name" : "Design Patterns", "rank" : "89", "class" : "success"},
+		{ "name" : "Phone Gap", "rank" : "89", "class" : "success"},
+		{ "name" : "Ember", "rank" : "89", "class" : "success"},
+		{ "name" : "Node.js", "rank" : "89", "class" : "success"},
+		{ "name" : "MongoDB", "rank" : "75", "class" : "warning"},
+		{ "name" : "QA &amp; CI", "rank" : "75", "class" : "warning"},
+		{ "name" : "SQL &amp; ORM", "rank" : "65", "class" : "warning"},
+		{ "name" : "Xamarin iOS", "rank" : "65", "class" : "warning"},
+		{ "name" : "Xamarin Android", "rank" : "65", "class" : "danger"},
+		{ "name" : "PHP &amp; Java", "rank" : "65", "class" : "danger"},
+		{ "name" : "WebGL", "rank" : "50", "class" : "danger"}
+	]
+}

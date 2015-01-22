@@ -1,0 +1,25 @@
+<div class="fadeInDown animated">
+	<h3 class="notopmargin">{{unbound portfolio.title}}</h3>
+	<p>{{unbound portfolio.description}}</p>
+</div>
+<div class="row">
+  <div class="col-md-12 col-ms-12 printNotVisible">
+    <div>
+    	<br/>
+		<div class="row">
+		  {{#each portfolio.demo}}
+		  <div class="col-md-4col-xs-12">
+		    <div class="thumbnail">
+		      {{#if description}}
+		      	<p class="portfolioparagraph well fadeInDown animated" style="padding: 15px;">
+		      		{{{unbound description}}}
+		      	</p>
+		      {{/if}}
+		      <img class="fadeInDown animated" alt="" src="{{unbound url}}" />
+		    </div>
+		  </div>
+		  {{/each}}
+		</div>
+    </div>
+  </div>
+</div>

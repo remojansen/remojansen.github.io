@@ -1,0 +1,31 @@
+{
+  "name": "ower89.github.io",
+  "version": "0.0.0",
+  "homepage": "www.remojansen.com",
+  "authors": [
+    "Remo H. Jansen remo.jansen@wolksoftware.com"
+  ],
+  "description": "Remo H. Jansen personal website",
+  "main": "index.html",
+  "keywords": [
+    "website",
+    "web",
+    "developer"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.2.0",
+    "ember": "~1.6.1",
+    "requirejs-text": "~2.0.12",
+    "requirejs": "~2.1.14",
+    "google-code-prettify": "~1.0.2"
+  }
+}

@@ -1,0 +1,42 @@
+{
+	"title" : "My Portfolio",
+	"description" : "Here you will find some screenshots and descritions of some of the websites that I've been working on so far.",
+	"demo" : [
+		{ "url" : "./website/assets/portfolio/1.png", "description" : "MoneyMate Investment Analytics is a mobile-ready single-page application that contains a number of stand-alone modules (Fund Screening, Real and Model Portfolios, Portfolio Optimisation, Scoring) which enable financial advisers to analyse constantly updated fund data for most major European funds markets." },
+		{ "url" : "./website/assets/portfolio/2.png", "description" : null  },
+		{ "url" : "./website/assets/portfolio/3.png", "description" : null  },
+		{ "url" : "./website/assets/portfolio/3b.png", "description" : null  },
+		{ "url" : "./website/assets/portfolio/4.png", "description" : "I was in charge to design a tool to increase engagement between brokers and customers and increase the sales of Bank Of Ireland investment products. I worked with the client to gather business requirements, create data models and architecture. I also had to do some work to integrate user authentification within an existing application. I used HTML5, ResfFul services and PhoneGap to target as many devices as possible with one single code base so it is easier to maintain and deploy. A premium user experience was achieved through an strong user-centric process (Contextual enquiry, user research, competitor analysis, ketching, wireframing, prototyping, early UAT iterations...)."  },
+		{ "url" : "./website/assets/portfolio/5.png", "description" : null  },
+		{ "url" : "./website/assets/portfolio/6.png", "description" : null  },
+		{ 
+			"url" : "./website/assets/portfolio/7.png", 
+			"description" : "The sites <a class=\"link\" href=\"https://funcentre.newireland.ie\">funcentre.newireland.ie</a> and <a class=\"link\" href=\"https://funcentre.bankofireland.com\">funcentre.bankofireland.com</a> are powered by a CMS-like single-page-application. The site uses the latest web development techniques and frameworks (responsive-design, backbone.js or CoffeeScript) and it has advance performace optimizations (SQL, Minification, Gzip, Cache) that allows to load all the information available for more than 1000 investments in one initial load that takes only 0.2 seconds and it can support as many clients as necesary. This product was semi-finalist in the 2013 <a class=\"link\" href=\"http://webawards.ie/\">Realex Fire Web Awards</a> in the category \"Best financial services website\"."  
+		},
+		{ "url" : "./website/assets/portfolio/8.png", "description" : null  },
+		{ "url" : "./website/assets/portfolio/9.png", "description" : null  },
+		{ 
+			"url" : "./website/assets/portfolio/10.png", 
+			"description" : "<a class=\"link\" href=\"http://www.wolksoftware.com/DublinRTPI/\">Dublin RTPI</a> is an Android and iOS native app powered by Xamarin."  
+		},
+		{
+			"url" : "./website/assets/portfolio/11.png",
+			"description" : "I created <a class=\"link\" href=\"http://www.wolksoftware.com/\">www.wolksoftware.com</a> when I Co-Founded Wolk Software Limited."
+		},
+		{ 
+			"url" : "./website/assets/portfolio/12.png", 
+			"description" : "Fund Centre Lite is a hosted fund data platform that Asset Managers and Life Assurance companies can employ to manage the online publication of their fund data"  
+		},
+		{ "url" : "./website/assets/portfolio/13.png", "description" : null  },
+		{ 
+			"url" : "./website/assets/portfolio/14.png", 
+			"description" : "Silverfinch is one of the MoneyMate solutions. Silverfinch creates connectivity between asset managers and insurers through a fund data utility in a secure and controlled environment."  
+		},
+		{ "url" : "./website/assets/portfolio/15.png", "description" : null  },
+		{ "url" : "./website/assets/portfolio/16.png", "description" : null  },
+		{ "url" : "./website/assets/portfolio/17.png", "description" : "The website www.unsc.info is a Halo universe wiki website, I created this site because I'm a big fan of the Halo series."  },
+		{ "url" : "./website/assets/portfolio/18.png", "description" : null  },
+		{ "url" : "./website/assets/portfolio/19.png", "description" : null  },
+		{ "url" : "./website/assets/portfolio/20.png", "description" : null  }
+	]
+}

@@ -1,0 +1,177 @@
+{
+	"title": "Work Experience",
+	"organizarion" : [
+		{
+			"name" : "Wolk Software Ltd.",
+			"role" : [
+				{ "country_icon_path" : "./website/assets/ie.png", "initial_date" : "March 2014", "name" : "CEO, Co-Founder" }
+			],
+			"paragraph" : [
+				"Wolk Software is a software development company that want to not just deliver high quality software but to create software that add value to peoples lives and business through innovation, open-source and cloud technologies."
+			],
+			"skill" : {
+				"title" : "SKILLS",
+				"item" : [
+					"ALM",
+					"Social Media",
+					"Marketing",
+					"UX",
+					"Windows Azure",
+					"Nodejitsu",
+					"Node",
+					"Ember",
+					"MongoDB",
+					"UX", 
+					"Agile", 
+					"Scrum",
+					"Balsamiq",
+					"Xamarin",
+					"Grunt.js",
+					"SOA",
+					"REST",
+					"Management",
+					"Strategy"
+				]
+			},
+			"diaplay_break" : true
+		},
+		{ 
+			"name" : "Moneymate Ltd.",
+			"role" : [
+				{ "country_icon_path" : "./website/assets/ie.png", "initial_date" : "July 2013", "name" : "Lead UX Engineer" },
+				{ "country_icon_path" : "./website/assets/ie.png", "initial_date" : "March 2012", "name" : "Web Engineer"}
+			],
+			"paragraph" : [
+				"MoneyMate is a specialist provider of investment product information  management solutions to global asset managers like State Street or JP Morgan."
+			],
+			"skill" : {
+				"title" : "SKILLS",
+				"item" : [
+					"ALM",
+					"User Research",
+					"Prototyping",
+					"Wireframes",
+					"Sketches",
+					"UX", 
+					"Agile", 
+					"Scrum",
+					"Jira",
+					"Balsamiq",
+					"CI",
+					"Grunt.js",
+					"Investment Analytics",
+					"SOA",
+					"REST",
+					"IoC &amp; DI",
+					"SOLID",
+					"Git",
+					"JavaScript",  
+					"CSS3", 
+					"HTML5", 
+					"Responsive Design",
+					"Bootstrap",
+					"Phonegap",
+					"C#",
+					"ASP MVC",
+					"AMD",
+					"Node.js",
+					"Backbone.js",
+					"Chaplin.js",
+					"Handlebars.js",
+					"TypeScript",
+					"CoffeeScript",
+					"MSSQL",
+					"Linq",
+					"Nhibernate",
+					"Entity Framework"
+				]
+			},
+			"diaplay_break" : true
+		},
+		{ 
+			"name" : "Club Travel Ltd.",
+			"role" : [
+				{ "country_icon_path" : "./website/assets/ie.png", "initial_date" : "March 2011", "name" : "Web Engineer" }
+			],
+			"paragraph" : [
+				"Club Travel has been established for more than 35 years and is the single largest travel management company in Ireland."
+			],
+			"skill" : {
+				"title" : "SKILLS",
+				"item" : [
+					"JavaScript",
+					 "Jquery",  
+					 "Ajax",
+					 "CSS3", 
+					 "HTML5", 
+					 "C#",
+					 "ASP MVC",
+					 "VB.NET",
+					 "MSSQL",
+					 "Linq",
+					 "Entity Framework",
+					 "SOA",
+					 "SOAP",
+					 "Invoicing",
+					 "Online Payments"
+				]
+			},
+			"diaplay_break" : true
+		},
+		{ 
+			"name" : "GuadalTech",
+			"role" : [
+				{ "country_icon_path" : "./website/assets/es.png", "initial_date" : "September 2010", "name" : "Web Engineer" }
+			],
+			"paragraph" : [
+				"GuadalTech Technologic Services is one of the leading IT companies in Seville. They deliver software consulting and outsourced managed services for multi-national companies like Heineken."
+			],
+			"skill" : {
+				"title" : "SKILLS",
+				"item" : [
+					 "JavaScript",
+					 "Jquery",  
+					 "Ajax",
+					 "CSS3", 
+					 "HTML5", 
+					 "Java",
+					 "Spring",
+					 "Hibernate",
+					 "Oracle",
+					 "SAP R/3",
+					 "SOA",
+					 "SOAP",
+					 "Disaster Recovery",
+					 "Logistics",
+					 "Reporting",
+					 "Audit"
+				]
+			},
+			"diaplay_break" : true
+		},
+		{ 
+			"name" : "Lucca Leadership",
+			"role" : [
+				{ "country_icon_path" : "./website/assets/ie.png", "initial_date" : "May 2010", "name" : "Web Engineer" }
+			],
+			"paragraph" : [
+				"Lucca Leadership is a global charity that aims to uplift communities all over the world by developing new generations of transformational leaders."
+			],
+			"skill" : {
+				"title" : "SKILLS",
+				"item" : [
+					 "JavaScript",
+					 "Jquery",  
+					 "Ajax",
+					 "CSS2", 
+					 "XHTML", 
+					 "PHP",
+					 "LAMP",
+					 "MySQL",
+					 "i18n"
+				]
+			},
+			"diaplay_break" : false
+		}
+	]
+}

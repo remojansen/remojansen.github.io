@@ -1,0 +1,12 @@
+<h3>{{unbound self_education.title}}</h3>
+<ul class="planeul">
+	{{#each self_education.book}}
+        <li>
+            <p>
+                <i class="glyphicon glyphicon-book"></i>
+                {{unbound title}}
+                <span class="label label-default">ISBN {{unbound isbn}}</span>
+            </p>
+        </li>
+    {{/each}}
+</ul>

@@ -1,0 +1,19 @@
+<h3>{{unbound education.title}}</h3>
+{{#each education.organizarion}}
+	<h4><i class="glyphicon glyphicon-bookmark"></i> {{unbound name}}</h4>
+	{{#each course}}
+		<p>
+			<span class="label label-warning">
+                <img class="location" alt="" src="{{unbound country_icon_path}}"/>
+                {{unbound initial_date}}
+            </span>
+			<b>{{unbound name}}</b>
+		</p>
+        {{#each paragraph}}<p class="paragraph">{{unbound this}}</p>{{/each}}
+        <p class="skill_container">
+          {{unbound skill.title}}
+          {{#each skill.item}}<span class="label label-default">{{unbound this}}</span> {{/each}}
+        </p>
+    {{/each}}
+	{{#if diaplay_break}}<hr/>{{/if}}
+{{/each}}
