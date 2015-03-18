@@ -1,0 +1,20 @@
+<div>
+  <div class="fadeInDown animated">
+    <h3 class="notopmargin">Twitter Feed</h3>
+    <p>
+      todo
+    </p>
+  </div>
+  {{#each item}}
+  <div class="well fadeInUp animated tweet">
+    <div class="tweet-body">
+      {{{unbound description}}}
+      <hr/>
+      {{unbound pubDate}}
+      <a href="{{unbound link}}" class="pull-right tweet-icon"><i class="fa fa-star"></i></a>
+      <a href="{{unbound link}}" class="pull-right tweet-icon"><i class="fa fa-retweet"></i></a>
+      <a href="{{unbound link}}" class="pull-right tweet-icon"><i class="fa fa-reply"></i></a>
+    </div>
+  </div>
+  {{/each}}
+</div>

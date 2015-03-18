@@ -1,0 +1,29 @@
+{
+  "name": "remojansen.github.io",
+  "version": "1.0.0",
+  "description": "Remo H. Jansen personal website",
+  "main": "",
+  "scripts": {
+    "test": "gulp"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/remojansen/remojansen.github.io.git"
+  },
+  "keywords": [
+    "personal",
+    "website",
+    "web",
+    "developer"
+  ],
+  "author": "Remo H. Jansen <remo.jansen@wolksoftware.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/remojansen/remojansen.github.io/issues"
+  },
+  "homepage": "https://github.com/remojansen/remojansen.github.io",
+  "devDependencies": {
+    "browser-sync": "^2.3.1",
+    "gulp": "^3.8.11"
+  }
+}

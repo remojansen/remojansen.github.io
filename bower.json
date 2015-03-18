@@ -26,6 +26,7 @@
     "ember": "~1.6.1",
     "requirejs-text": "~2.0.12",
     "requirejs": "~2.1.14",
-    "google-code-prettify": "~1.0.2"
+    "google-code-prettify": "~1.0.2",
+    "fontawesome" : "~4.3.0"
   }
 }

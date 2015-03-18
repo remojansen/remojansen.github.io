@@ -605,7 +605,7 @@ pre {
 
 @keyframes pulse {
     0% {
-       
+
         background: url('../assets/343.png');
     }
     20% {
@@ -631,7 +631,7 @@ pre {
 
 @-moz-keyframes pulse {
     0% {
-       
+
         background: url('../assets/343.png');
     }
     20% {
@@ -657,7 +657,7 @@ pre {
 
 @-webkit-keyframes pulse {
     0% {
-       
+
         background: url('../assets/343.png');
     }
     20% {
@@ -813,4 +813,17 @@ hr {
 
 ol.linenums {
     margin: 0 0 0 10px;
+}
+
+.tweet{
+	padding: 3% 2% 1% 2%;
+	width: 32.333%;
+	float: left;
+	margin-right: 1%;
+	min-height: 190px;
+}
+
+.tweet-icon {
+	color: #999;
+	margin-right: 1%;
 }
