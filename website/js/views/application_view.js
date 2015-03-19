@@ -1,9 +1,10 @@
 define([
     'Ember',
     'text!website/js/templates/application.hbs',
-    'Konami'
+    'Konami',
+    'website/js/utils',
 ],
-    function (Ember, template, Konami) {
+    function (Ember, template, Konami, utils) {
         "use strict";
 
         return Ember.View.extend({
@@ -15,6 +16,7 @@ define([
             afterRenderEvent: function () {
                 var that = this;
                 that.easterEgg();
+                utils.initializeSlideout();
             },
             easterEgg : function () {
                 var easter_egg, SECRET_WITH, SECRET_HEIGHT;

@@ -5,6 +5,11 @@ define([
         "use strict";
 
         return Ember.Route.extend({
+            renderTemplate: function() {
+              this.render({
+                outlet: "main"
+              });
+            },
             model: function()
             {
                 var result = {};

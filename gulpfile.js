@@ -15,6 +15,8 @@ gulp.task('browser-sync', function() {
 gulp.task('default', ['browser-sync'], function (cb) {
     gulp.watch([
       "website/js/**/**.js",
+      "website/js/**/**.json",
+      "website/js/**/**.hbs",
       "website/css/**/**.css",
       "website/css/**/**.css",
       "website/assets/**/**.png",

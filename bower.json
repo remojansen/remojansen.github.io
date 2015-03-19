@@ -22,11 +22,15 @@
     "tests"
   ],
   "dependencies": {
-    "bootstrap": "~3.2.0",
-    "ember": "~1.6.1",
-    "requirejs-text": "~2.0.12",
-    "requirejs": "~2.1.14",
-    "google-code-prettify": "~1.0.2",
-    "fontawesome" : "~4.3.0"
+    "bootstrap": "~3.3.4",
+    "ember": "~1.10.0",
+    "requirejs-text": "~2.0.14",
+    "requirejs": "~2.1.16",
+    "google-code-prettify": "~1.0.4",
+    "fontawesome": "~4.3.0",
+    "slideout": "https://github.com/Mango/slideout.git#~0.1.5"
+  },
+  "resolutions": {
+    "ember": "~1.10.0"
   }
 }

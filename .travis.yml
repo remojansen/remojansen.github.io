@@ -1,0 +1,6 @@
+before_script:
+  - npm install -g bower
+  - npm install -g tsd
+language: node_js
+node_js:
+  - "0.10"
