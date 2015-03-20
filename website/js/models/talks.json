@@ -2,6 +2,41 @@
   "title" : "Talks",
   "description" : "",
   "items" : [
-    
+    {
+      "title" : "",
+      "language" : "en",
+      "link" : "",
+      "year" : "2014"
+    },
+    {
+      "title" : "",
+      "language" : "es",
+      "link" : "http://salesianostrianadam.github.io/data/slide.html?slide=mongodb_basico#/slide1",
+      "year" : "2014"
+    },
+    {
+      "title" : "",
+      "language" : "es",
+      "link" : "http://salesianostrianadam.github.io/data/slide.html?slide=rest_con_node#/slide1",
+      "year" : "2014"
+    },
+    {
+      "title" : "",
+      "language" : "es",
+      "link" : "http://salesianostrianadam.github.io/data/slide.html?slide=javascript_mvc#/slide1",
+      "year" : "2014"
+    },
+    {
+      "title" : "",
+      "language" : "es",
+      "link" : "http://salesianostrianadam.github.io/data/slide.html?slide=herramientas_javascript#/slide1",
+      "year" : "2014"
+    },
+    {
+      "title" : "",
+      "language" : "es",
+      "link" : "",
+      "year" : "2013"
+    }
   ]
 }
