@@ -1,20 +1,30 @@
-<div>
-  <div class="fadeInDown animated">
-    <h3 class="notopmargin">Twitter Feed</h3>
-    <p>
-      todo
-    </p>
-  </div>
+<blockquote class="large fadeInDown animated">
+  <p>
+    <strong>Please Note:</strong>
+    This is just a preview of my latest tweets.
+    If you are looking for all my tweets or you want to
+    follow me, please visit my twitter account at
+    <a href="https://twitter.com/OweR_ReLoaDeD/">@OweR_ReLoaDeD</a>
+  </p>
+</blockquote>
+<div class="row">
   {{#each item}}
-  <div class="well fadeInUp animated tweet">
-    <div class="tweet-body">
-      {{{unbound description}}}
-      <hr/>
-      {{unbound pubDate}}
-      <a href="{{unbound link}}" class="pull-right tweet-icon"><i class="fa fa-star"></i></a>
-      <a href="{{unbound link}}" class="pull-right tweet-icon"><i class="fa fa-retweet"></i></a>
-      <a href="{{unbound link}}" class="pull-right tweet-icon"><i class="fa fa-reply"></i></a>
+    <div class="col-md-4">
+      <div class="well fadeInUp animated tweet">
+        <a href="https://twitter.com/OweR_ReLoaDeD/">
+          <img src="/website/assets/me.png" class="pull-left img-rounded tweet-image"/>
+        </a>  
+        <div class="tweet-body">
+          <div class="tweet-text">
+            {{{unbound description}}}
+          </div>
+          <hr/>
+          {{unbound pubDate}}
+          <a href="{{unbound link}}" class="pull-right tweet-icon"><i class="fa fa-star"></i></a>
+          <a href="{{unbound link}}" class="pull-right tweet-icon"><i class="fa fa-retweet"></i></a>
+          <a href="{{unbound link}}" class="pull-right tweet-icon"><i class="fa fa-reply"></i></a>
+        </div>
+      </div>
     </div>
-  </div>
   {{/each}}
 </div>

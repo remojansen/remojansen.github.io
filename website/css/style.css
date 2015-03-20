@@ -820,11 +820,15 @@ ol.linenums {
 }
 
 .tweet{
-	padding: 3% 2% 1% 2%;
-	width: 32.333%;
-	float: left;
-	margin-right: 1%;
-	min-height: 190px;
+	padding: 5%;
+}
+.tweet-text {
+	min-height: 120px;
+}
+
+.tweet-image{
+	width: 45px;
+	margin: 1% 3% 3% 0%;
 }
 
 .tweet-icon {

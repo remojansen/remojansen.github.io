@@ -28,7 +28,8 @@
     "requirejs": "~2.1.16",
     "google-code-prettify": "~1.0.4",
     "fontawesome": "~4.3.0",
-    "slideout": "https://github.com/Mango/slideout.git#~0.1.5"
+    "slideout": "https://github.com/Mango/slideout.git#~0.1.5",
+    "moment": "~2.9.0"
   },
   "resolutions": {
     "ember": "~1.10.0"

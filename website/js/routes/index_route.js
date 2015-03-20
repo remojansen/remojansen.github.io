@@ -91,7 +91,25 @@ define([
                     dataType: "json",
                     url: './website/js/models/self_education.json',
                     success: function(data){
+
+                        var half = (data.book.length / 2),
+                            bookGroupA = [],
+                            bookGroupB = [],
+                            i = 0;
+
+                        for(i = 0; i < data.book.length; i++) {
+                          if(i <= half) {
+                            bookGroupA.push(data.book[i]);
+                          }
+                          else {
+                            bookGroupB.push(data.book[i]);
+                          }
+                        }
+
+                        debugger;
                         result.self_education = data;
+                        result.self_education.bookGroupA = bookGroupA;
+                        result.self_education.bookGroupB = bookGroupB;
                     }
                 });
 

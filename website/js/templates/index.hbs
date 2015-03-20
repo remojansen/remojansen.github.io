@@ -1,9 +1,4 @@
-<div class="fadeInDown animated">
-    <h3 class="notopmargin">About Me</h3>
-    <p>
-        Here you can find a detailed summary of my entire career as software engineer.
-    </p>
-</div>
+
 <!-- welcome -->
 <div class="jumbotron fadeInUp animated">
     <div class="row">
@@ -25,12 +20,6 @@
         <div class="well fadeInLeft animated">
             <div id="education_content">
                 {{view view.CvEducationView}}
-            </div>
-        </div>
-        <!-- self education -->
-        <div class="well fadeInLeft animated">
-            <div id="self_education_content">
-                {{view view.CvSelfEducationView}}
             </div>
         </div>
     </div>
@@ -63,6 +52,16 @@
         <div class="well fadeInRight animated">
             <div id="additional_info_content">
                 {{view view.CvAdditionalInformationView}}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row cvblock">
+    <div class="col-md-12 col-xs-12">
+        <!-- self education -->
+        <div class="well fadeInLeft animated">
+            <div id="self_education_content">
+                {{view view.CvSelfEducationView}}
             </div>
         </div>
     </div>

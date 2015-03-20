@@ -16,7 +16,8 @@ require.config({
         text: "bower_components/requirejs-text/text",
         Konami: "bower_components/konami-js/konami",
         prettify : "bower_components/google-code-prettify/bin/prettify.min",
-        slideout : "./bower_components/slideout/dist/slideout.min"
+        slideout : "bower_components/slideout/dist/slideout.min",
+        moment : "bower_components/moment/min/moment.min"
     },
     urlArgs: 'bust=' + (new Date()).getTime() // set cache off (disable in production)
 });
