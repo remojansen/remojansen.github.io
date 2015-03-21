@@ -1,14 +1,16 @@
-<div class="fadeInDown animated">
-	<h3 class="notopmargin">{{unbound publications.title}}</h3>
-	<p>{{unbound publications.description}}</p>
-</div>
 <div class="row">
-  <div class="col-md-12 col-ms-12 printNotVisible">
+  <div class="col-md-12 col-ms-12">
     <div>
     	<br/>
 		<div class="row">
-		  {{#each publications.items}}
-        todo
+		  {{#each item in publications.items}}
+      {{unbound item.title}}
+      {{unbound item.role}}
+      {{unbound item.isbn}}
+      {{unbound item.publisher}}
+      {{unbound item.link}}
+      {{unbound item.year}}
+      <img src="{{unbound item.thumbnail}}"/>
 		  {{/each}}
 		</div>
     </div>

@@ -1,16 +1,11 @@
-<div class="fadeInDown animated">
-	<h3 class="notopmargin">{{unbound talks.title}}</h3>
-	<p>{{unbound talks.description}}</p>
-</div>
 <div class="row">
-  <div class="col-md-12 col-ms-12 printNotVisible">
-    <div>
-    	<br/>
-		<div class="row">
-		  {{#each talks.items}}
-        todo
-		  {{/each}}
-		</div>
-    </div>
+	<div class="well fadeInUp animated">
+		<h2>{{unbound talks.title}}</h2>
+	  {{#each talk in talks.items}}
+      <h3>{{unbound talk.title}}</h3>
+			{{unbound talk.language}}
+			{{unbound talk.year}}
+			<a href="{{unbound talk.url}}" target="_blank">link</a>
+	  {{/each}}
   </div>
 </div>

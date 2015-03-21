@@ -5,6 +5,8 @@ require([
     'website/js/routes/portfolio_route',
     'website/js/routes/blog_route',
     'website/js/routes/stackoverflow_route',
+    'website/js/routes/talks_route',
+    'website/js/routes/publications_route',
     'website/js/routes/github_route',
     'website/js/routes/twitter_route',
     'website/js/views/index_view',
@@ -12,53 +14,61 @@ require([
     'website/js/views/portfolio_view',
     'website/js/views/blog_view',
     'website/js/views/stackoverflow_view',
+    'website/js/views/talks_view',
+    'website/js/views/publications_view',
     'website/js/views/github_view',
     'website/js/views/twitter_view',
     'jQuery',
     'Bootstrap',
     'Handlebars',
     'Ember'
-],
-    function (app,
-              routes,
-              indexRoute,
-              portfolioRoute,
-              blogRoute,
-              stackoverflowRoute,
-              githubRoute,
-              twitterRoute,
-              indexView,
-              applicationView,
-              portfolioView,
-              blogView,
-              stackoverflowView,
-              githubView,
-              twitterView
-        )
-    {
-        "use strict";
+], function (
+  app,
+  routes,
+  indexRoute,
+  portfolioRoute,
+  blogRoute,
+  stackoverflowRoute,
+  talksRoute,
+  publicationsRoute,
+  githubRoute,
+  twitterRoute,
+  indexView,
+  applicationView,
+  portfolioView,
+  blogView,
+  stackoverflowView,
+  talksView,
+  publicationsView,
+  githubView,
+  twitterView
+  ){
+    "use strict";
 
-        // Configure Routes
-        app.Router.map(routes);
+    // Configure Routes
+    app.Router.map(routes);
 
-        // Configure Routes
-        app.IndexRoute = indexRoute;
-        app.PortfolioRoute = portfolioRoute;
-        app.BlogRoute = blogRoute;
-        app.StackoverflowRoute = stackoverflowRoute;
-        app.GithubRoute = githubRoute;
-        app.TwitterRoute = twitterRoute;
+    // Configure Routes
+    app.IndexRoute = indexRoute;
+    app.PortfolioRoute = portfolioRoute;
+    app.BlogRoute = blogRoute;
+    app.StackoverflowRoute = stackoverflowRoute;
+    app.TalksRoute = talksRoute;
+    app.PublicationsRoute = publicationsRoute;
+    app.GithubRoute = githubRoute;
+    app.TwitterRoute = twitterRoute;
 
-        // Configure Views
-        app.IndexView = indexView;
-        app.ApplicationView = applicationView;
-        app.PortfolioView = portfolioView;
-        app.BlogView = blogView;
-        app.StackoverflowView = stackoverflowView;
-        app.GithubView = githubView;
-        app.TwitterView = twitterView;
+    // Configure Views
+    app.IndexView = indexView;
+    app.ApplicationView = applicationView;
+    app.PortfolioView = portfolioView;
+    app.BlogView = blogView;
+    app.StackoverflowView = stackoverflowView;
+    app.TalksView = talksView;
+    app.PublicationsView = publicationsView;
+    app.GithubView = githubView;
+    app.TwitterView = twitterView;
 
-        // We're ready to launch the app!
-        app.advanceReadiness();
-    }
-);
+    // We're ready to launch the app!
+    app.advanceReadiness();
+});

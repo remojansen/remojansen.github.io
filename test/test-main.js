@@ -1,5 +1,12 @@
-require.config({
-    baseUrl: './',
+var tests = [];
+for (var file in window.__karma__.files) {
+    if (/test\.js$/.test(file)) {
+        tests.push(file);
+    }
+}
+
+requirejs.config({
+    baseUrl: './base/',
     waitSeconds: 45,
     shim: {
         Bootstrap: { deps: ['jQuery'], exports: 'Bootstrap' },
@@ -20,5 +27,9 @@ require.config({
         moment : "bower_components/moment/min/moment.min"
     },
     // set cache off (disable in production)
-    urlArgs: 'bust=' + (new Date()).getTime()
+    urlArgs: 'bust=' + (new Date()).getTime(),
+    // ask Require.js to load these files (all our tests)
+    deps: tests,
+    // start test run, once Require.js is done
+    callback: window.__karma__.start
 });

@@ -5,38 +5,32 @@
     {
       "title" : "",
       "language" : "en",
-      "link" : "",
+      "url" : "",
       "year" : "2014"
     },
     {
-      "title" : "",
+      "title" : "MongoDB Básico",
       "language" : "es",
-      "link" : "http://salesianostrianadam.github.io/data/slide.html?slide=mongodb_basico#/slide1",
+      "url" : "http://salesianostrianadam.github.io/data/slide.html?slide=mongodb_basico#/slide1",
       "year" : "2014"
     },
     {
-      "title" : "",
+      "title" : "REST con Node.js",
       "language" : "es",
-      "link" : "http://salesianostrianadam.github.io/data/slide.html?slide=rest_con_node#/slide1",
+      "url" : "http://salesianostrianadam.github.io/data/slide.html?slide=rest_con_node#/slide1",
       "year" : "2014"
     },
     {
-      "title" : "",
+      "title" : "Aplicaciones de una sola página",
       "language" : "es",
-      "link" : "http://salesianostrianadam.github.io/data/slide.html?slide=javascript_mvc#/slide1",
+      "url" : "http://salesianostrianadam.github.io/data/slide.html?slide=javascript_mvc#/slide1",
       "year" : "2014"
     },
     {
-      "title" : "",
+      "title" : "Herramientas JavaScript",
       "language" : "es",
       "link" : "http://salesianostrianadam.github.io/data/slide.html?slide=herramientas_javascript#/slide1",
       "year" : "2014"
-    },
-    {
-      "title" : "",
-      "language" : "es",
-      "link" : "",
-      "year" : "2013"
     }
   ]
 }

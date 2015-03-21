@@ -5,18 +5,18 @@
     {
       "title" : "Mastering TypeScript",
       "role" : "Technical Reviewer",
-      "ISBN" : "9781784399665",
-      "Publisher" : "Packt Publishing",
-      "Link" : "https://www.packtpub.com/web-development/mastering-typescript",
-      "Year" : "",
+      "isbn" : "9781784399665",
+      "publisher" : "Packt Publishing",
+      "link" : "https://www.packtpub.com/web-development/mastering-typescript",
+      "year" : "",
       "thumbnail" : "https://www.packtpub.com/sites/default/files/B03967_MockupCover_Normal.jpg"
     },
     {
       "title" : "-",
       "role" : "Writer",
-      "ISBN" : "-",
-      "Publisher" : "Packt Publishing",
-      "Link" : "https://www.packtpub.com/web-development/",
+      "isbn" : "-",
+      "publisher" : "Packt Publishing",
+      "link" : "https://www.packtpub.com/web-development/",
       "thumbnail" : ""
     }
   ]

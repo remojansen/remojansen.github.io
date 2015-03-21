@@ -41,7 +41,7 @@ define([
                     $('.animation').css('left', position_x + 'px');
                     $('.closeeasterEgg').click(function(){ $('.easterEgg').fadeOut(); });
                     $('.easterEgg').fadeIn();
-                }
+                };
 
                 easter_egg.load();
             }

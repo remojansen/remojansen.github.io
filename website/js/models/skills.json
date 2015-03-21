@@ -1,22 +1,23 @@
 {
 	"title" : "Skills",
 	"skill" : [
-		{ "name" : "HTML5 & CSS3", "rank" : "100", "class" : "success"},
 		{ "name" : "JavaScript", "rank" : "100", "class" : "success"},
-		{ "name" : "UX &amp; ALM", "rank" : "100", "class" : "success"},
-		{ "name" : "SOA &amp; REST", "rank" : "100", "class" : "success"},
-		{ "name" : "Responsive Design", "rank" : "100", "class" : "success"},
+		{ "name" : "TypeScript", "rank" : "100", "class" : "success"},
+		{ "name" : "MV* Frameworks", "rank" : "95", "class" : "success"},
+		{ "name" : "JS Architecture", "rank" : "95", "class" : "success"},
+		{ "name" : "JS Performance", "rank" : "95", "class" : "success"},
+		{ "name" : "UX &amp; ALM", "rank" : "95", "class" : "success"},
+		{ "name" : "SOA &amp; REST", "rank" : "95", "class" : "success"},
+		{ "name" : "HTML5 & CSS3", "rank" : "95", "class" : "success"},
+		{ "name" : "Responsive Design", "rank" : "95", "class" : "success"},
 		{ "name" : "C# &amp; ASP MVC", "rank" : "95", "class" : "success"},
-		{ "name" : "Design Patterns", "rank" : "89", "class" : "success"},
-		{ "name" : "Phone Gap", "rank" : "89", "class" : "success"},
-		{ "name" : "Ember", "rank" : "89", "class" : "success"},
-		{ "name" : "Node.js", "rank" : "89", "class" : "success"},
-		{ "name" : "MongoDB", "rank" : "75", "class" : "warning"},
-		{ "name" : "QA &amp; CI", "rank" : "75", "class" : "warning"},
-		{ "name" : "SQL &amp; ORM", "rank" : "65", "class" : "warning"},
-		{ "name" : "Xamarin iOS", "rank" : "65", "class" : "warning"},
-		{ "name" : "Xamarin Android", "rank" : "65", "class" : "danger"},
-		{ "name" : "PHP &amp; Java", "rank" : "65", "class" : "danger"},
-		{ "name" : "WebGL", "rank" : "50", "class" : "danger"}
+		{ "name" : "Node.js", "rank" : "90", "class" : "success"},
+		{ "name" : "MongoDB", "rank" : "85", "class" : "warning"},
+		{ "name" : "Automation", "rank" : "85", "class" : "warning"},
+		{ "name" : "SQL &amp; ORMs", "rank" : "75", "class" : "warning"},
+		{ "name" : "Xamarin iOS", "rank" : "75", "class" : "warning"},
+		{ "name" : "Xamarin Android", "rank" : "75", "class" : "danger"},
+		{ "name" : "PHP &amp; Java", "rank" : "75", "class" : "danger"},
+		{ "name" : "WebGL", "rank" : "60", "class" : "danger"}
 	]
 }

@@ -105,8 +105,7 @@ define([
                             bookGroupB.push(data.book[i]);
                           }
                         }
-
-                        debugger;
+                        
                         result.self_education = data;
                         result.self_education.bookGroupA = bookGroupA;
                         result.self_education.bookGroupB = bookGroupB;

@@ -3,10 +3,10 @@ define(['jQuery'], function () {
 
     var twitterEntities = {
       escapeHTML : function (text) {
-          return $('<div/>').text(text).html()
+          return $('<div/>').text(text).html();
       },
       linkifyEntities : function (tweet) {
-          tweet.pubDate = moment(tweet.pubDate).format("dddd, MMMM Do YYYY");;
+          tweet.pubDate = moment(tweet.pubDate).format("dddd, MMMM Do YYYY");
           return tweet;
       }
     };
