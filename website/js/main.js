@@ -71,4 +71,6 @@ require([
 
     // We're ready to launch the app!
     app.advanceReadiness();
+
+    $('.loader').hide();
 });

@@ -11,6 +11,10 @@ body
 	font-family: 'Raleway';
 }
 
+.loader{
+	text-text-align: center;
+}
+
 #panel {
 	background-image: url('/website/assets/bg.png');
 	background-repeat: repeat-x;

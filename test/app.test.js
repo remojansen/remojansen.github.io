@@ -1,8 +1,6 @@
 define(['website/js/app'], function(app) {
   "use strict";
 
-  console.log("--------->" + app.LOG_TRANSITIONS);
-
   var assert = chai.assert,
       expect = chai.expect,
       should = chai.should();
