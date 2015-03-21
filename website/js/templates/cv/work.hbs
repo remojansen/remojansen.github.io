@@ -1,21 +1,23 @@
 <h3>{{unbound work.title}}</h3>
-{{#each work.organizarion}}
-	<h4><i class="glyphicon glyphicon-briefcase"></i> {{unbound name}}</h4>
-	{{#each role}}
+{{#each organization in work.organizarion}}
+	<h4><i class="glyphicon glyphicon-briefcase"></i> {{unbound organization.name}}</h4>
+	{{#each rl in organization.role}}
 		<p>
 			<span class="label label-warning">
-                <img class="location" alt="" src="{{unbound country_icon_path}}"/>
-                {{unbound initial_date}}
+                <img class="location" alt="" src="{{unbound rl.country_icon_path}}"/>
+                {{unbound rl.initial_date}}
             </span>
-			<b>{{unbound name}}</b>
+			<b>{{unbound rl.name}}</b>
 		</p>
 	{{/each}}
-	{{#each paragraph}}
-        <p class="paragraph">{{unbound this}}</p>
-    {{/each}}
+	{{#each prgh in organization.paragraph}}
+        <p class="paragraph">{{unbound prgh}}</p>
+  {{/each}}
 	<p class="skill_container">
-		{{unbound skill.title}}
-		{{#each skill.item}}<span class="label label-default">{{{unbound this}}}</span> {{/each}}
+		{{unbound organization.skill.title}}
+		{{#each i in organization.skill.item}}
+			<span class="label label-default">{{{unbound i}}}</span>
+		{{/each}}
 	</p>
-	{{#if diaplay_break}}<hr/>{{/if}}
+	{{#if organization.diaplay_break}}<hr/>{{/if}}
 {{/each}}

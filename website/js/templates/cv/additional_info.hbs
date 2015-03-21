@@ -1,9 +1,9 @@
 <h3>{{unbound additional_info.title}}</h3>
-{{#each additional_info.paragraph}}
-    <p class="paragraph">{{unbound this}}</p>
+{{#each p in additional_info.paragraph}}
+    <p class="paragraph">{{unbound p}}</p>
 {{/each}}
 <ul>
-    {{#each additional_info.featured}}
-        <li>{{{unbound this}}}</li>
+    {{#each feature in additional_info.featured}}
+        <li>{{{unbound feature}}}</li>
     {{/each}}
 </ul>

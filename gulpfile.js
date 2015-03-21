@@ -31,7 +31,7 @@ gulp.task('test', function(cb) {
   }, cb);
 });
 
-gulp.task('serve', function() {
+gulp.task('serve', function(cb) {
     browserSync({
         server: {
             baseDir: "./"
@@ -39,12 +39,12 @@ gulp.task('serve', function() {
     });
 
     gulp.watch([
-      "./website/js/**/**.js",
-      "./website/js/**/**.json",
-      "./website/js/**/**.hbs",
-      "./website/css/**/**.css",
-      "./website/css/**/**.css",
-      "./website/assets/**/**.png",
+      "./website/js/**/*.js",
+      "./website/js/**/*.json",
+      "./website/js/**/*.hbs",
+      "./website/css/**/*.css",
+      "./website/css/**/*.css",
+      "./website/assets/**/*.png",
       "./index.html"
     ], browserSync.reload, cb);
 });

@@ -1,11 +1,13 @@
 <div>
-  {{#each item}}
+  {{#each i in item}}
   <div class="well fadeInUp animated tweet">
     <div class="tweet-body">
-      {{unbound title.content}}
+      {{unbound i.title.content}}
       <hr/>
-      {{unbound published}}
-      <a class="pull-right tweet-icon" href="{{unbound link.href}}"><i class="fa fa-code"></i></a>
+      {{unbound i.published}}
+      <a class="pull-right tweet-icon" href="{{unbound i.link.href}}">
+        <i class="fa fa-code"></i>
+      </a>
     </div>
   </div>
   {{/each}}

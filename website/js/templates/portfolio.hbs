@@ -3,15 +3,15 @@
     <div>
     	<br/>
 		<div class="row">
-		  {{#each portfolio.demo}}
+		  {{#each item in portfolio.demo}}
 		  <div class="col-md-4col-xs-12">
 		    <div class="thumbnail">
-		      {{#if description}}
+		      {{#if item.description}}
 		      	<p class="portfolioparagraph well fadeInDown animated" style="padding: 15px;">
-		      		{{{unbound description}}}
+		      		{{{unbound item.description}}}
 		      	</p>
 		      {{/if}}
-		      <img class="fadeInDown animated" alt="" src="{{unbound url}}" />
+		      <img class="fadeInDown animated" alt="" src="{{unbound item.url}}" />
 		    </div>
 		  </div>
 		  {{/each}}

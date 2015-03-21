@@ -1,11 +1,11 @@
 <div>
-  {{#each post}}
+  {{#each item in post}}
   <div class="well fadeInLeft animated">
     <h2>
-      <a class="link" href="{{unbound link}}">{{unbound title}}</a>
+      <a class="link" href="{{unbound item.link}}">{{unbound item.title}}</a>
     </h2>
     <div class="post-body">
-      {{{unbound description}}}
+      {{{unbound item.description}}}
     </div>
   </div>
   {{/each}}
@@ -17,5 +17,5 @@
       read more please visit the blog at
       <a href="http://blog.wolksoftware.com/">blog.wolksoftware.com</a>
     </p>
-  </blockquote>  
+  </blockquote>
 </div>

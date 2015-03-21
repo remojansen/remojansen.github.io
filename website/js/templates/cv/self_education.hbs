@@ -2,28 +2,28 @@
 <div class="row">
   <div class="col-md-6">
 		<ul class="planeul">
-			{{#each self_education.bookGroupA }}
-		        <li>
-		            <p>
-		                <i class="glyphicon glyphicon-book"></i>
-		                {{unbound title}}
-		                <span class="label label-default">ISBN {{unbound isbn}}</span>
-		            </p>
-		        </li>
-		    {{/each}}
+			{{#each book in self_education.bookGroupA }}
+        <li>
+          <p>
+            <i class="glyphicon glyphicon-book"></i>
+            {{unbound book.title}}
+            <span class="label label-default">ISBN {{unbound book.isbn}}</span>
+          </p>
+        </li>
+		   {{/each}}
 		</ul>
 	</div>
 	<div class="col-md-6">
 		<ul class="planeul">
-				{{#each self_education.bookGroupB }}
-			        <li>
-			            <p>
-			                <i class="glyphicon glyphicon-book"></i>
-			                {{unbound title}}
-			                <span class="label label-default">ISBN {{unbound isbn}}</span>
-			            </p>
-			        </li>
-			    {{/each}}
+				{{#each book in self_education.bookGroupB }}
+	        <li>
+            <p>
+              <i class="glyphicon glyphicon-book"></i>
+              {{unbound book.title}}
+              <span class="label label-default">ISBN {{unbound book.isbn}}</span>
+            </p>
+	        </li>
+			  {{/each}}
 		</ul>
 	</div>
 </div>
