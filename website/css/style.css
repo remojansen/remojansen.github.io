@@ -884,3 +884,7 @@ ol.linenums {
 .talk{
 	min-height: 170px;
 }
+
+.gitfeed-body{
+	min-height: 60px;
+}

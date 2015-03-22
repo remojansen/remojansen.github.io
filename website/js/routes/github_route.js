@@ -1,7 +1,7 @@
 define([
-    'Ember', 'bluebird'
+    'Ember', 'bluebird', 'moment'
 ],
-    function (Ember, Promise) {
+    function (Ember, Promise, moment) {
         "use strict";
 
         return Ember.Route.extend({
@@ -20,6 +20,11 @@ define([
                 success: function(data) {
                   var result = {};
                   result.item = data.value.items;
+                  for(var i = 0; i < result.item.length; i++){
+                    var date = result.item[i].published;
+                    date = moment(date).format("dddd, MMMM Do YYYY");
+                    result.item[i].published = date;
+                  }
                   resolve(result);
                 },
                 error: function() {
