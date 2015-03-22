@@ -1,11 +1,16 @@
 <div class="row">
-	<div class="well fadeInUp animated">
-		<h2>{{unbound talks.title}}</h2>
-	  {{#each talk in talks.items}}
-      <h3>{{unbound talk.title}}</h3>
-			{{unbound talk.language}}
-			{{unbound talk.year}}
-			<a href="{{unbound talk.url}}" target="_blank">link</a>
-	  {{/each}}
-  </div>
+  {{#each talk in talks.items}}
+		<div class="col-md-6">
+			<div class="well fadeInUp animated talk">
+				<a class="link" href="{{unbound talk.url}}" target="_blank">
+		      <h3>{{unbound talk.title}}</h3>
+				</a>
+				<img class="location" alt="" src="./website/assets/{{unbound talk.language}}.png">
+				<span class="label label-default">
+					{{unbound talk.year}}
+				</span>
+				<p>{{unbound talk.description}}</p>
+			</div>
+		</div>
+  {{/each}}
 </div>

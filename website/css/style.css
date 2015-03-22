@@ -872,7 +872,10 @@ ol.linenums {
 	min-height: 643px;
 }
 
-
 .publication img {
 	width: 100%;
+}
+
+.talk{
+	min-height: 170px;
 }

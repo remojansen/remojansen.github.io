@@ -3,34 +3,39 @@
   "description" : "",
   "items" : [
     {
-      "title" : "Automatización del Software",
-      "language" : "en",
-      "url" : "https://docs.google.com/presentation/d/1-Ai3VvOS_wsOaoH9L9kHoSD8wsL2KwLUXShCLch8IzM/edit?usp=sharing",
-      "year" : "2014"
-    },
-    {
       "title" : "MongoDB Básico",
+      "description" :"Aprender como instalar MongoDB y como trabajar con documentos JSON en bases de datos no relacionales",
       "language" : "es",
-      "url" : "http://salesianostrianadam.github.io/data/slide.html?slide=mongodb_basico#/slide1",
+      "url" : "http://salesianostrianadam.github.io/data/slide.html?slide=mongodb_basico",
       "year" : "2014"
     },
     {
       "title" : "REST con Node.js",
+      "description" :"Aprende a desplegar un servidor web y a crear servicios REST con el poder de JavaScript y node.js",
       "language" : "es",
-      "url" : "http://salesianostrianadam.github.io/data/slide.html?slide=rest_con_node#/slide1",
+      "url" : "http://salesianostrianadam.github.io/data/slide.html?slide=rest_con_node",
       "year" : "2014"
     },
     {
       "title" : "Aplicaciones de una sola página",
+      "description" :"Aprende a crear aplicaciones de una sola página y a estructurar tu codigo JavaScript en el lado del cliente utilizando el patron de diseño MVC",
       "language" : "es",
-      "url" : "http://salesianostrianadam.github.io/data/slide.html?slide=javascript_mvc#/slide1",
+      "url" : "http://salesianostrianadam.github.io/data/slide.html?slide=javascript_mvc",
       "year" : "2014"
     },
     {
       "title" : "Herramientas JavaScript",
+      "description" :"Aprender como utilizar herramientas para maximizar tu productividad y mejorar la calidad de tu codigo JavaScript",
       "language" : "es",
-      "link" : "http://salesianostrianadam.github.io/data/slide.html?slide=herramientas_javascript#/slide1",
+      "url" : "http://salesianostrianadam.github.io/data/slide.html?slide=herramientas_javascript",
       "year" : "2014"
+    },
+    {
+      "title" : "Automatización del Software",
+      "description" :"El trabajo de beta tester ya no existe, las personas ya no testean. Las personas automatizan el proceso de test, los testers han pasado a ser maquinas.",
+      "language" : "es",
+      "url" : "https://docs.google.com/presentation/d/1-Ai3VvOS_wsOaoH9L9kHoSD8wsL2KwLUXShCLch8IzM/edit?usp=sharing",
+      "year" : "2013"
     }
   ]
 }
