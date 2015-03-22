@@ -63,11 +63,11 @@ define([
                     projects : projects,
                     skills : skills,
                     recommendations : recommendations,
-                    self_education : {
-                      bookGroupA : bookGroupA,
-                      bookGroupB : bookGroupB
-                    }
+                    self_education : self_education
                   };
+
+                  result.self_education.bookGroupA = bookGroupA;
+                  result.self_education.bookGroupB = bookGroupB;
 
                   resolve(result);
               }
