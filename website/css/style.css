@@ -866,3 +866,13 @@ ol.linenums {
 	color: #999;
 	margin-right: 1%;
 }
+
+.publication {
+	padding: 5%;
+	min-height: 643px;
+}
+
+
+.publication img {
+	width: 100%;
+}

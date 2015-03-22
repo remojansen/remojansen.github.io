@@ -1,18 +1,19 @@
 <div class="row">
-  <div class="col-md-12 col-ms-12">
-    <div>
-    	<br/>
-		<div class="row">
-		  {{#each item in publications.items}}
-        {{unbound item.title}}
-        {{unbound item.role}}
-        {{unbound item.isbn}}
-        {{unbound item.publisher}}
-        {{unbound item.link}}
-        {{unbound item.year}}
-        <img src="{{unbound item.thumbnail}}"/>
-		  {{/each}}
-		</div>
+  {{#each item in publications.items}}
+    <div class="col-md-4 col-ms-12">
+      <div class="well fadeInUp animated publication">
+        <h3>{{unbound item.role}}</h3>
+        <a href="{{unbound item.link}}">
+          <img src="{{unbound item.thumbnail}}"/>
+        </a>
+        <br/><br/>
+        <p>
+          <b>Title</b>: {{unbound item.title}}<br/>
+          <b>ISBN</b>: {{unbound item.isbn}}<br/>
+          <b>PUBLISHER</b>: {{unbound item.publisher}}<br/>
+          <b>PUBLICATION YEAR</b>: {{unbound item.year}}
+        </p>
+      </div>
     </div>
-  </div>
+  {{/each}}
 </div>
