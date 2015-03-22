@@ -7,5 +7,9 @@ define(['Ember'], function (Ember) {
       LOG_VIEW_LOOKUPS: false // detailed logging of view resolution
     });
 
+    // Delay the app's initialization . We will invoke advanceReadiness()
+    // when are ready for the app to be initialized
+    window.app.deferReadiness();
+
     return window.app;
 });

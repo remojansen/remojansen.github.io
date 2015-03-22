@@ -1,5 +1,5 @@
 <div class="row">
-  {{#each item}}
+  {{#each itm in item}}
     <div class="col-md-4">
       <div class="well fadeInUp animated tweet">
         <a href="https://twitter.com/OweR_ReLoaDeD/">
@@ -7,13 +7,13 @@
         </a>
         <div class="tweet-body">
           <div class="tweet-text">
-            {{{unbound description}}}
+            {{{unbound itm.description}}}
           </div>
           <hr/>
-          {{unbound pubDate}}
-          <a href="{{unbound link}}" class="pull-right tweet-icon"><i class="fa fa-star"></i></a>
-          <a href="{{unbound link}}" class="pull-right tweet-icon"><i class="fa fa-retweet"></i></a>
-          <a href="{{unbound link}}" class="pull-right tweet-icon"><i class="fa fa-reply"></i></a>
+          {{unbound itm.pubDate}}
+          <a href="{{unbound itm.link}}" class="pull-right tweet-icon"><i class="fa fa-star"></i></a>
+          <a href="{{unbound itm.link}}" class="pull-right tweet-icon"><i class="fa fa-retweet"></i></a>
+          <a href="{{unbound itm.link}}" class="pull-right tweet-icon"><i class="fa fa-reply"></i></a>
         </div>
       </div>
     </div>

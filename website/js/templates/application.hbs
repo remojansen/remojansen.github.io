@@ -22,14 +22,14 @@
           </div>
           <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav hidden-xs hidden-sm hidden-md">
-              <li><a href="#/"><i class="fa fa-user"></i> About</a></li>
-              <li><a href="#/portfolio"><i class="fa fa-picture-o"></i> Portfolio</a></li>
-              <li><a href="#/publications"><i class="fa fa-book"></i> Publications</a></li>
-              <li><a href="#/talks"><i class="fa fa-comments-o"></i> Talks</a></li>
-              <li><a href="#/blog"><i class="fa fa-rss"></i> Blog</a></li>
-              <li><a href="#/github"><i class="fa fa-github"></i> Github</a></li>
-              <li><a href="#/stackoverflow"><i class="fa fa-stack-overflow"></i> Stack Overflow</a></li>
-              <li><a href="#/twitter"><i class="fa fa-twitter"></i> Twitter</a></li>
+              <li>{{#link-to 'index'}}<i class="fa fa-user"></i> About{{/link-to}}</li>
+              <li>{{#link-to 'portfolio'}}<i class="fa fa-picture-o"></i> Portfolio{{/link-to}}</li>
+              <li>{{#link-to 'publications'}}<i class="fa fa-book"></i> Publications{{/link-to}}</li>
+              <li>{{#link-to 'talks'}}<i class="fa fa-comments-o"></i> Talks{{/link-to}}</li>
+              <li>{{#link-to 'blog'}}<i class="fa fa-rss"></i> Blog{{/link-to}}</li>
+              <li>{{#link-to 'github'}}<i class="fa fa-github"></i> Github{{/link-to}}</li>
+              <li>{{#link-to 'stackoverflow'}}<i class="fa fa-stack-overflow"></i> Stack Overflow{{/link-to}}</li>
+              <li>{{#link-to 'twitter'}}<i class="fa fa-twitter"></i> Twitter{{/link-to}}</li>
             </ul>
           </div>
       </div>
@@ -37,7 +37,7 @@
   <div class="container" id="maincontainer">
       <div class="maincontainer">
           <!-- Populated by ember -->
-          {{outlet}}
+          {{outlet "main"}}
       </div>
   </div>
   <!-- footer -->
