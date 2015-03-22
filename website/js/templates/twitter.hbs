@@ -11,9 +11,15 @@
           </div>
           <hr/>
           {{unbound itm.pubDate}}
-          <a href="{{unbound itm.link}}" class="pull-right tweet-icon"><i class="fa fa-star"></i></a>
-          <a href="{{unbound itm.link}}" class="pull-right tweet-icon"><i class="fa fa-retweet"></i></a>
-          <a href="{{unbound itm.link}}" class="pull-right tweet-icon"><i class="fa fa-reply"></i></a>
+          <a href="{{unbound itm.fav_link}}" class="pull-right tweet-icon" target="_blank">
+            <i class="fa fa-star"></i>
+          </a>
+          <a href="{{unbound itm.retweet_link}}" class="pull-right tweet-icon" target="_blank">
+            <i class="fa fa-retweet"></i>
+          </a>
+          <a href="{{unbound itm.reply_link}}" class="pull-right tweet-icon" target="_blank">
+            <i class="fa fa-reply"></i>
+          </a>
         </div>
       </div>
     </div>

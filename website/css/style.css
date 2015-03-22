@@ -863,7 +863,12 @@ ol.linenums {
 }
 
 .tweet-icon {
-	color: #999;
+	color: #FC6E51;
+	margin-right: 1%;
+}
+
+.tweet-icon:hover {
+	color: #FC6E51;
 	margin-right: 1%;
 }
 
