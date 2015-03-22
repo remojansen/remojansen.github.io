@@ -1,37 +1,38 @@
 define([
     'Ember',
-    'moment',
     'website/js/lib/twitter-entities'
 ],
-    function (Ember, moment, twitterEntities) {
+    function (Ember, twitterEntities) {
         "use strict";
 
         return Ember.Route.extend({
-            renderTemplate: function() {
-              this.render({
-                outlet: "main"
-              });
-            },
             model: function()
             {
-                var result = {};
+              return new Promise(function(resolve, reject) {
 
                 $.ajax({
-                    async: false,
+                    async: true,
+                    ype: 'GET',
                     dataType: "json",
-                    url: 'http://pipes.yahoo.com/pipes/pipe.run?_id=d3b21840e155e327bdfd8ac11ff6f91e&_render=json',
-                    success: function(data) {
-                        result.item = data.value.items[0].item;
-                        for(var i = 0; i < result.item.length; i++){
-                          result.item[i] = twitterEntities.linkifyEntities(result.item[i]);
-                        }
+                    url: 'http://pipes.yahoo.com/pipes/pipe.run',
+                    data : {
+                      '_id' : 'd3b21840e155e327bdfd8ac11ff6f91e',
+                      '_render' : ' json'
                     },
-                    error: function() {
-                        result.item = [];
+                    success: function(data) {
+                      var result = {};
+                      result.item = data.value.items[0].item;
+                      for(var i = 0; i < result.item.length; i++){
+                        result.item[i] = twitterEntities.linkifyEntities(result.item[i]);
+                      }
+                      resolve(result);
+                    },
+                    error: function(error) {
+                      reject(error);
                     }
                 });
 
-                return result;
+              });
             }
         });
     }

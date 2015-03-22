@@ -1,4 +1,7 @@
-define(['jQuery'], function () {
+define([
+  'moment',
+  'jQuery'
+  ], function (moment) {
     "use strict";
 
     var twitterEntities = {

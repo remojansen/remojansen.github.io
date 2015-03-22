@@ -7,7 +7,5 @@ define(['Ember'], function (Ember) {
       LOG_VIEW_LOOKUPS: false // detailed logging of view resolution
     });
 
-    
-
     return window.app;
 });

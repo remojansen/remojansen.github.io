@@ -1,29 +1,29 @@
 define([
-    'Ember'
+    'Ember', 'bluebird'
 ],
-    function (Ember) {
+    function (Ember, Promise) {
         "use strict";
 
         return Ember.Route.extend({
-            renderTemplate: function() {
-              this.render({
-                outlet: "main"
-              });
-            },
             model: function()
             {
-                var result = {};
+              return new Promise(function(resolve, reject) {
 
                 $.ajax({
-                    async: false,
+                    async: true,
                     dataType: "json",
                     url: './website/js/models/talks.json',
                     success: function(data){
-                        result.talks = data;
+                      var result = {};
+                      result.talks = data;
+                      resolve(result);
+                    },
+                    error : function(error){
+                      reject(reject);
                     }
                 });
 
-                return result;
+              });
             }
         });
     }

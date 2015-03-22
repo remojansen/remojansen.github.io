@@ -33,6 +33,7 @@ gulp.task('test', function(cb) {
 
 gulp.task('serve', function(cb) {
     browserSync({
+        port: 8080,
         server: {
             baseDir: "./"
         }

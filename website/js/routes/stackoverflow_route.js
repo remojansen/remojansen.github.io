@@ -1,32 +1,33 @@
 define([
-    'Ember'
+    'Ember', 'bluebird'
 ],
-    function (Ember) {
+    function (Ember, Promise) {
         "use strict";
 
         return Ember.Route.extend({
-            renderTemplate: function() {
-              this.render({
-                outlet: "main"
-              });
-            },
             model: function()
             {
-                var result = {};
-
+              return new Promise(function(resolve, reject) {
                 $.ajax({
-                    async: false,
+                    async: true,
+                    ype: 'GET',
                     dataType: "json",
-                    url: 'http://pipes.yahoo.com/pipes/pipe.run?_id=e281899472e8587bf15c31cb2e3adf15&_render=json',
-                    success: function(data){
-                        result.item = data.value.items;
+                    url: 'http://pipes.yahoo.com/pipes/pipe.run',
+                    data : {
+                      '_id' : 'e281899472e8587bf15c31cb2e3adf15',
+                      '_render' : ' json'
                     },
-                    error: function(){
-                        result.post = [];
+                    success: function(data){
+                      var result = {};
+                      result.item = data.value.items;
+                      resolve(result);
+                    },
+                    error: function(error) {
+                      reject(error);
                     }
                 });
 
-                return result;
+              });
             }
         });
     }
