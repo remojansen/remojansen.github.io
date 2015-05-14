@@ -8,7 +8,7 @@
         { 
           "year" : 2014, 
           "country_icon_path": "./website/assets/ie.png", 
-          "name" : "http://www.inversify.io",
+          "name" : "InversifyJS",
           "url" : "http://www.inversify.io",
           "paragraph" : [
             "An open-source lightweight (4KB) IoC container written in TypeScript."
