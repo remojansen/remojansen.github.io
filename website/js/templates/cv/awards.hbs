@@ -2,20 +2,16 @@
 {{#each organization in awards.organization}}
 	<h4><i class="glyphicon glyphicon-certificate"></i> {{unbound organization.name}}</h4>
 	{{#each crs in organization.course}}
-	<p>
-		<span class="label label-warning">
-	        <img class="location" alt="IE" src="{{unbound crs.country_icon_path}}"/>
-	        {{unbound crs.initial_date}}
-	    </span>
-		<b>{{unbound crs.name}}</b>
-	</p>
-	{{#each prgh in crs.paragraph}}<p class="paragraph">{{{unbound prgh}}}</p>{{/each}}
-		<p class="skill_container">
-			<b>{{crs.skill.title}}:</b>
-			{{#each skill in crs.skill.item}}
-				<span class="label label-default">{{skill}}</span>
-			{{/each}}
+		<p>
+			<span class="label label-warning">
+		        <img class="location" alt="IE" src="{{unbound crs.country_icon_path}}"/>
+		        {{unbound crs.initial_date}}
+		    </span>
+			<b>{{unbound crs.name}}</b>
 		</p>
+		{{#each prgh in crs.paragraph}}
+			<p class="paragraph">{{{unbound prgh}}}</p>
+		{{/each}}
 	{{/each}}
 	{{#if organization.picture}}
       <div class="centre">

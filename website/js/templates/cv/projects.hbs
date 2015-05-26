@@ -1,25 +1,16 @@
 <h3>{{unbound projects.title}}</h3>
-{{#each license in projects.license}}
-	<h4><i class="{{unbound icon_class}}"></i> {{unbound license.title}}</h4>
-	{{#each prjct in license.project}}
-		<p>
-			<span class="label label-warning">
-        <img class="location" alt="" src="{{unbound prjct.country_icon_path}}"/>
-        {{unbound prjct.year}}
-      </span>
-			<b>
-				<a class="link" href="{{unbound prjct.url}}">{{unbound prjct.name}}</a>
-			</b>
-		</p>
-		{{#each prgh in prjct.paragraph}}
-			<p class="paragraph">{{{unbound prgh}}}</p>
-		{{/each}}
-    <p class="skill_container">
-        {{unbound prjct.skill.title}}
-        {{#each skill in prjct.skill.item}}
-					<span class="label label-default">{{unbound skill}}</span>
-				{{/each}}
-    </p>
-		{{#if prjct.display_break}}<hr />{{/if}}
+{{#each prjct in projects.projects}}
+	<p>
+		<span class="label label-warning">
+      <img class="location" alt="" src="{{unbound prjct.country_icon_path}}"/>
+      {{unbound prjct.year}}
+    </span>
+		<b>
+			<a class="link" href="{{unbound prjct.url}}">{{unbound prjct.name}}</a>
+		</b>
+	</p>
+	{{#each prgh in prjct.paragraph}}
+		<p class="paragraph">{{{unbound prgh}}}</p>
 	{{/each}}
+	{{#if prjct.display_break}}<hr />{{/if}}
 {{/each}}

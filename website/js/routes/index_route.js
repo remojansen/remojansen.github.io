@@ -29,13 +29,12 @@ define([
             LoadDataAsync('./website/js/models/work.json'),
             LoadDataAsync('./website/js/models/awards.json'),
             LoadDataAsync('./website/js/models/education.json'),
-            LoadDataAsync('./website/js/models/additional_info.json'),
             LoadDataAsync('./website/js/models/projects.json'),
             LoadDataAsync('./website/js/models/skills.json'),
             LoadDataAsync('./website/js/models/recommendations.json'),
             LoadDataAsync('./website/js/models/self_education.json'),
-            function(summary, work, awards, education, additional_info,
-              projects, skills, recommendations, self_education) {
+            function(summary, work, awards, education, projects, skills,
+              recommendations, self_education) {
 
                 try {
                   // split self education in 2 groups
@@ -59,7 +58,6 @@ define([
                     work : work,
                     awards : awards,
                     education : education,
-                    additional_info : additional_info,
                     projects : projects,
                     skills : skills,
                     recommendations : recommendations,

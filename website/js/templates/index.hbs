@@ -23,9 +23,9 @@
             </div>
         </div>
     </div>
-    <div class="col-md-6 col-xs-12 printNotVisible">
+    <div class="col-md-6 col-xs-12">
         <!-- skills -->
-        <div class="well fadeInRight animated">
+        <div class="well fadeInRight animated printNotVisible">
             <div id="skills_content">
                 {{view view.CvSkillsEducationView}}
             </div>
@@ -42,24 +42,18 @@
                     {{view view.CvProjectsView}}
             </div>
         </div>
-        <!-- recommendations -->
-        <div class="well fadeInRight animated">
-            <div id="recommendations_content">
-                {{view view.CvRecommendationsView}}
-            </div>
-        </div>
-        <!-- additional information -->
-        <div class="well fadeInRight animated">
-            <div id="additional_info_content">
-                {{view view.CvAdditionalInformationView}}
-            </div>
-        </div>
     </div>
 </div>
 <div class="row cvblock">
-    <div class="col-md-12 col-xs-12">
+    <div class="col-md-12">
+      <!-- recommendations -->
+      <div class="well fadeInUp animated printVisible">
+          <div id="recommendations_content">
+              {{view view.CvRecommendationsView}}
+          </div>
+      </div>
         <!-- self education -->
-        <div class="well fadeInLeft animated">
+        <div class="well fadeInUp animated printNotVisible">
             <div id="self_education_content">
                 {{view view.CvSelfEducationView}}
             </div>

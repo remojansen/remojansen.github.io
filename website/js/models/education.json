@@ -1,286 +1,134 @@
 {
 	"title": "Education",
 	"organizarion" : [
-		{ 
+		{
 			"name" : "Analytics Academy",
 			"course" : [
-				{ 
-					"country_icon_path" : "./website/assets/ie.png", 
-					"initial_date" : "2014", 
+				{
+					"country_icon_path" : "./website/assets/ie.png",
+					"initial_date" : "2014",
 					"name" : "Google Analytics Platform Principles (Online course)",
-					"paragraph" : [],
-					"skill" : {
-						"title" : "SKILLS",
-						"item" : [
-							"Google Analytics",
-							"Collection API",
-							"Reporting API"
-						]
-					}
+					"paragraph" : []
 				}
 			],
 			"diaplay_break" : true
 		},
-		{ 
+		{
 			"name" : "Xamarin University",
 			"course" : [
-				{ 
-					"country_icon_path" : "./website/assets/ie.png", 
-					"initial_date" : "2014", 
+				{
+					"country_icon_path" : "./website/assets/ie.png",
+					"initial_date" : "2014",
 					"name" : "Xamarin Certified Mobile Developer (Online course)",
-					"paragraph" : [],
-					"skill" : {
-						"title" : "SKILLS",
-						"item" : [
-							"Corss-Platform Development",
-							"Xamarin",
-							"C#",
-							"PLC",
-							"Parallel Programming",
-							"I/O",
-							"iOS",
-							"Android"
-						]
-					}
+					"paragraph" : []
 				},
-				{ 
-					"country_icon_path" : "./website/assets/ie.png", 
-					"initial_date" : "2014", 
+				{
+					"country_icon_path" : "./website/assets/ie.png",
+					"initial_date" : "2014",
 					"name" : "Xamarin Certified iOS Developer (Online course)",
-					"paragraph" : [],
-					"skill" : {
-						"title" : "SKILLS",
-						"item" : [
-							"iOS",
-							"C#",
-							"Xamarin"
-						]
-					}
+					"paragraph" : []
 				},
-				{ 
-					"country_icon_path" : "./website/assets/ie.png", 
-					"initial_date" : "2014", 
+				{
+					"country_icon_path" : "./website/assets/ie.png",
+					"initial_date" : "2014",
 					"name" : "Xamarin Certified Android Developer (Online course)",
-					"paragraph" : [],
-					"skill" : {
-						"title" : "SKILLS",
-						"item" : [
-							"Android",
-							"C#",
-							"Xamarin"
-						]
-					}
+					"paragraph" : []
 				}
 			],
 			"diaplay_break" : true
 		},
-		{ 
+		{
 			"name" : "New Horizons computer training centres",
 			"course" : [
-				{ 
-					"country_icon_path" : "./website/assets/ie.png", 
-					"initial_date" : "2013", 
+				{
+					"country_icon_path" : "./website/assets/ie.png",
+					"initial_date" : "2013",
 					"name" : "Microsoft certified professional developer (MCPD)",
-					"paragraph" : [],
-					"skill" : {
-						"title" : "SKILLS",
-						"item" : [
-							"C#",
-							"Web Forms",
-							"ASP MVC",
-							"Parallel Programming",
-							"I/O",
-							"Reflection",
-							"Data Structures"
-						]
-					}
+					"paragraph" : []
 				}
 			],
 			"diaplay_break" : true
 		},
-		{ 
+		{
 			"name" : "Stanford university",
 			"course" : [
-				{ 
-					"country_icon_path" : "./website/assets/us.png", 
-					"initial_date" : "2011", 
+				{
+					"country_icon_path" : "./website/assets/us.png",
+					"initial_date" : "2011",
 					"name" : "Introduction to databases (Online course)",
-					"paragraph" : [],
-					"skill" : {
-						"title" : "SKILLS",
-						"item" : [
-							"Relational algebra",
-							"UML",
-							"Database design",
-							"Database normalization",
-							"SQL",
-							"XML",
-							"XSLT",
-							"PLSQL"
-						]
-					}
+					"paragraph" : []
 				}
 			],
 			"diaplay_break" : true
 		},
-		{ 
+		{
 			"name" : "ETICOM Corporate University",
 			"course" : [
-				{ 
-					"country_icon_path" : "./website/assets/es.png", 
-					"initial_date" : "2011", 
+				{
+					"country_icon_path" : "./website/assets/es.png",
+					"initial_date" : "2011",
 					"name" : "Certificate in ASP.NET (Online course)",
-					"paragraph" : [],
-					"skill" : {
-						"title" : "SKILLS",
-						"item" : [
-							".NET","Framework 3.5","ASP.NET","C#","MSSQL","IIS","LINQ"
-						]
-					}
+					"paragraph" : []
 				},
-				{ 
-					"country_icon_path" : "./website/assets/es.png", 
-					"initial_date" : "2011", 
+				{
+					"country_icon_path" : "./website/assets/es.png",
+					"initial_date" : "2011",
 					"name" : "Certificate in JavaScript (Online course)",
-					"paragraph" : [],
-					"skill" : {
-						"title" : "SKILLS",
-						"item" : [
-							"JavaScript","Jquery","Jquery UI","XML","DOM","XSL"
-						]
-					}
+					"paragraph" : []
 				},
-				{ 
-					"country_icon_path" : "./website/assets/es.png", 
-					"initial_date" : "2010", 
+				{
+					"country_icon_path" : "./website/assets/es.png",
+					"initial_date" : "2010",
 					"name" : "Certificate in Spring Framework (Online course)",
-					"paragraph" : [],
-					"skill" : {
-						"title" : "SKILLS",
-						"item" : [
-							"Spring","MVC","Hibernate"
-						]
-					}
+					"paragraph" : []
 				},
-				{ 
-					"country_icon_path" : "./website/assets/es.png", 
-					"initial_date" : "2010", 
+				{
+					"country_icon_path" : "./website/assets/es.png",
+					"initial_date" : "2010",
 					"name" : "Certificate in Hibernate Framework (Online course)",
-					"paragraph" : [],
-					"skill" : {
-						"title" : "SKILLS",
-						"item" : [
-							"Hibernate","ORM","Transactions"
-						]
-					}
+					"paragraph" : []
 				},
-				{ 
-					"country_icon_path" : "./website/assets/es.png", 
-					"initial_date" : "2010", 
+				{
+					"country_icon_path" : "./website/assets/es.png",
+					"initial_date" : "2010",
 					"name" : "Certificate in AJAX (Online course)",
-					"paragraph" : [],
-					"skill" : {
-						"title" : "SKILLS",
-						"item" : [
-							"XMLHttpRequest","XML","DOM","Http","Jquery","JSON"
-						]
-					}
+					"paragraph" : []
 				}
 			],
 			"diaplay_break" : true
 		},
-		{ 
+		{
 			"name" : "Universidad de Sevilla School of Computer Science",
 			"course" : [
-				{ 
-					"country_icon_path" : "./website/assets/es.png", 
-					"initial_date" : "2009", 
+				{
+					"country_icon_path" : "./website/assets/es.png",
+					"initial_date" : "2009",
 					"name" : "Certificate in Joomla! (CMS)",
-					"paragraph" : [],
-					"skill" : {
-						"title" : "SKILLS",
-						"item" : [
-							"Joomla! Deployment",
-							"Joomla! Administration",
-							"Joomla! Development",
-							"Templates",
-							"Modules",
-							"LAMP"
-						]
-					}
+					"paragraph" : []
 				},
-				{ 
-					"country_icon_path" : "./website/assets/es.png", 
-					"initial_date" : "2008", 
+				{
+					"country_icon_path" : "./website/assets/es.png",
+					"initial_date" : "2008",
 					"name" : "Certificate in Linux Server administration",
-					"paragraph" : [],
-					"skill" : {
-						"title" : "SKILLS",
-						"item" : [
-							"GNU/Linux",
-							"Networks",
-							"Apache",
-							"PHP",
-							"MySQL",
-							"PHPMyAdmin",
-							"Secure Shell Server",
-							"FTP Server",
-							"Mail Server",
-							"Domain Server"
-						]
-					}
+					"paragraph" : []
 				},
-				{ 
-					"country_icon_path" : "./website/assets/es.png", 
-					"initial_date" : "2008", 
+				{
+					"country_icon_path" : "./website/assets/es.png",
+					"initial_date" : "2008",
 					"name" : "Certificate in Oracle",
-					"paragraph" : [],
-					"skill" : {
-						"title" : "SKILLS",
-						"item" : [
-							"Oracle RDBMS",
-							"Oracle Developer Tools ",
-							"SQL",
-							"PSQL",
-							"JDBC",
-							"JSP",
-							"Hibernate"
-						]
-					}
+					"paragraph" : []
 				}
 			],
 			"diaplay_break" : true
 		},
-		{ 
+		{
 			"name" : "Salesians of St. Peter College",
 			"course" : [
-				{ 
-					"country_icon_path" : "./website/assets/es.png", 
-					"initial_date" : "2008", 
+				{
+					"country_icon_path" : "./website/assets/es.png",
+					"initial_date" : "2008",
 					"name" : "Higher Certificate In Software Engineering",
-					"paragraph" : [],
-					"skill" : {
-						"title" : "SKILLS",
-						"item" : [
-							"C",
-							"Java",
-							"SQL",
-							"Oracle",
-							"PLSQL",
-							"HTML",
-							"XML",
-							"CSS",
-							"UML",
-							"Agile",
-							"ALM",
-							"Algorithms Design",
-							"Computer Networks",
-							"SOA",
-							"Design Patterns",
-							"Database Design",
-							"Data Structures"
-						]
-					}
+					"paragraph" : []
 				}
 			],
 			"diaplay_break" : false

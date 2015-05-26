@@ -1,59 +1,36 @@
 {
   "title" : "Personal Projects",
-  "license": [
+  "projects" : [
     {
-      "title" : "Open Source",
-      "icon_class": "glyphicon glyphicon-cloud",
-      "project" : [
-        { 
-          "year" : 2014, 
-          "country_icon_path": "./website/assets/ie.png", 
-          "name" : "InversifyJS",
-          "url" : "http://www.inversify.io",
-          "paragraph" : [
-            "An open-source lightweight (4KB) IoC container written in TypeScript."
-          ],
-          "skill" : {
-            "title" : "SKILLS",
-            "item" : [
-              "TypeScript","Git","Travis CI","Mocha","Gulp.js","Browserify","DI", "IoC", "Chai", "Sinon", "Decorators"
-            ]
-          },
-          "display_break": true
-        },
-        { 
-          "year" : 2014, 
-          "country_icon_path": "./website/assets/ie.png", 
-          "name" : "www.unsc.info",
-          "url" : "http://www.unsc.info",
-          "paragraph" : [
-            "A Halo universe wiki website, I created this site because I'm a big fan of the Halo series."
-          ],
-          "skill" : {
-            "title" : "SKILLS",
-            "item" : [
-              "JavaScript","Git","Handlebars","Grunt.js","AMD","MV*", "Node", "MongoDB", "C#", "JSON"
-            ]
-          },
-          "display_break": true
-        },
-        { 
-          "year" : 2013, 
-          "country_icon_path": "./website/assets/ie.png", 
-          "name" : "Dublin RTPI",
-          "url" : "http://www.wolksoftware.com/DublinRTPI",
-          "paragraph" : [
-            "Dublin RTPI is a cross-platform native mobile app that allows users to access real-time public transport information."
-          ],
-          "skill" : {
-            "title" : "SKILLS",
-            "item" : [
-              "Xamarin","Android","iOS","REST","JSON","XML","PLC"
-            ]
-          },
-          "display_break": true
-        }
-      ]
+      "year" : 2015,
+      "country_icon_path": "./website/assets/ie.png",
+      "name" : "AtSpy",
+      "url" : "http://atspy.github.io/",
+      "paragraph" : [
+        "AtSpy provides developers with standalone test spies for JavaScript.",
+        "AtSpy is powered by TypeScript & Decorators (ES7), has no dependencies and works with any unit testing framework."
+      ],
+      "display_break": true
+    },
+    {
+      "year" : 2015,
+      "country_icon_path": "./website/assets/ie.png",
+      "name" : "InversifyJS",
+      "url" : "http://www.inversify.io",
+      "paragraph" : [
+        "An open-source lightweight (4KB) IoC container written in TypeScript."
+      ],
+      "display_break": true
+    },
+    {
+      "year" : 2014,
+      "country_icon_path": "./website/assets/ie.png",
+      "name" : "www.unsc.info",
+      "url" : "http://www.unsc.info",
+      "paragraph" : [
+        "A Halo universe wiki website, I created this site because I'm a big fan of the Halo series."
+      ],
+      "display_break": true
     }
   ]
 }

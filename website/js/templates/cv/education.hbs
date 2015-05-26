@@ -12,10 +12,6 @@
 		{{#each prgh in crs.paragraph}}
 			<p class="paragraph">{{unbound prgh}}</p>
 		{{/each}}
-		<p class="skill_container">
-		  {{unbound crs.skill.title}}
-		  {{#each skill in crs.skill.item}}<span class="label label-default">{{unbound skill}}</span> {{/each}}
-		</p>
 	{{/each}}
 	{{#if org.diaplay_break}}<hr/>{{/if}}
 {{/each}}

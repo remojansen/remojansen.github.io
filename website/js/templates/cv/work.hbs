@@ -13,11 +13,5 @@
 	{{#each prgh in organization.paragraph}}
         <p class="paragraph">{{unbound prgh}}</p>
   {{/each}}
-	<p class="skill_container">
-		{{unbound organization.skill.title}}
-		{{#each i in organization.skill.item}}
-			<span class="label label-default">{{{unbound i}}}</span>
-		{{/each}}
-	</p>
 	{{#if organization.diaplay_break}}<hr/>{{/if}}
 {{/each}}

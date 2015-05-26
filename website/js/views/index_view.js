@@ -9,7 +9,6 @@ define([
     'website/js/views/cv/cv_awards_view',
     'website/js/views/cv/cv_projects_view',
     'website/js/views/cv/cv_recommendations_view',
-    'website/js/views/cv/cv_additional_information_view',
     'website/js/utils'
 ],
     function (
@@ -23,7 +22,6 @@ define([
         cvAwardsEducationView,
         cvProjectsView,
         cvRecommendationsView,
-        CvAdditionalInformationView,
         utils
         )
     {
@@ -45,8 +43,7 @@ define([
             CvSkillsEducationView : cvSkillsEducationView,
             CvAwardsEducationView : cvAwardsEducationView,
             CvProjectsView : cvProjectsView,
-            CvRecommendationsView : cvRecommendationsView,
-            CvAdditionalInformationView : CvAdditionalInformationView
+            CvRecommendationsView : cvRecommendationsView
         });
     }
 );
