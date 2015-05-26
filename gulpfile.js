@@ -11,7 +11,7 @@ var gulp        = require('gulp'),
     reload      = browserSync.reload;
 
 gulp.task('jslint', function() {
-  return gulp.src('website/js/**/*.js')
+  return gulp.src(['website/js/**/*.js', '!website/js/bundle.min.js'])
     .pipe(jshint())
     .pipe(jshint.reporter('default'));
 });
