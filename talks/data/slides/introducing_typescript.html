@@ -3,7 +3,7 @@
     <div class="cover">
         <h1>Introducing TypeScript</h1>
         <h2>
-            Large scale JavaScript application developent.
+            Large-scale JavaScript application development.
         </h2>
         <h3>
             Remo H. Jansen - <a href="https://twitter.com/OweR_ReLoaDeD">@OweR_ReLoaDeD</a>
@@ -15,31 +15,112 @@
         </div>
     </div>
 </div>
-<div id="slide2" class="step slide" data-x="1000" data-y="0">
+<div id="slide2" class="step slide" data-x="1500" data-y="0">
     <div class="appreturn"><a href="../index.html"><i class="fa fa-home"></i></a></div>
     <h1>Why to use TypeScript?</h1>
-    <h2>
-      - It is really hard to write large JavaScript code bases.
-    </h2>
-    <h2>
-      - It is even harder to maintain large JavaScript code bases.
-    </h2>
-    <h2>
-      - JavaScript is TypeScript.
-    </h2>
-    <h2>
-      - TypeScript the future of JavaScript.
-    </h2>
-    <h2>
-      - TypeScript helps your team to be more productive.
-    </h2>
+    <h3>It is really hard to write/maintain large JavaScript code bases.<h3>
+<pre class="prettyprint linenums">
+function Person(name, surname) {
+    this.name = name;
+    this.surname = surname;
+}
+
+Person.prototype.greet = function () {
+    return "Hello! my name is " + this.name + " " + this.surname;
+};
+
+var me = new Person("Luke", "Skywalker");
+console.log(me.greet());
+console.log(me.surname);
+</pre>
     <div class="sponsor">
         <a href="http://blog.wolksoftware.com/">
             <img src="../media/wolk_logo.png" alt="logo" />
         </a>
     </div>
 </div>
-<div id="slide3" class="step slide" data-x="0" data-y="1000">
+<div id="slide3" class="step slide" data-x="3000" data-y="0">
+    <div class="appreturn"><a href="../index.html"><i class="fa fa-home"></i></a></div>
+    <h1>Why to use TypeScript?</h1>
+    <h3>JavaScript is TypeScript</h3>
+<pre class="prettyprint linenums">
+function Person(name, surname) {
+    this.name = name;
+    this.surname = surname;
+}
+
+Person.prototype.greet = function () {
+    return "Hello! my name is " + this.name + " " + this.surname;
+};
+
+var me = new Person("Luke", "Skywalker");
+console.log(me.greet());
+console.log(me.surname);
+</pre>
+    <div class="sponsor">
+        <a href="http://blog.wolksoftware.com/">
+            <img src="../media/wolk_logo.png" alt="logo" />
+        </a>
+    </div>
+</div>
+<div id="slide4" class="step slide" data-x="5000" data-y="0">
+    <div class="appreturn"><a href="../index.html"><i class="fa fa-home"></i></a></div>
+    <h1>Why to use TypeScript?</h1>
+    <h3>TypeScript is the future of JavaScript</h3>
+<pre class="prettyprint linenums">
+class Person {
+
+  public name: string;
+  public surname: string;
+
+  constructor(name : string, surname : string) {
+    this.name = name;
+    this.surname = surname;
+  }
+
+  public greet() {
+    return `Hello! my name is ${this.name} ${this.surname}`;
+  }
+
+}
+
+var luke = new Person("Luke", "Skywalker");
+console.log(luke.greet());
+console.log(luke.surname);
+</pre>
+    <div class="sponsor">
+        <a href="http://blog.wolksoftware.com/">
+            <img src="../media/wolk_logo.png" alt="logo" />
+        </a>
+    </div>
+</div>
+<div id="slide5" class="step slide" data-x="6500" data-y="0">
+    <div class="appreturn"><a href="../index.html"><i class="fa fa-home"></i></a></div>
+    <h1>Why to use TypeScript?</h1>
+    <h3>TypeScript makes your team more productive</h3>
+<pre class="prettyprint linenums">
+interface IPerson {
+  name : string;
+  surname : string;
+  greet() : string;
+}
+
+describe("Person Class", () => {
+  it("should be able to greet", () => {
+    var luke : IPerson = new Person("Luke", "Skywalker");
+    expect(luke.name).to.equal("Luke");
+    expect(luke.surname).to.equal("Skywalker");
+    expect(luke.greet()).to.equal("Hello! my name is Luke Skywalker");
+  });
+}
+</pre>
+    <div class="sponsor">
+        <a href="http://blog.wolksoftware.com/">
+            <img src="../media/wolk_logo.png" alt="logo" />
+        </a>
+    </div>
+</div>
+<div id="slide3b" class="step slide" data-x="0" data-y="2000">
     <div class="appreturn"><a href="../index.html"><i class="fa fa-home"></i></a></div>
     <h1>Optional type notation</h1>
     // todo types
@@ -49,7 +130,7 @@
         </a>
     </div>
 </div>
-<div id="slide4" class="step slide" data-x="1000" data-y="1000">
+<div id="slide4b" class="step slide" data-x="1000" data-y="1000">
     <div class="appreturn"><a href="../index.html"><i class="fa fa-home"></i></a></div>
     <h1>Interfaces</h1>
     // todo interfaces
@@ -59,7 +140,7 @@
         </a>
     </div>
 </div>
-<div id="slide5" class="step slide" data-x="2000" data-y="1000">
+<div id="slide5b" class="step slide" data-x="2000" data-y="1000">
     <div class="appreturn"><a href="../index.html"><i class="fa fa-home"></i></a></div>
     <h1>Classes (ES6)</h1>
     // todo clases
