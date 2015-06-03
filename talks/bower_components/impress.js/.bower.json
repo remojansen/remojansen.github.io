@@ -1,0 +1,15 @@
+{
+  "name": "impress.js",
+  "homepage": "https://github.com/bartaz/impress.js",
+  "version": "0.5.3",
+  "_release": "0.5.3",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.5.3",
+    "commit": "e8fbd0cc7599b2d4b4c03501d80be1694509878b"
+  },
+  "_source": "git://github.com/bartaz/impress.js.git",
+  "_target": "~0.5.3",
+  "_originalSource": "impress.js",
+  "_direct": true
+}

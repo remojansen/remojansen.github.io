@@ -1,0 +1,26 @@
+{{#each box}}
+    {{#if BOF}}
+            <div class="row">
+    {{/if}}
+                <div class="col-md-4">
+                    <div class="well expandUp">
+                        <h5>{{category}}</h5>
+                        <h3>{{title}}</h3>
+                        <p>{{{desc}}}</p>
+                        <p style="text-align: right;">
+                          <br/>
+                          <a class="btn" href="{{href}}" role="button">
+                               Go to slides &raquo;
+                          </a>
+                        </p>
+                    </div>
+                </div>
+    {{#if EOL}}
+        {{#if EOF}}
+            </div>
+        {{else}}
+            </div>
+            <div class="row">
+        {{/if}}
+    {{/if}}
+{{/each}}

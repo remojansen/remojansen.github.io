@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <link rel="icon" href="../media/favicon.ico">
+        <title>Hackathon Open-Source Salesianos Triana</title>
+        <link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+        <link href="../css/slides.css" rel="stylesheet">
+        <link href="../bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet">
+        <link href="../css/tomorrow-night.css" rel="stylesheet">
+    </head>
+    <body class="impress-not-supported">
+        <div class="fallback-message">
+            <p>Your browser <b>doesn't support the features required</b> by impress.js, so you are presented with a simplified version of this presentation.</p>
+            <p>For the best experience please use the latest <b>Chrome</b>, <b>Safari</b> or <b>Firefox</b> browser.</p>
+        </div>
+        <div id="impress">
+            <!-- CONTENT GOES HERE -->
+        </div>
+        <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+        <script src="../bower_components/impress.js/js/impress.js"></script>
+        <script src="../bower_components/google-code-prettify/src/prettify.js"></script>
+        <script type="application/javascript">
+            var urlComponents = window.location.href.split('?slide=');
+            if (urlComponents.length > 1)
+            {
+                var path = './slides/' + urlComponents[1].split('#')[0] + ".html";
+                $.ajax({
+                    url: path,
+                    success: function (data) {
+                        $('#impress').html(data);
+                        impress().init();
+                        prettyPrint();
+                    }
+                });
+            }
+            else
+            {
+                alert('Could not find slide');
+            }
+        </script>
+    </body>
+</html>

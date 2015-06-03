@@ -1,0 +1,47 @@
+body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+    background: rgb(73,155,234); /* Old browsers */
+    background: -moz-radial-gradient(center, ellipse cover,  rgba(73,155,234,1) 25%, rgba(32,124,229,1) 77%); /* FF3.6+ */
+    background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(25%,rgba(73,155,234,1)), color-stop(77%,rgba(32,124,229,1))); /* Chrome,Safari4+ */
+    background: -webkit-radial-gradient(center, ellipse cover,  rgba(73,155,234,1) 25%,rgba(32,124,229,1) 77%); /* Chrome10+,Safari5.1+ */
+    background: -o-radial-gradient(center, ellipse cover,  rgba(73,155,234,1) 25%,rgba(32,124,229,1) 77%); /* Opera 12+ */
+    background: -ms-radial-gradient(center, ellipse cover,  rgba(73,155,234,1) 25%,rgba(32,124,229,1) 77%); /* IE10+ */
+    background: radial-gradient(ellipse at center,  rgba(73,155,234,1) 25%,rgba(32,124,229,1) 77%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#499bea', endColorstr='#207ce5',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+    background-color: #0074c1;
+}
+
+.navbar-inverse .navbar-brand:hover, .navbar-inverse .navbar-brand:focus {
+    color: #ffffff;
+}
+
+#maincontainer{
+    margin-bottom: 150px;
+}
+
+.hackathon
+{
+    margin-top: 50px;
+}
+
+blockquote {
+    border-left: 5px solid #00bc8c;
+    color: #3c763d;
+    background-color: #dff0d8;
+}
+
+.well {
+    background-color: #fff;
+    color: #333;
+    border-radius: 0px;
+    border-left: 5px solid #0074c1;
+}
+
+.well a {
+  color: #333;
+}
+
+.well a:hover {
+  color: #333;
+}

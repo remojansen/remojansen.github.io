@@ -1,0 +1,13 @@
+{
+    "box" : [
+        {
+            "category" : "September 2015",
+            "title" : "Introducing TypeScript",
+            "desc" : "Large scale JavaScript application developent made easy with TypeScript.",
+            "href" : "./data/slide.html?slide=introducing_typescript#/slide1",
+            "EOL" : false,
+            "EOF" : false,
+            "BOF" : true
+        }
+    ]
+}
