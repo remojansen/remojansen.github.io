@@ -3,17 +3,17 @@
   "description" : "",
   "items" : [
     {
-      "title" : "Developing maintainable large-scale web applications with TypeScript",
-      "role" : "Writer",
-      "isbn" : "-",
+      "title" : "Learning TypeScript",
+      "role" : "Author",
+      "isbn" : "9781783985548",
       "publisher" : "Packt Publishing",
-      "link" : "#publications",
+      "link" : "https://www.packtpub.com/web-development/learning-typescript",
       "year" : "2015",
-      "thumbnail" : "./website/assets/coming_soon_book.png"
+      "thumbnail" : "./website/assets/learning_typescript.png"
     },
     {
       "title" : "Mastering TypeScript",
-      "role" : "Reviewer",
+      "role" : "Technical Reviewer",
       "isbn" : "9781784399665",
       "publisher" : "Packt Publishing",
       "link" : "https://www.packtpub.com/web-development/mastering-typescript",
