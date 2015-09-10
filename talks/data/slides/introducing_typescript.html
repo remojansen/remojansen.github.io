@@ -17,7 +17,8 @@
         </div>
     </div>
 </div>
-<div id="slide2" class="step slide" data-x="1500" data-y="0">
+<!--########################################################################################################################## -->
+<div id="slide2" class="step slide" data-x="1500" data-y="0" data-rotate="90">
     <div class="cover">
       <h1>Why we need<br/> TypeScript?</h1>
     </div>
@@ -27,7 +28,8 @@
         </a>
     </div>
 </div>
-<div id="slide3" class="step slide" data-x="3000" data-y="0">
+<!--########################################################################################################################## -->
+<div id="slide3" class="step slide" data-x="3000" data-y="0" data-rotate="90">
     <div class="cover">
       <h1>"Controlling complexity<br/> is the essence of<br/> computer programming"</h1>
       <h2> — Brian Kernighan</h2>
@@ -38,7 +40,8 @@
         </a>
     </div>
 </div>
-<div id="slide4" class="step slide" data-x="4500" data-y="0">
+<!--########################################################################################################################## -->
+<div id="slide4" class="step slide" data-x="4500" data-y="0" data-rotate="0">
     <div class="cover">
       <h1>What we know about software complexity?</h1>
     </div>
@@ -48,7 +51,8 @@
         </a>
     </div>
 </div>
-<div id="slide5" class="step slide" data-x="6000" data-y="0">
+<!--########################################################################################################################## -->
+<div id="slide5" class="step slide" data-x="6000" data-y="0"  data-rotate="180">
     <div class="cover">
       <h1>Complex !== Complicated</h1>
       <br/>
@@ -67,6 +71,7 @@
         </a>
     </div>
 </div>
+<!--########################################################################################################################## -->
 <div id="slide6" class="step slide" data-x="7500" data-y="0">
     <div class="cover">
       <img src="../media/chart.jpg" alt="chart" />
@@ -82,7 +87,8 @@
         </a>
     </div>
 </div>
-<div id="slide7" class="step slide" data-x="9000" data-y="0">
+<!--########################################################################################################################## -->
+<div id="slide7" class="step slide" data-x="9000" data-y="0" data-rotate="90">
     <div class="cover">
       <h1>How can we measure the complexity of software?</h1>
       <br/>
@@ -93,7 +99,8 @@
         </a>
     </div>
 </div>
-<div id="slide8" class="step slide" data-x="10500" data-y="0">
+<!--########################################################################################################################## -->
+<div id="slide8" class="step slide" data-x="10500" data-y="0" data-rotate="90">
     <div class="cover">
       <h1>Chidamber & Kemerer<br/> object-oriented metrics suite</h1>
       <h2>1. Mumber of methods defined in class (WMC)</h2>
@@ -108,6 +115,7 @@
         </a>
     </div>
 </div>
+<!--########################################################################################################################## -->
 <div id="slide9" class="step slide" data-x="12000" data-y="0">
     <div class="cover">
       <h1>How can we reduce the complexity of a system?</h1>
@@ -119,6 +127,7 @@
         </a>
     </div>
 </div>
+<!--########################################################################################################################## -->
 <div id="slide10" class="step slide" data-x="13500" data-y="0">
     <div class="cover">
       <h1>The SOLID principles</h1>
@@ -135,6 +144,7 @@
         </a>
     </div>
 </div>
+<!--########################################################################################################################## -->
 <div id="slide11" class="step slide" data-x="15000" data-y="0">
     <div class="cover">
       <h1>
@@ -150,6 +160,7 @@
         </a>
     </div>
 </div>
+<!--########################################################################################################################## -->
 <div id="slide12" class="step slide" data-x="16500" data-y="0">
     <div class="cover">
       <h1>
@@ -163,6 +174,7 @@
         </a>
     </div>
 </div>
+<!--########################################################################################################################## -->
 <div id="slide13" class="step slide" data-x="18000" data-y="0">
     <div class="cover">
       <h1>
@@ -176,6 +188,7 @@
         </a>
     </div>
 </div>
+<!--########################################################################################################################## -->
 <div id="slide14" class="step slide" data-x="19500" data-y="0">
     <div class="cover">
       <h1>
@@ -191,12 +204,17 @@
         </a>
     </div>
 </div>
+<!--########################################################################################################################## -->
 <div id="slide15" class="step slide" data-x="21000" data-y="0">
     <div class="cover">
       <h1>
         TypeScript is the future of JavaScript
       </h1>
       <h2>TypeScript allow us to use ES6 and ES7 today!</h2>
+      <h2>
+        We can use the <a href="https://github.com/Microsoft/TypeScript/wiki/Compiler-Options">--target</a> compiler option
+        to specify ECMAScript target version: 'ES3' (default), 'ES5', or 'ES6'.
+      <h2>
       <br/>
     </div>
     <div class="sponsor">
@@ -205,6 +223,7 @@
         </a>
     </div>
 </div>
+<!--########################################################################################################################## -->
 <div id="slide16" class="step slide" data-x="22500" data-y="0">
     <h1>ES5 class</h1>
 <pre class="prettyprint linenums">
@@ -241,12 +260,210 @@ class Person {
     </a>
 </div>
 </div>
+<!--########################################################################################################################## -->
 <div id="slide17" class="step slide" data-x="24000" data-y="0">
+    <h1>ES5 inheritance</h1>
+<pre class="prettyprint linenums">
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    __.prototype = b.prototype;
+    d.prototype = new __();
+};
+
+var Animal = (function () {
+    function Animal(theName) {
+        this.name = theName;
+    }
+    Animal.prototype.move = function (meters) { /* ... */ };
+    return Animal;
+})();
+
+var Snake = (function (_super) {
+    __extends(Snake, _super);
+    function Snake(name) {
+        _super.call(this, name);
+    }
+    Snake.prototype.move = function (meters) {
+        /* ... */
+        _super.prototype.move.call(this, meters);
+    };
+    return Snake;
+})(Animal);
+</pre>
+<div class="sponsor">
+    <a href="http://blog.wolksoftware.com/">
+        <img src="../media/wolk_logo.png" alt="logo" />
+    </a>
+</div>
+</div>
+<!--########################################################################################################################## -->
+<div id="slide18" class="step slide" data-x="25500" data-y="0">
+    <h1>ES6 inheritance</h1>
+<pre class="prettyprint linenums">
+class Animal {
+    name:string;
+    constructor(theName: string) { this.name = theName; }
+    move(meters: number = 0) { /* ... */ }
+}
+
+class Snake extends Animal {
+    constructor(name: string) { super(name); }
+    move(meters = 5) {
+        /* ... */
+        super.move(meters);
+    }
+}
+</pre>
+<div class="sponsor">
+    <a href="http://blog.wolksoftware.com/">
+        <img src="../media/wolk_logo.png" alt="logo" />
+    </a>
+</div>
+</div>
+<!--########################################################################################################################## -->
+<div id="slide19" class="step slide" data-x="27000" data-y="0">
   <h1>ES5 module (RequireJS)</h1>
 <pre class="prettyprint linenums">
-
+require([
+    "./source/inversify.config",
+    "./source/models/filter_state_model"
+], function (kernel, FilterStateModel) {
+  
+  // code goes here ...
+  
+});
 </pre>
   <h1>ES6 modules</h1>
+<pre class="prettyprint linenums">
+import { kernel } from "./source/inversify.config";
+import { FilterStateModel } from "./source/inversify.config";
+
+// code goes here ...
+</pre>
+  <h2>
+    We can use the <a href="https://github.com/Microsoft/TypeScript/wiki/Compiler-Options">--module</a> compiler option
+    to specify module code generation: 'commonjs', 'amd', 'system', or 'umd'.
+    <h2>
+  <div class="sponsor">
+      <a href="http://blog.wolksoftware.com/">
+          <img src="../media/wolk_logo.png" alt="logo" />
+      </a>
+  </div>
+</div>
+<!--########################################################################################################################## -->
+<div id="slide20" class="step slide" data-x="28500" data-y="0">
+  <h1>Callbacks (ES5)</h1>
+<pre class="prettyprint linenums">
+Parse.User.logIn("user", "pass", {
+  success: function(user) {
+    query.find({
+      success: function(results) {
+        results[0].save({ key: value }, {
+          success: function(result) {
+            // the object was saved.
+          }
+        });
+      }
+    });
+  }
+});
+</pre>
+  <h1>Promises (ES6)</h1>
+<pre class="prettyprint linenums">
+Parse.User.logIn("user", "pass").then(function(user) {
+  return query.find();
+}).then(function(results) {
+  return results[0].save({ key: value });
+}).then(function(result) {
+  // the object was saved.
+});
+</pre>
+  <div class="sponsor">
+      <a href="http://blog.wolksoftware.com/">
+          <img src="../media/wolk_logo.png" alt="logo" />
+      </a>
+  </div>
+</div>
+<!--########################################################################################################################## -->
+<div id="slide21" class="step slide" data-x="30000" data-y="0">
+  <h1>Async Functions (ES7)</h1>
+<pre class="prettyprint linenums">
+Parse.User.logIn("user", "pass", {
+  success: function(user) {
+    query.find({
+      success: function(results) {
+        results[0].save({ key: value }, {
+          success: function(result) {
+            // the object was saved.
+          }
+        });
+      }
+    });
+  }
+});
+</pre>
+  <div class="sponsor">
+      <a href="http://blog.wolksoftware.com/">
+          <img src="../media/wolk_logo.png" alt="logo" />
+      </a>
+  </div>
+</div>
+<!--########################################################################################################################## -->
+<div id="slide22" class="step slide" data-x="31500" data-y="0">
+  <h1>Decorators (ES7)</h1>
+<pre class="prettyprint linenums">
+@Component({
+  selector: 'todo-app',
+  appInjector: [
+    AngularFire,
+    bind(Firebase).toValue(new Firebase('https://webapi.firebaseio-demo.com/test'))
+]})
+@View({
+  templateUrl: 'todo.html',
+  directives: [NgFor]
+})
+class TodoApp {
+  todoService: FirebaseArray;
+  todoEdit: any;
+  todoFilter: Boolean;
+
+  constructor(sync: AngularFire) {
+    this.todoService = sync.asArray();
+    this.todoEdit = null;
+    this.todoFilter = null;
+  }
+
+  editTodo($event, todo) {
+    this.todoEdit = todo;
+  }
+
+}
+</pre>
+  <div class="sponsor">
+      <a href="http://blog.wolksoftware.com/">
+          <img src="../media/wolk_logo.png" alt="logo" />
+      </a>
+  </div>
+</div>
+<!--########################################################################################################################## -->
+<div id="slide23" class="step slide" data-x="33000" data-y="0" data-rotate="90">
+  <div class="cover">
+    <h1>
+      TypeScript goes beyond<br/> ES6 & ES7
+    </h1>
+    <h2>TypeScript introduces some great features that<br/> are not available in ES6 or ES7!</h2>
+    <br/>
+  </div>
+  <div class="sponsor">
+      <a href="http://blog.wolksoftware.com/">
+          <img src="../media/wolk_logo.png" alt="logo" />
+      </a>
+  </div>
+</div>
+<!--########################################################################################################################## -->
+<div id="slide24" class="step slide" data-x="34500" data-y="0">
+  <h1>Optional type annotations system</h1>
 <pre class="prettyprint linenums">
 
 </pre>
@@ -256,3 +473,99 @@ class Person {
       </a>
   </div>
 </div>
+<!--########################################################################################################################## -->
+<div id="slide25" class="step slide" data-x="36000" data-y="0">
+  <h1>Interfaces</h1>
+<pre class="prettyprint linenums">
+interface IPerson implements ISerializable { 
+  name : string;
+  surname : string;
+  greet() : string;
+}
+
+interface IMainSkill { 
+  use() : bool; 
+}
+
+class MockMainSkill implements IMainSkill {
+  use() { return true; }
+}
+
+// TDD and BBD
+describe("Person Class", () => {
+  it("should be able to greet", () => {
+    var mainSkill = new MockMainSkill(); // SOLID: Liskov substitution principle
+    var luke : IPerson = new Person("Luke", "Skywalker", mainSkill);
+    expect(luke.name).to.equal("Luke");
+    expect(luke.surname).to.equal("Skywalker");
+    expect(luke.greet()).to.equal("Hello! my name is Luke Skywalker");
+  });
+}
+
+class Person implements IPerson, ISerializable { // SOLID: Interface segregation principle
+  private _skill : IMainSkill; // SOLID: Dependency inversion principle
+  public name : string;
+  public surname : string;  
+  constructor(name: string, surname: string, skill : IMainSkill) { /* ... */ }
+  greet() : string { /* ... */ };
+}
+</pre>
+</div>
+<!--########################################################################################################################## -->
+<div id="slide26" class="step slide" data-x="37500" data-y="0">
+  <h1>Generics Types</h1>
+<pre class="prettyprint linenums">
+class CustomCollection<T> { // SOLID: Open/Close principle
+    private itemArray: Array<T>;
+
+    constructor() {
+        this.itemArray = [];
+    }
+
+    Add(item: T) {
+        this.itemArray.push(item);
+    }
+
+    GetFirst(): T {
+        return this.itemArray[0];
+    }
+}
+
+class User {
+    public Name;
+}
+
+class Message {
+    public Message;
+}
+
+var myUsers = new CustomCollection<User>();
+myUsers.Add(new User());
+myUsers.Add(new Message()); // Error because of generic type validation
+</pre>
+  <div class="sponsor">
+      <a href="http://blog.wolksoftware.com/">
+          <img src="../media/wolk_logo.png" alt="logo" />
+      </a>
+  </div>
+</div>
+<!--########################################################################################################################## -->
+<div id="slide27" class="step slide" data-x="39000" data-y="0">
+
+
+  <div class="sponsor">
+      <a href="http://blog.wolksoftware.com/">
+          <img src="../media/wolk_logo.png" alt="logo" />
+      </a>
+  </div>
+</div>
+<!--########################################################################################################################## -->
+<div id="slide28" class="step slide" data-x="40500" data-y="0">
+
+  <div class="sponsor">
+      <a href="http://blog.wolksoftware.com/">
+          <img src="../media/wolk_logo.png" alt="logo" />
+      </a>
+  </div>
+</div>
+<!--########################################################################################################################## -->
