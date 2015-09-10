@@ -103,7 +103,7 @@
 <div id="slide8" class="step slide" data-x="10500" data-y="0" data-rotate="90">
     <div class="cover">
       <h1>Chidamber & Kemerer<br/> object-oriented metrics suite</h1>
-      <h2>1. Mumber of methods defined in class (WMC)</h2>
+      <h2>1. Number of methods defined in class (WMC)</h2>
       <h2>2. Depth of inheritance tree (DIT) </h2>
       <h2>3. Number of immediate sub-classes of a class (NOC)</h2>
       <h2>4. Number of classes to which a class is coupled (CBO)</h2>
@@ -261,7 +261,7 @@ class Person {
 </div>
 </div>
 <!--########################################################################################################################## -->
-<div id="slide17" class="step slide" data-x="24000" data-y="0">
+<div id="slide17" class="step slide" data-x="24000" data-y="0" data-rotate="180">
     <h1>ES5 inheritance</h1>
 <pre class="prettyprint linenums">
 var __extends = (this && this.__extends) || function (d, b) {
@@ -298,7 +298,7 @@ var Snake = (function (_super) {
 </div>
 </div>
 <!--########################################################################################################################## -->
-<div id="slide18" class="step slide" data-x="25500" data-y="0">
+<div id="slide18" class="step slide" data-x="25500" data-y="0" data-rotate="180">
     <h1>ES6 inheritance</h1>
 <pre class="prettyprint linenums">
 class Animal {
@@ -322,7 +322,7 @@ class Snake extends Animal {
 </div>
 </div>
 <!--########################################################################################################################## -->
-<div id="slide19" class="step slide" data-x="27000" data-y="0">
+<div id="slide19" class="step slide" data-x="27000" data-y="0" data-rotate="90">
   <h1>ES5 module (RequireJS)</h1>
 <pre class="prettyprint linenums">
 require([
@@ -386,22 +386,23 @@ Parse.User.logIn("user", "pass").then(function(user) {
   </div>
 </div>
 <!--########################################################################################################################## -->
-<div id="slide21" class="step slide" data-x="30000" data-y="0">
+<div id="slide21" class="step slide" data-x="30000" data-y="0" data-rotate="90">
   <h1>Async Functions (ES7)</h1>
 <pre class="prettyprint linenums">
-Parse.User.logIn("user", "pass", {
-  success: function(user) {
-    query.find({
-      success: function(results) {
-        results[0].save({ key: value }, {
-          success: function(result) {
-            // the object was saved.
-          }
-        });
-      }
-    });
+async function updateEntity() {
+  var success = false;
+  var user = await Parse.User.logIn(user, pass);
+  if(user !== null) {
+    let results = await query.find();
+    success = await results[0].save({ key: value };
   }
-});
+  return success;
+}
+
+await updateEntity();
+if(success) {
+  // the object was saved.
+}
 </pre>
   <div class="sponsor">
       <a href="http://blog.wolksoftware.com/">
@@ -411,7 +412,7 @@ Parse.User.logIn("user", "pass", {
 </div>
 <!--########################################################################################################################## -->
 <div id="slide22" class="step slide" data-x="31500" data-y="0">
-  <h1>Decorators (ES7)</h1>
+  <h1>Decorators (ES6)</h1>
 <pre class="prettyprint linenums">
 @Component({
   selector: 'todo-app',
@@ -447,7 +448,7 @@ class TodoApp {
   </div>
 </div>
 <!--########################################################################################################################## -->
-<div id="slide23" class="step slide" data-x="33000" data-y="0" data-rotate="90">
+<div id="slide23" class="step slide" data-x="33000" data-y="0" data-rotate="180">
   <div class="cover">
     <h1>
       TypeScript goes beyond<br/> ES6 & ES7
@@ -462,10 +463,21 @@ class TodoApp {
   </div>
 </div>
 <!--########################################################################################################################## -->
-<div id="slide24" class="step slide" data-x="34500" data-y="0">
-  <h1>Optional type annotations system</h1>
+<div id="slide24" class="step slide" data-x="34500" data-y="0" data-rotate="180">
+  <h1>Type inference</h1>
 <pre class="prettyprint linenums">
-
+function f() {
+ return "hello";
+}
+</pre>
+<h2>Code editors can incorporate the TypeScript language service.</h2>
+<img src="../media/IDE.png" alt="logo" />
+<h1>Optional type annotations</h1>
+<pre class="prettyprint linenums">
+function f(s: string) { return s; }
+// It is also possible to define the type of a function using the optional type annotations
+var f : (s: string) => string;
+f = function(s: string) { return s; }
 </pre>
   <div class="sponsor">
       <a href="http://blog.wolksoftware.com/">
@@ -474,7 +486,7 @@ class TodoApp {
   </div>
 </div>
 <!--########################################################################################################################## -->
-<div id="slide25" class="step slide" data-x="36000" data-y="0">
+<div id="slide25" class="step slide" data-x="36000" data-y="0" data-rotate="90">
   <h1>Interfaces</h1>
 <pre class="prettyprint linenums">
 interface IPerson implements ISerializable { 
@@ -512,7 +524,7 @@ class Person implements IPerson, ISerializable { // SOLID: Interface segregation
 </pre>
 </div>
 <!--########################################################################################################################## -->
-<div id="slide26" class="step slide" data-x="37500" data-y="0">
+<div id="slide26" class="step slide" data-x="37500" data-y="0" data-rotate="0">
   <h1>Generics Types</h1>
 <pre class="prettyprint linenums">
 class CustomCollection&lt;T&gt; { // SOLID: Open/Close principle
@@ -550,7 +562,7 @@ myUsers.Add(new Message()); // Error because of generic type validation
   </div>
 </div>
 <!--########################################################################################################################## -->
-<div id="slide27" class="step slide" data-x="39000" data-y="0">
+<div id="slide27" class="step slide" data-x="39000" data-y="0" data-rotate="180">
     <div class="cover">
       <h1>
         Ok... you have convinced me but I have already started my project with Vanilla JavaScript...
@@ -564,7 +576,7 @@ myUsers.Add(new Message()); // Error because of generic type validation
   </div>
 </div>
 <!--########################################################################################################################## -->
-<div id="slide28" class="step slide" data-x="40500" data-y="0">
+<div id="slide28" class="step slide" data-x="40500" data-y="0" data-rotate="90">
   <div class="cover">
     <h1>
       Good news! TypeScript is a superset of JavaScript
@@ -579,7 +591,7 @@ myUsers.Add(new Message()); // Error because of generic type validation
   </div>
 </div>
 <!--########################################################################################################################## -->
-<div id="slide29" class="step slide" data-x="42000" data-y="0">
+<div id="slide29" class="step slide" data-x="42000" data-y="0" data-rotate="90">
   <div class="cover">
     <h1 style="margin-top:0px;">
       Want to learn more?
@@ -588,7 +600,7 @@ myUsers.Add(new Message()); // Error because of generic type validation
     <a href="https://www.packtpub.com/web-development/learning-typescript">
         <img src="http://www.remojansen.com/website/assets/learning_typescript.png" style="height: 400px;"/>
     </a>
-    <h2>Pre-order now! or join our next meetup for a chance<br/> to win a free physical copy of my upcoming book!</h2>
+    <h2>Pre-order now! or join our next meetup for a chance<br/> to win a free physical copy of my upcoming book.</h2>
   </div>
   <br/>
   <div class="sponsor">
