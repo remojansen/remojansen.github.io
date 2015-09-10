@@ -128,7 +128,7 @@
     </div>
 </div>
 <!--########################################################################################################################## -->
-<div id="slide10" class="step slide" data-x="13500" data-y="0">
+<div id="slide10" class="step slide" data-x="13500" data-y="0" data-rotate="180">
     <div class="cover">
       <h1>The SOLID principles</h1>
       <h2>Single responsibility principle</h2>
@@ -145,7 +145,7 @@
     </div>
 </div>
 <!--########################################################################################################################## -->
-<div id="slide11" class="step slide" data-x="15000" data-y="0">
+<div id="slide11" class="step slide" data-x="15000" data-y="0" data-rotate="180">
     <div class="cover">
       <h1>
         "The principles, when applied together, intend to make it more
@@ -161,7 +161,7 @@
     </div>
 </div>
 <!--########################################################################################################################## -->
-<div id="slide12" class="step slide" data-x="16500" data-y="0">
+<div id="slide12" class="step slide" data-x="16500" data-y="0" data-rotate="90">
     <div class="cover">
       <h1>
         So why we<br/> need TypeScript?
@@ -175,7 +175,7 @@
     </div>
 </div>
 <!--########################################################################################################################## -->
-<div id="slide13" class="step slide" data-x="18000" data-y="0">
+<div id="slide13" class="step slide" data-x="18000" data-y="0" data-rotate="0">
     <div class="cover">
       <h1>
         It is really hard to write SOLID code with JavaScript (ES5).
@@ -189,7 +189,7 @@
     </div>
 </div>
 <!--########################################################################################################################## -->
-<div id="slide14" class="step slide" data-x="19500" data-y="0">
+<div id="slide14" class="step slide" data-x="19500" data-y="0" data-rotate="0">
     <div class="cover">
       <h1>
         ES6 and ES7 make writing SOLID code easier
@@ -205,7 +205,7 @@
     </div>
 </div>
 <!--########################################################################################################################## -->
-<div id="slide15" class="step slide" data-x="21000" data-y="0">
+<div id="slide15" class="step slide" data-x="21000" data-y="0" data-rotate="90">
     <div class="cover">
       <h1>
         TypeScript is the future of JavaScript
@@ -224,7 +224,7 @@
     </div>
 </div>
 <!--########################################################################################################################## -->
-<div id="slide16" class="step slide" data-x="22500" data-y="0">
+<div id="slide16" class="step slide" data-x="22500" data-y="0" data-rotate="90">
     <h1>ES5 class</h1>
 <pre class="prettyprint linenums">
 var Person = (function () {
@@ -515,8 +515,8 @@ class Person implements IPerson, ISerializable { // SOLID: Interface segregation
 <div id="slide26" class="step slide" data-x="37500" data-y="0">
   <h1>Generics Types</h1>
 <pre class="prettyprint linenums">
-class CustomCollection<T> { // SOLID: Open/Close principle
-    private itemArray: Array<T>;
+class CustomCollection&lt;T&gt; { // SOLID: Open/Close principle
+    private itemArray: Array&lt;T&gt;;
 
     constructor() {
         this.itemArray = [];
@@ -539,7 +539,7 @@ class Message {
     public Message;
 }
 
-var myUsers = new CustomCollection<User>();
+var myUsers = new CustomCollection&lt;User&gt;();
 myUsers.Add(new User());
 myUsers.Add(new Message()); // Error because of generic type validation
 </pre>
@@ -551,8 +551,12 @@ myUsers.Add(new Message()); // Error because of generic type validation
 </div>
 <!--########################################################################################################################## -->
 <div id="slide27" class="step slide" data-x="39000" data-y="0">
-
-
+    <div class="cover">
+      <h1>
+        Ok... you have convinced me but I have already started my project with Vanilla JavaScript...
+      </h1>
+      <br/>
+    </div>
   <div class="sponsor">
       <a href="http://blog.wolksoftware.com/">
           <img src="../media/wolk_logo.png" alt="logo" />
@@ -561,7 +565,55 @@ myUsers.Add(new Message()); // Error because of generic type validation
 </div>
 <!--########################################################################################################################## -->
 <div id="slide28" class="step slide" data-x="40500" data-y="0">
-
+  <div class="cover">
+    <h1>
+      Good news! TypeScript is a superset of JavaScript
+    </h1>
+    <h2>All your JavaScript code is already valid TypeScript code.</h2>
+    <br/>
+  </div>
+  <div class="sponsor">
+      <a href="http://blog.wolksoftware.com/">
+          <img src="../media/wolk_logo.png" alt="logo" />
+      </a>
+  </div>
+</div>
+<!--########################################################################################################################## -->
+<div id="slide29" class="step slide" data-x="42000" data-y="0">
+  <div class="cover">
+    <h1 style="margin-top:0px;">
+      Want to learn more?
+    </h1>
+    <br/>
+    <a href="https://www.packtpub.com/web-development/learning-typescript">
+        <img src="http://www.remojansen.com/website/assets/learning_typescript.png" style="height: 400px;"/>
+    </a>
+    <h2>Pre-order now! or join our next meetup for a chance<br/> to win a free physical copy of my upcoming book!</h2>
+  </div>
+  <br/>
+  <div class="sponsor">
+      <a href="http://blog.wolksoftware.com/">
+          <img src="../media/wolk_logo.png" alt="logo" />
+      </a>
+  </div>
+</div>
+<!--########################################################################################################################## -->
+<div id="slide30" class="step slide" data-x="43500" data-y="0">
+  <div class="cover">
+    <h1>
+      Thanks!
+    </h1>
+    <h2>
+        Do you have any questions?
+    </h2>
+    <h3>
+        Remo H. Jansen<br/><br/>
+        <a href="http://www.remojansen.com">www.remojansen.com</a> -
+        <a href="https://twitter.com/OweR_ReLoaDeD">@OweR_ReLoaDeD</a> -
+        <a href="http://blog.wolksoftware.com">blog.wolksoftware.com</a>
+    </h3>    
+    <br/>
+  </div>
   <div class="sponsor">
       <a href="http://blog.wolksoftware.com/">
           <img src="../media/wolk_logo.png" alt="logo" />
