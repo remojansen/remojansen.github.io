@@ -474,3 +474,20 @@ ol.linenums {
     padding: 5px;
     text-align: center;
 }
+
+.center {
+  text-align: center;
+}
+
+.big-margin-top {
+  margin-top: 10%;
+}
+
+.float-left {
+  float: left;
+  width: 50%;
+}
+
+.left {
+  text-align: left;
+}

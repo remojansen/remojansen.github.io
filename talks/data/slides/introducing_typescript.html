@@ -1,12 +1,14 @@
 <div id="slide1" class="step slide" data-x="0" data-y="0">
-    <div class="appreturn"><a href="../index.html"><i class="fa fa-home"></i></a></div>
     <div class="cover">
         <h1>Introducing TypeScript</h1>
         <h2>
             Large-scale JavaScript application development.
         </h2>
         <h3>
-            Remo H. Jansen - <a href="https://twitter.com/OweR_ReLoaDeD">@OweR_ReLoaDeD</a>
+            Remo H. Jansen<br/><br/>
+            <a href="http://www.remojansen.com">www.remojansen.com</a> -
+            <a href="https://twitter.com/OweR_ReLoaDeD">@OweR_ReLoaDeD</a> -
+            <a href="http://blog.wolksoftware.com">blog.wolksoftware.com</a>
         </h3>
         <div class="sponsor">
             <a href="http://blog.wolksoftware.com/">
@@ -16,23 +18,9 @@
     </div>
 </div>
 <div id="slide2" class="step slide" data-x="1500" data-y="0">
-    <div class="appreturn"><a href="../index.html"><i class="fa fa-home"></i></a></div>
-    <h1>Why to use TypeScript?</h1>
-    <h3>It is really hard to write/maintain large JavaScript code bases.<h3>
-<pre class="prettyprint linenums">
-function Person(name, surname) {
-    this.name = name;
-    this.surname = surname;
-}
-
-Person.prototype.greet = function () {
-    return "Hello! my name is " + this.name + " " + this.surname;
-};
-
-var me = new Person("Luke", "Skywalker");
-console.log(me.greet());
-console.log(me.surname);
-</pre>
+    <div class="cover">
+      <h1>Why we need<br/> TypeScript?</h1>
+    </div>
     <div class="sponsor">
         <a href="http://blog.wolksoftware.com/">
             <img src="../media/wolk_logo.png" alt="logo" />
@@ -40,40 +28,204 @@ console.log(me.surname);
     </div>
 </div>
 <div id="slide3" class="step slide" data-x="3000" data-y="0">
-    <div class="appreturn"><a href="../index.html"><i class="fa fa-home"></i></a></div>
-    <h1>Why to use TypeScript?</h1>
-    <h3>JavaScript is TypeScript</h3>
-<pre class="prettyprint linenums">
-function Person(name, surname) {
-    this.name = name;
-    this.surname = surname;
-}
-
-Person.prototype.greet = function () {
-    return "Hello! my name is " + this.name + " " + this.surname;
-};
-
-var me = new Person("Luke", "Skywalker");
-console.log(me.greet());
-console.log(me.surname);
-</pre>
+    <div class="cover">
+      <h1>"Controlling complexity<br/> is the essence of<br/> computer programming"</h1>
+      <h2> — Brian Kernighan</h2>
+    </div>
     <div class="sponsor">
         <a href="http://blog.wolksoftware.com/">
             <img src="../media/wolk_logo.png" alt="logo" />
         </a>
     </div>
 </div>
-<div id="slide4" class="step slide" data-x="5000" data-y="0">
-    <div class="appreturn"><a href="../index.html"><i class="fa fa-home"></i></a></div>
-    <h1>Why to use TypeScript?</h1>
-    <h3>TypeScript is the future of JavaScript</h3>
+<div id="slide4" class="step slide" data-x="4500" data-y="0">
+    <div class="cover">
+      <h1>What we know about software complexity?</h1>
+    </div>
+    <div class="sponsor">
+        <a href="http://blog.wolksoftware.com/">
+            <img src="../media/wolk_logo.png" alt="logo" />
+        </a>
+    </div>
+</div>
+<div id="slide5" class="step slide" data-x="6000" data-y="0">
+    <div class="cover">
+      <h1>Complex !== Complicated</h1>
+      <br/>
+      <h2>
+        - Complicated implies being difficult to understand but with time and effort, ultimately knowable.
+      </h2>
+      <br/>
+      <h2>
+        - Complex, describes the interactions between a number of entities.
+        If the number of entities and interactions between them increase we will get to a point where it would be impossible to know and understand all of them.
+      </h2>
+    </div>
+    <div class="sponsor">
+        <a href="http://blog.wolksoftware.com/">
+            <img src="../media/wolk_logo.png" alt="logo" />
+        </a>
+    </div>
+</div>
+<div id="slide6" class="step slide" data-x="7500" data-y="0">
+    <div class="cover">
+      <img src="../media/chart.jpg" alt="chart" />
+      <h1 style="margin-top: 2%;">
+        “As a system evolves, its complexity increases unless steps are taken to reduce it.”
+      </h1>
+      <h2> - "The eight laws of software evolution" by Meir Lehman</h2>
+      <br/>
+    </div>
+    <div class="sponsor">
+        <a href="http://blog.wolksoftware.com/">
+            <img src="../media/wolk_logo.png" alt="logo" />
+        </a>
+    </div>
+</div>
+<div id="slide7" class="step slide" data-x="9000" data-y="0">
+    <div class="cover">
+      <h1>How can we measure the complexity of software?</h1>
+      <br/>
+    </div>
+    <div class="sponsor">
+        <a href="http://blog.wolksoftware.com/">
+            <img src="../media/wolk_logo.png" alt="logo" />
+        </a>
+    </div>
+</div>
+<div id="slide8" class="step slide" data-x="10500" data-y="0">
+    <div class="cover">
+      <h1>Chidamber & Kemerer<br/> object-oriented metrics suite</h1>
+      <h2>1. Mumber of methods defined in class (WMC)</h2>
+      <h2>2. Depth of inheritance tree (DIT) </h2>
+      <h2>3. Number of immediate sub-classes of a class (NOC)</h2>
+      <h2>4. Number of classes to which a class is coupled (CBO)</h2>
+      <br/>
+    </div>
+    <div class="sponsor">
+        <a href="http://blog.wolksoftware.com/">
+            <img src="../media/wolk_logo.png" alt="logo" />
+        </a>
+    </div>
+</div>
+<div id="slide9" class="step slide" data-x="12000" data-y="0">
+    <div class="cover">
+      <h1>How can we reduce the complexity of a system?</h1>
+      <br/>
+    </div>
+    <div class="sponsor">
+        <a href="http://blog.wolksoftware.com/">
+            <img src="../media/wolk_logo.png" alt="logo" />
+        </a>
+    </div>
+</div>
+<div id="slide10" class="step slide" data-x="13500" data-y="0">
+    <div class="cover">
+      <h1>The SOLID principles</h1>
+      <h2>Single responsibility principle</h2>
+      <h2>Open/Close principle</h2>
+      <h2>Liskov substitution</h2>
+      <h2>Interface segregation</h2>
+      <h2>Dependency inversion</h2>
+      <br/>
+    </div>
+    <div class="sponsor">
+        <a href="http://blog.wolksoftware.com/">
+            <img src="../media/wolk_logo.png" alt="logo" />
+        </a>
+    </div>
+</div>
+<div id="slide11" class="step slide" data-x="15000" data-y="0">
+    <div class="cover">
+      <h1>
+        "The principles, when applied together, intend to make it more
+        likely that a programmer will create a system that is easy to
+        maintain and extend over time"
+      </h1>
+      <br/>
+    </div>
+    <div class="sponsor">
+        <a href="http://blog.wolksoftware.com/">
+            <img src="../media/wolk_logo.png" alt="logo" />
+        </a>
+    </div>
+</div>
+<div id="slide12" class="step slide" data-x="16500" data-y="0">
+    <div class="cover">
+      <h1>
+        So why we<br/> need TypeScript?
+      </h1>
+      <br/>
+    </div>
+    <div class="sponsor">
+        <a href="http://blog.wolksoftware.com/">
+            <img src="../media/wolk_logo.png" alt="logo" />
+        </a>
+    </div>
+</div>
+<div id="slide13" class="step slide" data-x="18000" data-y="0">
+    <div class="cover">
+      <h1>
+        It is really hard to write SOLID code with JavaScript (ES5).
+      </h1>
+      <br/>
+    </div>
+    <div class="sponsor">
+        <a href="http://blog.wolksoftware.com/">
+            <img src="../media/wolk_logo.png" alt="logo" />
+        </a>
+    </div>
+</div>
+<div id="slide14" class="step slide" data-x="19500" data-y="0">
+    <div class="cover">
+      <h1>
+        ES6 and ES7 make writing SOLID code easier
+        but it will be years before we can use them without having to
+        worry about old browsers.
+      </h1>
+      <br/>
+    </div>
+    <div class="sponsor">
+        <a href="http://blog.wolksoftware.com/">
+            <img src="../media/wolk_logo.png" alt="logo" />
+        </a>
+    </div>
+</div>
+<div id="slide15" class="step slide" data-x="21000" data-y="0">
+    <div class="cover">
+      <h1>
+        TypeScript is the future of JavaScript
+      </h1>
+      <h2>TypeScript allow us to use ES6 and ES7 today!</h2>
+      <br/>
+    </div>
+    <div class="sponsor">
+        <a href="http://blog.wolksoftware.com/">
+            <img src="../media/wolk_logo.png" alt="logo" />
+        </a>
+    </div>
+</div>
+<div id="slide16" class="step slide" data-x="22500" data-y="0">
+    <h1>ES5 class</h1>
+<pre class="prettyprint linenums">
+var Person = (function () {
+    function Person(name, surname) {
+        this.name = name;
+        this.surname = surname;
+    }
+    Person.prototype.greet = function () {
+        return "Hello! my name is " + this.name + " " + this.surname;
+    };
+    return Person;
+})();
+</pre>
+    <h1>ES6 class</h1>
 <pre class="prettyprint linenums">
 class Person {
+  public name;
+  public surname;
 
-  public name: string;
-  public surname: string;
-
-  constructor(name : string, surname : string) {
+  constructor(name, surname) {
     this.name = name;
     this.surname = surname;
   }
@@ -81,164 +233,26 @@ class Person {
   public greet() {
     return `Hello! my name is ${this.name} ${this.surname}`;
   }
-
 }
-
-var luke = new Person("Luke", "Skywalker");
-console.log(luke.greet());
-console.log(luke.surname);
 </pre>
-    <div class="sponsor">
-        <a href="http://blog.wolksoftware.com/">
-            <img src="../media/wolk_logo.png" alt="logo" />
-        </a>
-    </div>
+<div class="sponsor">
+    <a href="http://blog.wolksoftware.com/">
+        <img src="../media/wolk_logo.png" alt="logo" />
+    </a>
 </div>
-<div id="slide5" class="step slide" data-x="6500" data-y="0">
-    <div class="appreturn"><a href="../index.html"><i class="fa fa-home"></i></a></div>
-    <h1>Why to use TypeScript?</h1>
-    <h3>TypeScript makes your team more productive</h3>
+</div>
+<div id="slide17" class="step slide" data-x="24000" data-y="0">
+  <h1>ES5 module (RequireJS)</h1>
 <pre class="prettyprint linenums">
-interface IPerson {
-  name : string;
-  surname : string;
-  greet() : string;
-}
 
-describe("Person Class", () => {
-  it("should be able to greet", () => {
-    var luke : IPerson = new Person("Luke", "Skywalker");
-    expect(luke.name).to.equal("Luke");
-    expect(luke.surname).to.equal("Skywalker");
-    expect(luke.greet()).to.equal("Hello! my name is Luke Skywalker");
-  });
-}
 </pre>
-    <div class="sponsor">
-        <a href="http://blog.wolksoftware.com/">
-            <img src="../media/wolk_logo.png" alt="logo" />
-        </a>
-    </div>
-</div>
-<div id="slide3b" class="step slide" data-x="0" data-y="2000">
-    <div class="appreturn"><a href="../index.html"><i class="fa fa-home"></i></a></div>
-    <h1>Optional type notation</h1>
-    // todo types
-    <div class="sponsor">
-        <a href="http://blog.wolksoftware.com/">
-            <img src="../media/wolk_logo.png" alt="logo" />
-        </a>
-    </div>
-</div>
-<div id="slide4b" class="step slide" data-x="1000" data-y="1000">
-    <div class="appreturn"><a href="../index.html"><i class="fa fa-home"></i></a></div>
-    <h1>Interfaces</h1>
-    // todo interfaces
-    <div class="sponsor">
-        <a href="http://blog.wolksoftware.com/">
-            <img src="../media/wolk_logo.png" alt="logo" />
-        </a>
-    </div>
-</div>
-<div id="slide5b" class="step slide" data-x="2000" data-y="1000">
-    <div class="appreturn"><a href="../index.html"><i class="fa fa-home"></i></a></div>
-    <h1>Classes (ES6)</h1>
-    // todo clases
-    <div class="sponsor">
-        <a href="http://blog.wolksoftware.com/">
-            <img src="../media/wolk_logo.png" alt="logo" />
-        </a>
-    </div>
-</div>
-<div id="slide6" class="step slide" data-x="3000" data-y="1000">
-    <div class="appreturn"><a href="../index.html"><i class="fa fa-home"></i></a></div>
-    <h1>Inheritance</h1>
-    // todo inheritance
-    <div class="sponsor">
-        <a href="http://blog.wolksoftware.com/">
-            <img src="../media/wolk_logo.png" alt="logo" />
-        </a>
-    </div>
-</div>
-<div id="slide7" class="step slide" data-x="4000" data-y="1000">
-    <div class="appreturn"><a href="../index.html"><i class="fa fa-home"></i></a></div>
-    <h1>Generics</h1>
-    // todo generics
-    <div class="sponsor">
-        <a href="http://blog.wolksoftware.com/">
-            <img src="../media/wolk_logo.png" alt="logo" />
-        </a>
-    </div>
-</div>
-<div id="slide8" class="step slide" data-x="5000" data-y="1000">
-    <div class="appreturn"><a href="../index.html"><i class="fa fa-home"></i></a></div>
-    <h1>Decorators (ES7)</h1>
-    // todo decorators
-    <div class="sponsor">
-        <a href="http://blog.wolksoftware.com/">
-            <img src="../media/wolk_logo.png" alt="logo" />
-        </a>
-    </div>
-</div>
-<div id="slide9" class="step slide" data-x="6000" data-y="1000">
-    <div class="appreturn"><a href="../index.html"><i class="fa fa-home"></i></a></div>
-    <h1>Modules</h1>
-    // internal and external modules
-    <div class="sponsor">
-        <a href="http://blog.wolksoftware.com/">
-            <img src="../media/wolk_logo.png" alt="logo" />
-        </a>
-    </div>
-</div>
-<div id="slide10" class="step slide" data-x="7000" data-y="1000">
-    <div class="appreturn"><a href="../index.html"><i class="fa fa-home"></i></a></div>
-    <h1>Type definition files</h1>
-    // todo tsd, npm and < reference >
-    <div class="sponsor">
-        <a href="http://blog.wolksoftware.com/">
-            <img src="../media/wolk_logo.png" alt="logo" />
-        </a>
-    </div>
-</div>
-<div id="slide11" class="step slide" data-x="8000" data-y="1000">
-    <div class="appreturn"><a href="../index.html"><i class="fa fa-home"></i></a></div>
-    <h1>IDEs</h1>
-    // todo IDEs
-    <div class="sponsor">
-        <a href="http://blog.wolksoftware.com/">
-            <img src="../media/wolk_logo.png" alt="logo" />
-        </a>
-    </div>
-</div>
-<div id="slide12" class="step slide" data-x="9000" data-y="1000">
-    <div class="appreturn"><a href="../index.html"><i class="fa fa-home"></i></a></div>
-    <h1>Automation</h1>
-    // todo test and gulp
-    <div class="sponsor">
-        <a href="http://blog.wolksoftware.com/">
-            <img src="../media/wolk_logo.png" alt="logo" />
-        </a>
-    </div>
-</div>
-<div id="slide13" class="step slide" data-x="10000" data-y="1000">
-    <div class="appreturn"><a href="../index.html"><i class="fa fa-home"></i></a></div>
-    <div class="cover">
-        <h1>Thanks!</h1>
-        <h2>
-            Questions?
-        </h2>
-        <h3>
-            Remo H. Jansen - <a href="https://twitter.com/OweR_ReLoaDeD">@OweR_ReLoaDeD</a>
-        </h3>
-        <div class="sponsor">
-            <a href="http://blog.wolksoftware.com/">
-                <img src="../media/wolk_logo.png" alt="logo" />
-            </a>
-        </div>
-    </div>
-    <div class="sponsor">
-        <a href="http://blog.wolksoftware.com/">
-            <img src="../media/wolk_logo.png" alt="logo" />
-        </a>
-    </div>
+  <h1>ES6 modules</h1>
+<pre class="prettyprint linenums">
+
+</pre>
+  <div class="sponsor">
+      <a href="http://blog.wolksoftware.com/">
+          <img src="../media/wolk_logo.png" alt="logo" />
+      </a>
+  </div>
 </div>
