@@ -108,6 +108,12 @@
       <h2>3. Number of immediate sub-classes of a class (NOC)</h2>
       <h2>4. Number of classes to which a class is coupled (CBO)</h2>
       <br/>
+      <br/>
+      <p>
+        Note: The Chidamber &amp; Kemerer object-oriented metrics suite is one of<br/>
+        the most common ways of measuring complexity of a system but there are<br/>
+        many other principles and techniques which can be applied for this purpose.
+      </p>
     </div>
     <div class="sponsor">
         <a href="http://blog.wolksoftware.com/">
@@ -133,10 +139,16 @@
       <h1>The SOLID principles</h1>
       <h2>Single responsibility principle</h2>
       <h2>Open/Close principle</h2>
-      <h2>Liskov substitution</h2>
-      <h2>Interface segregation</h2>
-      <h2>Dependency inversion</h2>
+      <h2>Liskov substitution principle</h2>
+      <h2>Interface segregation principle</h2>
+      <h2>Dependency inversion principle</h2>
       <br/>
+      <br/>
+      <p>
+        Note: Adhering to the SOLID principles is one of the most common ways to reduce<br/>
+        the complexity of a system but there are many other principles and techniques which<br/>
+        can be applied for this purpose.
+      </p>
     </div>
     <div class="sponsor">
         <a href="http://blog.wolksoftware.com/">
@@ -176,12 +188,15 @@
 </div>
 <!--########################################################################################################################## -->
 <div id="slide13" class="step slide" data-x="18000" data-y="0" data-rotate="0">
-    <div class="cover">
-      <h1>
-        It is really hard to write SOLID code with JavaScript (ES5).
-      </h1>
-      <br/>
-    </div>
+  <div class="cover">
+    <h1>
+      <a href="http://programmers.stackexchange.com/questions/221615/why-do-dynamic-languages-make-it-more-difficult-to-maintain-large-codebases/221658#221658">
+      "Large codebases are more difficult to maintain when they are written in dynamic languages."
+      </a>
+    </h1>
+    <h2> - Yevgeniy Brikman</h2>
+    <br/>
+  </div>
     <div class="sponsor">
         <a href="http://blog.wolksoftware.com/">
             <img src="../media/wolk_logo.png" alt="logo" />
@@ -192,11 +207,19 @@
 <div id="slide14" class="step slide" data-x="19500" data-y="0" data-rotate="0">
     <div class="cover">
       <h1>
-        ES6 and ES7 make writing SOLID code easier
+        We can write SOLID OOP code with JavaScript (ES5) but it feels so unnatural .
+      </h2>
+      <h2>
+        ES6 and ES7 make writing SOLID OOP code more natural
         but it will be years before we can use them without having to
         worry about old browsers.
-      </h1>
-      <br/>
+      </h2>
+      <br/><br/><br/><br/>
+      <p>
+        Note: Some JavaScript developers don't like when I say this but I think that
+        doing things like using closures to emulate a private property is not
+        what I would consider as natural OOP (using the "private" access modifier).
+      </p>
     </div>
     <div class="sponsor">
         <a href="http://blog.wolksoftware.com/">
@@ -329,9 +352,9 @@ require([
     "./source/inversify.config",
     "./source/models/filter_state_model"
 ], function (kernel, FilterStateModel) {
-  
+
   // code goes here ...
-  
+
 });
 </pre>
   <h1>ES6 modules</h1>
@@ -453,7 +476,11 @@ class TodoApp {
     <h1>
       TypeScript goes beyond<br/> ES6 & ES7
     </h1>
-    <h2>TypeScript introduces some great features that<br/> are not available in ES6 or ES7!</h2>
+    <h2>
+      TypeScript is not a dynamic programming language<br/>
+      and introduces some great features that are not available<br/>
+      in ES6 or ES7!
+     </h2>
     <br/>
   </div>
   <div class="sponsor">
@@ -489,14 +516,14 @@ f = function(s: string) { return s; }
 <div id="slide25" class="step slide" data-x="36000" data-y="0" data-rotate="90">
   <h1>Interfaces</h1>
 <pre class="prettyprint linenums">
-interface IPerson implements ISerializable { 
+interface IPerson implements ISerializable {
   name : string;
   surname : string;
   greet() : string;
 }
 
-interface IMainSkill { 
-  use() : bool; 
+interface IMainSkill {
+  use() : bool;
 }
 
 class MockMainSkill implements IMainSkill {
@@ -517,7 +544,7 @@ describe("Person Class", () => {
 class Person implements IPerson, ISerializable { // SOLID: Interface segregation principle
   private _skill : IMainSkill; // SOLID: Dependency inversion principle
   public name : string;
-  public surname : string;  
+  public surname : string;
   constructor(name: string, surname: string, skill : IMainSkill) { /* ... */ }
   greet() : string { /* ... */ };
 }
@@ -623,7 +650,7 @@ myUsers.Add(new Message()); // Error because of generic type validation
         <a href="http://www.remojansen.com">www.remojansen.com</a> -
         <a href="https://twitter.com/OweR_ReLoaDeD">@OweR_ReLoaDeD</a> -
         <a href="http://blog.wolksoftware.com">blog.wolksoftware.com</a>
-    </h3>    
+    </h3>
     <br/>
   </div>
   <div class="sponsor">
