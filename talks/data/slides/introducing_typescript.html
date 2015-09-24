@@ -402,6 +402,11 @@ Parse.User.logIn("user", "pass").then(function(user) {
   // the object was saved.
 });
 </pre>
+<pre class="prettyprint linenums">
+Promise.all([Primise1, Primise2, PrimiseN]).then(function() {
+    console.log("all the files were created");
+});
+</pre>
   <div class="sponsor">
       <a href="http://blog.wolksoftware.com/">
           <img src="../media/wolk_logo.png" alt="logo" />
@@ -516,22 +521,20 @@ f = function(s: string) { return s; }
 <div id="slide25" class="step slide" data-x="36000" data-y="0" data-rotate="90">
   <h1>Interfaces</h1>
 <pre class="prettyprint linenums">
-interface IPerson implements ISerializable {
+interface ISerializable { serialize() : string; }
+interface IMainSkill { use() : bool; }
+
+interface IPerson {
   name : string;
   surname : string;
   greet() : string;
-}
-
-interface IMainSkill {
-  use() : bool;
 }
 
 class MockMainSkill implements IMainSkill {
   use() { return true; }
 }
 
-// TDD and BBD
-describe("Person Class", () => {
+describe("Person Class", () => { // TDD & BDD
   it("should be able to greet", () => {
     var mainSkill = new MockMainSkill(); // SOLID: Liskov substitution principle
     var luke : IPerson = new Person("Luke", "Skywalker", mainSkill);
@@ -547,14 +550,24 @@ class Person implements IPerson, ISerializable { // SOLID: Interface segregation
   public surname : string;
   constructor(name: string, surname: string, skill : IMainSkill) { /* ... */ }
   greet() : string { /* ... */ };
+  serialize() : string { /* ... */ };
 }
 </pre>
+<div class="sponsor">
+    <a href="http://blog.wolksoftware.com/">
+        <img src="../media/wolk_logo.png" alt="logo" />
+    </a>
+</div>
 </div>
 <!--########################################################################################################################## -->
 <div id="slide26" class="step slide" data-x="37500" data-y="0" data-rotate="0">
   <h1>Generics Types</h1>
 <pre class="prettyprint linenums">
-class CustomCollection&lt;T&gt; { // SOLID: Open/Close principle
+interface IValidatable {
+  validate() : void;
+}
+
+class CustomCollection&lt;T extends IValidatable&gt; { // SOLID: Open/Close principle
     private itemArray: Array&lt;T&gt;;
 
     constructor() {
@@ -562,31 +575,32 @@ class CustomCollection&lt;T&gt; { // SOLID: Open/Close principle
     }
 
     Add(item: T) {
+        this.validate();
         this.itemArray.push(item);
     }
-
-    GetFirst(): T {
-        return this.itemArray[0];
-    }
+    // ...
 }
 
-class User {
-    public Name;
+class User implements IValidatable{
+    public name;
+    validate() { if(name === null) throw new Error(); }
 }
 
-class Message {
-    public Message;
+class Message implements IValidatable{
+    public message;
+    validate() { if(message === null) throw new Error(); }
 }
 
+var myMessage = new CustomCollection&lt;Message&gt;();
 var myUsers = new CustomCollection&lt;User&gt;();
 myUsers.Add(new User());
 myUsers.Add(new Message()); // Error because of generic type validation
 </pre>
-  <div class="sponsor">
-      <a href="http://blog.wolksoftware.com/">
-          <img src="../media/wolk_logo.png" alt="logo" />
-      </a>
-  </div>
+<div class="sponsor">
+    <a href="http://blog.wolksoftware.com/">
+        <img src="../media/wolk_logo.png" alt="logo" />
+    </a>
+</div>
 </div>
 <!--########################################################################################################################## -->
 <div id="slide27" class="step slide" data-x="39000" data-y="0" data-rotate="180">
