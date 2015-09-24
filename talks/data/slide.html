@@ -31,6 +31,16 @@
                         $('#impress').html(data);
                         impress().init();
                         prettyPrint();
+                        var url = window.location.href;
+
+                        if (url.indexOf("wolk") !== -1) {
+                            $('.sponsor').show();
+                            $('.contact').show();
+                        }
+                        else {
+                            $('.sponsor').hide();
+                            $('.contact').hide();
+                        }
                     }
                 });
             }
