@@ -24,7 +24,7 @@
             var urlComponents = window.location.href.split('?slide=');
             if (urlComponents.length > 1)
             {
-                var path = './slides/' + urlComponents[1].split('#')[0] + ".html";
+                var path = ('./slides/' + urlComponents[1].split('#')[0] + ".html").replace("&wolk=true", "");
                 $.ajax({
                     url: path,
                     success: function (data) {
