@@ -3,6 +3,15 @@
   "description" : "",
   "items" : [
     {
+      "title" : "TypeScript Cookbook",
+      "role" : "Author",
+      "isbn" : "-",
+      "publisher" : "Packt Publishing",
+      "link" : "#",
+      "year" : "2016",
+      "thumbnail" : "./website/assets/coming_soon_book.png"
+    },
+    {
       "title" : "Learning TypeScript",
       "role" : "Author",
       "isbn" : "9781783985548",
