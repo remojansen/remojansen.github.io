@@ -21,8 +21,8 @@ define([
                       var $item = $($items[i]);
                       items .push({
                         id : $item.find("id").text(),
-                        content : $item.find("id").text(),
-                        title : $item.find("summary").text()
+                        content : $item.find("summary").text(),
+                        title : $item.find("title").text()
                       });
                     }
                     var result = { item : items };
