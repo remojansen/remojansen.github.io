@@ -1,8 +1,9 @@
 define([
     'Ember',
-    'website/js/lib/twitter-entities'
+    'moment',
+    'bluebird'
 ],
-    function (Ember, twitterEntities) {
+    function (Ember, moment, Promise) {
         "use strict";
 
         return Ember.Route.extend({
@@ -12,19 +13,27 @@ define([
 
               $.ajax({
                   async: true,
-                  ype: 'GET',
-                  dataType: "json",
-                  url: 'http://pipes.yahoo.com/pipes/pipe.run',
-                  data : {
-                    '_id' : 'd3b21840e155e327bdfd8ac11ff6f91e',
-                    '_render' : ' json'
-                  },
-                  success: function(data) {
-                    var result = {};
-                    result.item = data.value.items[0].item;
-                    for(var i = 0; i < result.item.length; i++){
-                      result.item[i] = twitterEntities.linkifyEntities(result.item[i]);
+                  url : 'http://my-cors-proxy.azurewebsites.net/twitrss.me/twitter_user_to_rss/?user=ower_reloaded',
+                  crossDomain : true,
+                  dataType: "xml",
+                  success: function(xml) {
+                    var items = [];
+                    var $items = $(xml).find("item");
+                    for(var i = 0; i < $items.length; i++) {
+                      var $item = $($items[i]);
+                      var link = $item.find("link").text();
+                      var id = link.split("/")[5];
+                      items .push({
+                        link : link,
+                        id : id,
+                        pubDate : moment($item.find("pubDate").text()).format("dddd, MMMM Do YYYY"),
+                        description : $item.find("title").text(),
+                        fav_link : "https://twitter.com/intent/favorite?tweet_id=" + id,
+                        retweet_link : "https://twitter.com/intent/tweet?in_reply_to=" + id,
+                        reply_link : "https://twitter.com/intent/retweet?tweet_id=" + id
+                      });
                     }
+                    var result = { item : items };
                     resolve(result);
                   },
                   error: function(error) {

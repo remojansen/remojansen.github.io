@@ -8,29 +8,31 @@ define([
           model: function()
           {
             return new Promise(function(resolve, reject) {
+
               $.ajax({
-                async: true,
-                dataType: "json",
-                type: 'GET',
-                url: 'http://pipes.yahoo.com/pipes/pipe.run',
-                data : {
-                  '_id' : '2d41b5bdc1a7f250df50879be8604500',
-                  '_render' : ' json'
-                },
-                success: function(data) {
-                  var result = {};
-                  result.item = data.value.items;
-                  for(var i = 0; i < result.item.length; i++){
-                    var date = result.item[i].published;
-                    date = moment(date).format("dddd, MMMM Do YYYY");
-                    result.item[i].published = date;
+                  async: true,
+                  url : 'http://my-cors-proxy.azurewebsites.net/github.com/remojansen.atom',
+                  crossDomain : true,
+                  dataType: "xml",
+                  success: function(xml) {
+                    var items = [];
+                    var $items = $(xml).find("entry");
+                    for(var i = 0; i < $items.length; i++) {
+                      var $item = $($items[i]);
+                      items .push({
+                        link: $item.find("link").attr("href"),
+                        published : moment($item.find("published").text()).format("dddd, MMMM Do YYYY"),
+                        title : $item.find("title").text()
+                      });
+                    }
+                    var result = { item : items };
+                    resolve(result);
+                  },
+                  error: function(error) {
+                    reject(error);
                   }
-                  resolve(result);
-                },
-                error: function() {
-                  reject(error);
-                }
               });
+
             });
           }
         });

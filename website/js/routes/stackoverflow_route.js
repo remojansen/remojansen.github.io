@@ -8,18 +8,24 @@ define([
           model: function()
           {
             return new Promise(function(resolve, reject) {
+
               $.ajax({
                   async: true,
-                  ype: 'GET',
-                  dataType: "json",
-                  url: 'http://pipes.yahoo.com/pipes/pipe.run',
-                  data : {
-                    '_id' : 'e281899472e8587bf15c31cb2e3adf15',
-                    '_render' : ' json'
-                  },
-                  success: function(data){
-                    var result = {};
-                    result.item = data.value.items;
+                  url : 'http://my-cors-proxy.azurewebsites.net/stackoverflow.com/feeds/user/606821',
+                  crossDomain : true,
+                  dataType: "xml",
+                  success: function(xml) {
+                    var items = [];
+                    var $items = $(xml).find("entry");
+                    for(var i = 0; i < $items.length; i++) {
+                      var $item = $($items[i]);
+                      items .push({
+                        id : $item.find("id").text(),
+                        content : $item.find("id").text(),
+                        title : $item.find("summary").text()
+                      });
+                    }
+                    var result = { item : items };
                     resolve(result);
                   },
                   error: function(error) {

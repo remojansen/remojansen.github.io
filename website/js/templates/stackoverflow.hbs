@@ -2,10 +2,10 @@
   {{#each i in item}}
   <div class="well fadeInUp animated">
     <h2>
-      <a class="link" href="{{unbound i.id}}">{{unbound i.title.content}}</a>
+      <a class="link" href="{{unbound i.id}}">{{unbound i.title}}</a>
     </h2>
     <div class="post-body">
-      {{{unbound i.summary.content}}}
+      {{{unbound i.content}}}
     </div>
   </div>
   {{/each}}
