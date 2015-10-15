@@ -929,3 +929,8 @@ ol.linenums {
   	font-size: 12px !important;
 	}
 }
+
+code {
+    background-color: #eeeeee;
+    color: #333333;
+}
