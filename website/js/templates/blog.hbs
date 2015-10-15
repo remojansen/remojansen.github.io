@@ -1,13 +1,13 @@
 <div>
-  {{#each i in item}}
-  <div class="well fadeInUp animated">
-    <h2>
-      <a class="link" href="{{unbound i.link}}">{{unbound i.title}}</a>
-    </h2>
-    <div class="post-body">
-      {{{unbound i.description}}}
+  {{#each itm in item}}
+    <div class="well fadeInUp animated">
+      <h2>
+        <a class="link" href="{{unbound itm.link}}">{{unbound itm.title}}</a>
+      </h2>
+      <div class="post-body">
+        {{{unbound itm.description}}}
+      </div>
     </div>
-  </div>
   {{/each}}
   <blockquote class="large fadeInDown animated">
     <p>
