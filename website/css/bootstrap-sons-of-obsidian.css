@@ -5,7 +5,7 @@
  *
  */
 .pln {
-  color: #F1F2F3; }
+  color: #333333; }
 
 .str {
   color: #EC7600; }
@@ -24,7 +24,7 @@
   color: #FACD22; }
 
 .pun {
-  color: #F1F2F3; }
+  color: #333333; }
 
 .opn {
   color: #F1F2F3; }
@@ -52,7 +52,7 @@
 
 /* Put a border around prettyprinted code snippets. */
 pre.prettyprint {
-  background-color: #111111;
+  background-color: #eeeeee;
   padding: 10px;
   border: 1px solid #E1E1E8; }
 
@@ -82,4 +82,4 @@ ol.linenums li.L3,
 ol.linenums li.L5,
 ol.linenums li.L7,
 ol.linenums li.L9 {
-  background: #111111; }
+  background: #eeeeee; }
