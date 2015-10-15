@@ -7,6 +7,12 @@ define([
     function (Ember, template, utils) {
         "use strict";
 
+        function htmlDecode(i){
+          var e = document.createElement('div');
+          e.innerHTML = i;
+          return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
+        }
+
         return Ember.View.extend({
             defaultTemplate: Ember.Handlebars.compile(template),
             didInsertElement: function () {
@@ -23,11 +29,11 @@ define([
                 // Make tables looks better
                 $('.post-body table').addClass('table table-bordered table-striped table-responsive');
 
-                // Escape HTML inside code examples and make them look better
+                // Mmake code snippets look better
                 $('.post-body code').each(function(index, item){
                     $(item).parent().addClass('prettyprint linenums lang-js');
-                    var html = $(item).html();
-                    $(item).text(html);
+                    //var html = $(item).html();
+                    //$(item).text(html);
                 });
                 prettyPrint();
             }
