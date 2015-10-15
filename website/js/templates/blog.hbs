@@ -1,11 +1,11 @@
 <div>
-  {{#each item in post}}
+  {{#each i in item}}
   <div class="well fadeInUp animated">
     <h2>
-      <a class="link" href="{{unbound item.link}}">{{unbound item.title}}</a>
+      <a class="link" href="{{unbound i.link}}">{{unbound i.title}}</a>
     </h2>
     <div class="post-body">
-      {{{unbound item.description}}}
+      {{{unbound i.description}}}
     </div>
   </div>
   {{/each}}
