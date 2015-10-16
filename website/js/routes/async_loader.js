@@ -4,8 +4,6 @@ define([
 ], function (Ember, Promise, moment) {
   "use strict";
 
-  debugger;
-
   function AsyncLoader(){}
 
   AsyncLoader.CAHE = {

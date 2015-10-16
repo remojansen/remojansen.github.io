@@ -48,8 +48,8 @@ require([
     "use strict";
 
     // pre load feeds
-    var f  = function(d){ console.log(d); }
-    var e  = function(e){ console.log(e); }
+    var t  = function(d){ console.log(d); }
+    var c  = function(e){ console.log(e); }
     var promises = [];
     promises.push(asyncLoader.getGitHubFeedPromise());
     promises.push(asyncLoader.getSoFeedPromise());
@@ -58,7 +58,7 @@ require([
 
     for(var i = 0; i < promises.length; i++) {
       var p = promises[i];
-      p(f,e);
+      p.then(t).catch(c);
     }
 
     // Configure Routes
