@@ -68,7 +68,7 @@ define([
                   title : $item.find("title").text()
                 });
               }
-              var AsyncLoader.CACHE.so = { item : items };
+              AsyncLoader.CACHE.so = { item : items };
               resolve(AsyncLoader.CACHE.so);
             },
             error: function(error) {
