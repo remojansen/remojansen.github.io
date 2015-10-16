@@ -7,7 +7,7 @@ define([
   function AsyncLoader(){}
 
   AsyncLoader.CAHE = {
-    blog : null;
+    blog : null,
     so : null,
     github : null,
     twitter : null
