@@ -4,18 +4,21 @@ define([
 ], function (Promise, moment) {
   "use strict";
 
-  function AsyncLoader(){}
+  function AsyncLoader(){
+    this.CAHE = {
+      blog : null,
+      so : null,
+      github : null,
+      twitter : null
+    };
+  }
 
-  AsyncLoader.CAHE = {
-    blog : null,
-    so : null,
-    github : null,
-    twitter : null
-  };
+  AsyncLoader
 
   AsyncLoader.prototype.getGitHubFeedPromise = function() {
+    var that = this;
     return new Promise(function(resolve, reject) {
-      if(AsyncLoader.CACHE.github !== null) {
+      if(that.CACHE.github !== null) {
         resolve(cache);
       }
       else {
@@ -35,8 +38,8 @@ define([
                   title : $item.find("title").text()
                 });
               }
-              AsyncLoader.CACHE.github ={ item : items };
-              resolve(AsyncLoader.CACHE.github);
+              that.CACHE.github ={ item : items };
+              resolve(that.CACHE.github);
             },
             error: function(error) {
               reject(error);
@@ -47,8 +50,9 @@ define([
   };
 
   AsyncLoader.prototype.getSoFeedPromise = function() {
+    var that = this;
     return new Promise(function(resolve, reject) {
-      if(AsyncLoader.CACHE.so !== null) {
+      if(that.CACHE.so !== null) {
         resolve(cache);
       }
       else {
@@ -68,8 +72,8 @@ define([
                   title : $item.find("title").text()
                 });
               }
-              AsyncLoader.CACHE.so = { item : items };
-              resolve(AsyncLoader.CACHE.so);
+              that.CACHE.so = { item : items };
+              resolve(that.CACHE.so);
             },
             error: function(error) {
               reject(error);
@@ -80,8 +84,9 @@ define([
   };
 
   AsyncLoader.prototype.getBlogFeedPromise = function() {
+    var that = this;
     return new Promise(function(resolve, reject) {
-      if(AsyncLoader.CACHE.blog !== null) {
+      if(that.CACHE.blog !== null) {
         resolve(cache);
       }
       else {
@@ -102,8 +107,8 @@ define([
                   title : $item.find("title").text()
                 });
               }
-              AsyncLoader.CACHE.blog = { item : items };
-              resolve(AsyncLoader.CACHE.blog);
+              that.CACHE.blog = { item : items };
+              resolve(that.CACHE.blog);
             },
             error: function(error) {
               reject(error);
@@ -114,8 +119,9 @@ define([
   };
 
   AsyncLoader.prototype.getTwitterFeedPromise = function() {
+    var that = this;
     return new Promise(function(resolve, reject) {
-      if(AsyncLoader.CACHE.twitter !== null) {
+      if(that.CACHE.twitter !== null) {
         resolve(cache);
       }
       else {
@@ -141,8 +147,8 @@ define([
                   reply_link : "https://twitter.com/intent/retweet?tweet_id=" + id
                 });
               }
-              syncLoader.CACHE.twitter = { item : items };
-              resolve(syncLoader.CACHE.twitter);
+              that.CACHE.twitter = { item : items };
+              resolve(that.CACHE.twitter);
             },
             error: function(error) {
               reject(error);
