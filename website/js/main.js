@@ -48,8 +48,8 @@ require([
     "use strict";
 
     // pre load feeds
-    var t  = function(d){ console.log(d); }
-    var c  = function(e){ console.log(e); }
+    var t  = function(d){ if(console && typeof console.log === "function") { console.log(d); } }
+    var c  = function(e){ if(console && typeof console.log === "function") { console.log(e); } }
     var promises = [];
     promises.push(asyncLoader.getGitHubFeedPromise());
     promises.push(asyncLoader.getSoFeedPromise());
