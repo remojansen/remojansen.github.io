@@ -50,10 +50,16 @@ require([
     // pre load feeds
     var f  = function(d){ console.log(d); }
     var e  = function(e){ console.log(e); }
-    asyncLoader.getGitHubFeedPromise()(f,e);
-    asyncLoader.getSoFeedPromise()(f,e);
-    asyncLoader.getTwitterFeedPromise()(f,e);
-    asyncLoader.getBlogFeedPromise()(f,e);
+    var promises = [];
+    promises.push(asyncLoader.getGitHubFeedPromise());
+    promises.push(asyncLoader.getSoFeedPromise());
+    promises.push(asyncLoader.getTwitterFeedPromise());
+    promises.push(asyncLoader.getBlogFeedPromise());
+
+    for(var i = 0; i < promises.length; i++) {
+      var p = promises[i];
+      p(f,e);
+    }
 
     // Configure Routes
     app.Router.map(routes);
