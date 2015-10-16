@@ -5,12 +5,13 @@ define([
   "use strict";
 
   function AsyncLoader() {
-    this.CACHE = {
+    window._cache || window._cache = {
       blog : null,
       so : null,
       github : null,
       twitter : null
     };
+    this.CACHE = window._cache;
   }
 
   AsyncLoader.prototype.getGitHubFeedPromise = function() {
@@ -156,7 +157,5 @@ define([
     });
   };
 
-  debugger;
-  window._loader =  window._loader || new AsyncLoader();
-  return window._loader;
+  return new AsyncLoader();
 });
