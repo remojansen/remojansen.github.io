@@ -5,7 +5,7 @@ define([
   "use strict";
 
   function AsyncLoader() {
-    window._cache || window._cache = {
+    window._cache = window._cache || {
       blog : null,
       so : null,
       github : null,
