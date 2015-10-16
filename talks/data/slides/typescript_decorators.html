@@ -1,0 +1,79 @@
+<div id="slide1" class="step slide" data-x="0" data-y="0">
+    <div class="cover">
+        <img src="../media/me.jpg" alt="chart" style="margin-top: 5%;">
+        <h1 style="margin-top:0px;">Decorators &amp; metadata reflection</h1>
+        <h2>
+            Learn how decorators make possible new exciting JavaScript features like reflection or dependency injection.
+        </h2>
+        <h3>
+            Remo H. Jansen<br/>
+        </h3>
+        <h3 class="contact">
+            <a href="http://www.remojansen.com">www.remojansen.com</a> -
+            <a href="https://twitter.com/OweR_ReLoaDeD">@OweR_ReLoaDeD</a> -
+            <a href="http://blog.wolksoftware.com">blog.wolksoftware.com</a>
+        </h3>
+        <div class="sponsor">
+            <a href="http://blog.wolksoftware.com/">
+                <img src="../media/wolk_logo.png" alt="logo" />
+            </a>
+        </div>
+    </div>
+</div>
+<!--########################################################################################################################## -->
+<div id="slide2" class="step slide" data-x="1500" data-y="0">
+  <h1>How all this started?</h1>
+  <img src="../media/decorators_3.png" alt="chart" style="margin-top: 1%;" />
+  <div style="text-align: center;">
+    <img src="../media/decorators_0.jpg" alt="chart" style="width: 70%;" />
+  </div>
+  <div class="sponsor">
+    <a href="http://blog.wolksoftware.com/">
+        <img src="../media/wolk_logo.png" alt="logo" />
+    </a>
+  </div>
+</div>
+<!--########################################################################################################################## -->
+<div id="slide3" class="step slide" data-x="3000" data-y="0">
+  <h1>What are annotations &amp; decorators?</h1>
+  <img src="../media/decorators_1.png" alt="chart" style="margin-top: 1%;" /><br/><br/><br/>
+  <h1>What is the difference between annotations &amp; decorators?</h1>
+  <img src="../media/decorators_2.png" alt="chart" style="margin-top: 1%;" />
+  <div class="sponsor">
+    <a href="http://blog.wolksoftware.com/">
+        <img src="../media/wolk_logo.png" alt="logo" />
+    </a>
+  </div>
+</div>
+<!--########################################################################################################################## -->
+<div id="slide4" class="step slide" data-x="4500" data-y="0">
+  <h1>Annotations</h1>
+<pre class="prettyprint linenums">
+import { View } from 'angular2/angular2';
+
+@View({
+  template: '&lt;h1&gt;My first Angular 2 App&lt;/h1&gt;'
+})
+class AppComponent {
+  // ...
+}
+</pre>
+  <h1>Decorators</h1>
+<pre class="prettyprint linenums">
+  function View(settings) {
+    return function(target) {
+      target.template = settings.template;
+      // ...
+    }
+  }
+
+  class AppComponent {
+    // ...
+  }
+</pre>
+  <div class="sponsor">
+    <a href="http://blog.wolksoftware.com/">
+        <img src="../media/wolk_logo.png" alt="logo" />
+    </a>
+  </div>
+</div>
