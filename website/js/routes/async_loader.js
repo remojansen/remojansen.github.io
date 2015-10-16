@@ -1,7 +1,7 @@
 define([
     'bluebird',
     'moment'
-], function (Ember, Promise, moment) {
+], function (Promise, moment) {
   "use strict";
 
   function AsyncLoader(){}
