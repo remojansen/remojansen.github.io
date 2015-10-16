@@ -4,7 +4,7 @@ define([
 ], function (Promise, moment) {
   "use strict";
 
-  function AsyncLoader(){
+  function AsyncLoader() {
     this.CAHE = {
       blog : null,
       so : null,
@@ -12,8 +12,6 @@ define([
       twitter : null
     };
   }
-
-  AsyncLoader
 
   AsyncLoader.prototype.getGitHubFeedPromise = function() {
     var that = this;
@@ -158,6 +156,7 @@ define([
     });
   };
 
+  debugger;
   window._loader =  window._loader || new AsyncLoader();
   return window._loader;
 });
