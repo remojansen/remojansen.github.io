@@ -5,7 +5,7 @@ define([
   "use strict";
 
   function AsyncLoader() {
-    this.CAHE = {
+    this.CACHE = {
       blog : null,
       so : null,
       github : null,
