@@ -18,6 +18,7 @@ require([
     'website/js/views/publications_view',
     'website/js/views/github_view',
     'website/js/views/twitter_view',
+    'website/js/routes/async_loader',
     'jQuery',
     'Bootstrap',
     'Handlebars',
@@ -41,9 +42,18 @@ require([
   talksView,
   publicationsView,
   githubView,
-  twitterView
+  twitterView,
+  asyncLoader
   ){
     "use strict";
+
+    // pre load feeds
+    var f  = function(d){ console.log(d); }
+    var e  = function(e){ console.log(e); }
+    asyncLoader.getGitHubFeedPromise()(f,e);
+    asyncLoader.getSoFeedPromise()(f,e);
+    asyncLoader.getTwitterFeedPromise()(f,e);
+    asyncLoader.getBlogFeedPromise()(f,e);
 
     // Configure Routes
     app.Router.map(routes);

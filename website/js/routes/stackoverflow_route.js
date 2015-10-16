@@ -1,39 +1,13 @@
 define([
-    'Ember', 'bluebird'
+    'Ember', 'bluebird', 'website/js/routes/async_loader'
 ],
-    function (Ember, Promise) {
+    function (Ember, Promise, asyncLoader) {
         "use strict";
 
         return Ember.Route.extend({
           model: function()
           {
-            return new Promise(function(resolve, reject) {
-
-              $.ajax({
-                  async: true,
-                  url : 'http://my-cors-proxy.azurewebsites.net/stackoverflow.com/feeds/user/606821',
-                  crossDomain : true,
-                  dataType: "xml",
-                  success: function(xml) {
-                    var items = [];
-                    var $items = $(xml).find("entry");
-                    for(var i = 0; i < $items.length; i++) {
-                      var $item = $($items[i]);
-                      items .push({
-                        id : $item.find("id").text(),
-                        content : $item.find("summary").text(),
-                        title : $item.find("title").text()
-                      });
-                    }
-                    var result = { item : items };
-                    resolve(result);
-                  },
-                  error: function(error) {
-                    reject(error);
-                  }
-              });
-
-            });
+            return asyncLoader.getSoFeedPromise();
           }
         });
     }

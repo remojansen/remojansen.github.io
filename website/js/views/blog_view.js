@@ -7,12 +7,6 @@ define([
     function (Ember, template, utils) {
         "use strict";
 
-        function htmlDecode(i){
-          var e = document.createElement('div');
-          e.innerHTML = i;
-          return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
-        }
-
         return Ember.View.extend({
             defaultTemplate: Ember.Handlebars.compile(template),
             didInsertElement: function () {
