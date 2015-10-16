@@ -18,7 +18,7 @@ define([
     var that = this;
     return new Promise(function(resolve, reject) {
       if(that.CACHE.github !== null) {
-        resolve(cache);
+        resolve(that.CACHE.github);
       }
       else {
         $.ajax({
@@ -52,7 +52,7 @@ define([
     var that = this;
     return new Promise(function(resolve, reject) {
       if(that.CACHE.so !== null) {
-        resolve(cache);
+        resolve(that.CACHE.so);
       }
       else {
         $.ajax({
@@ -86,7 +86,7 @@ define([
     var that = this;
     return new Promise(function(resolve, reject) {
       if(that.CACHE.blog !== null) {
-        resolve(cache);
+        resolve(that.CACHE.blog);
       }
       else {
         $.ajax({
@@ -121,7 +121,7 @@ define([
     var that = this;
     return new Promise(function(resolve, reject) {
       if(that.CACHE.twitter !== null) {
-        resolve(cache);
+        resolve(that.CACHE.twitter);
       }
       else {
         $.ajax({
