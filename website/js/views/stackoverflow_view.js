@@ -26,8 +26,8 @@ define([
                 // Escape HTML inside code examples and make them look better
                 $('.post-body code').each(function(index, item){
                     $(item).parent().addClass('prettyprint linenums lang-js');
-                    var html = $(item).html();
-                    $(item).text(html);
+                    //var html = $(item).html();
+                    //$(item).text(html);
                 });
                 prettyPrint();
             }
