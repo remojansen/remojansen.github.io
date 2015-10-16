@@ -858,8 +858,6 @@ ol.linenums {
 
 .tweet{
 	padding: 5%;
-}
-.tweet-text {
 	min-height: 120px;
 	overflow: hidden;
 }
