@@ -3,7 +3,7 @@
   "description" : "",
   "items" : [
     {
-      "title" : "Decorators &amp; metadata reflection",
+      "title" : "Decorators & metadata reflection",
       "description" : "Learn how decorators make new exciting JavaScript features like reflection or dependency injection possible.",
       "language" : "ie",
       "url" : "http://www.remojansen.com/talks/data/slide.html?slide=typescript_decorators",
