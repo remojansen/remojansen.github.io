@@ -3,6 +3,13 @@
   "description" : "",
   "items" : [
     {
+      "title" : "Decorators &amp; metadata reflection",
+      "description" : "Learn how decorators make new exciting JavaScript features like reflection or dependency injection possible.",
+      "language" : "ie",
+      "url" : "http://www.remojansen.com/talks/data/slide.html?slide=typescript_decorators",
+      "year" : "2015"
+    },
+    {
       "title" : "Introducing TypeScript",
       "description" : "Large-scale JavaScript application development.",
       "language" : "ie",
