@@ -937,6 +937,7 @@ code {
     background-repeat: no-repeat;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
+    background-position-x: 50%;
 }
 
 .container .jumbotron {
