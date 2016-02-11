@@ -1,13 +1,14 @@
 <div class="col-md-4 printNotVisible" style="text-align: center;">
-
-  <img src="{{unbound summary.image_path}}"
-       style="width:100%; margin-top: 15%;"
-      class="img-circle"/>
+  <div class="main-img-container">
+      <img src="{{unbound summary.image_path}}" class="img-circle main-img"/>
+  </div>
 </div>
 <div class="col-md-8">
-  <h2 class="">{{unbound summary.name}}</h2>
-  <p class="">{{{unbound summary.main_paragraph}}}</p>
-  {{#each smr in summary.paragraph}}
-      <p class="paragraph">{{{unbound smr}}}</p>
-  {{/each}}
+  <div class="summary">
+        <h2 class="">{{unbound summary.name}}</h2>
+        <p class="">{{{unbound summary.main_paragraph}}}</p>
+        {{#each smr in summary.paragraph}}
+            <p class="paragraph">{{{unbound smr}}}</p>
+        {{/each}}
+  </div>
 </div>

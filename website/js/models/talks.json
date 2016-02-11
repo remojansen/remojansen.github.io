@@ -3,6 +3,13 @@
   "description" : "",
   "items" : [
     {
+      "title" : "React + Redux + TypeScript === ♥",
+      "description" : "An introduction to the development of universal JavaScript applications with React, Redux & TypeScript",
+      "language" : "ie",
+      "url" : "http://www.slideshare.net/RemoJansen/react-redux-typescript",
+      "year" : "2016"
+    },
+    {
       "title" : "Decorators & metadata reflection",
       "description" : "Learn how decorators make new exciting JavaScript features like reflection or dependency injection possible.",
       "language" : "ie",

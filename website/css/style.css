@@ -511,13 +511,6 @@ ul.social li{
     padding-top: 5px;
 }
 
-.container .jumbotron {
-    padding-right: 30px;
-    padding-left: 30px;
-    padding-top: 10px;
-    padding-bottom: 20px;
-}
-
 .paragraph {
     font-size: 14px !important;
     text-align: justify;
@@ -934,4 +927,41 @@ ol.linenums {
 code {
     background-color: #eeeeee;
     color: #333333;
+}
+
+.header_bg {
+    background-image: url('../assets/header_bg.jpeg');
+    max-height: 380px;
+    height: 380px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.container .jumbotron {
+    padding-right: 0px;
+    padding-left: 0px;
+    padding-top: 0px;
+    padding-bottom: 20px;
+}
+
+.summary {
+    padding-right: 30px;
+    padding-left: 30px;
+}
+
+.main-img {
+    width: 90%;
+    margin: auto;
+    margin-top: 5%;
+    margin-bottom: 5%; 
+}
+
+.main-img-container {
+    background: white;
+    border-radius: 5px;
+    width: 90%;
+    margin: auto;
+    margin-top: -100px;
 }
