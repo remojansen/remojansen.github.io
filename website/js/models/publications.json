@@ -5,11 +5,11 @@
     {
       "title" : "TypeScript Cookbook",
       "role" : "Author",
-      "isbn" : "-",
+      "isbn" : "9781782175612",
       "publisher" : "Packt Publishing",
-      "link" : "#",
+      "link" : "https://www.packtpub.com/web-development/typescript-cookbook",
       "year" : "2016",
-      "thumbnail" : "./website/assets/coming_soon_book.png"
+      "thumbnail" : "./website/assets/typescript_cookbook.jpg"
     },
     {
       "title" : "Learning TypeScript",
