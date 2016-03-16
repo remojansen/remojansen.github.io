@@ -3,6 +3,13 @@
   "description" : "",
   "items" : [
     {
+      "title" : "Introducing TypeScript",
+      "description" : "Large scale JavaScript application development made easy",
+      "language" : "ie",
+      "url" : "https://docs.google.com/presentation/d/1OA9-z96nNgw43pm7uGn18uU6NICTAnVtzYs-4uBEbDI/present",
+      "year" : "2016"
+    },
+    {
       "title" : "React + Redux + TypeScript === ♥",
       "description" : "An introduction to the development of universal JavaScript applications with React, Redux & TypeScript",
       "language" : "ie",
