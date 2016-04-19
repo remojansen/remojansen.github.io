@@ -2,13 +2,13 @@
   "title" : "Personal Projects",
   "projects" : [
     {
-      "year" : 2015,
+      "year" : 2016,
       "country_icon_path": "./website/assets/ie.png",
-      "name" : "AtSpy",
-      "url" : "http://atspy.github.io/",
+      "name" : "redux-bootstrap",
+      "url" : "https://github.com/remojansen/redux-bootstrap",
       "paragraph" : [
-        "AtSpy provides developers with standalone test spies for JavaScript.",
-        "AtSpy is powered by TypeScript & Decorators (ES7), has no dependencies and works with any unit testing framework."
+        "Bootstrapping function for React / Redux applications.",
+        "This library handles most of the common application initialization/bootstrapping that takes place every time you create a new Redux project."
       ],
       "display_break": true
     },
