@@ -5,7 +5,7 @@
       "year" : 2016,
       "country_icon_path": "./website/assets/ie.png",
       "name" : "redux-bootstrap",
-      "url" : "https://github.com/remojansen/redux-bootstrap",
+      "url" : "http://redux-bootstrap.github.io",
       "paragraph" : [
         "Bootstrapping function for React / Redux applications.",
         "This library handles most of the common application initialization/bootstrapping that takes place every time you create a new Redux project."
