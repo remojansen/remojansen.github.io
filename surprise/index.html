@@ -1404,17 +1404,19 @@ body {
     <script>
     $(document).ready(function () {
       
-        function liftOff() {
-          // todo
-        }
-      
         $("#clock").countdown({
           until: new Date(2016, 9, 15),
-          onExpiry: window.liftOff || liftOff
+          onExpiry: function () {
+            for (var i=0; i < 100; i++) {
+              $('body').append("<div class='balloon balloon" + i + "'></div>");
+            }
+          }
         });
+
         setTimeout(function() {
             $("body").css({ height: window.innerHeight});
         }, 1000);
+ 
     });
     </script>
   </body>
