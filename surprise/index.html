@@ -30,7 +30,15 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-countdown/2.0.2/jquery.countdown.min.js"></script>
     <script>
     $(document).ready(function () {
-        $("#clock").countdown({until: new Date(2016, 9, 15)});
+      
+        function liftOff() {
+          // todo
+        }
+      
+        $("#clock").countdown({
+          until: new Date(2016, 9, 15),
+          onExpiry: window.liftOff || liftOff
+        });
         setTimeout(function() {
             $("body").css({ height: window.innerHeight});
         }, 1000);
