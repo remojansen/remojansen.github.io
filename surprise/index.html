@@ -1407,15 +1407,16 @@ body {
         $("#clock").countdown({
           until: new Date(2016, 9, 15),
           onExpiry: function () {
+            $("body").css({ "background-image": "url('./copenhagen.jpg')", height: window.innerHeight});
             for (var i=0; i < 100; i++) {
               $('body').append("<div class='balloon balloon" + i + "'></div>");
               setTimeout(function() {
-                  alert(`
-                      Happy birthday! You are going to the Imperial Hotel in Copenhagen!!
-                      Hotel: https://www.imperial-hotel-copenhagen.com/the-hotel/gallery/
-                      Dates: Fri, 28 Oct 16 (11:45) - Mon, 31 Oct 16 (20:10). 
-                      Hope you have a very happy day! I love u xxxxx
-                  `);
+                  alert("" +
+                      "Happy birthday! You are going to the Imperial Hotel in Copenhagen!! \n" +
+                      "Hotel: https://www.imperial-hotel-copenhagen.com/the-hotel/gallery/ \n" +
+                      "Dates: Fri, 28 Oct 16 (11:45) - Mon, 31 Oct 16 (20:10). \n" +
+                      "Hope you have a very happy day! I love u xxxxx\n" +
+                  "");
               }, 5000);
             }
           }
