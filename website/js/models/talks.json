@@ -3,6 +3,13 @@
   "description" : "",
   "items" : [
     {
+      "title" : "Introduction to Functional Programming and Reactive Programming with TypeScript",
+      "description" : "An introduction to FP and FRP with TypeScript, Ramda, RxJS, CycleJS & MobX",
+      "language" : "ie",
+      "url" : "https://docs.google.com/presentation/d/1lmlRJcHxRul7VHz07Gk8Smz-ROYzBPRRc9dy6G1ysho/present",
+      "year" : "2016"
+    },
+    {
       "title" : "Functional Programming Jargon",
       "description" : "A lighting talk that aims to encourage devs to not fear learning FP",
       "language" : "ie",
