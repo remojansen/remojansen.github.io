@@ -17,6 +17,13 @@
       "year" : "2016"
     },
     {
+      "title" : "Dependency Inversion in large-scale TypeScript applications with InversifyJS",
+      "description" : "An introduction to an Open Source project i've been working on for some time.",
+      "language" : "ie",
+      "url" : "https://docs.google.com/presentation/u/1/d/1JlbSbOjwbBMGEyM4qwVYMjFTYvCxf3waYNvzX0mP1zw/present",
+      "year" : "2016"
+    },
+    {
       "title" : "Introducing TypeScript",
       "description" : "Large scale JavaScript application development made easy",
       "language" : "ie",
