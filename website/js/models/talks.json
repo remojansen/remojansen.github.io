@@ -3,6 +3,13 @@
   "description" : "",
   "items" : [
     {
+      "title" : "Building software communities: Lessons learned, tips and tricks",
+      "description" : "A talk to encourage community leaders to create technology user groups",
+      "language" : "ie",
+      "url" : "https://docs.google.com/presentation/d/1u6ZuW7pufwnXl_lmPHEtOdBbhyv7ggXj1JlOJ6gHZVw/present",
+      "year" : "2016"
+    },
+    {
       "title" : "Introduction to Functional Programming and Reactive Programming with TypeScript",
       "description" : "An introduction to FP and FRP with TypeScript, Ramda, RxJS, CycleJS & MobX",
       "language" : "ie",
