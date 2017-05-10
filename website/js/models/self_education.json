@@ -54,6 +54,8 @@
     { "title": "Pro TypeScript", "isbn" : "978-1-43026-791-1" },
     { "title": "SOA Patterns", "isbn" : "978-1-93398-826-9" },
     { "title": "Ember.js in Action", "isbn" : "978-1-61729-145-6" },
-    { "title": "You Don't Know JS: Async & Performance", "isbn" : "978-1-49190-422-0" }
+    { "title": "You Don't Know JS: Async & Performance", "isbn" : "978-1-49190-422-0" },
+    { "title": "The Devops Handbook", "isbn" : "978-1-94278-800-3" },
+    { "title": "The Manager's Path", "isbn" : "978-1-49197-389-9" }
   ]
 }
