@@ -126,7 +126,7 @@ define([
       else {
         $.ajax({
             async: true,
-            url : 'http://my-cors-proxy.azurewebsites.net/twitrss.me/twitter_user_to_rss/?user=ower_reloaded',
+            url : 'http://my-cors-proxy.azurewebsites.net/twitrss.me/twitter_user_to_rss/?user=RemoHJansen',
             crossDomain : true,
             dataType: "xml",
             success: function(xml) {
