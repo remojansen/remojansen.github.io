@@ -2,6 +2,13 @@
   "title" : "Talks",
   "description" : "",
   "items" : [
+     {
+      "title" : "Inyección de dependencias en Node.js con  InversifyJS & TypeScript",
+      "description" : "Dependency injection in Node.js with InversifyJS & TypeScript",
+      "language" : "es",
+      "url" : "https://docs.google.com/presentation/d/12hK5z0wt4BlyOFhJBxVgQBTdvwTznKj3XttlvMwYgrY/present",
+      "year" : "2017"
+    },
     {
       "title" : "Building software communities: Lessons learned, tips and tricks",
       "description" : "A talk to encourage community leaders to create technology user groups",
