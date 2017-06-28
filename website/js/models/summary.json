@@ -1,5 +1,5 @@
 {
-    "image_path" : "./website/assets/profile.jpg",
+    "image_path" : "./website/assets/me.png",
     "name": "Remo H. Jansen",
     "main_paragraph": "Microsoft MVP, web development ninja, <a class=\"link\" href=\"https://github.com/remojansen\">open-source contributor</a>, <a class=\"link\" href=\"http://www.amazon.com/Remo-H.-Jansen/e/B015LX8AZM\">writer</a>, speaker, entrepreneur, technology lover and Internet enthusiast. <a class=\"link\" href=\"http://www.meetup.com/Dublin-TypeScript-Meetup/\">Dublin TypeScript meetup organizer</a>. Web engineer at <a class=\"link\" href=\"http://www.stellwagengroup.com/\">Stellwagen Technology</a>. Founder of <a class=\"link\" href=\"http://www.wolksoftware.com\">Wolk Software Ltd.</a>.",
     "paragraph": [
