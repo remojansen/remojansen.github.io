@@ -3,6 +3,20 @@
   "description" : "",
   "items" : [
     {
+      "title" : "Inyección de dependencias en Node.js con  InversifyJS & TypeScript v2",
+      "description" : "Inyección de dependencias en Node.js con  InversifyJS & TypeScript",
+      "language" : "es",
+      "url" : "https://docs.google.com/presentation/d/1yCRs13JcMoLpFRTefiQwbtbDmb5IzlXzUpkiup04SKI/present",
+      "year" : "2017"
+    },
+    {
+      "title" : "Dependency injection in Node.js with InversifyJS & TypeScript",
+      "description" : "Dependency injection in Node.js with InversifyJS & TypeScript",
+      "language" : "ie",
+      "url" : "https://docs.google.com/presentation/d/1YlOFTloOu8a8J3wfG4CZxx_34CpP-auhStVKp-ha7T0/present",
+      "year" : "2017"
+    },
+    {
       "title" : "Becoming an open source maintainer: Lessons learned",
       "description" : "I've bene working over 3 years on InversifyJs. This is what I have learned about OSS",
       "language" : "ie",
