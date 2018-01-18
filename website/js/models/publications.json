@@ -12,13 +12,22 @@
       "thumbnail" : "./website/assets/learning_typescript_2x.png"
     },
     {
+      "title" : "TypeScript: Modern JavaScript Development",
+      "role" : "Co-Author",
+      "isbn" : "9781783985548",
+      "publisher" : "Packt Publishing",
+      "link" : "https://www.packtpub.com/application-development/typescript-modern-javascript-development",
+      "year" : "2016",
+      "thumbnail" : "./website/assets/learning_typescript.png"
+    },
+    {
       "title" : "Learning TypeScript",
       "role" : "Author",
       "isbn" : "9781783985548",
       "publisher" : "Packt Publishing",
       "link" : "https://www.packtpub.com/web-development/learning-typescript",
       "year" : "2015",
-      "thumbnail" : "./website/assets/learning_typescript.png"
+      "thumbnail" : "./website/assets/ts_modern_js_development.png"
     },
     {
       "title" : "Mastering TypeScript",
