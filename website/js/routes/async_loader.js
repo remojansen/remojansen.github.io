@@ -57,7 +57,7 @@ define([
       else {
         $.ajax({
             async: true,
-            url : 'http://my-cors-proxy.azurewebsites.net/stackoverflow.com/feeds/user/606821',
+            url : 'http://my-cors-proxy.azurewebsites.net/feeds.feedburner.com/UserRemoHJansen-StackOverflow?fmt=xml',
             crossDomain : true,
             dataType: "xml",
             success: function(xml) {
