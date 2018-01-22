@@ -42,6 +42,11 @@ body {
     padding: 0px;
     margin: 0px;
 }
+
+.publications {
+    font-size: 14px;
+}
+
 .contents li {
     min-height: 190px;
 }
