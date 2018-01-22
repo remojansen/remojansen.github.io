@@ -2,9 +2,52 @@
 
 * {margin:0; padding:0; border: 0 none; position: relative;}
 
+html {
+    padding: 0px;
+    margin: 0px;
+}
+
+.center {
+    text-align: center;
+}
+
+.center p {
+    text-align: center;
+}
+
+.quote {
+    background-color: #ffffff;
+    padding: 30px;
+    margin-bottom: 50px;
+    min-height: 100px;
+    min-height: 190px;
+}
+
+.quote:after {
+    position: absolute;
+    height: 0;
+    width: 0;
+    border-width: 25px 20px;
+    border-style: solid;
+    content: '';
+    top: 100%;
+    right: 50%;
+    margin-right: -20px;
+    border-color: white transparent transparent transparent;
+}
+
 body {
     font-family: 'Raleway', sans-serif;
     background-color: #ffffff;
+    padding: 0px;
+    margin: 0px;
+}
+.contents li {
+    min-height: 190px;
+}
+
+.profile {
+    max-width: 100%;
 }
 
 .logo img {
@@ -14,6 +57,24 @@ body {
 
 p {
     font-size: 18px;
+}
+
+a {
+    color: #dc3545;
+}
+
+a:hover {
+    color: #c82333;
+}
+
+ul {
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+}
+
+.main-title {
+    font-size: 5rem;
 }
 
 .title {
@@ -28,7 +89,7 @@ p {
 }
 
 .gray {
-    background-color: #cccccc;
+    background-color: #f2f2f2;
     color: #2f2f31;
 }
 
@@ -38,8 +99,8 @@ p {
 }
 
 .libro {
-    width: 276px;
-    height: 375px;
+    width: 376px;
+    height: 483px;
     margin: 20px auto 0;
     -moz-transform: scaleX(0.88) scaleY(0.95);
     -moz-perspective: 150px;
@@ -67,8 +128,8 @@ p {
 }
 .libro img {
     display: block;
-    height: 375px;
-    width: 276px;
+    height: 483px;
+    width: 376px;
     position: absolute;
     z-index:5;
     -moz-transform: rotateY(-4deg) translateZ(0px);
