@@ -1,10 +1,10 @@
-@import url('https://fonts.googleapis.com/css?family=Ubuntu');
+@import url('https://fonts.googleapis.com/css?family=Raleway:100');
 
 * {margin:0; padding:0; border: 0 none; position: relative;}
 
 body {
-    font-family: 'Ubuntu', sans-serif;
-    background-color: #fefefe;
+    font-family: 'Raleway', sans-serif;
+    background-color: #ffffff;
 }
 
 .logo img {
@@ -12,8 +12,24 @@ body {
     margin: 50px 0px;
 }
 
+p {
+    font-size: 18px;
+}
+
+.title {
+    text-align: center;
+    font-weight: bold;
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+}
+
 .zebra {
-    padding: 5%;
+    padding: 5% 5% 10% 5%;
+}
+
+.gray {
+    background-color: #cccccc;
+    color: #2f2f31;
 }
 
 .dark {
