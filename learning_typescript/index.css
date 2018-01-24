@@ -31,7 +31,7 @@ h4 {
     background-color: #ffffff;
     padding: 30px;
     margin-bottom: 50px;
-    min-height: 215px;
+    min-height: 240px;
     font-style: italic;
 }
 
@@ -65,6 +65,7 @@ body {
 
 .profile {
     width: 100%;
+    max-width: 500px;
 }
 
 .logo img {
@@ -262,6 +263,10 @@ ul {
         display: block;
     }
 
+    .title {
+        margin-top: 60px;
+    }
+
 }
 
 /* Medium devices (tablets, 768px and up) */
@@ -383,6 +388,7 @@ ul {
 
     #gallery {
         position: relative;
+        height: 500px;
     }
 
     #gallery > img {
