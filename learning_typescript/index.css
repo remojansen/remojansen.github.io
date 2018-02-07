@@ -27,6 +27,22 @@ h4 {
     color: #787c86;
 }
 
+.cover img {
+    max-width: 90%;
+}
+
+.cover {
+    text-align: center;
+}
+
+.ordernow img {
+    max-width: 60%;
+}
+
+.ordernow {
+    text-align: center;
+}
+
 .quote {
     background-color: #ffffff;
     padding: 30px;
@@ -139,101 +155,6 @@ ul {
         font-size: 3.5rem;
     }
 
-    .libro {
-        width: 176px;
-        height: 383px;
-    }
-
-    .libro img {
-        height: 383px;
-        width: 176px;
-    }
-
-    .libro {
-        width: 276px;
-        height: 375px;
-        margin: 20px auto 0;
-        -moz-transform: scaleX(0.88) scaleY(0.95);
-        -moz-perspective: 150px;
-        -moz-perspective-origin: right center;
-        
-        -webkit-perspective: 150px;
-        -webkit-perspective-origin: right center;
-        -webkit-transform-style: preserve-3d;
-        -webkit-transform: scaleX(0.88) scaleY(0.95);
-        
-        -o-perspective: 150px;
-        -o-perspective-origin: right center;
-        -o-transform-style: preserve-3d;
-        -o-transform: scaleX(0.88) scaleY(0.95);
-        
-        -ms-perspective: 150px;
-        -ms-perspective-origin: right center;
-        -ms-transform-style: preserve-3d; 
-        -ms-transform: scaleX(0.88) scaleY(0.95);   
-        
-        perspective: 150px;
-        perspective-origin: right center;
-        transform-style: preserve-3d;
-        transform: scaleX(0.88) scaleY(0.95);
-        margin-left: 0px;
-    }
-    .libro img {
-        display: block;
-        height: 375px;
-        width: 276px;
-        position: absolute;
-        z-index:5;
-        -moz-transform: rotateY(-4deg) translateZ(0px);
-        -webkit-transform: rotateY(-4deg) translateZ(0px);
-        -o-transform: rotateY(-4deg) translateZ(0px);
-        -ms-transform: rotateY(-4deg) translateZ(0px);
-        transform: rotateY(-4deg) translateZ(0px);
-    }
-    
-    .libro:before, .libro:after {
-        content: '';
-        position: absolute;
-    }
-    
-    .libro:before {
-        height: 100%;
-        width: 40px;
-        position: absolute;
-        right: -29px;
-        top: 0%;
-        background: #89221B;
-        z-index: 2;
-        -moz-transform: rotateY(-4deg) translateZ(0px);    
-        -webkit-transform: rotateY(-4deg) translateZ(0px);
-        -o-transform: rotateY(-4deg) translateZ(0px);    
-        -ms-transform: rotateY(-4deg) translateZ(0px);
-        transform: rotateY(-4deg) translateZ(0px);
-    }
-    .libro:after {
-        background: #F5F5F5;
-        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1), 18px 3px 20px rgba(0, 0, 0, 0.25) inset;
-        height: 98%;
-        width: 30px;
-        right: -26px;
-        top: 1%;
-        z-index: 3;
-        -moz-perspective: 5px;
-        -moz-transform: rotateY(20deg) translateZ(5px);
-        -webkit-perspective: 5px;
-        -webkit-transform: rotateY(20deg) translateZ(5px);
-        -o-perspective: 5px;
-        -o-transform: rotateY(20deg) translateZ(5px);
-        -ms-perspective: 5px;
-        -ms-transform: rotateY(20deg) translateZ(5px);    
-        perspective: 5px;
-        transform: rotateY(20deg) translateZ(5px);
-    }
-
-    .libro span {
-        display: none;
-    }
-
     .social-link {
         font-size: 18px;
     }
@@ -271,108 +192,6 @@ ul {
 
 /* Medium devices (tablets, 768px and up) */
 @media (min-width: 577px) {
-
-    .libro {
-        width: 376px;
-        height: 483px;
-        margin: 20px auto 0;
-        -moz-transform: scaleX(0.88) scaleY(0.95);
-        -moz-perspective: 150px;
-        -moz-perspective-origin: right center;
-        
-        -webkit-perspective: 150px;
-        -webkit-perspective-origin: right center;
-        -webkit-transform-style: preserve-3d;
-        -webkit-transform: scaleX(0.88) scaleY(0.95);
-        
-        -o-perspective: 150px;
-        -o-perspective-origin: right center;
-        -o-transform-style: preserve-3d;
-        -o-transform: scaleX(0.88) scaleY(0.95);
-        
-        -ms-perspective: 150px;
-        -ms-perspective-origin: right center;
-        -ms-transform-style: preserve-3d; 
-        -ms-transform: scaleX(0.88) scaleY(0.95);   
-        
-        perspective: 150px;
-        perspective-origin: right center;
-        transform-style: preserve-3d;
-        transform: scaleX(0.88) scaleY(0.95);
-    }
-    .libro img {
-        display: block;
-        height: 483px;
-        width: 376px;
-        position: absolute;
-        z-index:5;
-        -moz-transform: rotateY(-4deg) translateZ(0px);
-        -webkit-transform: rotateY(-4deg) translateZ(0px);
-        -o-transform: rotateY(-4deg) translateZ(0px);
-        -ms-transform: rotateY(-4deg) translateZ(0px);
-        transform: rotateY(-4deg) translateZ(0px);
-    }
-    
-    .libro:before, .libro:after {
-        content: '';
-        position: absolute;
-    }
-    
-    .libro:before {
-        height: 100%;
-        width: 40px;
-        position: absolute;
-        right: -25px;
-        top: 0%;
-        background: #89221B;
-        z-index: 2;
-        -moz-transform: rotateY(-4deg) translateZ(0px);    
-        -webkit-transform: rotateY(-4deg) translateZ(0px);
-        -o-transform: rotateY(-4deg) translateZ(0px);    
-        -ms-transform: rotateY(-4deg) translateZ(0px);
-        transform: rotateY(-4deg) translateZ(0px);
-    }
-    .libro:after {
-        background: #F5F5F5;
-        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1), 18px 3px 20px rgba(0, 0, 0, 0.25) inset;
-        height: 98%;
-        width: 24px;
-        right: -19px;
-        top: 1%;
-        z-index: 3;
-        -moz-perspective: 5px;
-        -moz-transform: rotateY(20deg) translateZ(5px);
-        -webkit-perspective: 5px;
-        -webkit-transform: rotateY(20deg) translateZ(5px);
-        -o-perspective: 5px;
-        -o-transform: rotateY(20deg) translateZ(5px);
-        -ms-perspective: 5px;
-        -ms-transform: rotateY(20deg) translateZ(5px);    
-        perspective: 5px;
-        transform: rotateY(20deg) translateZ(5px);
-    }
-    
-    .libro span {
-        display: block;
-        position: absolute;
-        bottom: -13px;
-        height: 100px;
-        right: -110px;
-        height: 100px;
-        width: 200px;
-        background-image: -moz-linear-gradient(transparent, rgba(0, 0, 0, 0.1) 15%);
-        background-image: -webkit-linear-gradient(transparent, rgba(0, 0, 0, 0.1) 15%);
-        background-image: -o-linear-gradient(transparent, rgba(0, 0, 0, 0.1) 15%);
-        background-image: -ms-linear-gradient(transparent, rgba(0, 0, 0, 0.1) 15%);
-        background-image: linear-gradient(transparent, rgba(0, 0, 0, 0.1) 15%);
-        border-radius: 15px;
-        box-shadow: 5px 12px 15px 5px rgba(0, 0, 0, 0.1);
-        -moz-transform: rotate(5deg) skew(-65deg);
-        -webkit-transform: rotate(5deg) skew(-35deg);
-        -o-transform: rotate(5deg) skew(-35deg);
-        -ms-transform: rotate(5deg) skew(-35deg);
-        transform: rotate(5deg) skew(-35deg);
-    }
 
     p {
         font-size: 22px;
