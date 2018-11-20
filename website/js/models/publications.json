@@ -3,6 +3,15 @@
   "description" : "",
   "items" : [
     {
+      "title" : "Hands-On Functional Programming with Typescript",
+      "role" : "Author",
+      "isbn" : "9781788831437",
+      "publisher" : "Packt Publishing",
+      "link" : "https://www.packtpub.com/application-development/hands-functional-programming-typescript",
+      "year" : "2019",
+      "thumbnail" : "./website/assets/functional_typescript.png"
+    },
+    {
       "title" : "Learning TypeScript (2nd Edition)",
       "role" : "Author",
       "isbn" : "9781788391474",
