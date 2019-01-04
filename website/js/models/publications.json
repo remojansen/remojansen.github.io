@@ -7,7 +7,7 @@
       "role" : "Author",
       "isbn" : "9781788831437",
       "publisher" : "Packt Publishing",
-      "link" : "https://www.packtpub.com/application-development/hands-functional-programming-typescript",
+      "link" : "http://www.functionaltypescript.com/",
       "year" : "2019",
       "thumbnail" : "./website/assets/functional_typescript.png"
     },
@@ -16,7 +16,7 @@
       "role" : "Author",
       "isbn" : "9781788391474",
       "publisher" : "Packt Publishing",
-      "link" : "https://www.packtpub.com/application-development/learning-typescript-2x-second-edition",
+      "link" : "http://www.learningtypescript.com/",
       "year" : "2018",
       "thumbnail" : "./website/assets/learning_typescript_2x.png"
     },
@@ -25,7 +25,7 @@
       "role" : "Co-Author",
       "isbn" : "9781787289086",
       "publisher" : "Packt Publishing",
-      "link" : "https://www.packtpub.com/application-development/typescript-modern-javascript-development",
+      "link" : "https://amzn.to/2R6eRfM",
       "year" : "2016",
       "thumbnail" : "./website/assets/ts_modern_js_development.png"
     },
@@ -34,7 +34,7 @@
       "role" : "Author",
       "isbn" : "9787121300479",
       "publisher" : "Publishing House of Electronics Industry (PHEI)",
-      "link" : "https://www.packtpub.com/web-development/learning-typescript",
+      "link" : "https://amzn.to/2SCioiu",
       "year" : "2015",
       "thumbnail" : "./website/assets/learning_typescript_cn.jpg"
     },
@@ -43,7 +43,7 @@
       "role" : "Author",
       "isbn" : "9781783985548",
       "publisher" : "Packt Publishing",
-      "link" : "https://www.packtpub.com/web-development/learning-typescript",
+      "link" : "https://amzn.to/2SAWjRz",
       "year" : "2015",
       "thumbnail" : "./website/assets/learning_typescript.png"
     },
@@ -52,7 +52,7 @@
       "role" : "Technical Reviewer",
       "isbn" : "9781784399665",
       "publisher" : "Packt Publishing",
-      "link" : "https://www.packtpub.com/web-development/mastering-typescript",
+      "link" : "https://amzn.to/2SzScoP",
       "year" : "2015",
       "thumbnail" : "./website/assets/mastering_typescript.png"
     }
