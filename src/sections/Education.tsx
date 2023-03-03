@@ -104,7 +104,7 @@ const educationItems: EducationEntry[] = [
 ];
 
 export function Education() {
-  const options = {
+  const options: any = {
     year: "numeric",
   };
   return (
@@ -112,7 +112,7 @@ export function Education() {
       id="education"
       title="Education"
       content={
-        <div className="card-columns">
+        <div className="card-columns education-container">
           {educationItems.map((item, index) => {
             const start = item.startDate.toLocaleDateString("en-IE", options);
             return (

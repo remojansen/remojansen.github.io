@@ -27,7 +27,6 @@ export default function Home() {
         <ScrollHandler>
         <Hero />
         <About />
-        <Skills />
         <Work />
         <Education />
         <Awards />

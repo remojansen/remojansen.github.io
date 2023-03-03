@@ -16,10 +16,14 @@ const jobs: WorkEntry[] = [
     company: "Wolk Software",
     description: (
       <div>
-        As a managing director, I look after all the aspects of the business
-        from sales and legal to marketing, branding, and strategy. As a
-        technical lead, I'm building managing a growing team of software
-        consultants.
+        Wolk software is a software management consulting firm dedicated to
+        helping technology businesses to successfully design, build, and operate
+        digital products and compete in the modern digital era. Wolk software's
+        mission is to empower digital product teams to succeed. Wolk software
+        provides services that enable technology businesses to reach their goals
+        by becoming product-led organizations and achieving product and
+        engineering excellence. As CEO, I look after all the aspects of the
+        business from sales and legal to marketing, branding, and strategy.
       </div>
     ),
     role: "CEO & Founder",
@@ -31,20 +35,19 @@ const jobs: WorkEntry[] = [
     description: (
       <React.Fragment>
         <p>
-          JSDayIE 2019 is a 1-day single-track tech conference dedicated to the
+          JSDayIE is a 1-day single-track tech conference dedicated to the
           JavaScript community in Ireland featuring over 450 attendees and some
           of the best JavaScript professionals and organizations in Ireland.
         </p>
         <p>
-          JSDayIE is the first JavaScript conference in Ireland and will take
-          place in 2019, on September 20th at The Round Room at the Mansion
-          House in Dawson Street, Dublin.
+          JSDayIE is the first JavaScript conference in Ireland and took place
+          in 2019, on September 20th at The Round Room at the Mansion House in
+          Dawson Street, Dublin.
         </p>
       </React.Fragment>
     ),
     role: "Executive Producer",
     startDate: new Date(2019, 0, 1),
-    endDate: new Date(2019, 8, 1),
     isFullTime: false,
   },
   {
@@ -58,7 +61,6 @@ const jobs: WorkEntry[] = [
     ),
     role: "Lecturer",
     startDate: new Date(2018, 1, 1),
-    endDate: new Date(2022, 12, 1),
     isFullTime: false,
   },
   {
@@ -177,7 +179,7 @@ const jobs: WorkEntry[] = [
 ];
 
 export function Work() {
-  const options = {
+  const options: any = {
     year: "numeric",
     month: "short",
   };
@@ -187,7 +189,7 @@ export function Work() {
       title="Work"
       content={
         <React.Fragment>
-          <div className="card-columns">
+          <div className="card-columns work-container">
             {jobs.map((item, index) => {
               const start = item.startDate.toLocaleDateString("en-IE", options);
               const end =

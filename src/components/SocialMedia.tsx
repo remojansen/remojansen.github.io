@@ -18,7 +18,7 @@ function BtnIcon(props: BtnIconProps) {
   return (
     <a href={props.url}>
       <span className="icon">
-        <FontAwesomeIcon icon={props.icon} />
+        <FontAwesomeIcon icon={props.icon} width={25} />
       </span>
     </a>
   );

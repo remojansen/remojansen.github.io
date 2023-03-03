@@ -12,6 +12,12 @@ export interface TalkIten {
 
 const talkItems: TalkIten[] = [
   {
+    year: "2023",
+    title: "The infinite loop",
+    event: "MongoDB User Group Dublin",
+    slidesId:"2PACX-1vS7nzWjbZMdZvVBX1YZ0rPRGlW0ilDFZtxgMqLKhouHCIDwrCmrMXR9-HA7Q2XrCG3Qfr1yFMrSvf_y"
+  },
+  {
     year: "2020",
     title: "Type-safe infrastructure as Code with TypeScript",
     event: "Sevilla TypeScript Meetup",

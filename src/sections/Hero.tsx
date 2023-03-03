@@ -7,6 +7,9 @@ export function Hero() {
       <Fade>
         <div className="container">
           <div className="row">
+          <div className="col-md-6">
+              <img className="img-fluid me" src="/me.png" alt="me" />
+            </div>
             <div className="col-md-6">
               <div className="text">
                 <span className="subheading">Hello!</span>
@@ -14,7 +17,9 @@ export function Hero() {
                   I'm <span>Remo Jansen</span>
                 </h1>
                 <h2 className="mb-4">
-                  Empowering digital product teams to thrive.
+                  Empowering digital product teams to thrive — Former Microsoft
+                  MVP, CEO & Founder at Wolk Software, EP at JSDayIE and author
+                  of InversifyJS
                 </h2>
                 <p>
                   <a
@@ -28,9 +33,7 @@ export function Hero() {
                 </p>
               </div>
             </div>
-            <div className="col-md-6">
-              <img className="img-fluid me" src="/me.png" alt="me" />
-            </div>
+            
           </div>
         </div>
       </Fade>
