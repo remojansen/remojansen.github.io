@@ -13,7 +13,9 @@ export function Hero() {
                 <h1 className="mb-4 mt-3">
                   I'm <span>Remo Jansen</span>
                 </h1>
-                <h2 className="mb-4">A Full-Stack Web Engineer</h2>
+                <h2 className="mb-4">
+                  Empowering digital product teams to thrive.
+                </h2>
                 <p>
                   <a
                     href="https://www.wolksoftware.com/"

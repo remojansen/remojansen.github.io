@@ -1,12 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;900&display=swap");
-@import "../node_modules/bootstrap/scss/bootstrap.scss";
-
-$main-color: #ffc107;
+@import "../../node_modules/bootstrap/scss/bootstrap.scss";
 
 body {
   font-family: "Poppins", Arial, sans-serif;
-  background-color: #000000;
-  color: #999999;
+  background: linear-gradient(90deg,#3b0083,#1e1656 50%);
+  color: white;
   font-size: 16px;
   line-height: 1.8;
   font-weight: 400;
@@ -46,23 +44,23 @@ h5,
 }
 
 a {
-  color: $main-color;
+  color: #fe00dd;
   text-transform: uppercase;
 }
 
 a:hover {
-  color: $main-color;
+  color: #fe00dd;
   text-transform: uppercase;
 }
 
 .card {
-  background: #111111;
+  background: #3b0083;
 }
 
 .card-title {
   font-weight: 900;
   font-size: 26px;
-  color: $main-color;
+  color: #fe00dd;
 }
 
 .card-subtitle {
@@ -111,23 +109,23 @@ a:hover {
   outline: none;
 }
 .btn.btn-primary {
-  background: $main-color;
-  border: 1px solid $main-color !important;
+  background: #fe00dd;
+  border: 1px solid #fe00dd !important;
   color: #000000 !important;
 }
 .btn.btn-primary:hover {
-  border: 1px solid $main-color !important;
-  background: $main-color !important;
+  border: 1px solid #fe00dd !important;
+  background: #fe00dd !important;
   color: #000000 !important;
 }
 .btn.btn-primary.btn-outline-primary {
-  border: 2px solid $main-color !important;
+  border: 2px solid #fe00dd !important;
   background: transparent !important;
-  color: $main-color !important;
+  color: #fe00dd !important;
 }
 .btn.btn-primary.btn-outline-primary:hover {
   border: 2px solid transparent !important;
-  background: $main-color !important;
+  background: #fe00dd !important;
   color: #fff !important;
 }
 .btn.btn-secondary {
@@ -167,7 +165,7 @@ a:hover {
 }
 .btn.btn-white.btn-outline-white:hover {
   border: 1px solid transparent;
-  background: $main-color;
+  background: #fe00dd;
   color: #fff;
 }
 
@@ -181,7 +179,7 @@ a:hover {
   display: block;
   float: left;
   border-radius: 50%;
-  background: #ffc107;
+  background: #fe00dd;
   color: #111111 !important;
 }
 
@@ -198,7 +196,7 @@ a:hover {
   font-size: 14px;
   letter-spacing: 3px;
   text-transform: uppercase;
-  color: $main-color;
+  color: #fe00dd;
 }
 
 .hero h1 {
@@ -209,7 +207,7 @@ a:hover {
 }
 
 .hero h1 span {
-  color: $main-color;
+  color: #fe00dd;
 }
 
 .hero h2 {
@@ -226,7 +224,7 @@ iframe {
 }
 
 .bg-dark {
-  background-color: #000000 !important;
+  background-color: #3b0083 !important;
 }
 
 .progress-wrap {
@@ -251,7 +249,7 @@ iframe {
 }
 
 .chart-tooltip b {
-  color: $main-color;
+  color: #fe00dd;
 }
 
 .navbar-dark .navbar-nav .nav-link {
@@ -260,8 +258,8 @@ iframe {
 }
 
 .navbar-dark .navbar-nav .nav-link.active {
-  color: $main-color;
-  border-bottom: solid 2px $main-color;
+  color: #fe00dd;
+  border-bottom: solid 2px #fe00dd;
 }
 
 .not-found span {

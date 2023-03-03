@@ -1,9 +1,11 @@
+import { useRouter } from "next/router";
 import React from "react";
 import Nav from "react-bootstrap/esm/Nav";
 import Navbar from "react-bootstrap/esm/Navbar";
 
 export function Header() {
-  const basePath = window.location.pathname === "/" ? "#" : "/#";
+  const router = useRouter();
+  const basePath = router.asPath === "/" ? "#" : "/#";
   return (
     <Navbar bg="dark" expand="lg" variant="dark" fixed="top">
       <div className="container">

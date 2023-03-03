@@ -3,4 +3,8 @@ const nextConfig = {
   reactStrictMode: true,
 }
 
-module.exports = nextConfig
+const withTM = require('next-transpile-modules')(['react-bootstrap']);
+
+module.exports = withTM({
+  reactStrictMode: true,
+});

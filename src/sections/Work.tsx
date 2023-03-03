@@ -22,7 +22,7 @@ const jobs: WorkEntry[] = [
         consultants.
       </div>
     ),
-    role: "Managing Director / Tech Lead",
+    role: "CEO & Founder",
     startDate: new Date(2018, 7, 1),
     isFullTime: true,
   },
@@ -42,7 +42,7 @@ const jobs: WorkEntry[] = [
         </p>
       </React.Fragment>
     ),
-    role: "Event Manager",
+    role: "Executive Producer",
     startDate: new Date(2019, 0, 1),
     endDate: new Date(2019, 8, 1),
     isFullTime: false,
@@ -58,7 +58,7 @@ const jobs: WorkEntry[] = [
     ),
     role: "Lecturer",
     startDate: new Date(2018, 1, 1),
-    endDate: new Date(2019, 8, 1),
+    endDate: new Date(2022, 12, 1),
     isFullTime: false,
   },
   {
