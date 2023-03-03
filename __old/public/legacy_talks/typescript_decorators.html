@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <link rel="icon" href="/media/favicon.ico">
+        <title>Remo H. Jansen Talks</title>
+        <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+        <link href="/legacy_talks/css/slides.css" rel="stylesheet">
+    </head>
+    <body>
+        <div id="impress">
+<div id="slide1" class="step slide" data-x="0" data-y="0">
+    <div class="cover">
+        <img src="/legacy_talks/media/me.jpg" alt="chart" style="margin-top: 5%;">
+        <h1 style="margin-top:0px;">Decorators &amp; metadata reflection</h1>
+        <h2>
+            Learn how decorators make new exciting JavaScript features like reflection or dependency injection possible.
+        </h2>
+        <h3>
+            Remo H. Jansen<br/>
+        </h3>
+        <h3 class="contact">
+            <a href="http://www.remojansen.com">www.remojansen.com</a> -
+            <a href="https://twitter.com/RemoHJansen">@RemoHJansen</a> -
+            <a href="http://blog.wolksoftware.com">blog.wolksoftware.com</a>
+        </h3>
+        <div class="sponsor">
+            <a href="http://blog.wolksoftware.com/">
+                <img src="/legacy_talks/media/wolk_logo.png" alt="logo" />
+            </a>
+        </div>
+    </div>
+</div>
+<!--######################################################################## -->
+<div id="slide2" class="step slide" data-x="1500" data-y="0">
+  <h1>How all this started?</h1>
+  <img src="/legacy_talks/media/decorators_3.png" alt="chart" style="margin-top: 1%;" />
+  <div style="text-align: center;">
+    <img src="/legacy_talks/media/decorators_0.jpg" alt="chart" style="width: 70%;" />
+  </div>
+  <div class="sponsor">
+    <a href="http://blog.wolksoftware.com/">
+        <img src="/legacy_talks/media/wolk_logo.png" alt="logo" />
+    </a>
+  </div>
+</div>
+<!--######################################################################## -->
+<div id="slide3" class="step slide" data-x="3000" data-y="0">
+  <h1>What are annotations &amp; decorators?</h1>
+  <img src="/legacy_talks/media/decorators_1.png" alt="chart" style="margin-top: 1%;" /><br/><br/><br/>
+  <h1>What is the difference between annotations &amp; decorators?</h1>
+  <img src="/legacy_talks/media/decorators_2.png" alt="chart" style="margin-top: 1%;" />
+  <div class="sponsor">
+    <a href="http://blog.wolksoftware.com/">
+        <img src="/legacy_talks/media/wolk_logo.png" alt="logo" />
+    </a>
+  </div>
+</div>
+<!--######################################################################## -->
+<div id="slide4" class="step slide" data-x="4500" data-y="0">
+  <h1>Annotations</h1>
+  We don't know how template is added as metadata to AppComponent:
+<pre class="prettyprint linenums">
+import { View } from 'angular2/angular2';
+
+@View({
+  template: '&lt;h1&gt;test&lt;/h1&gt;'
+})
+class AppComponent {
+  // ...
+}
+</pre>
+  <h1>Decorators</h1>
+  We can decide how template is added as metadata to AppComponent:
+<pre class="prettyprint linenums">
+  function View(settings) {
+    return function(target) {
+      target.template = settings.template;
+      // ...
+      return target;
+    }
+  }
+
+  @View({
+    template: '&lt;h1&gt;test&lt;/h1&gt;'
+  })
+  class AppComponent {
+    // ...
+  }
+</pre>
+  <div class="sponsor">
+    <a href="http://blog.wolksoftware.com/">
+        <img src="/legacy_talks/media/wolk_logo.png" alt="logo" />
+    </a>
+  </div>
+</div>
+<!--######################################################################## -->
+<div id="slide5" class="step slide" data-x="6000" data-y="0">
+  <h1>Polyfill</h1>
+  <p>The TypeScript compiler uses a polyfill so we can use decorators today.</p>
+<pre class="prettyprint linenums" style="width: 44%; float: left;">
+// Class without decorators
+class AppComponent1 {
+  // ...
+}
+
+// Class with decorators
+@View({
+  template: '&lt;h1&gt;test&lt;/h1&gt;'
+})
+class AppComponent2 {
+  // ...
+}
+
+
+
+
+
+
+</pre>
+
+<pre class="prettyprint linenums" style="width: 44%; float: left; margin-left: 1%;">
+// Class without decorators
+var AppComponent1 = (function () {
+  function AppComponent1() {
+  }
+  return AppComponent1;
+})();
+
+// Class with decorators
+var AppComponent2 = (function () {
+  function AppComponent2() {
+  }
+  AppComponent2 = __decorate([
+    View({
+      template: '&lt;h1&gt;test&lt;/h1&gt;'
+    })
+  ], AppComponent2);
+  return AppComponent2;
+})();
+</pre>
+<div style="clear: both;"></div>
+<h2 style="color: red;">Remember! Decorators are applied to classes NOT instances!</h2>
+  <div class="sponsor">
+    <a href="http://blog.wolksoftware.com/">
+        <img src="/legacy_talks/media/wolk_logo.png" alt="logo" />
+    </a>
+  </div>
+</div>
+<!--######################################################################## -->
+<div id="slide6" class="step slide" data-x="7500" data-y="0">
+  <h1>Decorator Types</h1>
+  <p>There are 4 kinds of decorators:</p>
+<div style="width: 48%; float: left; margin-left: 1%;">
+<pre class="prettyprint linenums">
+declare type ClassDecorator = <TFunction extends Function>(
+  target: TFunction
+) => TFunction | void;
+
+</pre>
+<pre class="prettyprint linenums">
+declare type PropertyDecorator = (
+  target: Object,
+  propertyKey: string | symbol
+) => void;
+
+</pre>
+<pre class="prettyprint linenums">
+declare type MethodDecorator = <T>(
+  target: Object,
+  propertyKey: string | symbol,
+  descriptor: TypedPropertyDescriptor<T>
+) => TypedPropertyDescriptor<T> | void;
+
+</pre>
+<pre class="prettyprint linenums">
+declare type ParameterDecorator = (
+  target: Object,
+  propertyKey: string | symbol,
+  parameterIndex: number
+) => void;
+</pre>
+</div>
+<div style="width: 49%; float: left; margin-left: 1%;">
+<pre class="prettyprint linenums" style="height: 456px;">
+@logClass
+class Person {
+
+  @logProperty
+  public name: string;
+  public surname: string;
+
+  constructor(
+    name : string,
+    surname : string
+  ) {
+    this.name = name;
+    this.surname = surname;
+  }
+
+  @logMethod
+  public saySomething(
+    @logParameter something : string
+  ) : string {
+
+    return this.name + " " +
+            this.surname +
+            " says: " + something;
+  }
+}
+</pre>
+</div>
+  <div class="sponsor">
+    <a href="http://blog.wolksoftware.com/">
+        <img src="/legacy_talks/media/wolk_logo.png" alt="logo" />
+    </a>
+  </div>
+</div>
+<!--######################################################################## -->
+<div id="slide7" class="step slide" data-x="9000" data-y="0">
+  <h1>Class Decorator</h1>
+  <p>
+    A class decorator function is a function that accepts a constructor
+    function as its argument, and returns either undefined, the provided
+    constructor function, or a new constructor function.
+  </p>
+<pre class="prettyprint linenums">
+function logClass(target: any) {
+
+  // save a reference to the original constructor
+  var original = target;
+
+  // a utility function to generate instances of a class
+  function construct(constructor, args) {
+    var c : any = function () {
+      return constructor.apply(this, args);
+    }
+    c.prototype = constructor.prototype;
+    return new c();
+  }
+
+  // the new constructor behaviour
+  var f : any = function (...args) {
+    console.log("New: " + original.name);
+    return construct(original, args);
+  }
+
+  // copy prototype so intanceof operator still works
+  f.prototype = original.prototype;
+
+  // return new constructor (will override original)
+  return f;
+}
+</pre>
+  <div class="sponsor">
+    <a href="http://blog.wolksoftware.com/">
+        <img src="/legacy_talks/media/wolk_logo.png" alt="logo" />
+    </a>
+  </div>
+</div>
+<!--######################################################################## -->
+<div id="slide8" class="step slide" data-x="10500" data-y="0">
+  <h1>Method Decorator</h1>
+  <p>
+    A method decorator function is a function that accepts three arguments:
+    The object that owns the property,
+    the key for the property (a string or a symbol)
+    and an optional property descriptor.
+  </p>
+  <p>
+    The function must return either undefined, the provided property descriptor, or a new property descriptor. Returning undefined is equivalent to returning the provided property descriptor.
+  </p>
+<pre class="prettyprint linenums">
+function logMethod(target, key, descriptor) {
+
+    // save a reference to the original method this way we keep the values currently in the
+    // descriptor and don't overwrite what another decorator might have done to the descriptor.
+    if(descriptor === undefined) {
+      descriptor = Object.getOwnPropertyDescriptor(target, key);
+    }
+    var originalMethod = descriptor.value;
+
+    //editing the descriptor/value parameter
+    descriptor.value = function () {
+        var args = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            args[_i - 0] = arguments[_i];
+        }
+        var a = args.map(function (a) { return JSON.stringify(a); }).join();
+        // note usage of originalMethod here
+        var result = originalMethod.apply(this, args);
+        var r = JSON.stringify(result);
+        console.log("Call: " + key + "(" + a + ") => " + r);
+        return result;
+    };
+
+    // return edited descriptor as opposed to overwriting the descriptor
+    return descriptor;
+}
+</pre>
+  <div class="sponsor">
+    <a href="http://blog.wolksoftware.com/">
+        <img src="/legacy_talks/media/wolk_logo.png" alt="logo" />
+    </a>
+  </div>
+</div>
+<!--######################################################################## -->
+<div id="slide9" class="step slide" data-x="12000" data-y="0">
+  <h1>Property Decorator</h1>
+  <p>
+    A property decorator function is a function that accepts two arguments:
+    The object that owns the property and
+    the key for the property (a string or a symbol).
+    The return value of this decorator is ignored.
+  </p>
+<pre class="prettyprint linenums">
+function logProperty(target: any, key: string) {
+
+  // property value
+  var _val = this[key];
+
+  // property getter
+  var getter = function () {
+    console.log(`Get: ${key} => ${_val}`);
+    return _val;
+  };
+
+  // property setter
+  var setter = function (newVal) {
+    console.log(`Set: ${key} => ${newVal}`);
+    _val = newVal;
+  };
+
+  // Delete property.
+  if (delete this[key]) {
+
+    // Create new property with getter and setter
+    Object.defineProperty(target, key, {
+      get: getter,
+      set: setter,
+      enumerable: true,
+      configurable: true
+    });
+  }
+}
+</pre>
+  <div class="sponsor">
+    <a href="http://blog.wolksoftware.com/">
+        <img src="/legacy_talks/media/wolk_logo.png" alt="logo" />
+    </a>
+  </div>
+</div>
+<!--######################################################################## -->
+<div id="slide10" class="step slide" data-x="13500" data-y="0">
+  <h1>Parameter Decorator</h1>
+  <p>
+    A parameter decorator function is a function that accepts three arguments:
+    The function that contains the decorated parameter,
+    the property key of the member (or undefined for a parameter of the constructor),
+    and the ordinal index of the parameter. The return value of this decorator is ignored.
+  </p>
+<pre class="prettyprint linenums">
+function logParameter(target: any, key : string, index : number) {
+  var metadataKey = `__log_${key}_parameters`;
+  if (Array.isArray(target[metadataKey])) {
+    target[metadataKey].push(index);
+  } else {
+    target[metadataKey] = [index];
+  }
+}
+</pre>
+Parameter decorator must be
+<a href="https://gist.github.com/remojansen/16c661a7afd68e22ac6e#file-parameter_decorator-ts">used in combination with a method decorator</a>.
+<pre class="prettyprint linenums">
+class Person {
+  // ...
+  @logMethod
+  public saySomething(@logParameter something : string, somethingElse : string) : string {
+    return this.name + " " + this.surname + " says: " + something + " " + somethingElse;
+  }
+}
+</pre>
+<p>
+  It is also recommended to use the reflect-metadata API instead of using class properties.
+</p>
+<pre class="prettyprint linenums">
+function logParameter(target: any, key: string, index: number) {
+  var metadataKey = `__log_${key}_parameters`;
+  var indices = Reflect.getMetadata(metadataKey, target, key) || [];
+  indices.push(index);
+  Reflect.defineMetadata(metadataKey, indices, target, key);
+}
+</pre>
+  <div class="sponsor">
+    <a href="http://blog.wolksoftware.com/">
+        <img src="/legacy_talks/media/wolk_logo.png" alt="logo" />
+    </a>
+  </div>
+</div>
+<!--######################################################################## -->
+<div id="slide11" class="step slide" data-x="15000" data-y="0">
+  <h1>Configurable Decorators</h1>
+  <p>We can allow developers to pass arguments to a decorator when it is consumed:</p>
+<pre class="prettyprint linenums">
+@logClassWithArgs({ when : { name : "remo"} })
+class Person {
+  public name: string;
+
+  // ...
+}
+</pre>
+<pre class="prettyprint linenums">
+function logClassWithArgs(filter: Object) {
+    return (target: Object) => {
+        // implement class decorator here, the class decorator
+        // will have access to the decorator arguments (filter)
+        // because they are  stored in a closure
+    }
+}
+</pre>
+  <div class="sponsor">
+    <a href="http://blog.wolksoftware.com/">
+        <img src="/legacy_talks/media/wolk_logo.png" alt="logo" />
+    </a>
+  </div>
+</div>
+<!--######################################################################## -->
+<div id="slide12" class="step slide" data-x="16500" data-y="0">
+  <h1>Decorator Factory</h1>
+  <p>A decorator factory is used to improve the user experience of consuming a decorator.</p>
+<pre class="prettyprint linenums" style="width: 48%; float: left;">
+function log(...args : any[]) {
+  switch(args.length) {
+    case 1:
+      return logClass.apply(this, args);
+    case 2:
+      return logProperty.apply(this, args);
+    case 3:
+      if(typeof args[2] === "number") {
+        return logParameter.apply(this, args);
+      }
+      return logMethod.apply(this, args);
+    default:
+      throw new Error();
+  }
+}
+
+
+
+
+
+
+
+
+
+
+</pre>
+<pre class="prettyprint linenums" style="width: 42%; float: left; margin-left: 1%;">
+@log
+class Person {
+
+  @log
+  public name: string;
+  public surname: string;
+
+  constructor(
+    name : string,
+    surname : string
+  ) {
+    this.name = name;
+    this.surname = surname;
+  }
+
+  @log
+  public saySomething(
+    @log something : string
+  ) : string {
+
+    return this.name + " " +
+            this.surname +
+            " says: " + something;
+  }
+}
+</pre>
+  <div class="sponsor">
+    <a href="http://blog.wolksoftware.com/">
+        <img src="/legacy_talks/media/wolk_logo.png" alt="logo" />
+    </a>
+  </div>
+</div>
+<!--######################################################################## -->
+<div id="slide13" class="step slide" data-x="18000" data-y="0">
+  <h1>The reflect-metadata API</h1>
+  <p>
+    Is an external static dictionary to read and write metadata.
+    We need to use the
+    <a href="https://github.com/Microsoft/TypeScript/wiki/Compiler-Options">
+      --emitDecoratorMetadata
+    </a>
+    compiler options and the
+    <a href="https://www.npmjs.com/package/reflect-metadata">
+      reflect-metadata
+    </a>
+    npm package.
+  </p>
+<pre class="prettyprint linenums">
+function logParamTypes(target : any, key : string) {
+  var types = Reflect.getMetadata("design:paramtypes", target, key);
+  var s = types.map(a => a.name).join();
+  console.log(`${key} param types: ${s}`);
+}
+
+class Foo {}
+interface IFoo {}
+
+class Demo{
+  @logParameters
+  doSomething(
+    param1 : string,
+    param2 : number,
+    param3 : Foo,
+    param4 : { test : string },
+    param5 : IFoo,
+    param6 : Function,
+    param7 : (a : number) => void,
+  ) : number {
+      return 1
+  }
+}
+
+// doSomething param types: String, Number, Foo, Object, Object, Function, Function
+</pre>
+  <div class="sponsor">
+    <a href="http://blog.wolksoftware.com/">
+        <img src="/legacy_talks/media/wolk_logo.png" alt="logo" />
+    </a>
+  </div>
+</div>
+<!--######################################################################## -->
+<div id="slide14" class="step slide" data-x="19500" data-y="0">
+  <h1>Real-world applications</h1>
+  <p>Inversion of control (IoC) containers</p>
+<pre class="prettyprint linenums">
+import { Inject } from 'angular2/angular2';
+
+@Inject(Engine, Tires, Doors)
+class Car {
+  constructor(
+    engine,
+    tires,
+    doors
+  ) {
+    ...
+  }
+}
+</pre>
+<p>Many other applications</p>
+<pre class="prettyprint linenums">
+import { Component } from 'angular2/angular2';
+
+@Component({
+  selector: 'app',
+  template: '&lt;h1&gt;test&lt;/h1&gt;'
+})
+class App {
+  constructor() {
+    this.name = 'World';
+  }
+}
+</pre>
+  <div class="sponsor">
+    <a href="http://blog.wolksoftware.com/">
+        <img src="/legacy_talks/media/wolk_logo.png" alt="logo" />
+    </a>
+  </div>
+</div>
+<!--######################################################################## -->
+<a onclick="javascript: window.open('http://inversify.io/','_blank');"  id="slide15" class="step slide" data-x="21000" data-y="0" data-rotate="0"
+  style="background-image: url('/legacy_talks/media/inversify.png'); background-size: contain; cursor: pointer;">
+</a>
+<!--######################################################################## -->
+<div id="slide16" class="step slide" data-x="22500" data-y="0" data-rotate="0">
+  <div class="cover">
+    <h1 style="margin-top:0px;">
+      And the winner is...
+    </h1>
+    <br/>
+    <a href="http://www.amazon.co.uk/Learning-TypeScript-Remo-H-Jansen/dp/1783985542/">
+        <img src="https://learningtypescript.wolksoftware.com/assets/learning-typescript-cover-TRANSPARENT.png" style="height: 400px;"/>
+    </a>
+    <h2>
+      Let's find out who will win a free physical copy of my first book!
+    </h2>
+  </div>
+  <br/>
+  <div class="sponsor">
+      <a href="http://blog.wolksoftware.com/">
+          <img src="/legacy_talks/media/wolk_logo.png" alt="logo" />
+      </a>
+  </div>
+</div>
+<!--######################################################################## -->
+<div id="slide17" class="step slide" data-x="24000" data-y="0">
+  <div class="cover">
+    <h1>
+      Thanks!
+    </h1>
+    <h2>
+        Do you have any questions?
+    </h2>
+    <h3>
+        Remo H. Jansen<br/>
+    </h3>
+    <h3 class="contact">
+        <a href="http://www.remojansen.com">www.remojansen.com</a> -
+        <a href="https://twitter.com/RemoHJansen">@RemoHJansen</a> -
+        <a href="http://blog.wolksoftware.com">blog.wolksoftware.com</a>
+    </h3>
+    <br/>
+  </div>
+  <div class="sponsor">
+      <a href="http://blog.wolksoftware.com/">
+          <img src="/legacy_talks/media/wolk_logo.png" alt="logo" />
+      </a>
+  </div>
+</div>
+        
+        </div>
+        <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js?skin=desert"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/impress.js/0.5.3/impress.min.js"></script>
+        <script>impress().init();</script>
+    </body>
+</html>
