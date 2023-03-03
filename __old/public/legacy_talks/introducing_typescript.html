@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <link rel="icon" href="/media/favicon.ico">
+        <title>Remo H. Jansen Talks</title>
+        <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+        <link href="/legacy_talks/css/slides.css" rel="stylesheet">
+    </head>
+    <body>
+        <div id="impress">
+<div id="slide1" class="step slide" data-x="0" data-y="0">
+    <div class="cover">
+        <img src="/legacy_talks/media/me.jpg" alt="chart" style="margin-top: 5%;">
+        <h1 style="margin-top:0px;">Introducing TypeScript</h1>
+        <h2>
+            Large-scale JavaScript application development.
+        </h2>
+        <h3>
+            Remo H. Jansen<br/>
+        </h3>
+        <h3 class="contact">
+            <a href="http://www.remojansen.com">www.remojansen.com</a> -
+            <a href="https://twitter.com/RemoHJansen">@RemoHJansen</a> -
+            <a href="http://blog.wolksoftware.com">blog.wolksoftware.com</a>
+        </h3>
+        <div class="sponsor">
+            <a href="http://blog.wolksoftware.com/">
+                <img src="/legacy_talks/media/wolk_logo.png" alt="logo" />
+            </a>
+        </div>
+    </div>
+</div>
+<!--########################################################################################################################## -->
+<div id="slide2" class="step slide" data-x="1500" data-y="0" data-rotate="90">
+    <div class="cover">
+        <h1>Why we need<br/> TypeScript?</h1>
+    </div>
+    <div class="sponsor">
+        <a href="http://blog.wolksoftware.com/">
+            <img src="/legacy_talks/media/wolk_logo.png" alt="logo" />
+        </a>
+    </div>
+</div>
+<!--########################################################################################################################## -->
+<div id="slide3" class="step slide" data-x="3000" data-y="0" data-rotate="90">
+    <div class="cover">
+        <h1>"Controlling complexity<br/> is the essence of<br/> computer programming"</h1>
+        <h2> — Brian Kernighan</h2>
+    </div>
+    <div class="sponsor">
+        <a href="http://blog.wolksoftware.com/">
+            <img src="/legacy_talks/media/wolk_logo.png" alt="logo" />
+        </a>
+    </div>
+</div>
+<!--########################################################################################################################## -->
+<div id="slide4" class="step slide" data-x="4500" data-y="0" data-rotate="0">
+    <div class="cover">
+        <h1>What we know about software complexity?</h1>
+    </div>
+    <div class="sponsor">
+        <a href="http://blog.wolksoftware.com/">
+            <img src="/legacy_talks/media/wolk_logo.png" alt="logo" />
+        </a>
+    </div>
+</div>
+<!--########################################################################################################################## -->
+<div id="slide5" class="step slide" data-x="6000" data-y="0"  data-rotate="180">
+    <div class="cover">
+        <h1>Complex !== Complicated</h1>
+        <br/>
+        <h2>
+        - Complicated implies being difficult to understand but with time and effort, ultimately knowable.
+        </h2>
+        <br/>
+        <h2>
+        - Complex, describes the interactions between a number of entities.
+        If the number of entities and interactions between them increase we will get to a point where it would be impossible to know and understand all of them.
+        </h2>
+    </div>
+    <div class="sponsor">
+        <a href="http://blog.wolksoftware.com/">
+            <img src="/legacy_talks/media/wolk_logo.png" alt="logo" />
+        </a>
+    </div>
+</div>
+<!--########################################################################################################################## -->
+<div id="slide6" class="step slide" data-x="7500" data-y="0">
+    <div class="cover">
+        <img src="/legacy_talks/media/chart.jpg" alt="chart" />
+        <h1 style="margin-top: 2%;">
+        “As a system evolves, its complexity increases unless steps are taken to reduce it.”
+        </h1>
+        <h2> - "The eight laws of software evolution" by Meir Lehman</h2>
+        <br/>
+    </div>
+    <div class="sponsor">
+        <a href="http://blog.wolksoftware.com/">
+            <img src="/legacy_talks/media/wolk_logo.png" alt="logo" />
+        </a>
+    </div>
+</div>
+<!--########################################################################################################################## -->
+<div id="slide7" class="step slide" data-x="9000" data-y="0" data-rotate="90">
+    <div class="cover">
+        <h1>How can we measure the complexity of software?</h1>
+        <br/>
+    </div>
+    <div class="sponsor">
+        <a href="http://blog.wolksoftware.com/">
+            <img src="/legacy_talks/media/wolk_logo.png" alt="logo" />
+        </a>
+    </div>
+</div>
+<!--########################################################################################################################## -->
+<div id="slide8" class="step slide" data-x="10500" data-y="0" data-rotate="90">
+    <div class="cover">
+        <h1>Chidamber & Kemerer<br/> object-oriented metrics suite</h1>
+        <h2>1. Number of methods defined in class (WMC)</h2>
+        <h2>2. Depth of inheritance tree (DIT) </h2>
+        <h2>3. Number of immediate sub-classes of a class (NOC)</h2>
+        <h2>4. Number of classes to which a class is coupled (CBO)</h2>
+        <br/>
+        <br/>
+        <p>
+        Note: The Chidamber &amp; Kemerer object-oriented metrics suite is one of<br/>
+        the most common ways of measuring complexity of a system but there are<br/>
+        many other principles and techniques which can be applied for this purpose.
+        </p>
+    </div>
+    <div class="sponsor">
+        <a href="http://blog.wolksoftware.com/">
+            <img src="/legacy_talks/media/wolk_logo.png" alt="logo" />
+        </a>
+    </div>
+</div>
+<!--########################################################################################################################## -->
+<div id="slide9" class="step slide" data-x="12000" data-y="0">
+    <div class="cover">
+        <h1>How can we reduce the complexity of a system?</h1>
+        <br/>
+    </div>
+    <div class="sponsor">
+        <a href="http://blog.wolksoftware.com/">
+            <img src="/legacy_talks/media/wolk_logo.png" alt="logo" />
+        </a>
+    </div>
+</div>
+<!--########################################################################################################################## -->
+<div id="slide10" class="step slide" data-x="13500" data-y="0" data-rotate="180">
+    <div class="cover">
+        <h1>The SOLID principles</h1>
+        <h2>Single responsibility principle</h2>
+        <h2>Open/Close principle</h2>
+        <h2>Liskov substitution principle</h2>
+        <h2>Interface segregation principle</h2>
+        <h2>Dependency inversion principle</h2>
+        <br/>
+        <br/>
+        <p>
+        Note: Adhering to the SOLID principles is one of the most common ways to reduce<br/>
+        the complexity of a system but there are many other principles and techniques which<br/>
+        can be applied for this purpose.
+        </p>
+    </div>
+    <div class="sponsor">
+        <a href="http://blog.wolksoftware.com/">
+            <img src="/legacy_talks/media/wolk_logo.png" alt="logo" />
+        </a>
+    </div>
+</div>
+<!--########################################################################################################################## -->
+<div id="slide11" class="step slide" data-x="15000" data-y="0" data-rotate="180">
+    <div class="cover">
+        <h1>
+        The principles, when applied together, intend to make it more
+        likely that a programmer will create a system that is easy to
+        maintain and extend over time
+        </h1>
+        <br/>
+    </div>
+    <div class="sponsor">
+        <a href="http://blog.wolksoftware.com/">
+            <img src="/legacy_talks/media/wolk_logo.png" alt="logo" />
+        </a>
+    </div>
+</div>
+<!--########################################################################################################################## -->
+<div id="slide12" class="step slide" data-x="16500" data-y="0" data-rotate="90">
+    <div class="cover">
+        <h1>
+        So why do we<br/> need TypeScript?
+        </h1>
+        <br/>
+    </div>
+    <div class="sponsor">
+        <a href="http://blog.wolksoftware.com/">
+            <img src="/legacy_talks/media/wolk_logo.png" alt="logo" />
+        </a>
+    </div>
+</div>
+<!--########################################################################################################################## -->
+<div id="slide13" class="step slide" data-x="18000" data-y="0" data-rotate="0">
+    <div class="cover">
+    <h1>
+        <a href="http://programmers.stackexchange.com/questions/221615/why-do-dynamic-languages-make-it-more-difficult-to-maintain-large-codebases/221658#221658">
+        "Large codebases are more difficult to maintain when they are written in dynamic languages."
+        </a>
+    </h1>
+    <h2> - Yevgeniy Brikman</h2>
+    <br/>
+    </div>
+    <div class="sponsor">
+        <a href="http://blog.wolksoftware.com/">
+            <img src="/legacy_talks/media/wolk_logo.png" alt="logo" />
+        </a>
+    </div>
+</div>
+<!--########################################################################################################################## -->
+<div id="slide14" class="step slide" data-x="19500" data-y="0" data-rotate="0">
+    <div class="cover">
+        <h1>
+        We can write SOLID OOP code with JavaScript (ES5) but it feels so unnatural .
+        </h2>
+        <h2>
+        ES6 and ES7 make writing SOLID OOP code more natural
+        but it will be years before we can use them without having to
+        worry about old browsers.
+        </h2>
+        <br/><br/><br/><br/>
+        <p>
+        Note: Some JavaScript developers don't like when I say this but I think that
+        doing things like using closures to emulate a private property is not
+        what I would consider as natural OOP (using the "private" access modifier).
+        </p>
+    </div>
+    <div class="sponsor">
+        <a href="http://blog.wolksoftware.com/">
+            <img src="/legacy_talks/media/wolk_logo.png" alt="logo" />
+        </a>
+    </div>
+</div>
+<!--########################################################################################################################## -->
+<div id="slide15" class="step slide" data-x="21000" data-y="0" data-rotate="90">
+    <div class="cover">
+        <h1>
+        TypeScript is the future of JavaScript
+        </h1>
+        <h2>TypeScript allow us to use ES6 and ES7 today!</h2>
+        <h2>
+        We can use the <a href="https://github.com/Microsoft/TypeScript/wiki/Compiler-Options">--target</a> compiler option
+        to specify ECMAScript target version: 'ES3' (default), 'ES5', or 'ES6'.
+        <h2>
+        <br/>
+    </div>
+    <div class="sponsor">
+        <a href="http://blog.wolksoftware.com/">
+            <img src="/legacy_talks/media/wolk_logo.png" alt="logo" />
+        </a>
+    </div>
+</div>
+<!--########################################################################################################################## -->
+<div id="slide16" class="step slide" data-x="22500" data-y="0" data-rotate="90">
+    <h1>ES5 class</h1>
+<pre class="prettyprint linenums">
+var Person = (function () {
+    function Person(name, surname) {
+        this.name = name;
+        this.surname = surname;
+    }
+    Person.prototype.greet = function () {
+        return "Hello! my name is " + this.name + " " + this.surname;
+    };
+    return Person;
+})();
+</pre>
+    <h1>ES6 class</h1>
+<pre class="prettyprint linenums">
+class Person {
+    public name;
+    public surname;
+
+    constructor(name, surname) {
+    this.name = name;
+    this.surname = surname;
+    }
+
+    public greet() {
+    return `Hello! my name is ${this.name} ${this.surname}`;
+    }
+}
+</pre>
+<div class="sponsor">
+    <a href="http://blog.wolksoftware.com/">
+        <img src="/legacy_talks/media/wolk_logo.png" alt="logo" />
+    </a>
+</div>
+</div>
+<!--########################################################################################################################## -->
+<div id="slide17" class="step slide" data-x="24000" data-y="0" data-rotate="180">
+    <h1>ES5 inheritance</h1>
+<pre class="prettyprint linenums">
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    __.prototype = b.prototype;
+    d.prototype = new __();
+};
+
+var Animal = (function () {
+    function Animal(theName) {
+        this.name = theName;
+    }
+    Animal.prototype.move = function (meters) { /* ... */ };
+    return Animal;
+})();
+
+var Snake = (function (_super) {
+    __extends(Snake, _super);
+    function Snake(name) {
+        _super.call(this, name);
+    }
+    Snake.prototype.move = function (meters) {
+        /* ... */
+        _super.prototype.move.call(this, meters);
+    };
+    return Snake;
+})(Animal);
+</pre>
+<div class="sponsor">
+    <a href="http://blog.wolksoftware.com/">
+        <img src="/legacy_talks/media/wolk_logo.png" alt="logo" />
+    </a>
+</div>
+</div>
+<!--########################################################################################################################## -->
+<div id="slide18" class="step slide" data-x="25500" data-y="0" data-rotate="180">
+    <h1>ES6 inheritance</h1>
+<pre class="prettyprint linenums">
+class Animal {
+    name:string;
+    constructor(theName: string) { this.name = theName; }
+    move(meters: number = 0) { /* ... */ }
+}
+
+class Snake extends Animal {
+    constructor(name: string) { super(name); }
+    move(meters = 5) {
+        /* ... */
+        super.move(meters);
+    }
+}
+</pre>
+<div class="sponsor">
+    <a href="http://blog.wolksoftware.com/">
+        <img src="/legacy_talks/media/wolk_logo.png" alt="logo" />
+    </a>
+</div>
+</div>
+<!--########################################################################################################################## -->
+<div id="slide19" class="step slide" data-x="27000" data-y="0" data-rotate="90">
+    <h1>ES5 module (RequireJS)</h1>
+<pre class="prettyprint linenums">
+require([
+    "./source/inversify.config",
+    "./source/models/filter_state_model"
+], function (kernel, FilterStateModel) {
+
+    // code goes here ...
+
+});
+</pre>
+    <h1>ES6 modules</h1>
+<pre class="prettyprint linenums">
+import { kernel } from "./source/inversify.config";
+import { FilterStateModel } from "./source/inversify.config";
+
+// code goes here ...
+</pre>
+    <h2>
+    We can use the <a href="https://github.com/Microsoft/TypeScript/wiki/Compiler-Options">--module</a> compiler option
+    to specify module code generation: 'commonjs', 'amd', 'system', or 'umd'.
+    <h2>
+    <div class="sponsor">
+        <a href="http://blog.wolksoftware.com/">
+            <img src="/legacy_talks/media/wolk_logo.png" alt="logo" />
+        </a>
+    </div>
+</div>
+<!--########################################################################################################################## -->
+<div id="slide20" class="step slide" data-x="28500" data-y="0">
+    <h1>Callbacks (ES5)</h1>
+<pre class="prettyprint linenums">
+Parse.User.logIn("user", "pass", {
+    success: function(user) {
+    query.find({
+        success: function(results) {
+        results[0].save({ key: value }, {
+            success: function(result) {
+            // the object was saved.
+            }
+        });
+        }
+    });
+    }
+});
+</pre>
+    <h1>Promises (ES6)</h1>
+<pre class="prettyprint linenums">
+Parse.User.logIn("user", "pass").then(function(user) {
+    return query.find();
+}).then(function(results) {
+    return results[0].save({ key: value });
+}).then(function(result) {
+    // the object was saved.
+});
+</pre>
+<pre class="prettyprint linenums">
+Promise.all([Primise1, Primise2, PrimiseN]).then(function() {
+    console.log("all the files were created");
+});
+</pre>
+    <div class="sponsor">
+        <a href="http://blog.wolksoftware.com/">
+            <img src="/legacy_talks/media/wolk_logo.png" alt="logo" />
+        </a>
+    </div>
+</div>
+<!--########################################################################################################################## -->
+<div id="slide21" class="step slide" data-x="30000" data-y="0" data-rotate="90">
+    <h1>Async Functions (ES7)</h1>
+<pre class="prettyprint linenums">
+async function updateEntity() {
+    var success = false;
+    var user = await Parse.User.logIn(user, pass);
+    if(user !== null) {
+    let results = await query.find();
+    success = await results[0].save({ key: value };
+    }
+    return success;
+}
+
+await updateEntity();
+if(success) {
+    // the object was saved.
+}
+</pre>
+    <div class="sponsor">
+        <a href="http://blog.wolksoftware.com/">
+            <img src="/legacy_talks/media/wolk_logo.png" alt="logo" />
+        </a>
+    </div>
+</div>
+<!--########################################################################################################################## -->
+<div id="slide22" class="step slide" data-x="31500" data-y="0">
+    <h1>Decorators (ES6)</h1>
+<pre class="prettyprint linenums">
+@Component({
+    selector: 'todo-app',
+    appInjector: [
+    AngularFire,
+    bind(Firebase).toValue(new Firebase('https://webapi.firebaseio-demo.com/test'))
+]})
+@View({
+    templateUrl: 'todo.html',
+    directives: [NgFor]
+})
+class TodoApp {
+    todoService: FirebaseArray;
+    todoEdit: any;
+    todoFilter: Boolean;
+
+    constructor(sync: AngularFire) {
+    this.todoService = sync.asArray();
+    this.todoEdit = null;
+    this.todoFilter = null;
+    }
+
+    editTodo($event, todo) {
+    this.todoEdit = todo;
+    }
+
+}
+</pre>
+    <div class="sponsor">
+        <a href="http://blog.wolksoftware.com/">
+            <img src="/legacy_talks/media/wolk_logo.png" alt="logo" />
+        </a>
+    </div>
+</div>
+<!--########################################################################################################################## -->
+<div id="slide23" class="step slide" data-x="33000" data-y="0" data-rotate="180">
+    <div class="cover">
+    <h1>
+        TypeScript goes beyond<br/> ES6 & ES7
+    </h1>
+    <h2>
+        TypeScript is not a dynamic programming language<br/>
+        and introduces some great features that are not available<br/>
+        in ES6 or ES7!
+        </h2>
+    <br/>
+    </div>
+    <div class="sponsor">
+        <a href="http://blog.wolksoftware.com/">
+            <img src="/legacy_talks/media/wolk_logo.png" alt="logo" />
+        </a>
+    </div>
+</div>
+<!--########################################################################################################################## -->
+<div id="slide24" class="step slide" data-x="34500" data-y="0" data-rotate="180">
+    <h1>Type inference</h1>
+<pre class="prettyprint linenums">
+function f() {
+    return "hello";
+}
+</pre>
+<h2>Code editors can incorporate the TypeScript language service.</h2>
+<img src="/legacy_talks/media/IDE.png" alt="logo" />
+<h1>Optional type annotations</h1>
+<pre class="prettyprint linenums">
+function f(s: string) { return s; }
+// It is also possible to define the type of a function using the optional type annotations
+var f : (s: string) => string;
+f = function(s: string) { return s; }
+</pre>
+    <div class="sponsor">
+        <a href="http://blog.wolksoftware.com/">
+            <img src="/legacy_talks/media/wolk_logo.png" alt="logo" />
+        </a>
+    </div>
+</div>
+<!--########################################################################################################################## -->
+<div id="slide25" class="step slide" data-x="36000" data-y="0" data-rotate="90">
+    <h1>Interfaces</h1>
+<pre class="prettyprint linenums">
+interface ISerializable { serialize() : string; }
+interface IMainSkill { use() : bool; }
+
+interface IPerson {
+    name : string;
+    surname : string;
+    greet() : string;
+}
+
+class MockMainSkill implements IMainSkill {
+    use() { return true; }
+}
+
+describe("Person Class", () => { // TDD & BDD
+    it("should be able to greet", () => {
+    var mainSkill = new MockMainSkill(); // SOLID: Liskov substitution principle
+    var luke : IPerson = new Person("Luke", "Skywalker", mainSkill);
+    expect(luke.name).to.equal("Luke");
+    expect(luke.surname).to.equal("Skywalker");
+    expect(luke.greet()).to.equal("Hello! my name is Luke Skywalker");
+    });
+}
+
+class Person implements IPerson, ISerializable { // SOLID: Interface segregation principle
+    private _skill : IMainSkill; // SOLID: Dependency inversion principle
+    public name : string;
+    public surname : string;
+    constructor(name: string, surname: string, skill : IMainSkill) { /* ... */ }
+    greet() : string { /* ... */ };
+    serialize() : string { /* ... */ };
+}
+</pre>
+<div class="sponsor">
+    <a href="http://blog.wolksoftware.com/">
+        <img src="/legacy_talks/media/wolk_logo.png" alt="logo" />
+    </a>
+</div>
+</div>
+<!--########################################################################################################################## -->
+<div id="slide26" class="step slide" data-x="37500" data-y="0" data-rotate="0">
+    <h1>Generics Types</h1>
+<pre class="prettyprint linenums">
+interface IValidatable {
+    validate() : void;
+}
+
+class CustomCollection&lt;T extends IValidatable&gt; { // SOLID: Open/Close principle
+    private itemArray: Array&lt;T&gt;;
+
+    constructor() {
+        this.itemArray = [];
+    }
+
+    Add(item: T) {
+        this.validate();
+        this.itemArray.push(item);
+    }
+    // ...
+}
+
+class User implements IValidatable{
+    public name;
+    validate() { if(name === null) throw new Error(); }
+}
+
+class Message implements IValidatable{
+    public message;
+    validate() { if(message === null) throw new Error(); }
+}
+
+var myMessage = new CustomCollection&lt;Message&gt;();
+var myUsers = new CustomCollection&lt;User&gt;();
+myUsers.Add(new User());
+myUsers.Add(new Message()); // Error because of generic type validation
+</pre>
+<div class="sponsor">
+    <a href="http://blog.wolksoftware.com/">
+        <img src="/legacy_talks/media/wolk_logo.png" alt="logo" />
+    </a>
+</div>
+</div>
+<!--########################################################################################################################## -->
+<div id="slide27" class="step slide" data-x="39000" data-y="0" data-rotate="180">
+    <div class="cover">
+        <h1>
+        Ok... you have convinced me but I have already started my project with Vanilla JavaScript...
+        </h1>
+        <br/>
+    </div>
+    <div class="sponsor">
+        <a href="http://blog.wolksoftware.com/">
+            <img src="/legacy_talks/media/wolk_logo.png" alt="logo" />
+        </a>
+    </div>
+</div>
+<!--########################################################################################################################## -->
+<div id="slide28" class="step slide" data-x="40500" data-y="0" data-rotate="90">
+    <div class="cover">
+    <h1>
+        Good news! TypeScript is a superset of JavaScript
+    </h1>
+    <h2>All your JavaScript code is already valid TypeScript code.</h2>
+    <br/>
+    </div>
+    <div class="sponsor">
+        <a href="http://blog.wolksoftware.com/">
+            <img src="/legacy_talks/media/wolk_logo.png" alt="logo" />
+        </a>
+    </div>
+</div>
+<!--########################################################################################################################## -->
+<div id="slide29" class="step slide" data-x="42000" data-y="0" data-rotate="90">
+    <div class="cover">
+    <h1 style="margin-top:0px;">
+        Want to learn more?
+    </h1>
+    <br/>
+    <a href="http://www.amazon.co.uk/Learning-TypeScript-Remo-H-Jansen/dp/1783985542/">
+        <img src="https://learningtypescript.wolksoftware.com/assets/learning-typescript-cover-TRANSPARENT.png" style="height: 400px;"/>
+    </a>
+    <h2>Pre-order now! or join our next meetup for a chance<br/> to win a free physical copy of my upcoming book.</h2>
+    </div>
+    <br/>
+    <div class="sponsor">
+        <a href="http://blog.wolksoftware.com/">
+            <img src="/legacy_talks/media/wolk_logo.png" alt="logo" />
+        </a>
+    </div>
+</div>
+<!--########################################################################################################################## -->
+<div id="slide30" class="step slide" data-x="43500" data-y="0">
+    <div class="cover">
+    <h1>
+        Thanks!
+    </h1>
+    <h2>
+        Do you have any questions?
+    </h2>
+    <h3>
+        Remo H. Jansen<br/>
+    </h3>
+    <h3 class="contact">
+        <a href="http://www.remojansen.com">www.remojansen.com</a> -
+        <a href="https://twitter.com/RemoHJansen">@RemoHJansen</a> -
+        <a href="http://blog.wolksoftware.com">blog.wolksoftware.com</a>
+    </h3>
+    <br/>
+    </div>
+    <div class="sponsor">
+        <a href="http://blog.wolksoftware.com/">
+            <img src="/legacy_talks/media/wolk_logo.png" alt="logo" />
+        </a>
+    </div>
+</div>
+<!--########################################################################################################################## -->
+            
+        </div>
+        <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js?skin=desert"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/impress.js/0.5.3/impress.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/impress.js/0.5.3/impress.min.js"></script>
+        <script>impress().init();</script>
+    </body>
+</html>
