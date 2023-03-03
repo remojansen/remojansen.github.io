@@ -27,19 +27,51 @@ export function About() {
                 <div className="col-md-12 heading-section ftco-animate fadeInUp ftco-animated">
                   <h2 className="mb-4">About me</h2>
                   <p>
-                    I'm a full-stack web engineering tech lead and the managing
-                    director of <a href="#work">Wolk Software</a>. I am
-                    originally from Seville (Spain), but I have been living in
-                    Dublin (Ireland) since 2010. I'm the author of several books
-                    on <a href="#books">TypeScript</a> and I am a former{" "}
-                    <a href="#awards">Microsoft MVP</a>. For over a decade, I
-                    have worked with a variety of languages, frameworks and
-                    operating systems. As a result, I have developed strong
-                    coding and debugging skills. I have also gained experience
-                    implementing DevOps processes and training, coaching and
-                    managing on-site and remote web engineering teams. I love{" "}
-                    <a href="#projects">open source</a> and working with the
-                    tech <a href="#projects">community</a>.
+                    Empowering digital product teams to thrive — Former{" "}
+                    <a
+                      href="https://mvp.microsoft.com/en-us/PublicProfile/5002223"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Microsoft MVP,{" "}
+                    </a>
+                    CEO & Founder of{" "}
+                    <a
+                      href="https://www.wolksoftware.com/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Wolk Software
+                    </a>{" "}
+                    and EP at{" "}
+                    <a
+                      href="https://www.jsday.ie"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      JSDayIE
+                    </a>
+                    , and the author of{" "}
+                    <a
+                      href="https://www.amazon.com/stores/Remo-H.-Jansen/author/B015LX8AZM"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      several books on TypeScript
+                    </a>
+                    , and{" "}
+                    <a
+                      href="https://inversify.io/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      InversifyJS
+                    </a>
+                    , an open-source project with over 100 million downloads on
+                    npm. Remo has a strong interest in high-performance software
+                    teams and is on a mission to empower digital product teams
+                    to thrive. Besides technology, he also enjoys endurance
+                    sports and spending time outdoors.
                   </p>
                 </div>
               </div>
