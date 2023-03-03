@@ -16,14 +16,29 @@ const jobs: WorkEntry[] = [
     company: "Wolk Software",
     description: (
       <div>
-        Wolk software is a software management consulting firm dedicated to
-        helping technology businesses to successfully design, build, and operate
-        digital products and compete in the modern digital era. Wolk software's
-        mission is to empower digital product teams to succeed. Wolk software
-        provides services that enable technology businesses to reach their goals
-        by becoming product-led organizations and achieving product and
-        engineering excellence. As CEO, I look after all the aspects of the
-        business from sales and legal to marketing, branding, and strategy.
+        <p>
+          Wolk software is a software management consulting firm dedicated to
+          helping technology businesses to successfully design, build, and
+          operate digital products and compete in the modern digital era.
+        </p>
+        <p>
+          Wolk software's mission is to empower digital product teams to
+          succeed.
+        </p>
+        <a
+          href="https://www.wolksoftware.com"
+          className="btn btn-primary py-3 px-4"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn more
+        </a>
+        <div className="project-img">
+          <img
+            className="img-fluid"
+            src="https://www.wolksoftware.com/img/logo/png/wolk_logotipo_16.png"
+          />
+        </div>
       </div>
     ),
     role: "CEO & Founder",
@@ -44,6 +59,20 @@ const jobs: WorkEntry[] = [
           in 2019, on September 20th at The Round Room at the Mansion House in
           Dawson Street, Dublin.
         </p>
+        <a
+          href="https://www.jsday.ie"
+          className="btn btn-primary py-3 px-4"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn more
+        </a>
+        <div className="project-img">
+          <img
+            className="img-fluid"
+            src="https://www.jsday.ie/media/js_galaxy_2023.png?imwidth=1080"
+          />
+        </div>
       </React.Fragment>
     ),
     role: "Executive Producer",

@@ -3,7 +3,7 @@
 
 body {
   font-family: "Poppins", Arial, sans-serif;
-  background: linear-gradient(90deg,#3b0083,#1e1656 50%);
+  background: url(https://www.infinite-loop.org/assets/images/bgpattern-9401f028230dd50132f65e6b6a9c8802.png) 0 0/contain,linear-gradient(90deg,#3b0083,#1e1656 50%) 0 0/contain fixed;
   color: white;
   font-size: 16px;
   line-height: 1.8;
@@ -295,7 +295,7 @@ iframe {
   }
   
   .work-container  {
-    height: 2200px;
+    height: 2400px;
   }
   
   .projects-container  {

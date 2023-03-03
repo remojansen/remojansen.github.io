@@ -32,12 +32,14 @@ const awardItems: AwardsItems[] = [
             Learn more
           </a>
         </p>
+        <br/>
         <div className="card-img">
           <img
             alt="The Microsoft Most Valuable Professional (MVP) award"
-            src="/mvp.png"
+            src="/mvp.jpg"
           />
         </div>
+        <br/>
       </React.Fragment>
     ),
     org: "mvp.microsoft.com",
