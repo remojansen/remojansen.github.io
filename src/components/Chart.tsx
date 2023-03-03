@@ -2,6 +2,7 @@ import React from "react";
 import { LineChart, Line, Tooltip, ResponsiveContainer } from "recharts";
 import Data from "./inversify-download-counts.json";
 
+// https://npm-stat.com/api/download-counts?package=inversify&from=2015-04-15&until=2023-03-02
 const keys = Object.keys(Data.inversify);
 
 const data = keys
@@ -22,7 +23,7 @@ export function Chart() {
         data={data}
         margin={{ top: 5, right: 20, bottom: 5, left: 50 }}
       >
-        <Line dataKey="y" stroke="#ffbd39" dot={false} width={3} />
+        <Line dataKey="y" stroke="#fe00dd" dot={false} width={3} />
         <Tooltip
           content={(props: any) => {
             return props.active && props.payload[0] ? (

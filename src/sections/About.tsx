@@ -1,6 +1,5 @@
 import React from "react";
 import { SocialMedia } from "../components/SocialMedia";
-const Fade = require("react-reveal/Fade");
 
 export function About() {
   return (
@@ -8,7 +7,6 @@ export function About() {
       className="about ftco-about img ftco-section ftco-no-pb"
       id="about"
     >
-      <Fade>
         <div className="container">
           <div className="row d-flex">
             <div className="col-md-8 col-lg-5">
@@ -79,7 +77,6 @@ export function About() {
             </div>
           </div>
         </div>
-      </Fade>
     </section>
   );
 }

@@ -9,34 +9,36 @@ export function Projects() {
       id="projects"
       title="Projects"
       content={
-        <div className="card-columns">
+        <div className="card-columns projects-container">
           <ContentCard
-            title1="2015"
-            title2="InversifyJS"
-            title3="www.github.com/inversify/InversifyJS"
+            title1="2023"
+            title2="The Infinite Loop"
+            title3="www.infinite-loop.org"
             content={
               <React.Fragment>
                 <p>
-                  I created InversifyJS in 2015 while I was working on my first
-                  TypeScript book. InversifyJS is a powerful and lightweight
-                  inversion of control (IoC) container for JavaScript & Node.js
-                  apps powered by TypeScript.
+                  The Infinite Loop (L∞P) is an Agile software development methodology
+                  designed to help technology businesses create a culture of
+                  trust, ownership, and data-driven continuous experimentation
+                  that fosters sustainable product-led growth and
+                  high-performance digital product teams that can thrive in the
+                  age of disruption.
                 </p>
-                <Chart />
-                <br />
+                <div className="project-img">
+                  <img
+                    className="img-fluid"
+                    alt="infinite loop"
+                    src="https://www.infinite-loop.org/img/loop-b.png"
+                  />
+                </div>
                 <p>
-                  InversifyJS has reached over{" "}
-                  <a href="https://npm-stat.com/charts.html?package=inversify&from=2015-04-15">
-                    40 MILLION DOWNLOADS
-                  </a>{" "}
-                  on NPM and over{" "}
-                  <a href="https://github.com/inversify/InversifyJS/stargazers">
-                    6 THOUSAND STARS
-                  </a>{" "}
-                  on GitHub 🤯.
+                  L∞P's purpose is to improve the well-being of
+                  professionals in the software industry by creating a work in
+                  an environment that makes them feel trusted, empowered,
+                  engaged, productive and valued.
                 </p>
                 <a
-                  href="https://github.com/inversify/InversifyJS"
+                  href="https://www.infinite-loop.org/"
                   className="btn btn-primary py-3 px-4"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -47,9 +49,9 @@ export function Projects() {
             }
           />
           <ContentCard
-            title1="2019"
+            title1="2019 - Present"
             title2="JSDayIE"
-            title3="www.jsday.org"
+            title3="www.jsday.ie"
             content={
               <React.Fragment>
                 <p>
@@ -67,21 +69,57 @@ export function Projects() {
                   allowFullScreen
                 ></iframe>
                 <p>
-                  JSDayIE 2019 is a 1-day single track tech conference dedicated
-                  to the JavaScript community in Ireland featuring over{" "}
-                  <a href="https://www.jsday.org/gallery">300 attendees</a>, an
+                  JSDayIE is a 1-day single track tech conference dedicated to
+                  the JavaScript community in Ireland featuring over{" "}
+                  <a href="https://www.jsday.ie/gallery">500 attendees</a>, an
                   amazing lineup of{" "}
-                  <a href="https://www.jsday.org/speakers">
+                  <a href="https://www.jsday.ie/speakers">
                     international speakers
                   </a>{" "}
                   and{" "}
-                  <a href="https://www.jsday.org/sponsors">
+                  <a href="https://www.jsday.ie/sponsors">
                     industry leading sponsors
                   </a>
                   .
                 </p>
                 <a
-                  href="https://www.jsday.org"
+                  href="https://www.jsday.ie"
+                  className="btn btn-primary py-3 px-4"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Learn more
+                </a>
+              </React.Fragment>
+            }
+          />
+          <ContentCard
+            title1="2015"
+            title2="InversifyJS"
+            title3="www.inversify.io"
+            content={
+              <React.Fragment>
+                <p>
+                  I created InversifyJS in 2015 while I was working on my first
+                  TypeScript book. InversifyJS is a powerful and lightweight
+                  inversion of control (IoC) container for JavaScript & Node.js
+                  apps powered by TypeScript.
+                </p>
+                <Chart />
+                <br />
+                <p>
+                  InversifyJS has reached over{" "}
+                  <a href="https://npm-stat.com/charts.html?package=inversify&from=2015-04-15">
+                    100 MILLION DOWNLOADS
+                  </a>{" "}
+                  on NPM and over{" "}
+                  <a href="https://github.com/inversify/InversifyJS/stargazers">
+                    9 THOUSAND STARS
+                  </a>{" "}
+                  on GitHub 🤯.
+                </p>
+                <a
+                  href="https://github.com/inversify/InversifyJS"
                   className="btn btn-primary py-3 px-4"
                   target="_blank"
                   rel="noopener noreferrer"

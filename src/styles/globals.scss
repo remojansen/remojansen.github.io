@@ -111,7 +111,7 @@ a:hover {
 .btn.btn-primary {
   background: #fe00dd;
   border: 1px solid #fe00dd !important;
-  color: #000000 !important;
+  color: white !important;
 }
 .btn.btn-primary:hover {
   border: 1px solid #fe00dd !important;
@@ -173,14 +173,14 @@ a:hover {
   text-align: center;
   padding-top: 0.15rem;
   margin-right: 0.5rem;
-  font-size: 26px;
   height: 50px;
   width: 50px;
   display: block;
   float: left;
   border-radius: 50%;
   background: #fe00dd;
-  color: #111111 !important;
+  color: white !important;
+  padding-top: 8px;
 }
 
 .skill .level {
@@ -266,17 +266,51 @@ iframe {
   font-size: 200px;
 }
 
-.card-columns {
-  @include media-breakpoint-only(sm) {
-    column-count: 1;
+.me {
+  max-width: 80%;
+  margin-left: 10%;
+  margin-top: 16rem;
+}
+
+.project-img {
+  padding: 2rem 5rem;
+}
+
+@media (min-width: 992px) {
+
+  .card-columns {
+    display: flex;
+    flex-flow: column wrap;
+    align-content: space-between;
   }
-  @include media-breakpoint-only(md) {
-    column-count: 1;
+  
+  .card-columns .react-reveal {
+    width: 49%;
   }
-  @include media-breakpoint-only(lg) {
-    column-count: 2;
+  
+  /* Your container needs a fixed height, and it 
+     * needs to be taller than your tallest column. */
+  .awards-container  {
+    height: 1000px;
   }
-  @include media-breakpoint-only(xl) {
-    column-count: 2;
+  
+  .work-container  {
+    height: 2200px;
+  }
+  
+  .projects-container  {
+    height: 1600px;
+  }
+  
+  .education-container  {
+    height: 1700px;
+  }
+  
+  .books-container {
+    height: 2000px;
+  }
+  
+  .nav-link {
+    color: #fff;
   }
 }

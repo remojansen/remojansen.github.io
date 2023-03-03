@@ -96,7 +96,7 @@ const awardItems: AwardsItems[] = [
 ];
 
 export function Awards() {
-  const options = {
+  const options: any = {
     year: "numeric",
   };
   return (
@@ -104,7 +104,7 @@ export function Awards() {
       id="awards"
       title="Awards"
       content={
-        <div className="awards card-columns">
+        <div className="awards awards-container card-columns">
           {awardItems.map((item, index) => {
             const start = item.start.toLocaleDateString("en-IE", options);
             const end = item.end

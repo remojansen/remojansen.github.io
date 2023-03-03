@@ -14,13 +14,21 @@ interface BooksItem {
 
 const books: BooksItem[] = [
   {
+    title: "The Infinite Loop",
+    isbn: "TBD",
+    publisher: "Wolk Software",
+    year: "2023",
+    url: "https://www.infinite-loop.org/book/",
+    img: "https://www.infinite-loop.org/img/book.png",
+    isAuthor: true,
+  },
+  {
     title: "Functional Programming with Typescript",
     isbn: "9781788831437",
     publisher: "Packt Publishing",
     year: "2019",
     url: "https://functionaltypescript.wolksoftware.com/",
-    img:
-      "https://functionaltypescript.wolksoftware.com/assets/functional-typescript-cover-TRANSPARENT.png",
+    img: "https://functionaltypescript.wolksoftware.com/assets/functional-typescript-cover-TRANSPARENT.png",
     isAuthor: true,
   },
   {
@@ -29,8 +37,7 @@ const books: BooksItem[] = [
     publisher: "Packt Publishing",
     year: "2018",
     url: "https://learningtypescript.wolksoftware.com/",
-    img:
-      "https://learningtypescript.wolksoftware.com/assets/learning-typescript-cover-TRANSPARENT.png",
+    img: "https://learningtypescript.wolksoftware.com/assets/learning-typescript-cover-TRANSPARENT.png",
     isAuthor: true,
   },
   {
@@ -73,7 +80,7 @@ export function Books() {
       id="books"
       title="Books"
       content={
-        <div className="card-columns">
+        <div className="card-columns books-container">
           {books.map((item, index) => {
             return (
               <ContentCard
