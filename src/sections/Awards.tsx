@@ -73,13 +73,13 @@ const awardItems: AwardsItems[] = [
     description: (
       <React.Fragment>
         <p>
-          I worked with two of my college friends and the school's psychology
+          I worked with two of my college friends and the school&apos;s psychology
           team, for a few months on a video game for the treatment of children
           diagnosed with selective mutism. We tried to use augmented reality,
           voice capture and reward systems to encourage children to talk first
           with virtual characters and after introducing family members and
           school friends into the game. We used Microsoft XNA, but sadly Xbox
-          Kinect wasn't available in 2008.
+          Kinect wasn&apos;t available in 2008.
         </p>
         <a
           href="https://zaragoza.salesianos.edu/premiodonbosco/"

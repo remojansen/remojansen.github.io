@@ -22,7 +22,7 @@ const jobs: WorkEntry[] = [
           operate digital products and compete in the modern digital era.
         </p>
         <p>
-          Wolk software's mission is to empower digital product teams to
+          Wolk software&apos;s mission is to empower digital product teams to
           succeed.
         </p>
         <a
@@ -126,8 +126,8 @@ const jobs: WorkEntry[] = [
           across both risk and people solutions.
         </p>
         <p>
-          As the owner of one of the world's largest repositories of risk and
-          insurance placement information, we analyse Aon’s global premium flow
+          As the owner of one of the world&apos;s largest repositories of risk and
+          insurance placement information, we analyse Aon&apos;s global premium flow
           to identify innovative new products and to provide impactful,
           fact-based market insights and reports as to which markets and which
           carriers provide the best value for our clients around the globe. We
@@ -144,7 +144,7 @@ const jobs: WorkEntry[] = [
   {
     company: "Packt Publishing",
     description: (
-      <p>I'm the author of a few books published by Packy Publishing.</p>
+      <p>I&apos;m the author of a few books published by Packy Publishing.</p>
     ),
     role: "Author",
     startDate: new Date(2015, 0, 1),

@@ -32,7 +32,7 @@ export function Projects() {
                   />
                 </div>
                 <p>
-                  L∞P's purpose is to improve the well-being of
+                  L∞P&apos;s purpose is to improve the well-being of
                   professionals in the software industry by creating a work in
                   an environment that makes them feel trusted, empowered,
                   engaged, productive and valued.

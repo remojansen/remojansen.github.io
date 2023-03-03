@@ -14,7 +14,7 @@ export function Hero() {
               <div className="text">
                 <span className="subheading">Hello!</span>
                 <h1 className="mb-4 mt-3">
-                  I'm <span>Remo H. Jansen</span>
+                  I&apos;m <span>Remo H. Jansen</span>
                 </h1>
                 <h2 className="mb-4">
                   Empowering digital product teams to thrive — Former Microsoft

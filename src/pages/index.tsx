@@ -17,7 +17,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Remo Jansen  — Former Microsoft MVP, CEO & Founder at Wolk Software</title>
+        <title>Remo H. Jansen  — Former Microsoft MVP, CEO & Founder at Wolk Software</title>
         <meta name="description" content="Empowering digital product teams to thrive — Former Microsoft MVP, CEO & Founder at Wolk Software, EP at JSDayIE, published author and creator of InversifyJS" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
