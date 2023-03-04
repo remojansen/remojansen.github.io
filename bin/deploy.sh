@@ -1,7 +1,7 @@
 #!/bin/sh
 
 echo 'INSTALLING DEPENDENCIES...'
-lerna exec yarn
+yarn
 echo 'BUILDING...'
 yarn build
 read -p "Ready to deploy? " -n 1 -r
