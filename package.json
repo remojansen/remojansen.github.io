@@ -1,0 +1,30 @@
+{
+	"name": "web",
+	"version": "1.0.0",
+	"description": "",
+	"type": "module",
+	"main": "dist/main.js",
+	"scripts": {
+		"build": "tsup --minify",
+		"dev": "concurrently \"tsup --watch\" \"http-server -p 8080 -c-1\"",
+		"lint-and-format": "npx @biomejs/biome check --write --unsafe",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"devDependencies": {
+		"@types/three": "^0.182.0",
+		"concurrently": "^9.2.1",
+		"http-server": "^14.1.1",
+		"tsup": "^8.3.5",
+		"typescript": "^5.7.2"
+	},
+	"dependencies": {
+		"@types/stats.js": "^0.17.4",
+		"@xterm/xterm": "^6.0.0",
+		"stats.js": "^0.17.0",
+		"three": "^0.182.0",
+		"xterm": "^5.3.0"
+	}
+}

@@ -1,0 +1,43 @@
+@@@
+
+Monday, October 03, 2016
+@@@
+
+Re: Remo Jansen, Most Valuable Professional, Visual Studio and Development Technologies
+To whom it may concern,
+@@@
+
+It is with great pride we announce that Remo Jansen has been awarded as a Microsoft® Most Valuable
+Professional (MVP) for 10/1/2016 - 10/1/2017. The Microsoft MVP Award is an annual award that recognizes
+exceptional technology community leaders worldwide who actively share their high quality, real world expertise
+with users and Microsoft. All of us at Microsoft recognize and appreciate Remo’s extraordinary contributions and
+want to take this opportunity to share our appreciation with you.
+@@@
+
+With just over 4,000 awardees worldwide, Microsoft MVPs represent a highly select group of experts. MVPs share
+a deep commitment to community and a willingness to help others. They represent the diversity of today’s
+technical communities. MVPs are present in over 90 countries, in more than 40 languages, and across numerous
+Microsoft technologies. MVPs share a passion for technology, a willingness to help others, and a commitment to
+community. These are the qualities that make MVPs exceptional community leaders. MVPs’ efforts enhance
+people’s lives and contribute to our industry’s success in many ways. By sharing their knowledge and experiences,
+and providing objective feedback, they help people solve problems and discover new capabilities every day. MVPs
+are technology’s best and brightest, and we are honored to welcome Remo as one of them.
+To recognize the contributions they make, MVPs from around the world have the opportunity to meet Microsoft
+executives, network with peers, and position themselves as technical community leaders. This is accomplished
+through speaking engagements, one on one customer event participation and technical content development.
+MVPs also receive early access to technology through a variety of programs offered by Microsoft, which keeps
+them on the cutting edge of the software and hardware industry.
+@@@
+
+As a recipient of this year’s Microsoft MVP award, Remo joins an exceptional group of individuals from around the
+world who have demonstrated a willingness to reach out, share their technical expertise with others and help
+individuals maximize their use of technology.
+@@@
+
+Sincerely,
+@@@
+
+Steven Guggenheimer
+Corporate Vice President
+Developer Experience & Evangelism
+Microsoft Corporation
