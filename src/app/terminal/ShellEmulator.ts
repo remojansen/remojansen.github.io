@@ -10,6 +10,7 @@
 import { arkanoidCommand } from "./arkanoid";
 import { cvCommand } from "./cv";
 import { donutCommand } from "./donut";
+import { flappyBirdCommand } from "./flappybird";
 import { matrixCommand } from "./matrix";
 import { pongCommand } from "./pong";
 import { snakeCommand } from "./snake";
@@ -323,6 +324,14 @@ function initFileSystem(): void {
 		name: "arkanoid",
 		isDirectory: false,
 		size: 8192,
+		permissions: "-rwxr-xr-x",
+		modified: "Dec 27 00:00",
+		parent: "Programs",
+	});
+	virtualFileSystem.set("Programs/flappybird", {
+		name: "flappybird",
+		isDirectory: false,
+		size: 4096,
 		permissions: "-rwxr-xr-x",
 		modified: "Dec 27 00:00",
 		parent: "Programs",
@@ -924,6 +933,9 @@ registerCommand("./space-invaders", spaceInvadersCommand);
 
 // Arkanoid - classic brick breaker
 registerCommand("./arkanoid", arkanoidCommand);
+
+// Flappy Bird - tap to fly through pipes
+registerCommand("./flappybird", flappyBirdCommand);
 
 /**
  * Get tab completions for a partial path
