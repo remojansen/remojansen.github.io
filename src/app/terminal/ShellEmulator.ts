@@ -7,6 +7,7 @@
  */
 
 // Import game commands from separate modules
+import { arkanoidCommand } from "./arkanoid";
 import { cvCommand } from "./cv";
 import { donutCommand } from "./donut";
 import { matrixCommand } from "./matrix";
@@ -312,6 +313,14 @@ function initFileSystem(): void {
 	});
 	virtualFileSystem.set("Programs/space-invaders", {
 		name: "space-invaders",
+		isDirectory: false,
+		size: 8192,
+		permissions: "-rwxr-xr-x",
+		modified: "Dec 27 00:00",
+		parent: "Programs",
+	});
+	virtualFileSystem.set("Programs/arkanoid", {
+		name: "arkanoid",
 		isDirectory: false,
 		size: 8192,
 		permissions: "-rwxr-xr-x",
@@ -912,6 +921,9 @@ registerCommand("./donut", donutCommand);
 
 // Space Invaders - classic alien shooter
 registerCommand("./space-invaders", spaceInvadersCommand);
+
+// Arkanoid - classic brick breaker
+registerCommand("./arkanoid", arkanoidCommand);
 
 /**
  * Get tab completions for a partial path
