@@ -8,6 +8,7 @@
 
 // Import game commands from separate modules
 import { arkanoidCommand } from "./arkanoid";
+import { chessCommand } from "./chess";
 import { cvCommand } from "./cv";
 import { donutCommand } from "./donut";
 import { flappyBirdCommand } from "./flappybird";
@@ -332,6 +333,14 @@ function initFileSystem(): void {
 		name: "flappybird",
 		isDirectory: false,
 		size: 4096,
+		permissions: "-rwxr-xr-x",
+		modified: "Dec 27 00:00",
+		parent: "Programs",
+	});
+	virtualFileSystem.set("Programs/chess", {
+		name: "chess",
+		isDirectory: false,
+		size: 16384,
 		permissions: "-rwxr-xr-x",
 		modified: "Dec 27 00:00",
 		parent: "Programs",
@@ -936,6 +945,9 @@ registerCommand("./arkanoid", arkanoidCommand);
 
 // Flappy Bird - tap to fly through pipes
 registerCommand("./flappybird", flappyBirdCommand);
+
+// Chess - classic chess with AI opponent
+registerCommand("./chess", chessCommand);
 
 /**
  * Get tab completions for a partial path
