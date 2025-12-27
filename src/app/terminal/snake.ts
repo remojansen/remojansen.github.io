@@ -480,7 +480,7 @@ export async function snakeCommand(ctx: CommandContext): Promise<void> {
 	ctx.terminal.clear();
 	ctx.terminal.writeln(`Final Score: ${state.score}`);
 	if (state.score === state.highScore && state.score > 0) {
-		ctx.terminal.writeln("🏆 NEW HIGH SCORE!");
+		ctx.terminal.writeln("NEW HIGH SCORE!");
 	}
 	ctx.terminal.writeln("");
 }

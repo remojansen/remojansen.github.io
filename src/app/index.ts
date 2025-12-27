@@ -1,9 +1,18 @@
-// Cool Retro Term - Three.js Scene
+/**
+ * Cool Retro Term - Web Application Entry Point
+ *
+ * This is the application-specific entry point for remojansen.github.io
+ * It uses the cool-retro-term-webgl library and adds:
+ * - Custom shell emulator with virtual filesystem
+ * - Boot sequence with BIOS animation
+ * - Background and game music
+ * - Built-in games (pong, snake, tetris, matrix)
+ * - CV display and other custom commands
+ */
 
-// import Stats from "stats.js";
 import * as THREE from "three";
-import { TerminalFrame } from "./terminal/TerminalFrame";
-import { TerminalText } from "./terminal/TerminalText";
+import { TerminalFrame } from "../lib/TerminalFrame";
+import { TerminalText } from "../lib/TerminalText";
 import { XTermAdapter } from "./terminal/XTermAdapter";
 
 // Audio controller interface
@@ -14,7 +23,6 @@ interface AudioControls {
 }
 
 // Setup background music with Three.js Audio
-// Returns functions to control background and game music
 function setupAudio(camera: THREE.Camera): AudioControls {
 	const listener = new THREE.AudioListener();
 	camera.add(listener);
@@ -28,7 +36,6 @@ function setupAudio(camera: THREE.Camera): AudioControls {
 	let bgPlayRequested = false;
 
 	const playBackgroundAudio = () => {
-		// Resume audio context if suspended (required by browsers)
 		if (listener.context.state === "suspended") {
 			listener.context.resume();
 		}
@@ -39,7 +46,6 @@ function setupAudio(camera: THREE.Camera): AudioControls {
 		}
 	};
 
-	// Load background music
 	audioLoader.load("assets/audio/background.mp3", (loadedBuffer) => {
 		bgBuffer = loadedBuffer;
 		backgroundMusic.setBuffer(bgBuffer);
@@ -48,7 +54,6 @@ function setupAudio(camera: THREE.Camera): AudioControls {
 		bgAudioLoaded = true;
 		console.log("Background music loaded");
 
-		// If play was already requested before loading finished, play now
 		if (bgPlayRequested) {
 			playBackgroundAudio();
 		}
@@ -59,7 +64,6 @@ function setupAudio(camera: THREE.Camera): AudioControls {
 	let gameAudioLoaded = false;
 	let gameBuffer: AudioBuffer | null = null;
 
-	// Load game music
 	audioLoader.load("assets/audio/game.mp3", (loadedBuffer) => {
 		gameBuffer = loadedBuffer;
 		gameMusic.setBuffer(gameBuffer);
@@ -92,13 +96,7 @@ function setupAudio(camera: THREE.Camera): AudioControls {
 	};
 }
 
-export async function runScene(): Promise<void> {
-	// Setup FPS counter
-	//const stats = new Stats();
-	//stats.showPanel(0); // 0: fps, 1: ms, 2: mb, 3+: custom
-	// document.body.appendChild(stats.dom);
-
-	// Get the container element
+async function runScene(): Promise<void> {
 	const container = document.getElementById("container");
 
 	if (!container) {
@@ -109,49 +107,43 @@ export async function runScene(): Promise<void> {
 	const scene = new THREE.Scene();
 
 	// Create orthographic camera for 2D rendering
-	// The camera maps -1 to 1 in both x and y to fill the screen
 	const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0.1, 10);
 	camera.position.z = 1;
 
-	// Setup audio (returns functions to control background and game music)
+	// Setup audio
 	const audioControls = setupAudio(camera);
 
 	// Create the renderer
 	const renderer = new THREE.WebGLRenderer({ antialias: true });
 	renderer.setSize(window.innerWidth, window.innerHeight);
 	renderer.setPixelRatio(window.devicePixelRatio);
-	renderer.setClearColor(0x000000); // Black background
+	renderer.setClearColor(0x000000);
 	container.appendChild(renderer.domElement);
 
-	// Create the terminal text (renders the text content)
-	// Use window dimensions directly (not multiplied by devicePixelRatio)
-	// to match QML behavior where effects scale with screen, not with pixel density
+	// Create the terminal text
 	const terminalText = new TerminalText(window.innerWidth, window.innerHeight);
-	terminalText.mesh.position.z = 0; // Background layer
+	terminalText.mesh.position.z = 0;
 	scene.add(terminalText.mesh);
 
-	// Create the terminal frame (renders CRT frame effects on top)
+	// Create the terminal frame
 	const terminalFrame = new TerminalFrame(
 		window.innerWidth,
 		window.innerHeight,
 	);
-	terminalFrame.mesh.position.z = 0.1; // Foreground layer
+	terminalFrame.mesh.position.z = 0.1;
 	scene.add(terminalFrame.mesh);
 
-	// Create xterm adapter for terminal input/output
-	// This connects xterm.js (handles input) to TerminalText (renders with shaders)
-	// Pass the audio controls to start music when user presses Enter and during games
+	// Create xterm adapter with shell emulator
 	const xtermAdapter = new XTermAdapter(terminalText, 80, 24, audioControls);
 
 	// Sync xterm dimensions with the calculated terminal grid size
-	// This is needed because TerminalText calculates actual rows based on window size
 	const gridSize = terminalText.getGridSize();
 	console.log(`Initial grid size: ${gridSize.cols}x${gridSize.rows}`);
 	if (gridSize.cols > 0 && gridSize.rows > 0) {
 		xtermAdapter.resize(gridSize.cols, gridSize.rows);
 	}
 
-	// Listen for grid size changes (e.g., when font loads) and resize xterm
+	// Listen for grid size changes and resize xterm
 	terminalText.onGridSizeChange((cols, rows) => {
 		console.log(`Grid size changed: ${cols}x${rows}`);
 		if (cols > 0 && rows > 0) {
@@ -159,10 +151,10 @@ export async function runScene(): Promise<void> {
 		}
 	});
 
-	// Focus the terminal to receive keyboard input
+	// Focus the terminal
 	xtermAdapter.focus();
 
-	// Also focus on click
+	// Focus on click
 	container.addEventListener("click", () => {
 		xtermAdapter.focus();
 	});
@@ -172,7 +164,6 @@ export async function runScene(): Promise<void> {
 		renderer.setSize(window.innerWidth, window.innerHeight);
 		terminalFrame.updateSize(window.innerWidth, window.innerHeight);
 		terminalText.updateSize(window.innerWidth, window.innerHeight);
-		// Sync xterm dimensions with the new terminal grid size
 		const gridSize = terminalText.getGridSize();
 		if (gridSize.cols > 0 && gridSize.rows > 0) {
 			xtermAdapter.resize(gridSize.cols, gridSize.rows);
@@ -181,23 +172,16 @@ export async function runScene(): Promise<void> {
 
 	// Animation loop
 	function animate() {
-		// stats.begin();
-
-		// Update time for dynamic shader effects (flickering, etc.)
 		terminalText.updateTime(performance.now());
-
-		// Render static pass first (to render target)
-		// This produces the stable frameBuffer that dynamic effects sample from
 		terminalText.renderStaticPass(renderer);
-
-		// Then render the main scene (dynamic pass reads from static render target)
 		requestAnimationFrame(animate);
 		renderer.render(scene, camera);
-
-		// stats.end();
 	}
 
 	animate();
 
 	console.log("Cool Retro Term Web initialized");
 }
+
+// Start the application
+runScene().catch(console.error);

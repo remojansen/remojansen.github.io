@@ -832,7 +832,7 @@ export async function tetrisCommand(ctx: CommandContext): Promise<void> {
 		`Final Score: ${state.score} | Lines: ${state.lines} | Level: ${state.level}`,
 	);
 	if (state.score === state.highScore && state.score > 0) {
-		ctx.terminal.writeln("🏆 NEW HIGH SCORE!");
+		ctx.terminal.writeln("NEW HIGH SCORE!");
 	}
 	ctx.terminal.writeln("");
 }

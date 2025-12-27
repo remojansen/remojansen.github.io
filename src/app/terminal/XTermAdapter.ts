@@ -14,6 +14,7 @@
  */
 
 import { Terminal } from "@xterm/xterm";
+import type { TerminalText } from "../../lib/TerminalText";
 import { isMobileDevice } from "../utils";
 import {
 	getInitialOutput,
@@ -22,7 +23,6 @@ import {
 	runCommand,
 	type TerminalIO,
 } from "./ShellEmulator";
-import type { TerminalText } from "./TerminalText";
 
 // Audio controls interface
 interface AudioControls {
