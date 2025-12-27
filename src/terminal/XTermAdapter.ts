@@ -22,6 +22,7 @@ import {
 	type TerminalIO,
 } from "./ShellEmulator";
 import type { TerminalText } from "./TerminalText";
+import { isMobileDevice } from "../utils";
 
 // Audio controls interface
 interface AudioControls {
@@ -103,6 +104,11 @@ export class XTermAdapter {
 		// This allows us to use Up/Down for command history instead of cursor movement
 		// Also forwards keys to game handler when a game is running
 		this.xterm.attachCustomKeyEventHandler((event: KeyboardEvent) => {
+			// Block all keyboard input on mobile devices
+			if (isMobileDevice()) {
+				return false;
+			}
+
 			// If a game key handler is active, forward ALL keys to it (both keydown and keyup)
 			if (this.gameKeyHandler) {
 				// Ignore repeated keydown events from key being held - we track key state ourselves
@@ -185,11 +191,19 @@ export class XTermAdapter {
 
 		// Handle keyboard input for other keys
 		this.xterm.onKey(({ key, domEvent }) => {
+			// Block all keyboard input on mobile devices
+			if (isMobileDevice()) {
+				return;
+			}
 			this.handleKey(key, domEvent);
 		});
 
 		// Handle data (paste, etc.)
 		this.xterm.onData((data) => {
+			// Block all input on mobile devices
+			if (isMobileDevice()) {
+				return;
+			}
 			// Only handle paste events (multi-character data) when not running a command
 			if (
 				!this.isCommandRunning &&
@@ -230,9 +244,25 @@ export class XTermAdapter {
 	}
 
 	/**
-	 * Show the initial boot prompt
+	 * Show the initial boot prompt (or mobile message if on mobile device)
 	 */
 	private showBootPrompt(): void {
+		if (isMobileDevice()) {
+			const mobileMessage =
+				"Sorry, this site is\r\n" +
+				"designed for a retro\r\n" +
+				"terminal experience\r\n" +
+				"that requires a\r\n" +
+				"physical keyboard.\r\n" +
+				"\r\n" +
+				"Please visit using\r\n" +
+				"a desktop or laptop\r\n" +
+				"to enjoy the full\r\n" +
+				"experience.";
+			this.xterm.write(mobileMessage);
+			this.updateTerminalText();
+			return;
+		}
 		const bootMessage = "Press ENTER to initiate the BIOS boot sequence... ";
 		this.xterm.write(bootMessage);
 		this.updateTerminalText();
@@ -578,6 +608,11 @@ export class XTermAdapter {
 	 * Handle Enter key - execute current command or boot sequence
 	 */
 	private handleEnter(): void {
+		// Block all input on mobile devices
+		if (isMobileDevice()) {
+			return;
+		}
+
 		// Reset cursor blink on any keypress
 		this.terminalText.resetCursorBlink();
 
