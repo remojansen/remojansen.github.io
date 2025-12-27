@@ -684,7 +684,8 @@ registerCommand("./matrix", matrixCommand);
  * Map of video files to their actual URLs
  */
 const videoFiles: Map<string, string> = new Map([
-	["Videos/interview.mp4", "assets/video/interview.mp4"],
+	["Videos/interview.mp4", "assets/video/interview.webm"],
+	["interview.mp4", "assets/video/interview.webm"],
 ]);
 
 /**
