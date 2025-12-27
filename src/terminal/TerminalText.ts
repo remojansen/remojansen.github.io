@@ -682,10 +682,7 @@ export class TerminalText {
 		let endCol = this.selectionEnd.col;
 
 		// Swap if selection is backwards
-		if (
-			startRow > endRow ||
-			(startRow === endRow && startCol > endCol)
-		) {
+		if (startRow > endRow || (startRow === endRow && startCol > endCol)) {
 			[startRow, endRow] = [endRow, startRow];
 			[startCol, endCol] = [endCol, startCol];
 		}

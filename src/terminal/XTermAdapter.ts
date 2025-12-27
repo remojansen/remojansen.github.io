@@ -14,6 +14,7 @@
  */
 
 import { Terminal } from "@xterm/xterm";
+import { isMobileDevice } from "../utils";
 import {
 	getInitialOutput,
 	getTabCompletions,
@@ -22,7 +23,6 @@ import {
 	type TerminalIO,
 } from "./ShellEmulator";
 import type { TerminalText } from "./TerminalText";
-import { isMobileDevice } from "../utils";
 
 // Audio controls interface
 interface AudioControls {
@@ -282,23 +282,26 @@ export class XTermAdapter {
 				}
 				this.lastPasteTime = now;
 
-				navigator.clipboard.readText().then((text) => {
-					if (text) {
-						// Filter out newlines and carriage returns for single-line paste
-						const cleanText = text.replace(/[\r\n]/g, "");
-						if (cleanText.length > 0) {
-							this.currentLine += cleanText;
-							// Use callback to ensure text is written before updating display
-							this.xterm.write(cleanText, () => {
-								this.updateTerminalText();
-								this.xterm.focus();
-							});
+				navigator.clipboard
+					.readText()
+					.then((text) => {
+						if (text) {
+							// Filter out newlines and carriage returns for single-line paste
+							const cleanText = text.replace(/[\r\n]/g, "");
+							if (cleanText.length > 0) {
+								this.currentLine += cleanText;
+								// Use callback to ensure text is written before updating display
+								this.xterm.write(cleanText, () => {
+									this.updateTerminalText();
+									this.xterm.focus();
+								});
+							}
 						}
-					}
-				}).catch((err) => {
-					// Clipboard access denied or not available
-					console.warn("Could not read clipboard:", err);
-				});
+					})
+					.catch((err) => {
+						// Clipboard access denied or not available
+						console.warn("Could not read clipboard:", err);
+					});
 			});
 
 			// Mouse selection handlers
@@ -331,7 +334,7 @@ export class XTermAdapter {
 				// Start selection with absolute positions
 				this.isSelecting = true;
 				this.selectionStart = absPos;
-				
+
 				// Pass viewport offset to TerminalText for rendering
 				this.terminalText.setSelection(absPos, absPos, viewportY);
 
@@ -383,7 +386,11 @@ export class XTermAdapter {
 						this.terminalText.clearSelection();
 					} else {
 						// Finalize selection and copy to clipboard
-						this.terminalText.setSelection(this.selectionStart, absPos, viewportY);
+						this.terminalText.setSelection(
+							this.selectionStart,
+							absPos,
+							viewportY,
+						);
 						this.copySelectionToClipboard();
 					}
 				}
