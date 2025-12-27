@@ -28096,6 +28096,10 @@ vec3 applyStaticNoise(vec3 baseColor, vec3 fontColor, vec4 noiseTexel, float sta
     cursorBlinkInterval = null;
     CURSOR_BLINK_RATE = 530;
     // ms, matching typical terminal blink rate
+    // Selection state (stored in absolute buffer coordinates)
+    selectionStart = null;
+    selectionEnd = null;
+    selectionViewportY = 0;
     // Scaling (matching QML)
     screenScaling;
     totalFontScaling;
@@ -28428,6 +28432,88 @@ vec3 applyStaticNoise(vec3 baseColor, vec3 fontColor, vec4 noiseTexel, float sta
       this.render();
     }
     /**
+     * Set text selection range (in absolute buffer coordinates)
+     * @param start Start position (col, row) or null to clear
+     * @param end End position (col, row) or null to clear
+     * @param viewportY Current viewport Y offset for rendering
+     */
+    setSelection(start, end, viewportY = 0) {
+      this.selectionStart = start;
+      this.selectionEnd = end;
+      this.selectionViewportY = viewportY;
+      this.render();
+    }
+    /**
+     * Update the viewport offset for selection rendering (called on scroll)
+     * @param viewportY Current viewport Y offset
+     */
+    updateSelectionViewport(viewportY) {
+      this.selectionViewportY = viewportY;
+    }
+    /**
+     * Clear the current selection
+     */
+    clearSelection() {
+      this.selectionStart = null;
+      this.selectionEnd = null;
+      this.render();
+    }
+    /**
+     * Get the current selection range
+     */
+    getSelection() {
+      return { start: this.selectionStart, end: this.selectionEnd };
+    }
+    /**
+     * Convert pixel coordinates to grid position
+     * @param pixelX X coordinate in CSS pixels
+     * @param pixelY Y coordinate in CSS pixels
+     * @returns Grid position { col, row }
+     */
+    pixelToGrid(pixelX, pixelY) {
+      const marginPixels = this.totalMargin;
+      const cellWidth = this.charWidth * this.screenScaling;
+      const cellHeight = this.charHeight * this.screenScaling;
+      const col = Math.floor((pixelX - marginPixels) / cellWidth);
+      const row = Math.floor((pixelY - marginPixels) / cellHeight);
+      return {
+        col: Math.max(0, Math.min(col, this.cols - 1)),
+        row: Math.max(0, Math.min(row, this.rows - 1))
+      };
+    }
+    /**
+     * Check if a cell is within the current selection
+     * @param col Column in viewport coordinates
+     * @param row Row in viewport coordinates
+     */
+    isCellSelected(col, row) {
+      if (!this.selectionStart || !this.selectionEnd) {
+        return false;
+      }
+      const absRow = row + this.selectionViewportY;
+      let startRow = this.selectionStart.row;
+      let startCol = this.selectionStart.col;
+      let endRow = this.selectionEnd.row;
+      let endCol = this.selectionEnd.col;
+      if (startRow > endRow || startRow === endRow && startCol > endCol) {
+        [startRow, endRow] = [endRow, startRow];
+        [startCol, endCol] = [endCol, startCol];
+      }
+      if (absRow < startRow || absRow > endRow) {
+        return false;
+      }
+      if (absRow === startRow && absRow === endRow) {
+        return col >= startCol && col <= endCol;
+      }
+      if (absRow === startRow) {
+        return col >= startCol;
+      }
+      if (absRow === endRow) {
+        return col <= endCol;
+      }
+      return true;
+    }
+    /**
      * Render the terminal text to the canvas
      */
     render() {
@@ -28439,20 +28525,36 @@ vec3 applyStaticNoise(vec3 baseColor, vec3 fontColor, vec4 noiseTexel, float sta
       ctx.font = `${fontSize}px ${fontFamily}`;
       ctx.textBaseline = "top";
       ctx.imageSmoothingEnabled = false;
-      ctx.fillStyle = "#ffffff";
       const lines = this.text.split("\n");
       const marginPixels = this.totalMargin;
       for (let row = 0; row < this.rows; row++) {
         const line = row < lines.length ? lines[row] : "";
         const y = marginPixels + row * this.charHeight * this.screenScaling;
-        for (let col = 0; col < Math.min(line.length, this.cols); col++) {
-          const char = line[col];
+        for (let col = 0; col < this.cols; col++) {
           const x = marginPixels + col * this.charWidth * this.screenScaling;
-          ctx.save();
-          ctx.translate(x, y);
-          ctx.scale(this.screenScaling, this.screenScaling);
-          ctx.fillText(char, 0, 0);
-          ctx.restore();
+          const char = col < line.length ? line[col] : "";
+          const isSelected = this.isCellSelected(col, row);
+          if (isSelected) {
+            const cellWidth = this.charWidth * this.screenScaling;
+            const cellHeight = this.charHeight * this.screenScaling;
+            ctx.fillStyle = "#ffffff";
+            ctx.fillRect(x, y, cellWidth, cellHeight);
+            if (char) {
+              ctx.fillStyle = `rgb(${Math.floor(this.backgroundColor.r * 255)}, ${Math.floor(this.backgroundColor.g * 255)}, ${Math.floor(this.backgroundColor.b * 255)})`;
+              ctx.save();
+              ctx.translate(x, y);
+              ctx.scale(this.screenScaling, this.screenScaling);
+              ctx.fillText(char, 0, 0);
+              ctx.restore();
+            }
+          } else if (char) {
+            ctx.fillStyle = "#ffffff";
+            ctx.save();
+            ctx.translate(x, y);
+            ctx.scale(this.screenScaling, this.screenScaling);
+            ctx.fillText(char, 0, 0);
+            ctx.restore();
+          }
         }
       }
       if (this.cursorVisible && this.cursorBlinkState && this.cursorRow < this.rows) {
@@ -40233,7 +40335,7 @@ ${h.join(`
   }
 
   // src/terminal/XTermAdapter.ts
-  var XTermAdapter = class {
+  var XTermAdapter = class _XTermAdapter {
     xterm;
     terminalText;
     currentLine = "";
@@ -40249,6 +40351,12 @@ ${h.join(`
     // Saves current line when navigating history
     // Game key handler
     gameKeyHandler = null;
+    // Track paste cooldown to prevent rapid repeated pastes
+    lastPasteTime = 0;
+    static PASTE_COOLDOWN_MS = 500;
+    // Mouse selection state
+    isSelecting = false;
+    selectionStart = null;
     // Bound keyboard handler for games (so we can remove it later)
     boundGameKeyboardHandler = null;
     // Track if cursor is explicitly hidden (by games)
@@ -40365,6 +40473,101 @@ ${h.join(`
           },
           { passive: false }
         );
+        container.addEventListener("contextmenu", (event) => {
+          event.preventDefault();
+          event.stopPropagation();
+          if (isMobileDevice()) {
+            return;
+          }
+          if (!this.bootComplete || !this.biosComplete || this.isCommandRunning) {
+            return;
+          }
+          if (this.gameKeyHandler) {
+            return;
+          }
+          const selection = this.terminalText.getSelection();
+          if (selection.start && selection.end) {
+            return;
+          }
+          const now = Date.now();
+          if (now - this.lastPasteTime < _XTermAdapter.PASTE_COOLDOWN_MS) {
+            return;
+          }
+          this.lastPasteTime = now;
+          navigator.clipboard.readText().then((text) => {
+            if (text) {
+              const cleanText = text.replace(/[\r\n]/g, "");
+              if (cleanText.length > 0) {
+                this.currentLine += cleanText;
+                this.xterm.write(cleanText, () => {
+                  this.updateTerminalText();
+                  this.xterm.focus();
+                });
+              }
+            }
+          }).catch((err) => {
+            console.warn("Could not read clipboard:", err);
+          });
+        });
+        container.addEventListener("mousedown", (event) => {
+          if (event.button !== 0) {
+            return;
+          }
+          if (isMobileDevice()) {
+            return;
+          }
+          if (this.gameKeyHandler) {
+            return;
+          }
+          const rect = container.getBoundingClientRect();
+          const x = event.clientX - rect.left;
+          const y = event.clientY - rect.top;
+          const gridPos = this.terminalText.pixelToGrid(x, y);
+          const viewportY = this.xterm.buffer.active.viewportY;
+          const absPos = { col: gridPos.col, row: gridPos.row + viewportY };
+          this.isSelecting = true;
+          this.selectionStart = absPos;
+          this.terminalText.setSelection(absPos, absPos, viewportY);
+          event.preventDefault();
+        });
+        container.addEventListener("mousemove", (event) => {
+          if (!this.isSelecting || !this.selectionStart) {
+            return;
+          }
+          const rect = container.getBoundingClientRect();
+          const x = event.clientX - rect.left;
+          const y = event.clientY - rect.top;
+          const gridPos = this.terminalText.pixelToGrid(x, y);
+          const viewportY = this.xterm.buffer.active.viewportY;
+          const absPos = { col: gridPos.col, row: gridPos.row + viewportY };
+          this.terminalText.setSelection(this.selectionStart, absPos, viewportY);
+        });
+        container.addEventListener("mouseup", (event) => {
+          if (event.button !== 0) {
+            return;
+          }
+          if (this.isSelecting && this.selectionStart) {
+            const rect = container.getBoundingClientRect();
+            const x = event.clientX - rect.left;
+            const y = event.clientY - rect.top;
+            const gridPos = this.terminalText.pixelToGrid(x, y);
+            const viewportY = this.xterm.buffer.active.viewportY;
+            const absPos = { col: gridPos.col, row: gridPos.row + viewportY };
+            if (absPos.col === this.selectionStart.col && absPos.row === this.selectionStart.row) {
+              this.terminalText.clearSelection();
+            } else {
+              this.terminalText.setSelection(this.selectionStart, absPos, viewportY);
+              this.copySelectionToClipboard();
+            }
+          }
+          this.isSelecting = false;
+          this.selectionStart = null;
+          this.xterm.focus();
+        });
+        container.addEventListener("mouseleave", () => {
+          this.isSelecting = false;
+          this.selectionStart = null;
+        });
       }
     }
     /**
@@ -40633,11 +40836,54 @@ ${h.join(`
       this.navigateHistoryDown();
     }
     /**
+     * Copy the current selection to clipboard
+     */
+    copySelectionToClipboard() {
+      const selection = this.terminalText.getSelection();
+      if (!selection.start || !selection.end) {
+        return;
+      }
+      const buffer = this.xterm.buffer.active;
+      let startRow = selection.start.row;
+      let startCol = selection.start.col;
+      let endRow = selection.end.row;
+      let endCol = selection.end.col;
+      if (startRow > endRow || startRow === endRow && startCol > endCol) {
+        [startRow, endRow] = [endRow, startRow];
+        [startCol, endCol] = [endCol, startCol];
+      }
+      const selectedLines = [];
+      for (let row = startRow; row <= endRow; row++) {
+        const line = buffer.getLine(row);
+        if (!line) {
+          selectedLines.push("");
+          continue;
+        }
+        const lineText = line.translateToString(true);
+        let lineStart = 0;
+        let lineEnd = lineText.length;
+        if (row === startRow) {
+          lineStart = startCol;
+        }
+        if (row === endRow) {
+          lineEnd = endCol + 1;
+        }
+        selectedLines.push(lineText.slice(lineStart, lineEnd));
+      }
+      const selectedText = selectedLines.join("\n");
+      if (selectedText) {
+        navigator.clipboard.writeText(selectedText).catch((err) => {
+          console.warn("Could not copy to clipboard:", err);
+        });
+      }
+    }
+    /**
      * Handle Backspace key - simple delete from end of currentLine
      * @returns false always since we handle it ourselves
      */
     handleBackspace() {
       this.terminalText.resetCursorBlink();
+      this.terminalText.clearSelection();
       if (!this.bootComplete || !this.biosComplete || this.isCommandRunning) {
         return false;
       }
@@ -40656,6 +40902,7 @@ ${h.join(`
       if (isMobileDevice()) {
         return;
       }
+      this.terminalText.clearSelection();
       this.terminalText.resetCursorBlink();
       if (!this.bootComplete) {
         this.bootComplete = true;
@@ -40714,6 +40961,7 @@ ${h.join(`
         return;
       }
       if (key.length === 1 && !domEvent.ctrlKey && !domEvent.altKey && !domEvent.metaKey) {
+        this.terminalText.clearSelection();
         this.currentLine += key;
         this.xterm.write(key, () => {
           this.updateTerminalText();
@@ -40817,6 +41065,7 @@ ${h.join(`
       const totalLines = buffer.length;
       const viewportStart = buffer.viewportY;
       const rows = this.xterm.rows;
+      this.terminalText.updateSelectionViewport(viewportStart);
       for (let i = 0; i < rows; i++) {
         const lineIndex = viewportStart + i;
         if (lineIndex < totalLines) {
