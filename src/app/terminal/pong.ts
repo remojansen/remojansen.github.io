@@ -5,6 +5,162 @@
 import type { CommandContext, KeyHandler } from "./ShellEmulator";
 import { sleep } from "./ShellEmulator";
 
+// ============================================
+// Sound Effects using Web Audio API
+// ============================================
+
+let audioContext: AudioContext | null = null;
+
+function getAudioContext(): AudioContext {
+	if (!audioContext) {
+		audioContext = new (window.AudioContext || (window as typeof window & { webkitAudioContext: typeof AudioContext }).webkitAudioContext)();
+	}
+	return audioContext;
+}
+
+/**
+ * Play paddle hit sound - classic pong blip
+ */
+function playPaddleHitSound(): void {
+	try {
+		const ctx = getAudioContext();
+		const oscillator = ctx.createOscillator();
+		const gainNode = ctx.createGain();
+
+		oscillator.connect(gainNode);
+		gainNode.connect(ctx.destination);
+
+		oscillator.type = "square";
+		oscillator.frequency.setValueAtTime(440, ctx.currentTime);
+
+		gainNode.gain.setValueAtTime(0.15, ctx.currentTime);
+		gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.1);
+
+		oscillator.start(ctx.currentTime);
+		oscillator.stop(ctx.currentTime + 0.1);
+	} catch {
+		// Audio not available
+	}
+}
+
+/**
+ * Play wall bounce sound - higher pitched blip
+ */
+function playWallBounceSound(): void {
+	try {
+		const ctx = getAudioContext();
+		const oscillator = ctx.createOscillator();
+		const gainNode = ctx.createGain();
+
+		oscillator.connect(gainNode);
+		gainNode.connect(ctx.destination);
+
+		oscillator.type = "square";
+		oscillator.frequency.setValueAtTime(220, ctx.currentTime);
+
+		gainNode.gain.setValueAtTime(0.1, ctx.currentTime);
+		gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.08);
+
+		oscillator.start(ctx.currentTime);
+		oscillator.stop(ctx.currentTime + 0.08);
+	} catch {
+		// Audio not available
+	}
+}
+
+/**
+ * Play score sound - ascending tone for player, descending for CPU
+ */
+function playScoreSound(playerScored: boolean): void {
+	try {
+		const ctx = getAudioContext();
+		const oscillator = ctx.createOscillator();
+		const gainNode = ctx.createGain();
+
+		oscillator.connect(gainNode);
+		gainNode.connect(ctx.destination);
+
+		oscillator.type = "sine";
+		
+		if (playerScored) {
+			// Ascending happy tone
+			oscillator.frequency.setValueAtTime(330, ctx.currentTime);
+			oscillator.frequency.setValueAtTime(440, ctx.currentTime + 0.1);
+			oscillator.frequency.setValueAtTime(550, ctx.currentTime + 0.2);
+		} else {
+			// Descending sad tone
+			oscillator.frequency.setValueAtTime(330, ctx.currentTime);
+			oscillator.frequency.setValueAtTime(280, ctx.currentTime + 0.1);
+			oscillator.frequency.setValueAtTime(220, ctx.currentTime + 0.2);
+		}
+
+		gainNode.gain.setValueAtTime(0.15, ctx.currentTime);
+		gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.3);
+
+		oscillator.start(ctx.currentTime);
+		oscillator.stop(ctx.currentTime + 0.3);
+	} catch {
+		// Audio not available
+	}
+}
+
+/**
+ * Play game over sound
+ */
+function playGameOverSound(playerWon: boolean): void {
+	try {
+		const ctx = getAudioContext();
+		
+		if (playerWon) {
+			// Victory fanfare
+			const notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
+			notes.forEach((freq, i) => {
+				const oscillator = ctx.createOscillator();
+				const gainNode = ctx.createGain();
+
+				oscillator.connect(gainNode);
+				gainNode.connect(ctx.destination);
+
+				oscillator.type = "sine";
+				oscillator.frequency.setValueAtTime(freq, ctx.currentTime + i * 0.12);
+
+				gainNode.gain.setValueAtTime(0, ctx.currentTime + i * 0.12);
+				gainNode.gain.linearRampToValueAtTime(0.15, ctx.currentTime + i * 0.12 + 0.02);
+				gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + i * 0.12 + 0.2);
+
+				oscillator.start(ctx.currentTime + i * 0.12);
+				oscillator.stop(ctx.currentTime + i * 0.12 + 0.2);
+			});
+		} else {
+			// Defeat sound
+			const notes = [392, 349.23, 329.63, 261.63]; // G4, F4, E4, C4
+			notes.forEach((freq, i) => {
+				const oscillator = ctx.createOscillator();
+				const gainNode = ctx.createGain();
+
+				oscillator.connect(gainNode);
+				gainNode.connect(ctx.destination);
+
+				oscillator.type = "sawtooth";
+				oscillator.frequency.setValueAtTime(freq, ctx.currentTime + i * 0.15);
+
+				gainNode.gain.setValueAtTime(0, ctx.currentTime + i * 0.15);
+				gainNode.gain.linearRampToValueAtTime(0.1, ctx.currentTime + i * 0.15 + 0.02);
+				gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + i * 0.15 + 0.2);
+
+				oscillator.start(ctx.currentTime + i * 0.15);
+				oscillator.stop(ctx.currentTime + i * 0.15 + 0.2);
+			});
+		}
+	} catch {
+		// Audio not available
+	}
+}
+
+// ============================================
+// Game Types and State
+// ============================================
+
 interface PongState {
 	// Game dimensions (in characters)
 	width: number;
@@ -290,6 +446,7 @@ export async function pongCommand(ctx: CommandContext): Promise<void> {
 			if (state.ballY <= 0 || state.ballY >= state.height - 1) {
 				state.ballVY = -state.ballVY;
 				state.ballY = Math.max(0, Math.min(state.height - 1, state.ballY));
+				playWallBounceSound();
 			}
 
 			// Ball collision with left paddle
@@ -302,6 +459,7 @@ export async function pongCommand(ctx: CommandContext): Promise<void> {
 					// Add some angle based on where it hit the paddle
 					const hitPos = (state.ballY - state.leftPaddleY) / state.paddleHeight;
 					state.ballVY = (hitPos - 0.5) * 2;
+					playPaddleHitSound();
 				}
 			}
 
@@ -316,6 +474,7 @@ export async function pongCommand(ctx: CommandContext): Promise<void> {
 					const hitPos =
 						(state.ballY - state.rightPaddleY) / state.paddleHeight;
 					state.ballVY = (hitPos - 0.5) * 2;
+					playPaddleHitSound();
 				}
 			}
 
@@ -325,7 +484,9 @@ export async function pongCommand(ctx: CommandContext): Promise<void> {
 				if (state.rightScore >= WIN_SCORE) {
 					state.gameOver = true;
 					state.winner = "PLAYER";
+					playGameOverSound(true);
 				} else {
+					playScoreSound(true);
 					resetBall(state);
 				}
 			}
@@ -334,7 +495,9 @@ export async function pongCommand(ctx: CommandContext): Promise<void> {
 				if (state.leftScore >= WIN_SCORE) {
 					state.gameOver = true;
 					state.winner = "CPU";
+					playGameOverSound(false);
 				} else {
+					playScoreSound(false);
 					resetBall(state);
 				}
 			}

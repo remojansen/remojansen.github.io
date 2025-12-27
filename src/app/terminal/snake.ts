@@ -5,6 +5,195 @@
 import type { CommandContext, KeyHandler } from "./ShellEmulator";
 import { sleep } from "./ShellEmulator";
 
+// ============================================
+// Sound Effects using Web Audio API
+// ============================================
+
+let audioContext: AudioContext | null = null;
+
+function getAudioContext(): AudioContext {
+	if (!audioContext) {
+		audioContext = new (window.AudioContext || (window as typeof window & { webkitAudioContext: typeof AudioContext }).webkitAudioContext)();
+	}
+	return audioContext;
+}
+
+/**
+ * Play eat food sound - satisfying chomp
+ */
+function playEatSound(): void {
+	try {
+		const ctx = getAudioContext();
+		const oscillator = ctx.createOscillator();
+		const gainNode = ctx.createGain();
+
+		oscillator.connect(gainNode);
+		gainNode.connect(ctx.destination);
+
+		oscillator.type = "sine";
+		oscillator.frequency.setValueAtTime(400, ctx.currentTime);
+		oscillator.frequency.exponentialRampToValueAtTime(600, ctx.currentTime + 0.05);
+		oscillator.frequency.exponentialRampToValueAtTime(500, ctx.currentTime + 0.1);
+
+		gainNode.gain.setValueAtTime(0.15, ctx.currentTime);
+		gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.1);
+
+		oscillator.start(ctx.currentTime);
+		oscillator.stop(ctx.currentTime + 0.1);
+	} catch {
+		// Audio not available
+	}
+}
+
+/**
+ * Play turn sound - subtle direction change
+ */
+function playTurnSound(): void {
+	try {
+		const ctx = getAudioContext();
+		const oscillator = ctx.createOscillator();
+		const gainNode = ctx.createGain();
+
+		oscillator.connect(gainNode);
+		gainNode.connect(ctx.destination);
+
+		oscillator.type = "sine";
+		oscillator.frequency.setValueAtTime(250, ctx.currentTime);
+
+		gainNode.gain.setValueAtTime(0.05, ctx.currentTime);
+		gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.03);
+
+		oscillator.start(ctx.currentTime);
+		oscillator.stop(ctx.currentTime + 0.03);
+	} catch {
+		// Audio not available
+	}
+}
+
+/**
+ * Play speed up sound - when snake gets faster
+ */
+function playSpeedUpSound(): void {
+	try {
+		const ctx = getAudioContext();
+		const notes = [440, 554.37, 659.25]; // A4, C#5, E5
+		
+		notes.forEach((freq, i) => {
+			const oscillator = ctx.createOscillator();
+			const gainNode = ctx.createGain();
+
+			oscillator.connect(gainNode);
+			gainNode.connect(ctx.destination);
+
+			oscillator.type = "sine";
+			oscillator.frequency.setValueAtTime(freq, ctx.currentTime + i * 0.08);
+
+			gainNode.gain.setValueAtTime(0, ctx.currentTime + i * 0.08);
+			gainNode.gain.linearRampToValueAtTime(0.1, ctx.currentTime + i * 0.08 + 0.02);
+			gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + i * 0.08 + 0.1);
+
+			oscillator.start(ctx.currentTime + i * 0.08);
+			oscillator.stop(ctx.currentTime + i * 0.08 + 0.1);
+		});
+	} catch {
+		// Audio not available
+	}
+}
+
+/**
+ * Play game over sound - crash/death
+ */
+function playGameOverSound(): void {
+	try {
+		const ctx = getAudioContext();
+		
+		// Create noise burst for crash effect
+		const bufferSize = ctx.sampleRate * 0.2;
+		const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+		const data = buffer.getChannelData(0);
+		
+		for (let i = 0; i < bufferSize; i++) {
+			data[i] = (Math.random() * 2 - 1) * (1 - i / bufferSize);
+		}
+		
+		const noise = ctx.createBufferSource();
+		noise.buffer = buffer;
+		
+		const gainNode = ctx.createGain();
+		const filter = ctx.createBiquadFilter();
+		
+		filter.type = "lowpass";
+		filter.frequency.setValueAtTime(800, ctx.currentTime);
+		filter.frequency.exponentialRampToValueAtTime(100, ctx.currentTime + 0.2);
+		
+		noise.connect(filter);
+		filter.connect(gainNode);
+		gainNode.connect(ctx.destination);
+		
+		gainNode.gain.setValueAtTime(0.2, ctx.currentTime);
+		gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.2);
+		
+		noise.start(ctx.currentTime);
+		noise.stop(ctx.currentTime + 0.2);
+
+		// Add descending tone
+		const notes = [300, 250, 200, 150];
+		notes.forEach((freq, i) => {
+			const oscillator = ctx.createOscillator();
+			const gain = ctx.createGain();
+
+			oscillator.connect(gain);
+			gain.connect(ctx.destination);
+
+			oscillator.type = "sawtooth";
+			oscillator.frequency.setValueAtTime(freq, ctx.currentTime + i * 0.1);
+
+			gain.gain.setValueAtTime(0, ctx.currentTime + i * 0.1);
+			gain.gain.linearRampToValueAtTime(0.08, ctx.currentTime + i * 0.1 + 0.02);
+			gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + i * 0.1 + 0.15);
+
+			oscillator.start(ctx.currentTime + i * 0.1);
+			oscillator.stop(ctx.currentTime + i * 0.1 + 0.15);
+		});
+	} catch {
+		// Audio not available
+	}
+}
+
+/**
+ * Play high score sound - celebratory
+ */
+function playHighScoreSound(): void {
+	try {
+		const ctx = getAudioContext();
+		const notes = [523.25, 659.25, 783.99, 1046.50, 783.99, 1046.50]; // C5, E5, G5, C6, G5, C6
+		
+		notes.forEach((freq, i) => {
+			const oscillator = ctx.createOscillator();
+			const gainNode = ctx.createGain();
+
+			oscillator.connect(gainNode);
+			gainNode.connect(ctx.destination);
+
+			oscillator.type = "sine";
+			oscillator.frequency.setValueAtTime(freq, ctx.currentTime + i * 0.1);
+
+			gainNode.gain.setValueAtTime(0, ctx.currentTime + i * 0.1);
+			gainNode.gain.linearRampToValueAtTime(0.12, ctx.currentTime + i * 0.1 + 0.02);
+			gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + i * 0.1 + 0.15);
+
+			oscillator.start(ctx.currentTime + i * 0.1);
+			oscillator.stop(ctx.currentTime + i * 0.1 + 0.15);
+		});
+	} catch {
+		// Audio not available
+	}
+}
+
+// ============================================
+// Game Types and State
+// ============================================
+
 interface SnakeSegment {
 	x: number;
 	y: number;
@@ -318,6 +507,7 @@ export async function snakeCommand(ctx: CommandContext): Promise<void> {
 					keyCode === 87) &&
 				state.direction !== "down"
 			) {
+				if (state.nextDirection !== "up") playTurnSound();
 				state.nextDirection = "up";
 			}
 			if (
@@ -328,6 +518,7 @@ export async function snakeCommand(ctx: CommandContext): Promise<void> {
 					keyCode === 83) &&
 				state.direction !== "up"
 			) {
+				if (state.nextDirection !== "down") playTurnSound();
 				state.nextDirection = "down";
 			}
 			if (
@@ -338,6 +529,7 @@ export async function snakeCommand(ctx: CommandContext): Promise<void> {
 					keyCode === 65) &&
 				state.direction !== "right"
 			) {
+				if (state.nextDirection !== "left") playTurnSound();
 				state.nextDirection = "left";
 			}
 			if (
@@ -348,6 +540,7 @@ export async function snakeCommand(ctx: CommandContext): Promise<void> {
 					keyCode === 68) &&
 				state.direction !== "left"
 			) {
+				if (state.nextDirection !== "right") playTurnSound();
 				state.nextDirection = "right";
 			}
 
@@ -428,12 +621,14 @@ export async function snakeCommand(ctx: CommandContext): Promise<void> {
 				) {
 					state.gameOver = true;
 					updateHighScore(state);
+					playGameOverSound();
 				} else {
 					// Check self collision
 					for (const segment of state.snake) {
 						if (segment.x === newX && segment.y === newY) {
 							state.gameOver = true;
 							updateHighScore(state);
+							playGameOverSound();
 							break;
 						}
 					}
@@ -446,10 +641,12 @@ export async function snakeCommand(ctx: CommandContext): Promise<void> {
 						if (newX === state.foodX && newY === state.foodY) {
 							// Eat food - don't remove tail (snake grows)
 							state.score += 10;
+							playEatSound();
 							spawnFood(state);
 							// Increase speed every 50 points
 							if (state.score % 50 === 0 && state.speed > MIN_SPEED) {
 								state.speed--;
+								playSpeedUpSound();
 							}
 						} else {
 							// Remove tail (normal move)
@@ -481,6 +678,7 @@ export async function snakeCommand(ctx: CommandContext): Promise<void> {
 	ctx.terminal.writeln(`Final Score: ${state.score}`);
 	if (state.score === state.highScore && state.score > 0) {
 		ctx.terminal.writeln("NEW HIGH SCORE!");
+		playHighScoreSound();
 	}
 	ctx.terminal.writeln("");
 }
