@@ -1,0 +1,351 @@
+{
+	"social": [
+		{
+			"url": "https://dev.to/remojansen",
+			"site": "dev.to"
+		},
+		{
+			"url": "https://twitter.com/RemoHJansen",
+			"site": "twitter"
+		},
+		{
+			"url": "https://stackoverflow.com/users/606821/remo-h-jansen",
+			"site": "stackoverflow"
+		},
+		{
+			"url": "https://www.linkedin.com/in/remojansen/",
+			"site": "linkedin"
+		},
+		{
+			"url": "https://github.com/remojansen",
+			"site": "github"
+		}
+	],
+	"bio": [
+		"Hola! I'm Remo H. Jansen, a Spanish full-stack cloud & web engineer living in Ireland since 2010.",
+		"I work as a Technical Lead at Marsh McLennan. In this role, I lead a cross-functional team responsible for all technical aspects of application lifecycle management—from design and development through deployment, maintenance, and optimization. My focus is on building and supporting AI-powered applications that enhance business efficiency, streamline processes, unlock data-driven insights, and deliver greater value to clients and colleagues alike. Previously, I held technical roles such as Solution Engineer and Technical Lead at organizations including Microsoft, Aerlytix, Aon, and others. For over 15 years, I’ve immersed myself in open-source web technologies, particularly Node.js and TypeScript.",
+		"I'm a developer at heart with a deep love for JavaScript, TypeScript, and building tools that make other developers more productive. Over the years, I've worked across startups, enterprise teams, and cloud platforms—always with a focus on creating intuitive, high-performance web applications. Whether it's visualizing financial data, optimizing developer workflows, or contributing to open-source, I bring a hands-on mindset and I care deeply about developer experience.",
+		"I love being part of the tech community. I am a former Microsoft Most Valuable Professional (MVP), the creator of InversifyJS, a lightweight IoC container for JavaScript apps with over 250 million downloads on npm, a former organizer of JSDayIE (Ireland's first JavaScript conference) and the Dublin TypeScript Meetup, as well as the author of TypeScript books and a content creator on DEV.to.",
+		"I'm currently interested in learning more about the latest Azure services, multi-tenant SaaS architectures, digital experience platforms (DXP), Dapr (Distributed Application Runtime), and sustainable high performance in digital product teams.",
+		"Outside of tech, I enjoy endurance sports such as triathlons and marathons: I'm an Ironman 140.6 finisher and currently working towards becoming an Abbott World Marathon Majors Six Star finisher."
+	],
+	"workExperience": [
+		{
+			"organizations": "Marsh McLennan",
+			"roles": "Technical Lead",
+			"period": "January 2026 - Present",
+			"type": "Full-time",
+			"location": "Dublin, Ireland"
+		},
+		{
+			"organizations": "Microsoft",
+			"roles": "Solution Engineer (Azure Cloud & AI Solution)",
+			"period": "June 2025 - December 2025",
+			"type": "Full-time",
+			"location": "Dublin, Ireland"
+		},
+		{
+			"organizations": "Wolk Software (Self-employed)",
+			"roles": "Senior Technology Consultant",
+			"period": "August 2018 - May 2025",
+			"type": "Full-time",
+			"location": "Dublin, Ireland"
+		},
+		{
+			"organizations": "JSDayIE",
+			"roles": "Executive Producer",
+			"period": "2019 - 2023",
+			"type": "Part-time",
+			"location": "Dublin, Ireland"
+		},
+		{
+			"organizations": "CCT College Dublin",
+			"roles": "Lecturer",
+			"period": "2019 - 2022",
+			"type": "Part-time",
+			"location": "Dublin, Ireland"
+		},
+		{
+			"organizations": "Aerlytix",
+			"roles": "Tech Lead",
+			"period": "January 2017 - April 2019",
+			"type": "Full-time",
+			"location": "Dublin, Ireland"
+		},
+		{
+			"organizations": "Aon",
+			"roles": "Senior Web Engineer",
+			"period": "November 2015 - December 2016",
+			"type": "Full-time",
+			"location": "Dublin, Ireland"
+		},
+		{
+			"organizations": "Compliance Solutions Strategies",
+			"roles": "Web Engineer",
+			"period": "March 2012 - November 2015",
+			"type": "Full-time",
+			"location": "Dublin, Ireland"
+		},
+		{
+			"organizations": "Club Travel",
+			"roles": "Web Engineer",
+			"period": "April 2011 - March 2012",
+			"type": "Full-time",
+			"location": "Dublin, Ireland"
+		},
+		{
+			"organizations": "Guadaltech",
+			"roles": "Web Engineer",
+			"period": "September 2010 - March 2011",
+			"type": "Full-time",
+			"location": "Spain"
+		},
+		{
+			"organizations": "Lucca Leadership",
+			"roles": "Web Engineer (Internship)",
+			"period": "May 2010 - June 2010",
+			"type": "Internship",
+			"location": "Dublin, Ireland"
+		}
+	],
+	"education": [
+		{
+			"school": "Microsoft",
+			"title": "Azure Fundamentals Certification",
+			"year": "2025"
+		},
+		{
+			"school": "Microsoft",
+			"title": "Azure AI Fundamentals Certification",
+			"year": "2025"
+		},
+		{
+			"school": "GitHub",
+			"title": "GitHub Fundamentals Certification",
+			"year": "2025"
+		},
+		{
+			"school": "GitHub",
+			"title": "GitHub Copilot Certification",
+			"year": "2025"
+		},
+		{
+			"school": "Google Analytics Academy",
+			"title": "Google Analytics Platform Principles",
+			"year": "2014"
+		},
+		{
+			"school": "Xamarin University",
+			"title": "Xamarin Certified Mobile Developer",
+			"year": "2014"
+		},
+		{
+			"school": "Xamarin University",
+			"title": "Xamarin Certified iOS Developer",
+			"year": "2014"
+		},
+		{
+			"school": "Xamarin University",
+			"title": "Xamarin Certified Android Developer",
+			"year": "2014"
+		},
+		{
+			"school": "New Horizons computer training centres",
+			"title": "Microsoft certified professional developer (MCPD)",
+			"year": "2011"
+		},
+		{
+			"school": "Stanford university",
+			"title": "Introduction to databases",
+			"year": "2011"
+		},
+		{
+			"school": "ETICOM Corporate University",
+			"title": "Certificate in ASP.NET",
+			"year": "2011"
+		},
+		{
+			"school": "ETICOM Corporate University",
+			"title": "Certificate in JavaScript",
+			"year": "2011"
+		},
+		{
+			"school": "ETICOM Corporate University",
+			"title": "Certificate in Spring Framework",
+			"year": 2010
+		},
+		{
+			"school": "ETICOM Corporate University",
+			"title": "Certificate in Hibernate Framework",
+			"year": 2010
+		},
+		{
+			"school": "ETICOM Corporate University",
+			"title": "Certificate in AJAX",
+			"year": 2010
+		},
+		{
+			"school": "Universidad de Sevilla School of Computer Science",
+			"title": "Certificate in Joomla! (CMS)",
+			"year": "2009"
+		},
+		{
+			"school": "Universidad de Sevilla School of Computer Science",
+			"title": "Certificate in Linux Server administration",
+			"year": "2008"
+		},
+		{
+			"school": "Universidad de Sevilla School of Computer Science",
+			"title": "Certificate in Oracle",
+			"year": "2008"
+		},
+		{
+			"school": "Salesians of St. Peter College",
+			"title": "Higher Certificate In Software Engineering",
+			"year": "2008"
+		}
+	],
+	"skills": [
+		"TypeScript",
+		"JavaScript",
+		"C#",
+		"Dependency Injection",
+		"Inversion of Control (IoC)",
+		"SOLID Principles",
+		"Node.js",
+		"React",
+		"Next.js",
+		"Redux",
+		"Functional Programming",
+		"Reactive Programming",
+		"Microservices Architecture",
+		"Decomposing Monoliths to Microservices",
+		"REST APIs",
+		"CI/CD Pipelines",
+		"Developer Experience (DevEx)",
+		"Microsoft Azure",
+		"Amazon Web Services (AWS)",
+		"GitHub Copilot",
+		"Retrieval Augmented Generation (RAG)",
+		"Model Context Protocol (MCP)",
+		"LLM Cost Optimization",
+		"AI-Assisted Programming",
+		"Agent Driven Development (ADD)",
+		"Agile Development Methodologies",
+		"Automated Testing",
+		"Application Performance and Scalability",
+		"Web APIs",
+		"Relational Databases",
+		"Non-Relational Databases",
+		"Application Authentication and Security",
+		"OAuth",
+		"JWT",
+		"SSL/TLS",
+		"Microsoft Entra ID",
+		"Type-safe Infrastructure as Code",
+		"Modern Database Access",
+		"Leadership",
+		"Product Strategy",
+		"Consulting",
+		"Technical Debt Management",
+		"Event Production and Organization",
+		"Community Building",
+		"Public Speaking",
+		"Technical Writing",
+		"Communication",
+		"Mentorship",
+		"Knowledge Sharing"
+	],
+	"oss": [
+		{
+			"project": "InversifyJS",
+			"url": "https://inversify.io",
+			"description": "A powerful and lightweight inversion of control (IoC) container for TypeScript and JavaScript apps.\n  It is used by projects such as Kibana and Eclipse Che (Cloud IDE) with over 1.5M weekly downloads.",
+			"stats": "/assets/content/inversify.json"
+		},
+		{
+			"project": "fresh-onion",
+			"url": "https://github.com/remojansen/fresh-onion",
+			"description": "A utility library for enforcing architectural boundaries in layered Node.js projects.\n  It is ideal for applications that implement a Hexagonal/Onion/Clean architecture."
+		}
+	],
+	"publications": [
+		{
+			"title": "Functional Programming with Typescript",
+			"isbn": "9781788831437",
+			"publisher": "Packt Publishing",
+			"year": "2019",
+			"role": "Author"
+		},
+		{
+			"title": "Learning TypeScript (2nd Edition)",
+			"isbn": "9781788391474",
+			"publisher": "Packt Publishing",
+			"year": "2018",
+			"role": "Author"
+		},
+		{
+			"title": "TypeScript : Modern JavaScript Development",
+			"isbn": "9781787289086",
+			"publisher": "Packt Publishing",
+			"year": "2016",
+			"role": "Co-Author"
+		},
+		{
+			"title": "Learning TypeScript (Chinese Edition)",
+			"isbn": "9787121300479",
+			"publisher": "Publishing House of Electronics Industry (PHEI)",
+			"year": "2015",
+			"role": "Author"
+		},
+		{
+			"title": "Learning TypeScript",
+			"isbn": "9781783985548",
+			"publisher": "Packt Publishing",
+			"year": "2015",
+			"role": "Author"
+		},
+		{
+			"title": "Mastering TypeScript",
+			"isbn": "9781784399665",
+			"publisher": "Packt Publishing",
+			"year": "2015",
+			"role": "Technical Reviewer"
+		}
+	],
+	"awards": [
+		{
+			"year": "2016 - 2019",
+			"title": "Microsoft Most Valuable Professional (MVP)",
+			"org": "Microsoft"
+		},
+		{
+			"year": "2013",
+			"title": "Best financial services website (Semi-finalist)",
+			"org": "Realex Fire Web Awards"
+		},
+		{
+			"year": "2008",
+			"title": "National research and technological innovation award (Semi-finalist)",
+			"org": "Premios Don Bosco Salesianos Zaragoza"
+		}
+	],
+	"hobbies": [
+		"Spending time with family and friends",
+		"Endurance sports (marathons, triathlons, cycling)",
+		"Spenging time in nature",
+		"Traveling",
+		"Learning new things",
+		"Gaming"
+	],
+	"languages": [
+		{
+			"name": "Spanish",
+			"level": "Native"
+		},
+		{
+			"name": "English",
+			"level": "Professional working proficiency"
+		}
+	]
+}
