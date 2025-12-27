@@ -8,6 +8,7 @@
 
 // Import game commands from separate modules
 import { cvCommand } from "./cv";
+import { donutCommand } from "./donut";
 import { matrixCommand } from "./matrix";
 import { pongCommand } from "./pong";
 import { snakeCommand } from "./snake";
@@ -298,6 +299,14 @@ function initFileSystem(): void {
 		size: 4096,
 		permissions: "-rwxr-xr-x",
 		modified: "Dec 25 00:00",
+		parent: "Programs",
+	});
+	virtualFileSystem.set("Programs/donut", {
+		name: "donut",
+		isDirectory: false,
+		size: 4096,
+		permissions: "-rwxr-xr-x",
+		modified: "Dec 27 00:00",
 		parent: "Programs",
 	});
 }
@@ -888,6 +897,9 @@ registerCommand("./snake", snakeCommand);
 
 // Tetris game - classic falling blocks puzzle
 registerCommand("./tetris", tetrisCommand);
+
+// Donut - spinning 3D ASCII donut with shading
+registerCommand("./donut", donutCommand);
 
 /**
  * Get tab completions for a partial path

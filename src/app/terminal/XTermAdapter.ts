@@ -238,6 +238,11 @@ export class XTermAdapter {
 			container.addEventListener(
 				"wheel",
 				(event: WheelEvent) => {
+					// Disable scrolling when a game is running
+					if (this.gameKeyHandler) {
+						event.preventDefault();
+						return;
+					}
 					// Scroll the terminal based on wheel delta
 					const lines =
 						Math.sign(event.deltaY) *
