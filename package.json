@@ -12,7 +12,7 @@
 	},
 	"keywords": [],
 	"author": "",
-	"license": "ISC",
+	"license": "GPL-3.0",
 	"devDependencies": {
 		"@types/three": "^0.182.0",
 		"concurrently": "^9.2.1",
