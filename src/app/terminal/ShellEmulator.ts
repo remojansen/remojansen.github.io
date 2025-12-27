@@ -12,6 +12,7 @@ import { donutCommand } from "./donut";
 import { matrixCommand } from "./matrix";
 import { pongCommand } from "./pong";
 import { snakeCommand } from "./snake";
+import { spaceInvadersCommand } from "./space-invaders";
 import { tetrisCommand } from "./tetris";
 
 /**
@@ -305,6 +306,14 @@ function initFileSystem(): void {
 		name: "donut",
 		isDirectory: false,
 		size: 4096,
+		permissions: "-rwxr-xr-x",
+		modified: "Dec 27 00:00",
+		parent: "Programs",
+	});
+	virtualFileSystem.set("Programs/space-invaders", {
+		name: "space-invaders",
+		isDirectory: false,
+		size: 8192,
 		permissions: "-rwxr-xr-x",
 		modified: "Dec 27 00:00",
 		parent: "Programs",
@@ -900,6 +909,9 @@ registerCommand("./tetris", tetrisCommand);
 
 // Donut - spinning 3D ASCII donut with shading
 registerCommand("./donut", donutCommand);
+
+// Space Invaders - classic alien shooter
+registerCommand("./space-invaders", spaceInvadersCommand);
 
 /**
  * Get tab completions for a partial path
