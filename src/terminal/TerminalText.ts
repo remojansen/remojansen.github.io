@@ -160,6 +160,11 @@ export class TerminalText {
 	private cursorBlinkInterval: number | null = null;
 	private readonly CURSOR_BLINK_RATE: number = 530; // ms, matching typical terminal blink rate
 
+	// Selection state (stored in absolute buffer coordinates)
+	private selectionStart: { col: number; row: number } | null = null;
+	private selectionEnd: { col: number; row: number } | null = null;
+	private selectionViewportY: number = 0;
+
 	// Scaling (matching QML)
 	private screenScaling: number;
 	private totalFontScaling: number;
@@ -592,6 +597,124 @@ export class TerminalText {
 	}
 
 	/**
+	 * Set text selection range (in absolute buffer coordinates)
+	 * @param start Start position (col, row) or null to clear
+	 * @param end End position (col, row) or null to clear
+	 * @param viewportY Current viewport Y offset for rendering
+	 */
+	setSelection(
+		start: { col: number; row: number } | null,
+		end: { col: number; row: number } | null,
+		viewportY: number = 0,
+	): void {
+		this.selectionStart = start;
+		this.selectionEnd = end;
+		this.selectionViewportY = viewportY;
+		this.render();
+	}
+
+	/**
+	 * Update the viewport offset for selection rendering (called on scroll)
+	 * @param viewportY Current viewport Y offset
+	 */
+	updateSelectionViewport(viewportY: number): void {
+		this.selectionViewportY = viewportY;
+		// No need to re-render here, render() will be called by setText()
+	}
+
+	/**
+	 * Clear the current selection
+	 */
+	clearSelection(): void {
+		this.selectionStart = null;
+		this.selectionEnd = null;
+		this.render();
+	}
+
+	/**
+	 * Get the current selection range
+	 */
+	getSelection(): {
+		start: { col: number; row: number } | null;
+		end: { col: number; row: number } | null;
+	} {
+		return { start: this.selectionStart, end: this.selectionEnd };
+	}
+
+	/**
+	 * Convert pixel coordinates to grid position
+	 * @param pixelX X coordinate in CSS pixels
+	 * @param pixelY Y coordinate in CSS pixels
+	 * @returns Grid position { col, row }
+	 */
+	pixelToGrid(pixelX: number, pixelY: number): { col: number; row: number } {
+		const marginPixels = this.totalMargin;
+		const cellWidth = this.charWidth * this.screenScaling;
+		const cellHeight = this.charHeight * this.screenScaling;
+
+		const col = Math.floor((pixelX - marginPixels) / cellWidth);
+		const row = Math.floor((pixelY - marginPixels) / cellHeight);
+
+		// Clamp to valid range
+		return {
+			col: Math.max(0, Math.min(col, this.cols - 1)),
+			row: Math.max(0, Math.min(row, this.rows - 1)),
+		};
+	}
+
+	/**
+	 * Check if a cell is within the current selection
+	 * @param col Column in viewport coordinates
+	 * @param row Row in viewport coordinates
+	 */
+	private isCellSelected(col: number, row: number): boolean {
+		if (!this.selectionStart || !this.selectionEnd) {
+			return false;
+		}
+
+		// Convert viewport row to absolute buffer row
+		const absRow = row + this.selectionViewportY;
+
+		// Normalize selection (start may be after end if selecting backwards)
+		let startRow = this.selectionStart.row;
+		let startCol = this.selectionStart.col;
+		let endRow = this.selectionEnd.row;
+		let endCol = this.selectionEnd.col;
+
+		// Swap if selection is backwards
+		if (
+			startRow > endRow ||
+			(startRow === endRow && startCol > endCol)
+		) {
+			[startRow, endRow] = [endRow, startRow];
+			[startCol, endCol] = [endCol, startCol];
+		}
+
+		// Check if cell is in selection range (using absolute row)
+		if (absRow < startRow || absRow > endRow) {
+			return false;
+		}
+
+		if (absRow === startRow && absRow === endRow) {
+			// Single row selection
+			return col >= startCol && col <= endCol;
+		}
+
+		if (absRow === startRow) {
+			// First row of multi-row selection
+			return col >= startCol;
+		}
+
+		if (absRow === endRow) {
+			// Last row of multi-row selection
+			return col <= endCol;
+		}
+
+		// Middle rows are fully selected
+		return true;
+	}
+
+	/**
 	 * Render the terminal text to the canvas
 	 */
 	private render(): void {
@@ -610,9 +733,6 @@ export class TerminalText {
 		ctx.textBaseline = "top";
 		ctx.imageSmoothingEnabled = false;
 
-		// Render text in white (shader colorizes it)
-		ctx.fillStyle = "#ffffff";
-
 		const lines = this.text.split("\n");
 		const marginPixels = this.totalMargin;
 
@@ -622,16 +742,36 @@ export class TerminalText {
 			const line = row < lines.length ? lines[row] : "";
 			const y = marginPixels + row * this.charHeight * this.screenScaling;
 
-			for (let col = 0; col < Math.min(line.length, this.cols); col++) {
-				const char = line[col];
+			for (let col = 0; col < this.cols; col++) {
 				const x = marginPixels + col * this.charWidth * this.screenScaling;
+				const char = col < line.length ? line[col] : "";
+				const isSelected = this.isCellSelected(col, row);
 
-				// Draw character scaled up
-				ctx.save();
-				ctx.translate(x, y);
-				ctx.scale(this.screenScaling, this.screenScaling);
-				ctx.fillText(char, 0, 0);
-				ctx.restore();
+				if (isSelected) {
+					// Draw selection highlight (white block like cursor)
+					const cellWidth = this.charWidth * this.screenScaling;
+					const cellHeight = this.charHeight * this.screenScaling;
+					ctx.fillStyle = "#ffffff";
+					ctx.fillRect(x, y, cellWidth, cellHeight);
+
+					// Draw character in background color (inverted)
+					if (char) {
+						ctx.fillStyle = `rgb(${Math.floor(this.backgroundColor.r * 255)}, ${Math.floor(this.backgroundColor.g * 255)}, ${Math.floor(this.backgroundColor.b * 255)})`;
+						ctx.save();
+						ctx.translate(x, y);
+						ctx.scale(this.screenScaling, this.screenScaling);
+						ctx.fillText(char, 0, 0);
+						ctx.restore();
+					}
+				} else if (char) {
+					// Draw character normally in white (shader colorizes it)
+					ctx.fillStyle = "#ffffff";
+					ctx.save();
+					ctx.translate(x, y);
+					ctx.scale(this.screenScaling, this.screenScaling);
+					ctx.fillText(char, 0, 0);
+					ctx.restore();
+				}
 			}
 		}
 

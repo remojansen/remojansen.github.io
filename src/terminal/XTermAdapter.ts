@@ -22,6 +22,7 @@ import {
 	type TerminalIO,
 } from "./ShellEmulator";
 import type { TerminalText } from "./TerminalText";
+import { isMobileDevice } from "../utils";
 
 // Audio controls interface
 interface AudioControls {
@@ -47,6 +48,14 @@ export class XTermAdapter {
 
 	// Game key handler
 	private gameKeyHandler: KeyHandler | null = null;
+
+	// Track paste cooldown to prevent rapid repeated pastes
+	private lastPasteTime: number = 0;
+	private static readonly PASTE_COOLDOWN_MS: number = 500;
+
+	// Mouse selection state
+	private isSelecting: boolean = false;
+	private selectionStart: { col: number; row: number } | null = null;
 
 	// Bound keyboard handler for games (so we can remove it later)
 	private boundGameKeyboardHandler: ((event: KeyboardEvent) => void) | null =
@@ -103,6 +112,11 @@ export class XTermAdapter {
 		// This allows us to use Up/Down for command history instead of cursor movement
 		// Also forwards keys to game handler when a game is running
 		this.xterm.attachCustomKeyEventHandler((event: KeyboardEvent) => {
+			// Block all keyboard input on mobile devices
+			if (isMobileDevice()) {
+				return false;
+			}
+
 			// If a game key handler is active, forward ALL keys to it (both keydown and keyup)
 			if (this.gameKeyHandler) {
 				// Ignore repeated keydown events from key being held - we track key state ourselves
@@ -185,11 +199,19 @@ export class XTermAdapter {
 
 		// Handle keyboard input for other keys
 		this.xterm.onKey(({ key, domEvent }) => {
+			// Block all keyboard input on mobile devices
+			if (isMobileDevice()) {
+				return;
+			}
 			this.handleKey(key, domEvent);
 		});
 
 		// Handle data (paste, etc.)
 		this.xterm.onData((data) => {
+			// Block all input on mobile devices
+			if (isMobileDevice()) {
+				return;
+			}
 			// Only handle paste events (multi-character data) when not running a command
 			if (
 				!this.isCommandRunning &&
@@ -226,13 +248,182 @@ export class XTermAdapter {
 				},
 				{ passive: false },
 			);
+
+			// Enable right-click to paste from clipboard
+			container.addEventListener("contextmenu", (event: MouseEvent) => {
+				event.preventDefault();
+				event.stopPropagation();
+
+				// Block paste on mobile devices
+				if (isMobileDevice()) {
+					return;
+				}
+
+				// Ignore if boot/BIOS not complete or command running
+				if (!this.bootComplete || !this.biosComplete || this.isCommandRunning) {
+					return;
+				}
+
+				// Ignore if a game is running
+				if (this.gameKeyHandler) {
+					return;
+				}
+
+				// If there's a selection, don't paste - allow copying instead
+				const selection = this.terminalText.getSelection();
+				if (selection.start && selection.end) {
+					return;
+				}
+
+				// Debounce: ignore rapid right-clicks within cooldown period
+				const now = Date.now();
+				if (now - this.lastPasteTime < XTermAdapter.PASTE_COOLDOWN_MS) {
+					return;
+				}
+				this.lastPasteTime = now;
+
+				navigator.clipboard.readText().then((text) => {
+					if (text) {
+						// Filter out newlines and carriage returns for single-line paste
+						const cleanText = text.replace(/[\r\n]/g, "");
+						if (cleanText.length > 0) {
+							this.currentLine += cleanText;
+							// Use callback to ensure text is written before updating display
+							this.xterm.write(cleanText, () => {
+								this.updateTerminalText();
+								this.xterm.focus();
+							});
+						}
+					}
+				}).catch((err) => {
+					// Clipboard access denied or not available
+					console.warn("Could not read clipboard:", err);
+				});
+			});
+
+			// Mouse selection handlers
+			container.addEventListener("mousedown", (event: MouseEvent) => {
+				// Only handle left mouse button
+				if (event.button !== 0) {
+					return;
+				}
+
+				// Block on mobile devices
+				if (isMobileDevice()) {
+					return;
+				}
+
+				// Ignore if a game is running
+				if (this.gameKeyHandler) {
+					return;
+				}
+
+				// Get grid position from mouse coordinates (viewport-relative)
+				const rect = container.getBoundingClientRect();
+				const x = event.clientX - rect.left;
+				const y = event.clientY - rect.top;
+				const gridPos = this.terminalText.pixelToGrid(x, y);
+
+				// Convert to absolute buffer position
+				const viewportY = this.xterm.buffer.active.viewportY;
+				const absPos = { col: gridPos.col, row: gridPos.row + viewportY };
+
+				// Start selection with absolute positions
+				this.isSelecting = true;
+				this.selectionStart = absPos;
+				
+				// Pass viewport offset to TerminalText for rendering
+				this.terminalText.setSelection(absPos, absPos, viewportY);
+
+				event.preventDefault();
+			});
+
+			container.addEventListener("mousemove", (event: MouseEvent) => {
+				// Only track if we're actively selecting
+				if (!this.isSelecting || !this.selectionStart) {
+					return;
+				}
+
+				// Get grid position from mouse coordinates (viewport-relative)
+				const rect = container.getBoundingClientRect();
+				const x = event.clientX - rect.left;
+				const y = event.clientY - rect.top;
+				const gridPos = this.terminalText.pixelToGrid(x, y);
+
+				// Convert to absolute buffer position
+				const viewportY = this.xterm.buffer.active.viewportY;
+				const absPos = { col: gridPos.col, row: gridPos.row + viewportY };
+
+				// Update selection end with absolute position
+				this.terminalText.setSelection(this.selectionStart, absPos, viewportY);
+			});
+
+			container.addEventListener("mouseup", (event: MouseEvent) => {
+				// Only handle left mouse button
+				if (event.button !== 0) {
+					return;
+				}
+
+				if (this.isSelecting && this.selectionStart) {
+					// Get final grid position (viewport-relative)
+					const rect = container.getBoundingClientRect();
+					const x = event.clientX - rect.left;
+					const y = event.clientY - rect.top;
+					const gridPos = this.terminalText.pixelToGrid(x, y);
+
+					// Convert to absolute buffer position
+					const viewportY = this.xterm.buffer.active.viewportY;
+					const absPos = { col: gridPos.col, row: gridPos.row + viewportY };
+
+					// Check if it's a single click (no drag) - clear selection
+					if (
+						absPos.col === this.selectionStart.col &&
+						absPos.row === this.selectionStart.row
+					) {
+						this.terminalText.clearSelection();
+					} else {
+						// Finalize selection and copy to clipboard
+						this.terminalText.setSelection(this.selectionStart, absPos, viewportY);
+						this.copySelectionToClipboard();
+					}
+				}
+
+				this.isSelecting = false;
+				this.selectionStart = null;
+
+				// Refocus terminal for keyboard input
+				this.xterm.focus();
+			});
+
+			// Handle mouse leaving the container while selecting
+			container.addEventListener("mouseleave", () => {
+				// Don't clear selection, just stop tracking
+				this.isSelecting = false;
+				this.selectionStart = null;
+			});
 		}
 	}
 
 	/**
-	 * Show the initial boot prompt
+	 * Show the initial boot prompt (or mobile message if on mobile device)
 	 */
 	private showBootPrompt(): void {
+		if (isMobileDevice()) {
+			const mobileMessage =
+				"Sorry, this site is\r\n" +
+				"designed for a retro\r\n" +
+				"terminal experience\r\n" +
+				"that requires a\r\n" +
+				"physical keyboard.\r\n" +
+				"\r\n" +
+				"Please visit using\r\n" +
+				"a desktop or laptop\r\n" +
+				"to enjoy the full\r\n" +
+				"experience.";
+			this.xterm.write(mobileMessage);
+			this.updateTerminalText();
+			return;
+		}
 		const bootMessage = "Press ENTER to initiate the BIOS boot sequence... ";
 		this.xterm.write(bootMessage);
 		this.updateTerminalText();
@@ -551,12 +742,72 @@ export class XTermAdapter {
 	}
 
 	/**
+	 * Copy the current selection to clipboard
+	 */
+	private copySelectionToClipboard(): void {
+		const selection = this.terminalText.getSelection();
+		if (!selection.start || !selection.end) {
+			return;
+		}
+
+		// Get the text content from xterm buffer
+		const buffer = this.xterm.buffer.active;
+
+		// Selection is already in absolute buffer coordinates
+		let startRow = selection.start.row;
+		let startCol = selection.start.col;
+		let endRow = selection.end.row;
+		let endCol = selection.end.col;
+
+		// Normalize selection (start may be after end if selecting backwards)
+		if (startRow > endRow || (startRow === endRow && startCol > endCol)) {
+			[startRow, endRow] = [endRow, startRow];
+			[startCol, endCol] = [endCol, startCol];
+		}
+
+		// Extract selected text using absolute row indices
+		const selectedLines: string[] = [];
+		for (let row = startRow; row <= endRow; row++) {
+			const line = buffer.getLine(row);
+			if (!line) {
+				selectedLines.push("");
+				continue;
+			}
+
+			const lineText = line.translateToString(true);
+			let lineStart = 0;
+			let lineEnd = lineText.length;
+
+			if (row === startRow) {
+				lineStart = startCol;
+			}
+			if (row === endRow) {
+				lineEnd = endCol + 1;
+			}
+
+			selectedLines.push(lineText.slice(lineStart, lineEnd));
+		}
+
+		const selectedText = selectedLines.join("\n");
+
+		// Copy to clipboard
+		if (selectedText) {
+			navigator.clipboard.writeText(selectedText).catch((err) => {
+				console.warn("Could not copy to clipboard:", err);
+			});
+		}
+	}
+
+	/**
 	 * Handle Backspace key - simple delete from end of currentLine
 	 * @returns false always since we handle it ourselves
 	 */
 	private handleBackspace(): boolean {
 		// Reset cursor blink on any keypress
 		this.terminalText.resetCursorBlink();
+
+		// Clear selection when pressing Backspace
+		this.terminalText.clearSelection();
 
 		// Ignore if boot/BIOS not complete or command running
 		if (!this.bootComplete || !this.biosComplete || this.isCommandRunning) {
@@ -578,6 +829,14 @@ export class XTermAdapter {
 	 * Handle Enter key - execute current command or boot sequence
 	 */
 	private handleEnter(): void {
+		// Block all input on mobile devices
+		if (isMobileDevice()) {
+			return;
+		}
+
+		// Clear selection when pressing Enter
+		this.terminalText.clearSelection();
+
 		// Reset cursor blink on any keypress
 		this.terminalText.resetCursorBlink();
 
@@ -681,6 +940,8 @@ export class XTermAdapter {
 			!domEvent.altKey &&
 			!domEvent.metaKey
 		) {
+			// Clear selection when typing
+			this.terminalText.clearSelection();
 			this.currentLine += key;
 			this.xterm.write(key, () => {
 				this.updateTerminalText();
@@ -831,6 +1092,9 @@ export class XTermAdapter {
 		const totalLines = buffer.length;
 		const viewportStart = buffer.viewportY;
 		const rows = this.xterm.rows;
+
+		// Update selection viewport offset for proper rendering
+		this.terminalText.updateSelectionViewport(viewportStart);
 
 		// Extract visible lines from the buffer
 		for (let i = 0; i < rows; i++) {
