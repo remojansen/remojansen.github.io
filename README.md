@@ -4,8 +4,6 @@ My personal website. Powered by TypeScript, Three.js (WebGL) and Xterm.js (termi
 
 ![](assets/images/thumbnail.png)
 
-![](assets/images/thumbnail.png)
-
 ![](assets/images/cmd.png)
 
 ![](assets/images/tetris.png)
