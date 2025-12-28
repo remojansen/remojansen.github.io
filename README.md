@@ -2,7 +2,19 @@
 
 My personal website. Powered by TypeScript, Three.js (WebGL) and Xterm.js (terminal emulator).
 
-![Preview](assets/images/thumbnail.png)
+![](assets/images/thumbnail.png)
+
+![](assets/images/thumbnail.png)
+
+![](assets/images/cmd.png)
+
+![](assets/images/tetris.png)
+
+![](assets/images/chess.png)
+
+![](assets/images/invaders.png)
+
+![](assets/images/arkanoid.png)q
 
 The site was inspired by https://github.com/Swordfish90/cool-retro-term and developed with heavy usage of GitHub Copilot (Claude Opus 3.5).
 

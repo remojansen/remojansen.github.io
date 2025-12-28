@@ -12,7 +12,9 @@ import { chessCommand } from "./chess";
 import { cvCommand } from "./cv";
 import { donutCommand } from "./donut";
 import { flappyBirdCommand } from "./flappybird";
+import { gameOfLifeCommand } from "./gameoflife";
 import { matrixCommand } from "./matrix";
+import { minesweeperCommand } from "./minesweeper";
 import { pongCommand } from "./pong";
 import { snakeCommand } from "./snake";
 import { spaceInvadersCommand } from "./space-invaders";
@@ -345,6 +347,22 @@ function initFileSystem(): void {
 		modified: "Dec 27 00:00",
 		parent: "Programs",
 	});
+	virtualFileSystem.set("Programs/minesweeper", {
+		name: "minesweeper",
+		isDirectory: false,
+		size: 8192,
+		permissions: "-rwxr-xr-x",
+		modified: "Dec 28 00:00",
+		parent: "Programs",
+	});
+	virtualFileSystem.set("Programs/life", {
+		name: "life",
+		isDirectory: false,
+		size: 8192,
+		permissions: "-rwxr-xr-x",
+		modified: "Dec 28 00:00",
+		parent: "Programs",
+	});
 }
 
 // Initialize the file system
@@ -618,9 +636,6 @@ registerCommand("ls", (ctx) => {
 
 	// Check for -l flag
 	if (hasLongFormat) {
-		const totalSize =
-			files.reduce((sum, f) => sum + (f.isDirectory ? 4 : 1), 0) * 4;
-		ctx.terminal.writeln(`total ${totalSize}`);
 		for (const file of files) {
 			const displayName = file.isDirectory ? `${file.name}/` : file.name;
 			ctx.terminal.writeln(
@@ -948,6 +963,12 @@ registerCommand("./flappybird", flappyBirdCommand);
 
 // Chess - classic chess with AI opponent
 registerCommand("./chess", chessCommand);
+
+// Minesweeper - classic puzzle game
+registerCommand("./minesweeper", minesweeperCommand);
+
+// Conway's Game of Life - cellular automaton
+registerCommand("./life", gameOfLifeCommand);
 
 /**
  * Get tab completions for a partial path

@@ -2,8 +2,23 @@
 
 A WebGL-based CRT terminal renderer for XTerm.js. This library provides authentic retro CRT visual effects for terminal applications, including screen curvature, phosphor glow, scanlines, and more.
 
-## Installation
+### Preview 
 
+![](../../assets/images/thumbnail.png)
+
+![](../../assets/images/cmd.png)
+
+![](../../assets/images/tetris.png)
+
+![](../../assets/images/chess.png)
+
+![](../../assets/images/invaders.png)
+
+![](../../assets/images/arkanoid.png)
+
+Live demo available at https://remojansen.github.io/
+
+## Installationq
 ```bash
 npm install cool-retro-term-webgl
 ```
