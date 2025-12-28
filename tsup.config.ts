@@ -3,7 +3,7 @@ import { defineConfig } from "tsup";
 export default defineConfig([
 	// App build - IIFE for direct browser use (remojansen.github.io)
 	{
-		entry: ["src/app/index.ts"],
+		entry: ["src/index.ts"],
 		format: ["iife"],
 		outDir: "dist",
 		bundle: true,
