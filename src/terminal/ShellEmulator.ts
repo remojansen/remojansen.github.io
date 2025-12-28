@@ -650,7 +650,7 @@ registerCommand("ls", (ctx) => {
 		if (file && !file.isDirectory) {
 			if (hasLongFormat) {
 				ctx.terminal.writeln(
-					`${file.permissions}  1 ghost ghost ${file.size.toString().padStart(8)} ${file.modified} ${file.name}`,
+					`${file.permissions}  1 guest guest ${file.size.toString().padStart(8)} ${file.modified} ${file.name}`,
 				);
 			} else {
 				ctx.terminal.writeln(file.name);
@@ -676,7 +676,7 @@ registerCommand("ls", (ctx) => {
 		for (const file of files) {
 			const displayName = file.isDirectory ? `${file.name}/` : file.name;
 			ctx.terminal.writeln(
-				`${file.permissions}  1 ghost ghost ${file.size.toString().padStart(8)} ${file.modified} ${displayName}`,
+				`${file.permissions}  1 guest guest ${file.size.toString().padStart(8)} ${file.modified} ${displayName}`,
 			);
 		}
 	} else {
