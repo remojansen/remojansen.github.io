@@ -12,7 +12,9 @@ My personal website. Powered by TypeScript, Three.js (WebGL) and Xterm.js (termi
 
 ![](assets/images/invaders.png)
 
-![](assets/images/arkanoid.png)q
+![](assets/images/arkanoid.png)
+
+![](assets/images/ffplay.png)
 
 The site was inspired by https://github.com/Swordfish90/cool-retro-term and developed with heavy usage of GitHub Copilot (Claude Opus 4.5).
 
