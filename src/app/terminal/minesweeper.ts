@@ -248,7 +248,11 @@ function initGrid(state: MinesweeperState): void {
 /**
  * Place mines after first click (ensures first click is safe)
  */
-function placeMines(state: MinesweeperState, safeX: number, safeY: number): void {
+function placeMines(
+	state: MinesweeperState,
+	safeX: number,
+	safeY: number,
+): void {
 	let minesPlaced = 0;
 
 	while (minesPlaced < state.mineCount) {
@@ -421,7 +425,7 @@ function renderMinesweeper(
 			const cell = state.grid[y][x];
 			const isCursor = x === state.cursorX && y === state.cursorY;
 			const char = getCellChar(cell, isCursor);
-			row += char + " ";
+			row += `${char} `;
 		}
 		row += "│";
 		lines.push(row);
@@ -524,32 +528,51 @@ export async function minesweeperCommand(ctx: CommandContext): Promise<void> {
 
 		// Navigation
 		if (
-			(key === "ArrowUp" || key === "w" || key === "W" || keyCode === 38 || keyCode === 87) &&
+			(key === "ArrowUp" ||
+				key === "w" ||
+				key === "W" ||
+				keyCode === 38 ||
+				keyCode === 87) &&
 			!state.gameOver
 		) {
 			state.cursorY = Math.max(0, state.cursorY - 1);
 		}
 		if (
-			(key === "ArrowDown" || key === "s" || key === "S" || keyCode === 40 || keyCode === 83) &&
+			(key === "ArrowDown" ||
+				key === "s" ||
+				key === "S" ||
+				keyCode === 40 ||
+				keyCode === 83) &&
 			!state.gameOver
 		) {
 			state.cursorY = Math.min(state.height - 1, state.cursorY + 1);
 		}
 		if (
-			(key === "ArrowLeft" || key === "a" || key === "A" || keyCode === 37 || keyCode === 65) &&
+			(key === "ArrowLeft" ||
+				key === "a" ||
+				key === "A" ||
+				keyCode === 37 ||
+				keyCode === 65) &&
 			!state.gameOver
 		) {
 			state.cursorX = Math.max(0, state.cursorX - 1);
 		}
 		if (
-			(key === "ArrowRight" || key === "d" || key === "D" || keyCode === 39 || keyCode === 68) &&
+			(key === "ArrowRight" ||
+				key === "d" ||
+				key === "D" ||
+				keyCode === 39 ||
+				keyCode === 68) &&
 			!state.gameOver
 		) {
 			state.cursorX = Math.min(state.width - 1, state.cursorX + 1);
 		}
 
 		// Reveal cell
-		if ((key === " " || keyCode === 32 || key === "Enter" || keyCode === 13) && !state.gameOver) {
+		if (
+			(key === " " || keyCode === 32 || key === "Enter" || keyCode === 13) &&
+			!state.gameOver
+		) {
 			if (state.firstMove) {
 				state.firstMove = false;
 				state.startTime = Date.now();

@@ -136,95 +136,168 @@ interface GameOfLifeState {
 /**
  * Famous patterns to load
  */
-const PATTERNS: { [key: string]: { name: string; cells: [number, number][] } } = {
-	glider: {
-		name: "Glider",
-		cells: [
-			[1, 0],
-			[2, 1],
-			[0, 2],
-			[1, 2],
-			[2, 2],
-		],
-	},
-	blinker: {
-		name: "Blinker",
-		cells: [
-			[0, 1],
-			[1, 1],
-			[2, 1],
-		],
-	},
-	toad: {
-		name: "Toad",
-		cells: [
-			[1, 0],
-			[2, 0],
-			[3, 0],
-			[0, 1],
-			[1, 1],
-			[2, 1],
-		],
-	},
-	beacon: {
-		name: "Beacon",
-		cells: [
-			[0, 0],
-			[1, 0],
-			[0, 1],
-			[3, 2],
-			[2, 3],
-			[3, 3],
-		],
-	},
-	pulsar: {
-		name: "Pulsar",
-		cells: [
-			// Top left quadrant pattern (repeated with symmetry)
-			[2, 0], [3, 0], [4, 0], [8, 0], [9, 0], [10, 0],
-			[0, 2], [5, 2], [7, 2], [12, 2],
-			[0, 3], [5, 3], [7, 3], [12, 3],
-			[0, 4], [5, 4], [7, 4], [12, 4],
-			[2, 5], [3, 5], [4, 5], [8, 5], [9, 5], [10, 5],
-			[2, 7], [3, 7], [4, 7], [8, 7], [9, 7], [10, 7],
-			[0, 8], [5, 8], [7, 8], [12, 8],
-			[0, 9], [5, 9], [7, 9], [12, 9],
-			[0, 10], [5, 10], [7, 10], [12, 10],
-			[2, 12], [3, 12], [4, 12], [8, 12], [9, 12], [10, 12],
-		],
-	},
-	gliderGun: {
-		name: "Gosper Glider Gun",
-		cells: [
-			[24, 0],
-			[22, 1], [24, 1],
-			[12, 2], [13, 2], [20, 2], [21, 2], [34, 2], [35, 2],
-			[11, 3], [15, 3], [20, 3], [21, 3], [34, 3], [35, 3],
-			[0, 4], [1, 4], [10, 4], [16, 4], [20, 4], [21, 4],
-			[0, 5], [1, 5], [10, 5], [14, 5], [16, 5], [17, 5], [22, 5], [24, 5],
-			[10, 6], [16, 6], [24, 6],
-			[11, 7], [15, 7],
-			[12, 8], [13, 8],
-		],
-	},
-	spaceship: {
-		name: "Lightweight Spaceship",
-		cells: [
-			[1, 0], [4, 0],
-			[0, 1],
-			[0, 2], [4, 2],
-			[0, 3], [1, 3], [2, 3], [3, 3],
-		],
-	},
-	rpentomino: {
-		name: "R-Pentomino",
-		cells: [
-			[1, 0], [2, 0],
-			[0, 1], [1, 1],
-			[1, 2],
-		],
-	},
-};
+const PATTERNS: { [key: string]: { name: string; cells: [number, number][] } } =
+	{
+		glider: {
+			name: "Glider",
+			cells: [
+				[1, 0],
+				[2, 1],
+				[0, 2],
+				[1, 2],
+				[2, 2],
+			],
+		},
+		blinker: {
+			name: "Blinker",
+			cells: [
+				[0, 1],
+				[1, 1],
+				[2, 1],
+			],
+		},
+		toad: {
+			name: "Toad",
+			cells: [
+				[1, 0],
+				[2, 0],
+				[3, 0],
+				[0, 1],
+				[1, 1],
+				[2, 1],
+			],
+		},
+		beacon: {
+			name: "Beacon",
+			cells: [
+				[0, 0],
+				[1, 0],
+				[0, 1],
+				[3, 2],
+				[2, 3],
+				[3, 3],
+			],
+		},
+		pulsar: {
+			name: "Pulsar",
+			cells: [
+				// Top left quadrant pattern (repeated with symmetry)
+				[2, 0],
+				[3, 0],
+				[4, 0],
+				[8, 0],
+				[9, 0],
+				[10, 0],
+				[0, 2],
+				[5, 2],
+				[7, 2],
+				[12, 2],
+				[0, 3],
+				[5, 3],
+				[7, 3],
+				[12, 3],
+				[0, 4],
+				[5, 4],
+				[7, 4],
+				[12, 4],
+				[2, 5],
+				[3, 5],
+				[4, 5],
+				[8, 5],
+				[9, 5],
+				[10, 5],
+				[2, 7],
+				[3, 7],
+				[4, 7],
+				[8, 7],
+				[9, 7],
+				[10, 7],
+				[0, 8],
+				[5, 8],
+				[7, 8],
+				[12, 8],
+				[0, 9],
+				[5, 9],
+				[7, 9],
+				[12, 9],
+				[0, 10],
+				[5, 10],
+				[7, 10],
+				[12, 10],
+				[2, 12],
+				[3, 12],
+				[4, 12],
+				[8, 12],
+				[9, 12],
+				[10, 12],
+			],
+		},
+		gliderGun: {
+			name: "Gosper Glider Gun",
+			cells: [
+				[24, 0],
+				[22, 1],
+				[24, 1],
+				[12, 2],
+				[13, 2],
+				[20, 2],
+				[21, 2],
+				[34, 2],
+				[35, 2],
+				[11, 3],
+				[15, 3],
+				[20, 3],
+				[21, 3],
+				[34, 3],
+				[35, 3],
+				[0, 4],
+				[1, 4],
+				[10, 4],
+				[16, 4],
+				[20, 4],
+				[21, 4],
+				[0, 5],
+				[1, 5],
+				[10, 5],
+				[14, 5],
+				[16, 5],
+				[17, 5],
+				[22, 5],
+				[24, 5],
+				[10, 6],
+				[16, 6],
+				[24, 6],
+				[11, 7],
+				[15, 7],
+				[12, 8],
+				[13, 8],
+			],
+		},
+		spaceship: {
+			name: "Lightweight Spaceship",
+			cells: [
+				[1, 0],
+				[4, 0],
+				[0, 1],
+				[0, 2],
+				[4, 2],
+				[0, 3],
+				[1, 3],
+				[2, 3],
+				[3, 3],
+			],
+		},
+		rpentomino: {
+			name: "R-Pentomino",
+			cells: [
+				[1, 0],
+				[2, 0],
+				[0, 1],
+				[1, 1],
+				[1, 2],
+			],
+		},
+	};
 
 /**
  * Initialize empty grid
@@ -300,10 +373,7 @@ function nextGeneration(state: GameOfLifeState): void {
 /**
  * Load a pattern at cursor position
  */
-function loadPattern(
-	state: GameOfLifeState,
-	patternKey: string,
-): void {
+function loadPattern(state: GameOfLifeState, patternKey: string): void {
 	const pattern = PATTERNS[patternKey];
 	if (!pattern) return;
 
@@ -315,7 +385,8 @@ function loadPattern(
 	}
 
 	// Find pattern bounds
-	let maxX = 0, maxY = 0;
+	let maxX = 0,
+		maxY = 0;
 	for (const [px, py] of pattern.cells) {
 		if (px > maxX) maxX = px;
 		if (py > maxY) maxY = py;
@@ -393,7 +464,11 @@ function renderGameOfLife(
 	const genStr = `Gen: ${state.generation}`;
 	const popStr = `Pop: ${state.population}`;
 	const speedStr = `Speed: ${state.speed}ms`;
-	const modeStr = state.editing ? "[EDIT]" : state.paused ? "[PAUSED]" : "[RUN]";
+	const modeStr = state.editing
+		? "[EDIT]"
+		: state.paused
+			? "[PAUSED]"
+			: "[RUN]";
 	const statusContent = `${genStr}  ${popStr}  ${speedStr}  ${modeStr}`;
 	lines.push(statusContent.padEnd(headerWidth + 2));
 
@@ -404,7 +479,8 @@ function renderGameOfLife(
 	for (let y = 0; y < state.height; y++) {
 		let row = "│";
 		for (let x = 0; x < state.width; x++) {
-			const isCursor = state.editing && x === state.cursorX && y === state.cursorY;
+			const isCursor =
+				state.editing && x === state.cursorX && y === state.cursorY;
 			if (isCursor) {
 				row += state.grid[y][x] ? "◉" : "◎";
 			} else {
@@ -422,14 +498,20 @@ function renderGameOfLife(
 	const STATUS_WIDTH = 70;
 	let statusLine: string;
 	if (state.editing) {
-		statusLine = "  ↑↓←→ = Move | SPACE = Toggle | E = Run | C = Clear | R = Random";
+		statusLine =
+			"  ↑↓←→ = Move | SPACE = Toggle | E = Run | C = Clear | R = Random";
 	} else {
-		statusLine = "  SPACE = Pause | E = Edit | +/- = Speed | 1-8 = Patterns | Q = Quit";
+		statusLine =
+			"  SPACE = Pause | E = Edit | +/- = Speed | 1-8 = Patterns | Q = Quit";
 	}
 	lines.push(statusLine.padEnd(STATUS_WIDTH));
 
 	// Pattern key legend
-	lines.push("  Patterns: 1=Glider 2=Blinker 3=Toad 4=Beacon 5=Pulsar 6=Gun 7=Ship 8=R".padEnd(STATUS_WIDTH));
+	lines.push(
+		"  Patterns: 1=Glider 2=Blinker 3=Toad 4=Beacon 5=Pulsar 6=Gun 7=Ship 8=R".padEnd(
+			STATUS_WIDTH,
+		),
+	);
 
 	if (isFirstFrame) {
 		ctx.terminal.clear();
@@ -438,7 +520,7 @@ function renderGameOfLife(
 	// Build the entire frame as a single string to reduce flickering
 	let frame = "\x1b[H"; // Move cursor to home position
 	for (let i = 0; i < lines.length; i++) {
-		frame += lines[i] + "\x1b[K\r\n"; // Clear to end of line after each line
+		frame += `${lines[i]}\x1b[K\r\n`; // Clear to end of line after each line
 	}
 
 	// Write the entire frame at once
@@ -450,9 +532,7 @@ function renderGameOfLife(
  */
 export async function gameOfLifeCommand(ctx: CommandContext): Promise<void> {
 	if (!ctx.terminal.setKeyHandler || !ctx.terminal.clearKeyHandler) {
-		ctx.terminal.writeln(
-			"life: error - terminal does not support game input",
-		);
+		ctx.terminal.writeln("life: error - terminal does not support game input");
 		ctx.terminal.writeln("This simulation requires keyboard input capture.");
 		return;
 	}
@@ -520,19 +600,43 @@ export async function gameOfLifeCommand(ctx: CommandContext): Promise<void> {
 		// In edit mode
 		if (state.editing) {
 			// Navigation
-			if (key === "ArrowUp" || key === "w" || key === "W" || keyCode === 38 || keyCode === 87) {
+			if (
+				key === "ArrowUp" ||
+				key === "w" ||
+				key === "W" ||
+				keyCode === 38 ||
+				keyCode === 87
+			) {
 				state.cursorY = (state.cursorY - 1 + state.height) % state.height;
 				state.needsRender = true;
 			}
-			if (key === "ArrowDown" || key === "s" || key === "S" || keyCode === 40 || keyCode === 83) {
+			if (
+				key === "ArrowDown" ||
+				key === "s" ||
+				key === "S" ||
+				keyCode === 40 ||
+				keyCode === 83
+			) {
 				state.cursorY = (state.cursorY + 1) % state.height;
 				state.needsRender = true;
 			}
-			if (key === "ArrowLeft" || key === "a" || key === "A" || keyCode === 37 || keyCode === 65) {
+			if (
+				key === "ArrowLeft" ||
+				key === "a" ||
+				key === "A" ||
+				keyCode === 37 ||
+				keyCode === 65
+			) {
 				state.cursorX = (state.cursorX - 1 + state.width) % state.width;
 				state.needsRender = true;
 			}
-			if (key === "ArrowRight" || key === "d" || key === "D" || keyCode === 39 || keyCode === 68) {
+			if (
+				key === "ArrowRight" ||
+				key === "d" ||
+				key === "D" ||
+				keyCode === 39 ||
+				keyCode === 68
+			) {
 				state.cursorX = (state.cursorX + 1) % state.width;
 				state.needsRender = true;
 			}
