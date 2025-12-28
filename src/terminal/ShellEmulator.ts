@@ -16,6 +16,7 @@ import { gameOfLifeCommand } from "./gameoflife";
 import { matrixCommand } from "./matrix";
 import { memoryCommand } from "./memory";
 import { minesweeperCommand } from "./minesweeper";
+import { mpg123Command } from "./mpg123";
 import { pongCommand } from "./pong";
 import { snakeCommand } from "./snake";
 import { spaceInvadersCommand } from "./space-invaders";
@@ -208,6 +209,14 @@ function initFileSystem(): void {
 		modified: "Dec 24 12:00",
 		parent: "",
 	});
+	virtualFileSystem.set("Music", {
+		name: "Music",
+		isDirectory: true,
+		size: 4096,
+		permissions: "drwxr-xr-x",
+		modified: "Dec 28 00:00",
+		parent: "",
+	});
 	virtualFileSystem.set("Videos", {
 		name: "Videos",
 		isDirectory: true,
@@ -223,6 +232,24 @@ function initFileSystem(): void {
 		permissions: "drwxr-xr-x",
 		modified: "Dec 25 00:00",
 		parent: "",
+	});
+
+	// Files in Music directory
+	virtualFileSystem.set("Music/arcade.mp3", {
+		name: "arcade.mp3",
+		isDirectory: false,
+		size: 3145728, // ~3MB
+		permissions: "-rw-r--r--",
+		modified: "Dec 28 00:00",
+		parent: "Music",
+	});
+	virtualFileSystem.set("Music/chill.mp3", {
+		name: "chill.mp3",
+		isDirectory: false,
+		size: 4194304, // ~4MB
+		permissions: "-rw-r--r--",
+		modified: "Dec 28 00:00",
+		parent: "Music",
 	});
 
 	// Files in Documents directory
@@ -556,6 +583,7 @@ registerCommand("help", (ctx) => {
 	ctx.terminal.writeln("  ls       - List directory contents");
 	ctx.terminal.writeln("  cat      - Display file contents");
 	ctx.terminal.writeln("  ffplay   - Play video files");
+	ctx.terminal.writeln("  mpg123   - Play MP3 audio files");
 });
 
 // CD command - change directory
@@ -981,6 +1009,9 @@ registerCommand("./life", gameOfLifeCommand);
 
 // Memory - classic card matching game
 registerCommand("./memory", memoryCommand);
+
+// mpg123 - MP3 audio player with visual equalizer
+registerCommand("mpg123", mpg123Command);
 
 /**
  * Get tab completions for a partial path

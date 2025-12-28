@@ -224,7 +224,7 @@ async function formatOSS(
 		return;
 	}
 	ctx.terminal.writeln("═══════════════════════════════════════════");
-	ctx.terminal.writeln("       OPEN SOURCE CONTRIBUTIONS");
+	ctx.terminal.writeln("       OPEN SOURCE PROJECTS");
 	ctx.terminal.writeln("═══════════════════════════════════════════");
 	ctx.terminal.writeln("");
 	for (const entry of data) {
