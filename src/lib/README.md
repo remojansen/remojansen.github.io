@@ -4,8 +4,6 @@ A WebGL-based CRT terminal renderer for XTerm.js. This library provides authenti
 
 ### Preview 
 
-![](../../assets/images/thumbnail.png)
-
 ![](../../assets/images/cmd.png)
 
 ![](../../assets/images/tetris.png)
