@@ -14,7 +14,7 @@
  */
 
 import { Terminal } from "@xterm/xterm";
-import type { TerminalText } from "../../lib/TerminalText";
+import type { TerminalText } from "cool-retro-term-renderer";
 import { isMobileDevice } from "../utils";
 import {
 	getInitialOutput,
