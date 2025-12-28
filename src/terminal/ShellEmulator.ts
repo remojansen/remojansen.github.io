@@ -14,6 +14,7 @@ import { donutCommand } from "./donut";
 import { flappyBirdCommand } from "./flappybird";
 import { gameOfLifeCommand } from "./gameoflife";
 import { matrixCommand } from "./matrix";
+import { memoryCommand } from "./memory";
 import { minesweeperCommand } from "./minesweeper";
 import { pongCommand } from "./pong";
 import { snakeCommand } from "./snake";
@@ -357,6 +358,14 @@ function initFileSystem(): void {
 	});
 	virtualFileSystem.set("Programs/life", {
 		name: "life",
+		isDirectory: false,
+		size: 8192,
+		permissions: "-rwxr-xr-x",
+		modified: "Dec 28 00:00",
+		parent: "Programs",
+	});
+	virtualFileSystem.set("Programs/memory", {
+		name: "memory",
 		isDirectory: false,
 		size: 8192,
 		permissions: "-rwxr-xr-x",
@@ -969,6 +978,9 @@ registerCommand("./minesweeper", minesweeperCommand);
 
 // Conway's Game of Life - cellular automaton
 registerCommand("./life", gameOfLifeCommand);
+
+// Memory - classic card matching game
+registerCommand("./memory", memoryCommand);
 
 /**
  * Get tab completions for a partial path
