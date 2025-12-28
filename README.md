@@ -12,8 +12,10 @@ My personal website. Powered by TypeScript, Three.js (WebGL) and Xterm.js (termi
 
 ![](assets/images/invaders.png)
 
-![](assets/images/arkanoid.png)q
+![](assets/images/arkanoid.png)
 
-The site was inspired by https://github.com/Swordfish90/cool-retro-term and developed with heavy usage of GitHub Copilot (Claude Opus 3.5).
+![](assets/images/ffplay.png)
+
+The site was inspired by https://github.com/Swordfish90/cool-retro-term and developed with heavy usage of GitHub Copilot (Claude Opus 4.5).
 
 Licensed under GNU General Public License v.3.0. See [LICENSE](LICENSE) for details.
