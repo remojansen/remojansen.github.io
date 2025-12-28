@@ -13,7 +13,11 @@ let audioContext: AudioContext | null = null;
 
 function getAudioContext(): AudioContext {
 	if (!audioContext) {
-		audioContext = new (window.AudioContext || (window as typeof window & { webkitAudioContext: typeof AudioContext }).webkitAudioContext)();
+		audioContext = new (
+			window.AudioContext ||
+			(window as typeof window & { webkitAudioContext: typeof AudioContext })
+				.webkitAudioContext
+		)();
 	}
 	return audioContext;
 }
@@ -57,7 +61,10 @@ function playRotateSound(): void {
 
 		oscillator.type = "sine";
 		oscillator.frequency.setValueAtTime(300, ctx.currentTime);
-		oscillator.frequency.exponentialRampToValueAtTime(400, ctx.currentTime + 0.05);
+		oscillator.frequency.exponentialRampToValueAtTime(
+			400,
+			ctx.currentTime + 0.05,
+		);
 
 		gainNode.gain.setValueAtTime(0.08, ctx.currentTime);
 		gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.05);
@@ -83,7 +90,10 @@ function playLockSound(): void {
 
 		oscillator.type = "triangle";
 		oscillator.frequency.setValueAtTime(150, ctx.currentTime);
-		oscillator.frequency.exponentialRampToValueAtTime(80, ctx.currentTime + 0.1);
+		oscillator.frequency.exponentialRampToValueAtTime(
+			80,
+			ctx.currentTime + 0.1,
+		);
 
 		gainNode.gain.setValueAtTime(0.15, ctx.currentTime);
 		gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.1);
@@ -109,7 +119,10 @@ function playHardDropSound(): void {
 
 		oscillator.type = "sawtooth";
 		oscillator.frequency.setValueAtTime(200, ctx.currentTime);
-		oscillator.frequency.exponentialRampToValueAtTime(60, ctx.currentTime + 0.15);
+		oscillator.frequency.exponentialRampToValueAtTime(
+			60,
+			ctx.currentTime + 0.15,
+		);
 
 		gainNode.gain.setValueAtTime(0.12, ctx.currentTime);
 		gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.15);
@@ -127,10 +140,10 @@ function playHardDropSound(): void {
 function playLineClearSound(lineCount: number): void {
 	try {
 		const ctx = getAudioContext();
-		
+
 		// More lines = more impressive sound
 		const baseFreq = 400 + lineCount * 100;
-		
+
 		const oscillator = ctx.createOscillator();
 		const gainNode = ctx.createGain();
 
@@ -139,8 +152,14 @@ function playLineClearSound(lineCount: number): void {
 
 		oscillator.type = "square";
 		oscillator.frequency.setValueAtTime(baseFreq, ctx.currentTime);
-		oscillator.frequency.exponentialRampToValueAtTime(baseFreq * 2, ctx.currentTime + 0.1);
-		oscillator.frequency.exponentialRampToValueAtTime(baseFreq * 1.5, ctx.currentTime + 0.2);
+		oscillator.frequency.exponentialRampToValueAtTime(
+			baseFreq * 2,
+			ctx.currentTime + 0.1,
+		);
+		oscillator.frequency.exponentialRampToValueAtTime(
+			baseFreq * 1.5,
+			ctx.currentTime + 0.2,
+		);
 
 		gainNode.gain.setValueAtTime(0.1, ctx.currentTime);
 		gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.25);
@@ -150,7 +169,7 @@ function playLineClearSound(lineCount: number): void {
 
 		// Tetris (4 lines) gets extra fanfare
 		if (lineCount === 4) {
-			const notes = [523.25, 659.25, 783.99, 1046.50];
+			const notes = [523.25, 659.25, 783.99, 1046.5];
 			notes.forEach((freq, i) => {
 				const osc = ctx.createOscillator();
 				const gain = ctx.createGain();
@@ -162,8 +181,14 @@ function playLineClearSound(lineCount: number): void {
 				osc.frequency.setValueAtTime(freq, ctx.currentTime + 0.1 + i * 0.08);
 
 				gain.gain.setValueAtTime(0, ctx.currentTime + 0.1 + i * 0.08);
-				gain.gain.linearRampToValueAtTime(0.1, ctx.currentTime + 0.1 + i * 0.08 + 0.02);
-				gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.1 + i * 0.08 + 0.15);
+				gain.gain.linearRampToValueAtTime(
+					0.1,
+					ctx.currentTime + 0.1 + i * 0.08 + 0.02,
+				);
+				gain.gain.exponentialRampToValueAtTime(
+					0.01,
+					ctx.currentTime + 0.1 + i * 0.08 + 0.15,
+				);
 
 				osc.start(ctx.currentTime + 0.1 + i * 0.08);
 				osc.stop(ctx.currentTime + 0.1 + i * 0.08 + 0.15);
@@ -181,7 +206,7 @@ function playLevelUpSound(): void {
 	try {
 		const ctx = getAudioContext();
 		const notes = [440, 554.37, 659.25, 880]; // A4, C#5, E5, A5
-		
+
 		notes.forEach((freq, i) => {
 			const oscillator = ctx.createOscillator();
 			const gainNode = ctx.createGain();
@@ -193,8 +218,14 @@ function playLevelUpSound(): void {
 			oscillator.frequency.setValueAtTime(freq, ctx.currentTime + i * 0.1);
 
 			gainNode.gain.setValueAtTime(0, ctx.currentTime + i * 0.1);
-			gainNode.gain.linearRampToValueAtTime(0.12, ctx.currentTime + i * 0.1 + 0.02);
-			gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + i * 0.1 + 0.15);
+			gainNode.gain.linearRampToValueAtTime(
+				0.12,
+				ctx.currentTime + i * 0.1 + 0.02,
+			);
+			gainNode.gain.exponentialRampToValueAtTime(
+				0.01,
+				ctx.currentTime + i * 0.1 + 0.15,
+			);
 
 			oscillator.start(ctx.currentTime + i * 0.1);
 			oscillator.stop(ctx.currentTime + i * 0.1 + 0.15);
@@ -211,7 +242,7 @@ function playGameOverSound(): void {
 	try {
 		const ctx = getAudioContext();
 		const notes = [440, 392, 349.23, 329.63, 293.66, 261.63]; // A4 down to C4
-		
+
 		notes.forEach((freq, i) => {
 			const oscillator = ctx.createOscillator();
 			const gainNode = ctx.createGain();
@@ -223,8 +254,14 @@ function playGameOverSound(): void {
 			oscillator.frequency.setValueAtTime(freq, ctx.currentTime + i * 0.12);
 
 			gainNode.gain.setValueAtTime(0, ctx.currentTime + i * 0.12);
-			gainNode.gain.linearRampToValueAtTime(0.1, ctx.currentTime + i * 0.12 + 0.02);
-			gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + i * 0.12 + 0.18);
+			gainNode.gain.linearRampToValueAtTime(
+				0.1,
+				ctx.currentTime + i * 0.12 + 0.02,
+			);
+			gainNode.gain.exponentialRampToValueAtTime(
+				0.01,
+				ctx.currentTime + i * 0.12 + 0.18,
+			);
 
 			oscillator.start(ctx.currentTime + i * 0.12);
 			oscillator.stop(ctx.currentTime + i * 0.12 + 0.18);

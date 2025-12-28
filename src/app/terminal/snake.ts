@@ -13,7 +13,11 @@ let audioContext: AudioContext | null = null;
 
 function getAudioContext(): AudioContext {
 	if (!audioContext) {
-		audioContext = new (window.AudioContext || (window as typeof window & { webkitAudioContext: typeof AudioContext }).webkitAudioContext)();
+		audioContext = new (
+			window.AudioContext ||
+			(window as typeof window & { webkitAudioContext: typeof AudioContext })
+				.webkitAudioContext
+		)();
 	}
 	return audioContext;
 }
@@ -32,8 +36,14 @@ function playEatSound(): void {
 
 		oscillator.type = "sine";
 		oscillator.frequency.setValueAtTime(400, ctx.currentTime);
-		oscillator.frequency.exponentialRampToValueAtTime(600, ctx.currentTime + 0.05);
-		oscillator.frequency.exponentialRampToValueAtTime(500, ctx.currentTime + 0.1);
+		oscillator.frequency.exponentialRampToValueAtTime(
+			600,
+			ctx.currentTime + 0.05,
+		);
+		oscillator.frequency.exponentialRampToValueAtTime(
+			500,
+			ctx.currentTime + 0.1,
+		);
 
 		gainNode.gain.setValueAtTime(0.15, ctx.currentTime);
 		gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.1);
@@ -77,7 +87,7 @@ function playSpeedUpSound(): void {
 	try {
 		const ctx = getAudioContext();
 		const notes = [440, 554.37, 659.25]; // A4, C#5, E5
-		
+
 		notes.forEach((freq, i) => {
 			const oscillator = ctx.createOscillator();
 			const gainNode = ctx.createGain();
@@ -89,8 +99,14 @@ function playSpeedUpSound(): void {
 			oscillator.frequency.setValueAtTime(freq, ctx.currentTime + i * 0.08);
 
 			gainNode.gain.setValueAtTime(0, ctx.currentTime + i * 0.08);
-			gainNode.gain.linearRampToValueAtTime(0.1, ctx.currentTime + i * 0.08 + 0.02);
-			gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + i * 0.08 + 0.1);
+			gainNode.gain.linearRampToValueAtTime(
+				0.1,
+				ctx.currentTime + i * 0.08 + 0.02,
+			);
+			gainNode.gain.exponentialRampToValueAtTime(
+				0.01,
+				ctx.currentTime + i * 0.08 + 0.1,
+			);
 
 			oscillator.start(ctx.currentTime + i * 0.08);
 			oscillator.stop(ctx.currentTime + i * 0.08 + 0.1);
@@ -106,33 +122,33 @@ function playSpeedUpSound(): void {
 function playGameOverSound(): void {
 	try {
 		const ctx = getAudioContext();
-		
+
 		// Create noise burst for crash effect
 		const bufferSize = ctx.sampleRate * 0.2;
 		const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
 		const data = buffer.getChannelData(0);
-		
+
 		for (let i = 0; i < bufferSize; i++) {
 			data[i] = (Math.random() * 2 - 1) * (1 - i / bufferSize);
 		}
-		
+
 		const noise = ctx.createBufferSource();
 		noise.buffer = buffer;
-		
+
 		const gainNode = ctx.createGain();
 		const filter = ctx.createBiquadFilter();
-		
+
 		filter.type = "lowpass";
 		filter.frequency.setValueAtTime(800, ctx.currentTime);
 		filter.frequency.exponentialRampToValueAtTime(100, ctx.currentTime + 0.2);
-		
+
 		noise.connect(filter);
 		filter.connect(gainNode);
 		gainNode.connect(ctx.destination);
-		
+
 		gainNode.gain.setValueAtTime(0.2, ctx.currentTime);
 		gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.2);
-		
+
 		noise.start(ctx.currentTime);
 		noise.stop(ctx.currentTime + 0.2);
 
@@ -150,7 +166,10 @@ function playGameOverSound(): void {
 
 			gain.gain.setValueAtTime(0, ctx.currentTime + i * 0.1);
 			gain.gain.linearRampToValueAtTime(0.08, ctx.currentTime + i * 0.1 + 0.02);
-			gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + i * 0.1 + 0.15);
+			gain.gain.exponentialRampToValueAtTime(
+				0.01,
+				ctx.currentTime + i * 0.1 + 0.15,
+			);
 
 			oscillator.start(ctx.currentTime + i * 0.1);
 			oscillator.stop(ctx.currentTime + i * 0.1 + 0.15);
@@ -166,8 +185,8 @@ function playGameOverSound(): void {
 function playHighScoreSound(): void {
 	try {
 		const ctx = getAudioContext();
-		const notes = [523.25, 659.25, 783.99, 1046.50, 783.99, 1046.50]; // C5, E5, G5, C6, G5, C6
-		
+		const notes = [523.25, 659.25, 783.99, 1046.5, 783.99, 1046.5]; // C5, E5, G5, C6, G5, C6
+
 		notes.forEach((freq, i) => {
 			const oscillator = ctx.createOscillator();
 			const gainNode = ctx.createGain();
@@ -179,8 +198,14 @@ function playHighScoreSound(): void {
 			oscillator.frequency.setValueAtTime(freq, ctx.currentTime + i * 0.1);
 
 			gainNode.gain.setValueAtTime(0, ctx.currentTime + i * 0.1);
-			gainNode.gain.linearRampToValueAtTime(0.12, ctx.currentTime + i * 0.1 + 0.02);
-			gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + i * 0.1 + 0.15);
+			gainNode.gain.linearRampToValueAtTime(
+				0.12,
+				ctx.currentTime + i * 0.1 + 0.02,
+			);
+			gainNode.gain.exponentialRampToValueAtTime(
+				0.01,
+				ctx.currentTime + i * 0.1 + 0.15,
+			);
 
 			oscillator.start(ctx.currentTime + i * 0.1);
 			oscillator.stop(ctx.currentTime + i * 0.1 + 0.15);

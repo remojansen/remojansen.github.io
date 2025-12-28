@@ -179,9 +179,9 @@ function renderFrame(
 	// Use \x1b[H to move cursor to home position
 	let frame = "\x1b[H";
 	for (const line of lines) {
-		frame += line + "\r\n";
+		frame += `${line}\r\n`;
 	}
-	
+
 	// Write entire frame at once
 	ctx.terminal.write(frame);
 }

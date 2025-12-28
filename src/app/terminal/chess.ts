@@ -14,7 +14,11 @@ let backgroundMusic: HTMLAudioElement | null = null;
 
 function getAudioContext(): AudioContext {
 	if (!audioContext) {
-		audioContext = new (window.AudioContext || (window as typeof window & { webkitAudioContext: typeof AudioContext }).webkitAudioContext)();
+		audioContext = new (
+			window.AudioContext ||
+			(window as typeof window & { webkitAudioContext: typeof AudioContext })
+				.webkitAudioContext
+		)();
 	}
 	return audioContext;
 }
@@ -64,7 +68,10 @@ function playMoveSound(): void {
 
 		oscillator.type = "sine";
 		oscillator.frequency.setValueAtTime(300, ctx.currentTime);
-		oscillator.frequency.exponentialRampToValueAtTime(200, ctx.currentTime + 0.1);
+		oscillator.frequency.exponentialRampToValueAtTime(
+			200,
+			ctx.currentTime + 0.1,
+		);
 
 		gainNode.gain.setValueAtTime(0.1, ctx.currentTime);
 		gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.1);
@@ -90,7 +97,10 @@ function playCaptureSound(): void {
 
 		oscillator.type = "sawtooth";
 		oscillator.frequency.setValueAtTime(400, ctx.currentTime);
-		oscillator.frequency.exponentialRampToValueAtTime(150, ctx.currentTime + 0.15);
+		oscillator.frequency.exponentialRampToValueAtTime(
+			150,
+			ctx.currentTime + 0.15,
+		);
 
 		gainNode.gain.setValueAtTime(0.12, ctx.currentTime);
 		gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.15);
@@ -121,8 +131,14 @@ function playCheckSound(): void {
 			oscillator.frequency.setValueAtTime(freq, ctx.currentTime + i * 0.1);
 
 			gainNode.gain.setValueAtTime(0, ctx.currentTime + i * 0.1);
-			gainNode.gain.linearRampToValueAtTime(0.08, ctx.currentTime + i * 0.1 + 0.02);
-			gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + i * 0.1 + 0.1);
+			gainNode.gain.linearRampToValueAtTime(
+				0.08,
+				ctx.currentTime + i * 0.1 + 0.02,
+			);
+			gainNode.gain.exponentialRampToValueAtTime(
+				0.01,
+				ctx.currentTime + i * 0.1 + 0.1,
+			);
 
 			oscillator.start(ctx.currentTime + i * 0.1);
 			oscillator.stop(ctx.currentTime + i * 0.1 + 0.1);
@@ -138,7 +154,7 @@ function playCheckSound(): void {
 function playCheckmateSound(): void {
 	try {
 		const ctx = getAudioContext();
-		const notes = [523.25, 659.25, 783.99, 1046.50];
+		const notes = [523.25, 659.25, 783.99, 1046.5];
 
 		notes.forEach((freq, i) => {
 			const oscillator = ctx.createOscillator();
@@ -151,8 +167,14 @@ function playCheckmateSound(): void {
 			oscillator.frequency.setValueAtTime(freq, ctx.currentTime + i * 0.15);
 
 			gainNode.gain.setValueAtTime(0, ctx.currentTime + i * 0.15);
-			gainNode.gain.linearRampToValueAtTime(0.15, ctx.currentTime + i * 0.15 + 0.02);
-			gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + i * 0.15 + 0.2);
+			gainNode.gain.linearRampToValueAtTime(
+				0.15,
+				ctx.currentTime + i * 0.15 + 0.02,
+			);
+			gainNode.gain.exponentialRampToValueAtTime(
+				0.01,
+				ctx.currentTime + i * 0.15 + 0.2,
+			);
 
 			oscillator.start(ctx.currentTime + i * 0.15);
 			oscillator.stop(ctx.currentTime + i * 0.15 + 0.2);
@@ -181,8 +203,14 @@ function playLoseSound(): void {
 			oscillator.frequency.setValueAtTime(freq, ctx.currentTime + i * 0.2);
 
 			gainNode.gain.setValueAtTime(0, ctx.currentTime + i * 0.2);
-			gainNode.gain.linearRampToValueAtTime(0.1, ctx.currentTime + i * 0.2 + 0.02);
-			gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + i * 0.2 + 0.25);
+			gainNode.gain.linearRampToValueAtTime(
+				0.1,
+				ctx.currentTime + i * 0.2 + 0.02,
+			);
+			gainNode.gain.exponentialRampToValueAtTime(
+				0.01,
+				ctx.currentTime + i * 0.2 + 0.25,
+			);
 
 			oscillator.start(ctx.currentTime + i * 0.2);
 			oscillator.stop(ctx.currentTime + i * 0.2 + 0.25);
@@ -330,7 +358,16 @@ function createInitialBoard(): (Piece | null)[][] {
 	}
 
 	// Set up black pieces (top)
-	const backRow: PieceType[] = ["rook", "knight", "bishop", "queen", "king", "bishop", "knight", "rook"];
+	const backRow: PieceType[] = [
+		"rook",
+		"knight",
+		"bishop",
+		"queen",
+		"king",
+		"bishop",
+		"knight",
+		"rook",
+	];
 	for (let col = 0; col < 8; col++) {
 		board[0][col] = { type: backRow[col], color: "black", hasMoved: false };
 		board[1][col] = { type: "pawn", color: "black", hasMoved: false };
@@ -354,10 +391,15 @@ function isValidPosition(row: number, col: number): boolean {
 }
 
 function cloneBoard(board: (Piece | null)[][]): (Piece | null)[][] {
-	return board.map(row => row.map(piece => piece ? { ...piece } : null));
+	return board.map((row) => row.map((piece) => (piece ? { ...piece } : null)));
 }
 
-function getPawnMoves(board: (Piece | null)[][], pos: Position, piece: Piece, enPassantTarget: Position | null): Position[] {
+function getPawnMoves(
+	board: (Piece | null)[][],
+	pos: Position,
+	piece: Piece,
+	enPassantTarget: Position | null,
+): Position[] {
 	const moves: Position[] = [];
 	const direction = piece.color === "white" ? -1 : 1;
 	const startRow = piece.color === "white" ? 6 : 1;
@@ -385,7 +427,11 @@ function getPawnMoves(board: (Piece | null)[][], pos: Position, piece: Piece, en
 				moves.push({ row: newRow, col: captureCol });
 			}
 			// En passant
-			if (enPassantTarget && enPassantTarget.row === newRow && enPassantTarget.col === captureCol) {
+			if (
+				enPassantTarget &&
+				enPassantTarget.row === newRow &&
+				enPassantTarget.col === captureCol
+			) {
 				moves.push({ row: newRow, col: captureCol });
 			}
 		}
@@ -394,11 +440,21 @@ function getPawnMoves(board: (Piece | null)[][], pos: Position, piece: Piece, en
 	return moves;
 }
 
-function getKnightMoves(board: (Piece | null)[][], pos: Position, piece: Piece): Position[] {
+function getKnightMoves(
+	board: (Piece | null)[][],
+	pos: Position,
+	piece: Piece,
+): Position[] {
 	const moves: Position[] = [];
 	const offsets = [
-		[-2, -1], [-2, 1], [-1, -2], [-1, 2],
-		[1, -2], [1, 2], [2, -1], [2, 1]
+		[-2, -1],
+		[-2, 1],
+		[-1, -2],
+		[-1, 2],
+		[1, -2],
+		[1, 2],
+		[2, -1],
+		[2, 1],
 	];
 
 	for (const [rowOff, colOff] of offsets) {
@@ -415,7 +471,12 @@ function getKnightMoves(board: (Piece | null)[][], pos: Position, piece: Piece):
 	return moves;
 }
 
-function getSlidingMoves(board: (Piece | null)[][], pos: Position, piece: Piece, directions: [number, number][]): Position[] {
+function getSlidingMoves(
+	board: (Piece | null)[][],
+	pos: Position,
+	piece: Piece,
+	directions: [number, number][],
+): Position[] {
 	const moves: Position[] = [];
 
 	for (const [rowDir, colDir] of directions) {
@@ -440,22 +501,49 @@ function getSlidingMoves(board: (Piece | null)[][], pos: Position, piece: Piece,
 	return moves;
 }
 
-function getBishopMoves(board: (Piece | null)[][], pos: Position, piece: Piece): Position[] {
-	return getSlidingMoves(board, pos, piece, [[-1, -1], [-1, 1], [1, -1], [1, 1]]);
+function getBishopMoves(
+	board: (Piece | null)[][],
+	pos: Position,
+	piece: Piece,
+): Position[] {
+	return getSlidingMoves(board, pos, piece, [
+		[-1, -1],
+		[-1, 1],
+		[1, -1],
+		[1, 1],
+	]);
 }
 
-function getRookMoves(board: (Piece | null)[][], pos: Position, piece: Piece): Position[] {
-	return getSlidingMoves(board, pos, piece, [[-1, 0], [1, 0], [0, -1], [0, 1]]);
+function getRookMoves(
+	board: (Piece | null)[][],
+	pos: Position,
+	piece: Piece,
+): Position[] {
+	return getSlidingMoves(board, pos, piece, [
+		[-1, 0],
+		[1, 0],
+		[0, -1],
+		[0, 1],
+	]);
 }
 
-function getQueenMoves(board: (Piece | null)[][], pos: Position, piece: Piece): Position[] {
+function getQueenMoves(
+	board: (Piece | null)[][],
+	pos: Position,
+	piece: Piece,
+): Position[] {
 	return [
 		...getBishopMoves(board, pos, piece),
-		...getRookMoves(board, pos, piece)
+		...getRookMoves(board, pos, piece),
 	];
 }
 
-function getKingMoves(board: (Piece | null)[][], pos: Position, piece: Piece, canCastle: boolean = true): Position[] {
+function getKingMoves(
+	board: (Piece | null)[][],
+	pos: Position,
+	piece: Piece,
+	canCastle: boolean = true,
+): Position[] {
 	const moves: Position[] = [];
 
 	// Normal king moves
@@ -479,12 +567,18 @@ function getKingMoves(board: (Piece | null)[][], pos: Position, piece: Piece, ca
 
 		// Kingside castling
 		const kingsideRook = board[row][7];
-		if (kingsideRook && kingsideRook.type === "rook" && !kingsideRook.hasMoved) {
+		if (
+			kingsideRook &&
+			kingsideRook.type === "rook" &&
+			!kingsideRook.hasMoved
+		) {
 			if (!board[row][5] && !board[row][6]) {
 				// Check if king passes through check
-				if (!isSquareAttacked(board, { row, col: 4 }, piece.color) &&
+				if (
+					!isSquareAttacked(board, { row, col: 4 }, piece.color) &&
 					!isSquareAttacked(board, { row, col: 5 }, piece.color) &&
-					!isSquareAttacked(board, { row, col: 6 }, piece.color)) {
+					!isSquareAttacked(board, { row, col: 6 }, piece.color)
+				) {
 					moves.push({ row, col: 6 });
 				}
 			}
@@ -492,12 +586,18 @@ function getKingMoves(board: (Piece | null)[][], pos: Position, piece: Piece, ca
 
 		// Queenside castling
 		const queensideRook = board[row][0];
-		if (queensideRook && queensideRook.type === "rook" && !queensideRook.hasMoved) {
+		if (
+			queensideRook &&
+			queensideRook.type === "rook" &&
+			!queensideRook.hasMoved
+		) {
 			if (!board[row][1] && !board[row][2] && !board[row][3]) {
 				// Check if king passes through check
-				if (!isSquareAttacked(board, { row, col: 4 }, piece.color) &&
+				if (
+					!isSquareAttacked(board, { row, col: 4 }, piece.color) &&
 					!isSquareAttacked(board, { row, col: 3 }, piece.color) &&
-					!isSquareAttacked(board, { row, col: 2 }, piece.color)) {
+					!isSquareAttacked(board, { row, col: 2 }, piece.color)
+				) {
 					moves.push({ row, col: 2 });
 				}
 			}
@@ -507,7 +607,12 @@ function getKingMoves(board: (Piece | null)[][], pos: Position, piece: Piece, ca
 	return moves;
 }
 
-function getPieceMoves(board: (Piece | null)[][], pos: Position, enPassantTarget: Position | null, includeCastling: boolean = true): Position[] {
+function getPieceMoves(
+	board: (Piece | null)[][],
+	pos: Position,
+	enPassantTarget: Position | null,
+	includeCastling: boolean = true,
+): Position[] {
 	const piece = board[pos.row][pos.col];
 	if (!piece) return [];
 
@@ -529,7 +634,11 @@ function getPieceMoves(board: (Piece | null)[][], pos: Position, enPassantTarget
 	}
 }
 
-function isSquareAttacked(board: (Piece | null)[][], pos: Position, byColor: PieceColor): boolean {
+function isSquareAttacked(
+	board: (Piece | null)[][],
+	pos: Position,
+	byColor: PieceColor,
+): boolean {
 	const enemyColor = byColor === "white" ? "black" : "white";
 
 	for (let row = 0; row < 8; row++) {
@@ -537,7 +646,7 @@ function isSquareAttacked(board: (Piece | null)[][], pos: Position, byColor: Pie
 			const piece = board[row][col];
 			if (piece && piece.color === enemyColor) {
 				const moves = getPieceMoves(board, { row, col }, null, false);
-				if (moves.some(m => m.row === pos.row && m.col === pos.col)) {
+				if (moves.some((m) => m.row === pos.row && m.col === pos.col)) {
 					return true;
 				}
 			}
@@ -546,7 +655,10 @@ function isSquareAttacked(board: (Piece | null)[][], pos: Position, byColor: Pie
 	return false;
 }
 
-function findKing(board: (Piece | null)[][], color: PieceColor): Position | null {
+function findKing(
+	board: (Piece | null)[][],
+	color: PieceColor,
+): Position | null {
 	for (let row = 0; row < 8; row++) {
 		for (let col = 0; col < 8; col++) {
 			const piece = board[row][col];
@@ -564,7 +676,16 @@ function isInCheck(board: (Piece | null)[][], color: PieceColor): boolean {
 	return isSquareAttacked(board, kingPos, color);
 }
 
-function makeMove(board: (Piece | null)[][], from: Position, to: Position, enPassantTarget: Position | null): { newBoard: (Piece | null)[][], captured: Piece | null, newEnPassant: Position | null } {
+function makeMove(
+	board: (Piece | null)[][],
+	from: Position,
+	to: Position,
+	enPassantTarget: Position | null,
+): {
+	newBoard: (Piece | null)[][];
+	captured: Piece | null;
+	newEnPassant: Position | null;
+} {
 	const newBoard = cloneBoard(board);
 	const piece = newBoard[from.row][from.col];
 	if (!piece) return { newBoard, captured: null, newEnPassant: null };
@@ -573,7 +694,12 @@ function makeMove(board: (Piece | null)[][], from: Position, to: Position, enPas
 	let newEnPassant: Position | null = null;
 
 	// Handle en passant capture
-	if (piece.type === "pawn" && enPassantTarget && to.row === enPassantTarget.row && to.col === enPassantTarget.col) {
+	if (
+		piece.type === "pawn" &&
+		enPassantTarget &&
+		to.row === enPassantTarget.row &&
+		to.col === enPassantTarget.col
+	) {
 		const capturedPawnRow = piece.color === "white" ? to.row + 1 : to.row - 1;
 		captured = newBoard[capturedPawnRow][to.col];
 		newBoard[capturedPawnRow][to.col] = null;
@@ -609,7 +735,11 @@ function makeMove(board: (Piece | null)[][], from: Position, to: Position, enPas
 	return { newBoard, captured, newEnPassant };
 }
 
-function getLegalMoves(board: (Piece | null)[][], pos: Position, enPassantTarget: Position | null): Position[] {
+function getLegalMoves(
+	board: (Piece | null)[][],
+	pos: Position,
+	enPassantTarget: Position | null,
+): Position[] {
 	const piece = board[pos.row][pos.col];
 	if (!piece) return [];
 
@@ -626,8 +756,12 @@ function getLegalMoves(board: (Piece | null)[][], pos: Position, enPassantTarget
 	return legalMoves;
 }
 
-function getAllLegalMoves(board: (Piece | null)[][], color: PieceColor, enPassantTarget: Position | null): { from: Position, to: Position }[] {
-	const moves: { from: Position, to: Position }[] = [];
+function getAllLegalMoves(
+	board: (Piece | null)[][],
+	color: PieceColor,
+	enPassantTarget: Position | null,
+): { from: Position; to: Position }[] {
+	const moves: { from: Position; to: Position }[] = [];
 
 	for (let row = 0; row < 8; row++) {
 		for (let col = 0; col < 8; col++) {
@@ -645,12 +779,20 @@ function getAllLegalMoves(board: (Piece | null)[][], color: PieceColor, enPassan
 	return moves;
 }
 
-function isCheckmate(board: (Piece | null)[][], color: PieceColor, enPassantTarget: Position | null): boolean {
+function isCheckmate(
+	board: (Piece | null)[][],
+	color: PieceColor,
+	enPassantTarget: Position | null,
+): boolean {
 	if (!isInCheck(board, color)) return false;
 	return getAllLegalMoves(board, color, enPassantTarget).length === 0;
 }
 
-function isStalemate(board: (Piece | null)[][], color: PieceColor, enPassantTarget: Position | null): boolean {
+function isStalemate(
+	board: (Piece | null)[][],
+	color: PieceColor,
+	enPassantTarget: Position | null,
+): boolean {
 	if (isInCheck(board, color)) return false;
 	return getAllLegalMoves(board, color, enPassantTarget).length === 0;
 }
@@ -684,7 +826,8 @@ function evaluateBoard(board: (Piece | null)[][], color: PieceColor): number {
 		for (let col = 0; col < 8; col++) {
 			const piece = board[row][col];
 			if (piece) {
-				const value = PIECE_VALUES[piece.type] + getPositionBonus(piece, row, col);
+				const value =
+					PIECE_VALUES[piece.type] + getPositionBonus(piece, row, col);
 				if (piece.color === color) {
 					score += value;
 				} else {
@@ -704,9 +847,13 @@ function minimax(
 	beta: number,
 	isMaximizing: boolean,
 	aiColor: PieceColor,
-	enPassantTarget: Position | null
+	enPassantTarget: Position | null,
 ): number {
-	const currentColor = isMaximizing ? aiColor : (aiColor === "white" ? "black" : "white");
+	const currentColor = isMaximizing
+		? aiColor
+		: aiColor === "white"
+			? "black"
+			: "white";
 
 	if (isCheckmate(board, currentColor, enPassantTarget)) {
 		return isMaximizing ? -100000 + depth : 100000 - depth;
@@ -725,8 +872,21 @@ function minimax(
 	if (isMaximizing) {
 		let maxEval = -Infinity;
 		for (const move of moves) {
-			const { newBoard, newEnPassant } = makeMove(board, move.from, move.to, enPassantTarget);
-			const evalScore = minimax(newBoard, depth - 1, alpha, beta, false, aiColor, newEnPassant);
+			const { newBoard, newEnPassant } = makeMove(
+				board,
+				move.from,
+				move.to,
+				enPassantTarget,
+			);
+			const evalScore = minimax(
+				newBoard,
+				depth - 1,
+				alpha,
+				beta,
+				false,
+				aiColor,
+				newEnPassant,
+			);
 			maxEval = Math.max(maxEval, evalScore);
 			alpha = Math.max(alpha, evalScore);
 			if (beta <= alpha) break;
@@ -735,8 +895,21 @@ function minimax(
 	} else {
 		let minEval = Infinity;
 		for (const move of moves) {
-			const { newBoard, newEnPassant } = makeMove(board, move.from, move.to, enPassantTarget);
-			const evalScore = minimax(newBoard, depth - 1, alpha, beta, true, aiColor, newEnPassant);
+			const { newBoard, newEnPassant } = makeMove(
+				board,
+				move.from,
+				move.to,
+				enPassantTarget,
+			);
+			const evalScore = minimax(
+				newBoard,
+				depth - 1,
+				alpha,
+				beta,
+				true,
+				aiColor,
+				newEnPassant,
+			);
 			minEval = Math.min(minEval, evalScore);
 			beta = Math.min(beta, evalScore);
 			if (beta <= alpha) break;
@@ -745,7 +918,12 @@ function minimax(
 	}
 }
 
-function getBestMove(board: (Piece | null)[][], aiColor: PieceColor, enPassantTarget: Position | null, depth: number = 3): { from: Position, to: Position } | null {
+function getBestMove(
+	board: (Piece | null)[][],
+	aiColor: PieceColor,
+	enPassantTarget: Position | null,
+	depth: number = 3,
+): { from: Position; to: Position } | null {
 	const moves = getAllLegalMoves(board, aiColor, enPassantTarget);
 	if (moves.length === 0) return null;
 
@@ -753,8 +931,21 @@ function getBestMove(board: (Piece | null)[][], aiColor: PieceColor, enPassantTa
 	let bestScore = -Infinity;
 
 	for (const move of moves) {
-		const { newBoard, newEnPassant } = makeMove(board, move.from, move.to, enPassantTarget);
-		const score = minimax(newBoard, depth - 1, -Infinity, Infinity, false, aiColor, newEnPassant);
+		const { newBoard, newEnPassant } = makeMove(
+			board,
+			move.from,
+			move.to,
+			enPassantTarget,
+		);
+		const score = minimax(
+			newBoard,
+			depth - 1,
+			-Infinity,
+			Infinity,
+			false,
+			aiColor,
+			newEnPassant,
+		);
 
 		if (score > bestScore) {
 			bestScore = score;
@@ -773,7 +964,11 @@ function posToNotation(pos: Position): string {
 	return `${String.fromCharCode(97 + pos.col)}${8 - pos.row}`;
 }
 
-function renderChess(ctx: CommandContext, state: ChessState, isFirstFrame: boolean): void {
+function renderChess(
+	ctx: CommandContext,
+	state: ChessState,
+	isFirstFrame: boolean,
+): void {
 	const lines: string[] = [];
 
 	// Header
@@ -782,11 +977,15 @@ function renderChess(ctx: CommandContext, state: ChessState, isFirstFrame: boole
 	const titlePadding = Math.floor((headerWidth - title.length) / 2);
 	const titlePaddingRight = headerWidth - title.length - titlePadding;
 	lines.push(`╔${"═".repeat(headerWidth)}╗`);
-	lines.push(`║${" ".repeat(titlePadding)}${title}${" ".repeat(titlePaddingRight)}║`);
+	lines.push(
+		`║${" ".repeat(titlePadding)}${title}${" ".repeat(titlePaddingRight)}║`,
+	);
 	lines.push(`╚${"═".repeat(headerWidth)}╝`);
 
 	// Game info
-	const turnStr = state.gameOver ? "Game Over" : `Turn: ${state.currentTurn === "white" ? "White (You)" : "Black (AI)"}`;
+	const turnStr = state.gameOver
+		? "Game Over"
+		: `Turn: ${state.currentTurn === "white" ? "White (You)" : "Black (AI)"}`;
 	const statusStr = state.isCheck ? " CHECK!" : "";
 	lines.push(`${turnStr}${statusStr}`);
 	lines.push("");
@@ -801,13 +1000,19 @@ function renderChess(ctx: CommandContext, state: ChessState, isFirstFrame: boole
 
 		for (let col = 0; col < 8; col++) {
 			const piece = state.board[row][col];
-			const isSelected = state.selectedPos && state.selectedPos.row === row && state.selectedPos.col === col;
-			const isCursor = state.cursorPos.row === row && state.cursorPos.col === col;
-			const isValidMove = state.validMoves.some(m => m.row === row && m.col === col);
-			const isLastMove = state.lastMove && (
-				(state.lastMove.from.row === row && state.lastMove.from.col === col) ||
-				(state.lastMove.to.row === row && state.lastMove.to.col === col)
+			const isSelected =
+				state.selectedPos &&
+				state.selectedPos.row === row &&
+				state.selectedPos.col === col;
+			const isCursor =
+				state.cursorPos.row === row && state.cursorPos.col === col;
+			const isValidMove = state.validMoves.some(
+				(m) => m.row === row && m.col === col,
 			);
+			const isLastMove =
+				state.lastMove &&
+				((state.lastMove.from.row === row && state.lastMove.from.col === col) ||
+					(state.lastMove.to.row === row && state.lastMove.to.col === col));
 
 			let cellContent: string;
 			if (piece) {
@@ -832,7 +1037,7 @@ function renderChess(ctx: CommandContext, state: ChessState, isFirstFrame: boole
 				cell = ` ${cellContent} `;
 			}
 
-			line += cell + "│";
+			line += `${cell}│`;
 		}
 
 		line += ` ${8 - row}`;
@@ -968,19 +1173,49 @@ export async function chessCommand(ctx: CommandContext): Promise<void> {
 			return;
 		}
 
-		if (state.paused || state.gameOver || state.thinking || state.currentTurn !== state.playerColor) return;
+		if (
+			state.paused ||
+			state.gameOver ||
+			state.thinking ||
+			state.currentTurn !== state.playerColor
+		)
+			return;
 
 		// Cursor movement
-		if (key === "ArrowUp" || key === "w" || key === "W" || keyCode === 38 || keyCode === 87) {
+		if (
+			key === "ArrowUp" ||
+			key === "w" ||
+			key === "W" ||
+			keyCode === 38 ||
+			keyCode === 87
+		) {
 			state.cursorPos.row = Math.max(0, state.cursorPos.row - 1);
 		}
-		if (key === "ArrowDown" || key === "s" || key === "S" || keyCode === 40 || keyCode === 83) {
+		if (
+			key === "ArrowDown" ||
+			key === "s" ||
+			key === "S" ||
+			keyCode === 40 ||
+			keyCode === 83
+		) {
 			state.cursorPos.row = Math.min(7, state.cursorPos.row + 1);
 		}
-		if (key === "ArrowLeft" || key === "a" || key === "A" || keyCode === 37 || keyCode === 65) {
+		if (
+			key === "ArrowLeft" ||
+			key === "a" ||
+			key === "A" ||
+			keyCode === 37 ||
+			keyCode === 65
+		) {
 			state.cursorPos.col = Math.max(0, state.cursorPos.col - 1);
 		}
-		if (key === "ArrowRight" || key === "d" || key === "D" || keyCode === 39 || keyCode === 68) {
+		if (
+			key === "ArrowRight" ||
+			key === "d" ||
+			key === "D" ||
+			keyCode === 39 ||
+			keyCode === 68
+		) {
 			state.cursorPos.col = Math.min(7, state.cursorPos.col + 1);
 		}
 
@@ -991,7 +1226,9 @@ export async function chessCommand(ctx: CommandContext): Promise<void> {
 
 			if (state.selectedPos) {
 				// Try to move
-				const isValidMove = state.validMoves.some(m => m.row === row && m.col === col);
+				const isValidMove = state.validMoves.some(
+					(m) => m.row === row && m.col === col,
+				);
 
 				if (isValidMove) {
 					// Execute move
@@ -999,24 +1236,34 @@ export async function chessCommand(ctx: CommandContext): Promise<void> {
 					const to = { row, col };
 					const captured = state.board[to.row][to.col];
 
-					const { newBoard, newEnPassant } = makeMove(state.board, from, to, state.enPassantTarget);
+					const { newBoard, newEnPassant } = makeMove(
+						state.board,
+						from,
+						to,
+						state.enPassantTarget,
+					);
 					state.board = newBoard;
 					state.enPassantTarget = newEnPassant;
 
 					// Record move
 					const movingPiece = state.board[to.row][to.col];
-					const pieceSymbol = movingPiece && movingPiece.type !== "pawn"
-						? movingPiece.type.charAt(0).toUpperCase()
-						: "";
+					const pieceSymbol =
+						movingPiece && movingPiece.type !== "pawn"
+							? movingPiece.type.charAt(0).toUpperCase()
+							: "";
 					const captureSymbol = captured ? "x" : "";
-					state.moveHistory.push(`${pieceSymbol}${captureSymbol}${posToNotation(to)}`);
+					state.moveHistory.push(
+						`${pieceSymbol}${captureSymbol}${posToNotation(to)}`,
+					);
 
-					state.lastMove = {
-						from,
-						to,
-						piece: movingPiece!,
-						captured: captured || undefined,
-					};
+					if (movingPiece) {
+						state.lastMove = {
+							from,
+							to,
+							piece: movingPiece,
+							captured: captured || undefined,
+						};
+					}
 
 					// Play sound
 					if (captured) {
@@ -1036,12 +1283,16 @@ export async function chessCommand(ctx: CommandContext): Promise<void> {
 						playCheckSound();
 					}
 
-					if (isCheckmate(state.board, state.currentTurn, state.enPassantTarget)) {
+					if (
+						isCheckmate(state.board, state.currentTurn, state.enPassantTarget)
+					) {
 						state.isCheckmate = true;
 						state.gameOver = true;
 						state.winner = state.playerColor;
 						playCheckmateSound();
-					} else if (isStalemate(state.board, state.currentTurn, state.enPassantTarget)) {
+					} else if (
+						isStalemate(state.board, state.currentTurn, state.enPassantTarget)
+					) {
 						state.isStalemate = true;
 						state.gameOver = true;
 						state.winner = "draw";
@@ -1049,7 +1300,11 @@ export async function chessCommand(ctx: CommandContext): Promise<void> {
 				} else if (piece && piece.color === state.playerColor) {
 					// Select different piece
 					state.selectedPos = { row, col };
-					state.validMoves = getLegalMoves(state.board, state.selectedPos, state.enPassantTarget);
+					state.validMoves = getLegalMoves(
+						state.board,
+						state.selectedPos,
+						state.enPassantTarget,
+					);
 				} else {
 					// Deselect
 					state.selectedPos = null;
@@ -1059,7 +1314,11 @@ export async function chessCommand(ctx: CommandContext): Promise<void> {
 				// Select piece
 				if (piece && piece.color === state.playerColor) {
 					state.selectedPos = { row, col };
-					state.validMoves = getLegalMoves(state.board, state.selectedPos, state.enPassantTarget);
+					state.validMoves = getLegalMoves(
+						state.board,
+						state.selectedPos,
+						state.enPassantTarget,
+					);
 				}
 			}
 		}
@@ -1078,7 +1337,11 @@ export async function chessCommand(ctx: CommandContext): Promise<void> {
 
 	while (state.running) {
 		// AI turn
-		if (!state.paused && !state.gameOver && state.currentTurn !== state.playerColor) {
+		if (
+			!state.paused &&
+			!state.gameOver &&
+			state.currentTurn !== state.playerColor
+		) {
 			state.thinking = true;
 			renderChess(ctx, state, isFirstFrame);
 			isFirstFrame = false;
@@ -1086,27 +1349,42 @@ export async function chessCommand(ctx: CommandContext): Promise<void> {
 			// Give a small delay so the "thinking" message shows
 			await sleep(100);
 
-			const aiMove = getBestMove(state.board, "black", state.enPassantTarget, 3);
+			const aiMove = getBestMove(
+				state.board,
+				"black",
+				state.enPassantTarget,
+				3,
+			);
 
 			if (aiMove) {
 				const captured = state.board[aiMove.to.row][aiMove.to.col];
-				const { newBoard, newEnPassant } = makeMove(state.board, aiMove.from, aiMove.to, state.enPassantTarget);
+				const { newBoard, newEnPassant } = makeMove(
+					state.board,
+					aiMove.from,
+					aiMove.to,
+					state.enPassantTarget,
+				);
 				state.board = newBoard;
 				state.enPassantTarget = newEnPassant;
 
 				const movingPiece = state.board[aiMove.to.row][aiMove.to.col];
-				const pieceSymbol = movingPiece && movingPiece.type !== "pawn"
-					? movingPiece.type.charAt(0).toUpperCase()
-					: "";
+				const pieceSymbol =
+					movingPiece && movingPiece.type !== "pawn"
+						? movingPiece.type.charAt(0).toUpperCase()
+						: "";
 				const captureSymbol = captured ? "x" : "";
-				state.moveHistory.push(`${pieceSymbol}${captureSymbol}${posToNotation(aiMove.to)}`);
+				state.moveHistory.push(
+					`${pieceSymbol}${captureSymbol}${posToNotation(aiMove.to)}`,
+				);
 
-				state.lastMove = {
-					from: aiMove.from,
-					to: aiMove.to,
-					piece: movingPiece!,
-					captured: captured || undefined,
-				};
+				if (movingPiece) {
+					state.lastMove = {
+						from: aiMove.from,
+						to: aiMove.to,
+						piece: movingPiece,
+						captured: captured || undefined,
+					};
+				}
 
 				if (captured) {
 					playCaptureSound();
@@ -1121,12 +1399,16 @@ export async function chessCommand(ctx: CommandContext): Promise<void> {
 					playCheckSound();
 				}
 
-				if (isCheckmate(state.board, state.currentTurn, state.enPassantTarget)) {
+				if (
+					isCheckmate(state.board, state.currentTurn, state.enPassantTarget)
+				) {
 					state.isCheckmate = true;
 					state.gameOver = true;
 					state.winner = "black";
 					playLoseSound();
-				} else if (isStalemate(state.board, state.currentTurn, state.enPassantTarget)) {
+				} else if (
+					isStalemate(state.board, state.currentTurn, state.enPassantTarget)
+				) {
 					state.isStalemate = true;
 					state.gameOver = true;
 					state.winner = "draw";

@@ -13,7 +13,11 @@ let audioContext: AudioContext | null = null;
 
 function getAudioContext(): AudioContext {
 	if (!audioContext) {
-		audioContext = new (window.AudioContext || (window as typeof window & { webkitAudioContext: typeof AudioContext }).webkitAudioContext)();
+		audioContext = new (
+			window.AudioContext ||
+			(window as typeof window & { webkitAudioContext: typeof AudioContext })
+				.webkitAudioContext
+		)();
 	}
 	return audioContext;
 }
@@ -32,7 +36,10 @@ function playShootSound(): void {
 
 		oscillator.type = "square";
 		oscillator.frequency.setValueAtTime(880, ctx.currentTime);
-		oscillator.frequency.exponentialRampToValueAtTime(220, ctx.currentTime + 0.1);
+		oscillator.frequency.exponentialRampToValueAtTime(
+			220,
+			ctx.currentTime + 0.1,
+		);
 
 		gainNode.gain.setValueAtTime(0.1, ctx.currentTime);
 		gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.1);
@@ -58,7 +65,10 @@ function playAlienHitSound(): void {
 
 		oscillator.type = "sawtooth";
 		oscillator.frequency.setValueAtTime(200, ctx.currentTime);
-		oscillator.frequency.exponentialRampToValueAtTime(50, ctx.currentTime + 0.15);
+		oscillator.frequency.exponentialRampToValueAtTime(
+			50,
+			ctx.currentTime + 0.15,
+		);
 
 		gainNode.gain.setValueAtTime(0.15, ctx.currentTime);
 		gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.15);
@@ -76,33 +86,33 @@ function playAlienHitSound(): void {
 function playPlayerHitSound(): void {
 	try {
 		const ctx = getAudioContext();
-		
+
 		// Create noise for explosion
 		const bufferSize = ctx.sampleRate * 0.3;
 		const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
 		const data = buffer.getChannelData(0);
-		
+
 		for (let i = 0; i < bufferSize; i++) {
 			data[i] = (Math.random() * 2 - 1) * (1 - i / bufferSize);
 		}
-		
+
 		const noise = ctx.createBufferSource();
 		noise.buffer = buffer;
-		
+
 		const gainNode = ctx.createGain();
 		const filter = ctx.createBiquadFilter();
-		
+
 		filter.type = "lowpass";
 		filter.frequency.setValueAtTime(1000, ctx.currentTime);
 		filter.frequency.exponentialRampToValueAtTime(100, ctx.currentTime + 0.3);
-		
+
 		noise.connect(filter);
 		filter.connect(gainNode);
 		gainNode.connect(ctx.destination);
-		
+
 		gainNode.gain.setValueAtTime(0.2, ctx.currentTime);
 		gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.3);
-		
+
 		noise.start(ctx.currentTime);
 		noise.stop(ctx.currentTime + 0.3);
 	} catch {
@@ -124,7 +134,10 @@ function playAlienShootSound(): void {
 
 		oscillator.type = "triangle";
 		oscillator.frequency.setValueAtTime(150, ctx.currentTime);
-		oscillator.frequency.exponentialRampToValueAtTime(80, ctx.currentTime + 0.08);
+		oscillator.frequency.exponentialRampToValueAtTime(
+			80,
+			ctx.currentTime + 0.08,
+		);
 
 		gainNode.gain.setValueAtTime(0.08, ctx.currentTime);
 		gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.08);
@@ -355,8 +368,7 @@ function alienShoot(state: SpaceInvadersState): void {
 		return !aliveAliens.some((other) => other.x === a.x && other.y > a.y);
 	});
 
-	const shooter =
-		bottomAliens[Math.floor(Math.random() * bottomAliens.length)];
+	const shooter = bottomAliens[Math.floor(Math.random() * bottomAliens.length)];
 	if (shooter && state.alienBullets.length < 3) {
 		state.alienBullets.push({
 			x: shooter.x + 2,
@@ -589,7 +601,7 @@ function renderGame(
 	// Build and write complete frame
 	let frame = "\x1b[H";
 	for (const line of lines) {
-		frame += line + "\r\n";
+		frame += `${line}\r\n`;
 	}
 	ctx.terminal.write(frame);
 }

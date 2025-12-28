@@ -13,7 +13,11 @@ let audioContext: AudioContext | null = null;
 
 function getAudioContext(): AudioContext {
 	if (!audioContext) {
-		audioContext = new (window.AudioContext || (window as typeof window & { webkitAudioContext: typeof AudioContext }).webkitAudioContext)();
+		audioContext = new (
+			window.AudioContext ||
+			(window as typeof window & { webkitAudioContext: typeof AudioContext })
+				.webkitAudioContext
+		)();
 	}
 	return audioContext;
 }
@@ -32,7 +36,10 @@ function playFlapSound(): void {
 
 		oscillator.type = "sine";
 		oscillator.frequency.setValueAtTime(400, ctx.currentTime);
-		oscillator.frequency.exponentialRampToValueAtTime(600, ctx.currentTime + 0.1);
+		oscillator.frequency.exponentialRampToValueAtTime(
+			600,
+			ctx.currentTime + 0.1,
+		);
 
 		gainNode.gain.setValueAtTime(0.1, ctx.currentTime);
 		gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.1);
@@ -63,8 +70,14 @@ function playScoreSound(): void {
 			oscillator.frequency.setValueAtTime(freq, ctx.currentTime + i * 0.1);
 
 			gainNode.gain.setValueAtTime(0, ctx.currentTime + i * 0.1);
-			gainNode.gain.linearRampToValueAtTime(0.12, ctx.currentTime + i * 0.1 + 0.02);
-			gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + i * 0.1 + 0.15);
+			gainNode.gain.linearRampToValueAtTime(
+				0.12,
+				ctx.currentTime + i * 0.1 + 0.02,
+			);
+			gainNode.gain.exponentialRampToValueAtTime(
+				0.01,
+				ctx.currentTime + i * 0.1 + 0.15,
+			);
 
 			oscillator.start(ctx.currentTime + i * 0.1);
 			oscillator.stop(ctx.currentTime + i * 0.1 + 0.15);
@@ -124,7 +137,10 @@ function playGameOverSound(): void {
 
 			gain.gain.setValueAtTime(0, ctx.currentTime + i * 0.1);
 			gain.gain.linearRampToValueAtTime(0.08, ctx.currentTime + i * 0.1 + 0.02);
-			gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + i * 0.1 + 0.15);
+			gain.gain.exponentialRampToValueAtTime(
+				0.01,
+				ctx.currentTime + i * 0.1 + 0.15,
+			);
 
 			oscillator.start(ctx.currentTime + i * 0.1);
 			oscillator.stop(ctx.currentTime + i * 0.1 + 0.15);
@@ -140,7 +156,7 @@ function playGameOverSound(): void {
 function playHighScoreSound(): void {
 	try {
 		const ctx = getAudioContext();
-		const notes = [523.25, 659.25, 783.99, 1046.50, 783.99, 1046.50]; // C5, E5, G5, C6, G5, C6
+		const notes = [523.25, 659.25, 783.99, 1046.5, 783.99, 1046.5]; // C5, E5, G5, C6, G5, C6
 
 		notes.forEach((freq, i) => {
 			const oscillator = ctx.createOscillator();
@@ -153,8 +169,14 @@ function playHighScoreSound(): void {
 			oscillator.frequency.setValueAtTime(freq, ctx.currentTime + i * 0.1);
 
 			gainNode.gain.setValueAtTime(0, ctx.currentTime + i * 0.1);
-			gainNode.gain.linearRampToValueAtTime(0.12, ctx.currentTime + i * 0.1 + 0.02);
-			gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + i * 0.1 + 0.15);
+			gainNode.gain.linearRampToValueAtTime(
+				0.12,
+				ctx.currentTime + i * 0.1 + 0.02,
+			);
+			gainNode.gain.exponentialRampToValueAtTime(
+				0.01,
+				ctx.currentTime + i * 0.1 + 0.15,
+			);
 
 			oscillator.start(ctx.currentTime + i * 0.1);
 			oscillator.stop(ctx.currentTime + i * 0.1 + 0.15);
@@ -224,7 +246,11 @@ function spawnPipe(state: FlappyState): void {
 /**
  * Reset flappy bird game state
  */
-function resetFlappyGame(state: FlappyState, width: number, height: number): void {
+function resetFlappyGame(
+	state: FlappyState,
+	_width: number,
+	height: number,
+): void {
 	state.birdY = Math.floor(height / 2);
 	state.birdVelocity = 0;
 	state.pipes = [];
@@ -281,7 +307,11 @@ function checkCollision(state: FlappyState): boolean {
 /**
  * Render the flappy bird game
  */
-function renderFlappy(ctx: CommandContext, state: FlappyState, isFirstFrame: boolean): void {
+function renderFlappy(
+	ctx: CommandContext,
+	state: FlappyState,
+	isFirstFrame: boolean,
+): void {
 	const lines: string[] = [];
 
 	// Header
@@ -290,14 +320,18 @@ function renderFlappy(ctx: CommandContext, state: FlappyState, isFirstFrame: boo
 	const titlePadding = Math.floor((headerWidth - title.length) / 2);
 	const titlePaddingRight = headerWidth - title.length - titlePadding;
 	lines.push(`╔${"═".repeat(headerWidth)}╗`);
-	lines.push(`║${" ".repeat(titlePadding)}${title}${" ".repeat(titlePaddingRight)}║`);
+	lines.push(
+		`║${" ".repeat(titlePadding)}${title}${" ".repeat(titlePaddingRight)}║`,
+	);
 	lines.push(`╚${"═".repeat(headerWidth)}╝`);
 
 	// Score line
 	const scoreStr = `Score: ${state.score}`;
 	const highScoreStr = `High: ${state.highScore}`;
 	const scorePadding = state.width - scoreStr.length - highScoreStr.length;
-	lines.push(`${scoreStr}${" ".repeat(Math.max(2, scorePadding))}${highScoreStr}`);
+	lines.push(
+		`${scoreStr}${" ".repeat(Math.max(2, scorePadding))}${highScoreStr}`,
+	);
 
 	// Top border
 	lines.push(`┌${"─".repeat(state.width)}┐`);
@@ -316,7 +350,11 @@ function renderFlappy(ctx: CommandContext, state: FlappyState, isFirstFrame: boo
 		const gapTop = pipe.gapY - Math.floor(PIPE_GAP / 2);
 		const gapBottom = pipe.gapY + Math.floor(PIPE_GAP / 2);
 
-		for (let x = Math.max(0, pipe.x); x < Math.min(state.width, pipe.x + PIPE_WIDTH); x++) {
+		for (
+			let x = Math.max(0, pipe.x);
+			x < Math.min(state.width, pipe.x + PIPE_WIDTH);
+			x++
+		) {
 			// Draw top pipe
 			for (let y = 0; y < gapTop; y++) {
 				if (x === pipe.x || x === pipe.x + PIPE_WIDTH - 1) {
@@ -349,7 +387,12 @@ function renderFlappy(ctx: CommandContext, state: FlappyState, isFirstFrame: boo
 
 	// Draw bird
 	const birdY = Math.round(state.birdY);
-	if (birdY >= 0 && birdY < state.height && BIRD_X >= 0 && BIRD_X < state.width) {
+	if (
+		birdY >= 0 &&
+		birdY < state.height &&
+		BIRD_X >= 0 &&
+		BIRD_X < state.width
+	) {
 		grid[birdY][BIRD_X] = "●";
 	}
 
@@ -394,7 +437,9 @@ function renderFlappy(ctx: CommandContext, state: FlappyState, isFirstFrame: boo
 export async function flappyBirdCommand(ctx: CommandContext): Promise<void> {
 	// Check if key handler is available
 	if (!ctx.terminal.setKeyHandler || !ctx.terminal.clearKeyHandler) {
-		ctx.terminal.writeln("flappybird: error - terminal does not support game input");
+		ctx.terminal.writeln(
+			"flappybird: error - terminal does not support game input",
+		);
 		ctx.terminal.writeln("This game requires keyboard input capture.");
 		return;
 	}
@@ -465,7 +510,13 @@ export async function flappyBirdCommand(ctx: CommandContext): Promise<void> {
 		}
 
 		// Arrow Up or W to flap (alternative)
-		if (key === "ArrowUp" || key === "w" || key === "W" || keyCode === 38 || keyCode === 87) {
+		if (
+			key === "ArrowUp" ||
+			key === "w" ||
+			key === "W" ||
+			keyCode === 38 ||
+			keyCode === 87
+		) {
 			if (!state.gameOver && !state.paused) {
 				flapPressed = true;
 				if (!state.started) {
@@ -539,7 +590,8 @@ export async function flappyBirdCommand(ctx: CommandContext): Promise<void> {
 			}
 		} else if (!state.started) {
 			// Bird hovers before game starts
-			state.birdY = Math.floor(state.height / 2) + Math.sin(Date.now() / 200) * 0.5;
+			state.birdY =
+				Math.floor(state.height / 2) + Math.sin(Date.now() / 200) * 0.5;
 
 			// Handle flap to start
 			if (flapPressed) {

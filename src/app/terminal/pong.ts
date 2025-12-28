@@ -13,7 +13,11 @@ let audioContext: AudioContext | null = null;
 
 function getAudioContext(): AudioContext {
 	if (!audioContext) {
-		audioContext = new (window.AudioContext || (window as typeof window & { webkitAudioContext: typeof AudioContext }).webkitAudioContext)();
+		audioContext = new (
+			window.AudioContext ||
+			(window as typeof window & { webkitAudioContext: typeof AudioContext })
+				.webkitAudioContext
+		)();
 	}
 	return audioContext;
 }
@@ -81,7 +85,7 @@ function playScoreSound(playerScored: boolean): void {
 		gainNode.connect(ctx.destination);
 
 		oscillator.type = "sine";
-		
+
 		if (playerScored) {
 			// Ascending happy tone
 			oscillator.frequency.setValueAtTime(330, ctx.currentTime);
@@ -110,10 +114,10 @@ function playScoreSound(playerScored: boolean): void {
 function playGameOverSound(playerWon: boolean): void {
 	try {
 		const ctx = getAudioContext();
-		
+
 		if (playerWon) {
 			// Victory fanfare
-			const notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
+			const notes = [523.25, 659.25, 783.99, 1046.5]; // C5, E5, G5, C6
 			notes.forEach((freq, i) => {
 				const oscillator = ctx.createOscillator();
 				const gainNode = ctx.createGain();
@@ -125,8 +129,14 @@ function playGameOverSound(playerWon: boolean): void {
 				oscillator.frequency.setValueAtTime(freq, ctx.currentTime + i * 0.12);
 
 				gainNode.gain.setValueAtTime(0, ctx.currentTime + i * 0.12);
-				gainNode.gain.linearRampToValueAtTime(0.15, ctx.currentTime + i * 0.12 + 0.02);
-				gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + i * 0.12 + 0.2);
+				gainNode.gain.linearRampToValueAtTime(
+					0.15,
+					ctx.currentTime + i * 0.12 + 0.02,
+				);
+				gainNode.gain.exponentialRampToValueAtTime(
+					0.01,
+					ctx.currentTime + i * 0.12 + 0.2,
+				);
 
 				oscillator.start(ctx.currentTime + i * 0.12);
 				oscillator.stop(ctx.currentTime + i * 0.12 + 0.2);
@@ -145,8 +155,14 @@ function playGameOverSound(playerWon: boolean): void {
 				oscillator.frequency.setValueAtTime(freq, ctx.currentTime + i * 0.15);
 
 				gainNode.gain.setValueAtTime(0, ctx.currentTime + i * 0.15);
-				gainNode.gain.linearRampToValueAtTime(0.1, ctx.currentTime + i * 0.15 + 0.02);
-				gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + i * 0.15 + 0.2);
+				gainNode.gain.linearRampToValueAtTime(
+					0.1,
+					ctx.currentTime + i * 0.15 + 0.02,
+				);
+				gainNode.gain.exponentialRampToValueAtTime(
+					0.01,
+					ctx.currentTime + i * 0.15 + 0.2,
+				);
 
 				oscillator.start(ctx.currentTime + i * 0.15);
 				oscillator.stop(ctx.currentTime + i * 0.15 + 0.2);

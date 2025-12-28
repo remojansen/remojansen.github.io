@@ -13,7 +13,11 @@ let audioContext: AudioContext | null = null;
 
 function getAudioContext(): AudioContext {
 	if (!audioContext) {
-		audioContext = new (window.AudioContext || (window as typeof window & { webkitAudioContext: typeof AudioContext }).webkitAudioContext)();
+		audioContext = new (
+			window.AudioContext ||
+			(window as typeof window & { webkitAudioContext: typeof AudioContext })
+				.webkitAudioContext
+		)();
 	}
 	return audioContext;
 }
@@ -32,7 +36,10 @@ function playPaddleHitSound(): void {
 
 		oscillator.type = "sine";
 		oscillator.frequency.setValueAtTime(440, ctx.currentTime);
-		oscillator.frequency.exponentialRampToValueAtTime(220, ctx.currentTime + 0.08);
+		oscillator.frequency.exponentialRampToValueAtTime(
+			220,
+			ctx.currentTime + 0.08,
+		);
 
 		gainNode.gain.setValueAtTime(0.15, ctx.currentTime);
 		gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.08);
@@ -58,7 +65,10 @@ function playBrickHitSound(): void {
 
 		oscillator.type = "square";
 		oscillator.frequency.setValueAtTime(600, ctx.currentTime);
-		oscillator.frequency.exponentialRampToValueAtTime(200, ctx.currentTime + 0.1);
+		oscillator.frequency.exponentialRampToValueAtTime(
+			200,
+			ctx.currentTime + 0.1,
+		);
 
 		gainNode.gain.setValueAtTime(0.12, ctx.currentTime);
 		gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.1);
@@ -84,8 +94,14 @@ function playBrickDestroySound(): void {
 
 		oscillator.type = "sawtooth";
 		oscillator.frequency.setValueAtTime(800, ctx.currentTime);
-		oscillator.frequency.exponentialRampToValueAtTime(1200, ctx.currentTime + 0.05);
-		oscillator.frequency.exponentialRampToValueAtTime(400, ctx.currentTime + 0.15);
+		oscillator.frequency.exponentialRampToValueAtTime(
+			1200,
+			ctx.currentTime + 0.05,
+		);
+		oscillator.frequency.exponentialRampToValueAtTime(
+			400,
+			ctx.currentTime + 0.15,
+		);
 
 		gainNode.gain.setValueAtTime(0.1, ctx.currentTime);
 		gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.15);
@@ -136,7 +152,10 @@ function playLaunchSound(): void {
 
 		oscillator.type = "triangle";
 		oscillator.frequency.setValueAtTime(220, ctx.currentTime);
-		oscillator.frequency.exponentialRampToValueAtTime(440, ctx.currentTime + 0.1);
+		oscillator.frequency.exponentialRampToValueAtTime(
+			440,
+			ctx.currentTime + 0.1,
+		);
 
 		gainNode.gain.setValueAtTime(0.1, ctx.currentTime);
 		gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.1);
@@ -162,7 +181,10 @@ function playLifeLostSound(): void {
 
 		oscillator.type = "sawtooth";
 		oscillator.frequency.setValueAtTime(400, ctx.currentTime);
-		oscillator.frequency.exponentialRampToValueAtTime(100, ctx.currentTime + 0.4);
+		oscillator.frequency.exponentialRampToValueAtTime(
+			100,
+			ctx.currentTime + 0.4,
+		);
 
 		gainNode.gain.setValueAtTime(0.15, ctx.currentTime);
 		gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.4);
@@ -180,8 +202,8 @@ function playLifeLostSound(): void {
 function playLevelCompleteSound(): void {
 	try {
 		const ctx = getAudioContext();
-		const notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
-		
+		const notes = [523.25, 659.25, 783.99, 1046.5]; // C5, E5, G5, C6
+
 		notes.forEach((freq, i) => {
 			const oscillator = ctx.createOscillator();
 			const gainNode = ctx.createGain();
@@ -193,8 +215,14 @@ function playLevelCompleteSound(): void {
 			oscillator.frequency.setValueAtTime(freq, ctx.currentTime + i * 0.1);
 
 			gainNode.gain.setValueAtTime(0, ctx.currentTime + i * 0.1);
-			gainNode.gain.linearRampToValueAtTime(0.12, ctx.currentTime + i * 0.1 + 0.02);
-			gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + i * 0.1 + 0.15);
+			gainNode.gain.linearRampToValueAtTime(
+				0.12,
+				ctx.currentTime + i * 0.1 + 0.02,
+			);
+			gainNode.gain.exponentialRampToValueAtTime(
+				0.01,
+				ctx.currentTime + i * 0.1 + 0.15,
+			);
 
 			oscillator.start(ctx.currentTime + i * 0.1);
 			oscillator.stop(ctx.currentTime + i * 0.1 + 0.15);
@@ -211,7 +239,7 @@ function playGameOverSound(): void {
 	try {
 		const ctx = getAudioContext();
 		const notes = [392, 349.23, 329.63, 261.63]; // G4, F4, E4, C4
-		
+
 		notes.forEach((freq, i) => {
 			const oscillator = ctx.createOscillator();
 			const gainNode = ctx.createGain();
@@ -223,8 +251,14 @@ function playGameOverSound(): void {
 			oscillator.frequency.setValueAtTime(freq, ctx.currentTime + i * 0.15);
 
 			gainNode.gain.setValueAtTime(0, ctx.currentTime + i * 0.15);
-			gainNode.gain.linearRampToValueAtTime(0.1, ctx.currentTime + i * 0.15 + 0.02);
-			gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + i * 0.15 + 0.2);
+			gainNode.gain.linearRampToValueAtTime(
+				0.1,
+				ctx.currentTime + i * 0.15 + 0.02,
+			);
+			gainNode.gain.exponentialRampToValueAtTime(
+				0.01,
+				ctx.currentTime + i * 0.15 + 0.2,
+			);
 
 			oscillator.start(ctx.currentTime + i * 0.15);
 			oscillator.stop(ctx.currentTime + i * 0.15 + 0.2);
@@ -451,11 +485,7 @@ function checkBrickCollision(
 	const ballY = Math.round(state.ballY);
 
 	// Check if ball is within brick bounds
-	if (
-		ballY === brick.y &&
-		ballX >= brick.x &&
-		ballX < brick.x + brick.width
-	) {
+	if (ballY === brick.y && ballX >= brick.x && ballX < brick.x + brick.width) {
 		// Determine which side was hit based on velocity
 		if (state.ballVY > 0) {
 			return { hit: true, side: "top" };
@@ -599,10 +629,7 @@ export async function arkanoidCommand(ctx: CommandContext): Promise<void> {
 			if (keys.arrowLeft && state.paddleX > 0) {
 				state.paddleX = Math.max(0, state.paddleX - paddleSpeed);
 			}
-			if (
-				keys.arrowRight &&
-				state.paddleX < state.width - state.paddleWidth
-			) {
+			if (keys.arrowRight && state.paddleX < state.width - state.paddleWidth) {
 				state.paddleX = Math.min(
 					state.width - state.paddleWidth,
 					state.paddleX + paddleSpeed,
@@ -641,8 +668,7 @@ export async function arkanoidCommand(ctx: CommandContext): Promise<void> {
 				) {
 					state.ballVY = -Math.abs(state.ballVY);
 					// Add some angle based on where it hit the paddle
-					const hitPos =
-						(state.ballX - state.paddleX) / state.paddleWidth;
+					const hitPos = (state.ballX - state.paddleX) / state.paddleWidth;
 					state.ballVX = (hitPos - 0.5) * 2.5;
 					state.ballY = state.height - 3;
 					playPaddleHitSound();
@@ -663,10 +689,7 @@ export async function arkanoidCommand(ctx: CommandContext): Promise<void> {
 						}
 
 						// Reflect ball based on collision side
-						if (
-							collision.side === "top" ||
-							collision.side === "bottom"
-						) {
+						if (collision.side === "top" || collision.side === "bottom") {
 							state.ballVY = -state.ballVY;
 						} else {
 							state.ballVX = -state.ballVX;
