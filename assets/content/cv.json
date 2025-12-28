@@ -264,6 +264,11 @@
 			"stats": "/assets/content/inversify.json"
 		},
 		{
+			"project": "cool-retro-term-renderer",
+			"url": "https://github.com/remojansen/cool-retro-term-webgl",
+			"description": "A WebGL-based CRT terminal renderer for XTerm.js and Electron terminal app with authentic retro effects."
+		},
+		{
 			"project": "fresh-onion",
 			"url": "https://github.com/remojansen/fresh-onion",
 			"description": "A utility library for enforcing architectural boundaries in layered Node.js projects.\n  It is ideal for applications that implement a Hexagonal/Onion/Clean architecture."
