@@ -983,7 +983,7 @@ registerCommand("./pong", pongCommand);
 // Snake game - classic snake game
 registerCommand("./snake", snakeCommand);
 
-// Tetris game - classic falling blocks puzzle
+// Blocks game - classic falling blocks puzzle
 registerCommand("./blocks", blocksCommand);
 
 // Donut - spinning 3D ASCII donut with shading

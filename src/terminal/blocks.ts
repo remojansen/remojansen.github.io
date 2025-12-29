@@ -1,5 +1,5 @@
 /**
- * Tetris game - Classic falling blocks puzzle game
+ * Blocks game - Classic falling blocks puzzle game
  */
 
 import type { CommandContext, KeyHandler } from "./ShellEmulator";
@@ -167,7 +167,7 @@ function playLineClearSound(lineCount: number): void {
 		oscillator.start(ctx.currentTime);
 		oscillator.stop(ctx.currentTime + 0.25);
 
-		// Tetris (4 lines) gets extra fanfare
+		// Blocks (4 lines) gets extra fanfare
 		if (lineCount === 4) {
 			const notes = [523.25, 659.25, 783.99, 1046.5];
 			notes.forEach((freq, i) => {
@@ -275,7 +275,7 @@ function playGameOverSound(): void {
 // Game Types and Constants
 // ============================================
 
-// Tetris piece shapes (each rotation is a 4x4 grid)
+// Blocks piece shapes (each rotation is a 4x4 grid)
 const BLOCKS_PIECES = {
 	I: [
 		[
@@ -464,7 +464,7 @@ const BLOCKS_PIECES = {
 const PIECE_TYPES = ["I", "O", "T", "S", "Z", "J", "L"] as const;
 type PieceType = (typeof PIECE_TYPES)[number];
 
-interface TetrisState {
+interface BlocksState {
 	// Board dimensions
 	width: number;
 	height: number;
@@ -510,7 +510,7 @@ function getRandomPiece(): PieceType {
  * Check if a piece can move to a position
  */
 function canMove(
-	state: TetrisState,
+	state: BlocksState,
 	newX: number,
 	newY: number,
 	rotation: number,
@@ -541,7 +541,7 @@ function canMove(
 /**
  * Lock the current piece to the board
  */
-function lockPiece(state: TetrisState): void {
+function lockPiece(state: BlocksState): void {
 	const piece = BLOCKS_PIECES[state.currentPiece][state.currentRotation];
 
 	for (let py = 0; py < 4; py++) {
@@ -610,7 +610,7 @@ function lockPiece(state: TetrisState): void {
 /**
  * Spawn a new piece
  */
-function spawnNewPiece(state: TetrisState): void {
+function spawnNewPiece(state: BlocksState): void {
 	state.currentPiece = state.nextPiece;
 	state.nextPiece = getRandomPiece();
 	state.currentRotation = 0;
@@ -628,8 +628,8 @@ function spawnNewPiece(state: TetrisState): void {
 /**
  * Reset blocks game state
  */
-function resetTetrisGame(
-	state: TetrisState,
+function resetBlocksGame(
+	state: BlocksState,
 	width: number,
 	height: number,
 	initialDropSpeed: number,
@@ -653,9 +653,9 @@ function resetTetrisGame(
 /**
  * Render the blocks game - using 2 chars per cell for wider display
  */
-function renderTetris(
+function renderBlocks(
 	ctx: CommandContext,
-	state: TetrisState,
+	state: BlocksState,
 	isFirstFrame: boolean,
 ): void {
 	const lines: string[] = [];
@@ -788,7 +788,7 @@ function renderTetris(
 }
 
 /**
- * Tetris game command handler
+ * Blocks game command handler
  */
 export async function blocksCommand(ctx: CommandContext): Promise<void> {
 	// Check if key handler is available
@@ -826,7 +826,7 @@ export async function blocksCommand(ctx: CommandContext): Promise<void> {
 	}
 
 	// Initialize game state
-	const state: TetrisState = {
+	const state: BlocksState = {
 		width: BOARD_WIDTH,
 		height: BOARD_HEIGHT,
 		board: createEmptyBoard(BOARD_WIDTH, BOARD_HEIGHT),
@@ -924,7 +924,7 @@ export async function blocksCommand(ctx: CommandContext): Promise<void> {
 			if (state.gameOver) {
 				// Space to restart after game over
 				if (key === " " || keyCode === 32) {
-					resetTetrisGame(state, BOARD_WIDTH, BOARD_HEIGHT, INITIAL_DROP_SPEED);
+					resetBlocksGame(state, BOARD_WIDTH, BOARD_HEIGHT, INITIAL_DROP_SPEED);
 				}
 				// Q to quit
 				if (key === "q" || key === "Q" || keyCode === 81) {
@@ -1098,7 +1098,7 @@ export async function blocksCommand(ctx: CommandContext): Promise<void> {
 		}
 
 		// Render game
-		renderTetris(ctx, state, isFirstFrame);
+		renderBlocks(ctx, state, isFirstFrame);
 		isFirstFrame = false;
 
 		await sleep(FRAME_DELAY);
