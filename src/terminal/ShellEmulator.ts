@@ -20,7 +20,7 @@ import { mpg123Command } from "./mpg123";
 import { pongCommand } from "./pong";
 import { snakeCommand } from "./snake";
 import { spaceInvadersCommand } from "./space-invaders";
-import { tetrisCommand } from "./tetris";
+import { blocksCommand } from "./blocks";
 
 /**
  * Key handler function type for games and interactive apps
@@ -319,8 +319,8 @@ function initFileSystem(): void {
 		modified: "Dec 25 00:00",
 		parent: "Programs",
 	});
-	virtualFileSystem.set("Programs/tetris", {
-		name: "tetris",
+	virtualFileSystem.set("Programs/blocks", {
+		name: "blocks",
 		isDirectory: false,
 		size: 8192,
 		permissions: "-rwxr-xr-x",
@@ -508,7 +508,7 @@ export async function runCommand(
 
 	// Check if this is a path-based command (starts with ./)
 	if (args[0].startsWith("./")) {
-		// Extract the path after ./ using original case (e.g., "./Programs/tetris" -> "Programs/tetris")
+		// Extract the path after ./ using original case (e.g., "./Programs/blocks" -> "Programs/blocks")
 		const pathAfterDotSlash = args[0].slice(2);
 
 		// Resolve the full path to check if the file exists
@@ -525,7 +525,7 @@ export async function runCommand(
 			return;
 		}
 
-		// Use the base executable name for command lookup (e.g., "./tetris")
+		// Use the base executable name for command lookup (e.g., "./blocks")
 		commandName = `./${file.name}`;
 	}
 
@@ -984,7 +984,7 @@ registerCommand("./pong", pongCommand);
 registerCommand("./snake", snakeCommand);
 
 // Tetris game - classic falling blocks puzzle
-registerCommand("./tetris", tetrisCommand);
+registerCommand("./blocks", blocksCommand);
 
 // Donut - spinning 3D ASCII donut with shading
 registerCommand("./donut", donutCommand);

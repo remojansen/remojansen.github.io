@@ -276,7 +276,7 @@ function playGameOverSound(): void {
 // ============================================
 
 // Tetris piece shapes (each rotation is a 4x4 grid)
-const TETRIS_PIECES = {
+const BLOCKS_PIECES = {
 	I: [
 		[
 			[0, 0, 0, 0],
@@ -515,7 +515,7 @@ function canMove(
 	newY: number,
 	rotation: number,
 ): boolean {
-	const piece = TETRIS_PIECES[state.currentPiece][rotation];
+	const piece = BLOCKS_PIECES[state.currentPiece][rotation];
 
 	for (let py = 0; py < 4; py++) {
 		for (let px = 0; px < 4; px++) {
@@ -542,7 +542,7 @@ function canMove(
  * Lock the current piece to the board
  */
 function lockPiece(state: TetrisState): void {
-	const piece = TETRIS_PIECES[state.currentPiece][state.currentRotation];
+	const piece = BLOCKS_PIECES[state.currentPiece][state.currentRotation];
 
 	for (let py = 0; py < 4; py++) {
 		for (let px = 0; px < 4; px++) {
@@ -598,7 +598,7 @@ function lockPiece(state: TetrisState): void {
 	if (state.score > state.highScore) {
 		state.highScore = state.score;
 		try {
-			localStorage.setItem("tetris_high_score", state.highScore.toString());
+			localStorage.setItem("blocks_high_score", state.highScore.toString());
 		} catch {
 			// Ignore localStorage errors
 		}
@@ -626,7 +626,7 @@ function spawnNewPiece(state: TetrisState): void {
 }
 
 /**
- * Reset tetris game state
+ * Reset blocks game state
  */
 function resetTetrisGame(
 	state: TetrisState,
@@ -651,7 +651,7 @@ function resetTetrisGame(
 }
 
 /**
- * Render the tetris game - using 2 chars per cell for wider display
+ * Render the blocks game - using 2 chars per cell for wider display
  */
 function renderTetris(
 	ctx: CommandContext,
@@ -666,7 +666,7 @@ function renderTetris(
 
 	// Header - wider to match board
 	lines.push("╔════════════════════════════════════════════════════╗");
-	lines.push("║                      TETRIS                        ║");
+	lines.push("║                      BLOCKS                        ║");
 	lines.push("╚════════════════════════════════════════════════════╝");
 
 	// Create display board with current piece (using 2-char cells)
@@ -680,7 +680,7 @@ function renderTetris(
 	);
 
 	// Draw current piece on display board
-	const piece = TETRIS_PIECES[state.currentPiece][state.currentRotation];
+	const piece = BLOCKS_PIECES[state.currentPiece][state.currentRotation];
 	for (let py = 0; py < 4; py++) {
 		for (let px = 0; px < 4; px++) {
 			if (piece[py][px]) {
@@ -726,7 +726,7 @@ function renderTetris(
 
 	// Render next piece preview (2 chars per cell)
 	const nextPiecePreview: string[] = [];
-	const nextShape = TETRIS_PIECES[state.nextPiece][0];
+	const nextShape = BLOCKS_PIECES[state.nextPiece][0];
 	for (let py = 0; py < 4; py++) {
 		let row = "";
 		for (let px = 0; px < 4; px++) {
@@ -790,11 +790,11 @@ function renderTetris(
 /**
  * Tetris game command handler
  */
-export async function tetrisCommand(ctx: CommandContext): Promise<void> {
+export async function blocksCommand(ctx: CommandContext): Promise<void> {
 	// Check if key handler is available
 	if (!ctx.terminal.setKeyHandler || !ctx.terminal.clearKeyHandler) {
 		ctx.terminal.writeln(
-			"tetris: error - terminal does not support game input",
+			"blocks: error - terminal does not support game input",
 		);
 		ctx.terminal.writeln("This game requires keyboard input capture.");
 		return;
@@ -819,7 +819,7 @@ export async function tetrisCommand(ctx: CommandContext): Promise<void> {
 	// Try to load high score from localStorage
 	let savedHighScore = 0;
 	try {
-		const saved = localStorage.getItem("tetris_high_score");
+		const saved = localStorage.getItem("blocks_high_score");
 		if (saved) savedHighScore = parseInt(saved, 10);
 	} catch {
 		// Ignore localStorage errors

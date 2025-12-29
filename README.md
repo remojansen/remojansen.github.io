@@ -6,7 +6,7 @@ My personal website. Powered by TypeScript, Three.js (WebGL) and Xterm.js (termi
 
 ![](assets/images/cmd.png)
 
-![](assets/images/tetris.png)
+![](assets/images/blocks.png)
 
 ![](assets/images/chess.png)
 
