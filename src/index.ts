@@ -6,7 +6,7 @@
  * - Custom shell emulator with virtual filesystem
  * - Boot sequence with BIOS animation
  * - Background and game music
- * - Built-in games (pong, snake, tetris, matrix)
+ * - Built-in games (pong, snake, blocks, matrix)
  * - CV display and other custom commands
  */
 

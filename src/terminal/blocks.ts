@@ -1,5 +1,5 @@
 /**
- * Tetris game - Classic falling blocks puzzle game
+ * Blocks game - Classic falling blocks puzzle game
  */
 
 import type { CommandContext, KeyHandler } from "./ShellEmulator";
@@ -167,7 +167,7 @@ function playLineClearSound(lineCount: number): void {
 		oscillator.start(ctx.currentTime);
 		oscillator.stop(ctx.currentTime + 0.25);
 
-		// Tetris (4 lines) gets extra fanfare
+		// Blocks (4 lines) gets extra fanfare
 		if (lineCount === 4) {
 			const notes = [523.25, 659.25, 783.99, 1046.5];
 			notes.forEach((freq, i) => {
@@ -275,8 +275,8 @@ function playGameOverSound(): void {
 // Game Types and Constants
 // ============================================
 
-// Tetris piece shapes (each rotation is a 4x4 grid)
-const TETRIS_PIECES = {
+// Blocks piece shapes (each rotation is a 4x4 grid)
+const BLOCKS_PIECES = {
 	I: [
 		[
 			[0, 0, 0, 0],
@@ -464,7 +464,7 @@ const TETRIS_PIECES = {
 const PIECE_TYPES = ["I", "O", "T", "S", "Z", "J", "L"] as const;
 type PieceType = (typeof PIECE_TYPES)[number];
 
-interface TetrisState {
+interface BlocksState {
 	// Board dimensions
 	width: number;
 	height: number;
@@ -510,12 +510,12 @@ function getRandomPiece(): PieceType {
  * Check if a piece can move to a position
  */
 function canMove(
-	state: TetrisState,
+	state: BlocksState,
 	newX: number,
 	newY: number,
 	rotation: number,
 ): boolean {
-	const piece = TETRIS_PIECES[state.currentPiece][rotation];
+	const piece = BLOCKS_PIECES[state.currentPiece][rotation];
 
 	for (let py = 0; py < 4; py++) {
 		for (let px = 0; px < 4; px++) {
@@ -541,8 +541,8 @@ function canMove(
 /**
  * Lock the current piece to the board
  */
-function lockPiece(state: TetrisState): void {
-	const piece = TETRIS_PIECES[state.currentPiece][state.currentRotation];
+function lockPiece(state: BlocksState): void {
+	const piece = BLOCKS_PIECES[state.currentPiece][state.currentRotation];
 
 	for (let py = 0; py < 4; py++) {
 		for (let px = 0; px < 4; px++) {
@@ -598,7 +598,7 @@ function lockPiece(state: TetrisState): void {
 	if (state.score > state.highScore) {
 		state.highScore = state.score;
 		try {
-			localStorage.setItem("tetris_high_score", state.highScore.toString());
+			localStorage.setItem("blocks_high_score", state.highScore.toString());
 		} catch {
 			// Ignore localStorage errors
 		}
@@ -610,7 +610,7 @@ function lockPiece(state: TetrisState): void {
 /**
  * Spawn a new piece
  */
-function spawnNewPiece(state: TetrisState): void {
+function spawnNewPiece(state: BlocksState): void {
 	state.currentPiece = state.nextPiece;
 	state.nextPiece = getRandomPiece();
 	state.currentRotation = 0;
@@ -626,10 +626,10 @@ function spawnNewPiece(state: TetrisState): void {
 }
 
 /**
- * Reset tetris game state
+ * Reset blocks game state
  */
-function resetTetrisGame(
-	state: TetrisState,
+function resetBlocksGame(
+	state: BlocksState,
 	width: number,
 	height: number,
 	initialDropSpeed: number,
@@ -651,11 +651,11 @@ function resetTetrisGame(
 }
 
 /**
- * Render the tetris game - using 2 chars per cell for wider display
+ * Render the blocks game - using 2 chars per cell for wider display
  */
-function renderTetris(
+function renderBlocks(
 	ctx: CommandContext,
-	state: TetrisState,
+	state: BlocksState,
 	isFirstFrame: boolean,
 ): void {
 	const lines: string[] = [];
@@ -666,7 +666,7 @@ function renderTetris(
 
 	// Header - wider to match board
 	lines.push("╔════════════════════════════════════════════════════╗");
-	lines.push("║                      TETRIS                        ║");
+	lines.push("║                      BLOCKS                        ║");
 	lines.push("╚════════════════════════════════════════════════════╝");
 
 	// Create display board with current piece (using 2-char cells)
@@ -680,7 +680,7 @@ function renderTetris(
 	);
 
 	// Draw current piece on display board
-	const piece = TETRIS_PIECES[state.currentPiece][state.currentRotation];
+	const piece = BLOCKS_PIECES[state.currentPiece][state.currentRotation];
 	for (let py = 0; py < 4; py++) {
 		for (let px = 0; px < 4; px++) {
 			if (piece[py][px]) {
@@ -726,7 +726,7 @@ function renderTetris(
 
 	// Render next piece preview (2 chars per cell)
 	const nextPiecePreview: string[] = [];
-	const nextShape = TETRIS_PIECES[state.nextPiece][0];
+	const nextShape = BLOCKS_PIECES[state.nextPiece][0];
 	for (let py = 0; py < 4; py++) {
 		let row = "";
 		for (let px = 0; px < 4; px++) {
@@ -788,13 +788,13 @@ function renderTetris(
 }
 
 /**
- * Tetris game command handler
+ * Blocks game command handler
  */
-export async function tetrisCommand(ctx: CommandContext): Promise<void> {
+export async function blocksCommand(ctx: CommandContext): Promise<void> {
 	// Check if key handler is available
 	if (!ctx.terminal.setKeyHandler || !ctx.terminal.clearKeyHandler) {
 		ctx.terminal.writeln(
-			"tetris: error - terminal does not support game input",
+			"blocks: error - terminal does not support game input",
 		);
 		ctx.terminal.writeln("This game requires keyboard input capture.");
 		return;
@@ -819,14 +819,14 @@ export async function tetrisCommand(ctx: CommandContext): Promise<void> {
 	// Try to load high score from localStorage
 	let savedHighScore = 0;
 	try {
-		const saved = localStorage.getItem("tetris_high_score");
+		const saved = localStorage.getItem("blocks_high_score");
 		if (saved) savedHighScore = parseInt(saved, 10);
 	} catch {
 		// Ignore localStorage errors
 	}
 
 	// Initialize game state
-	const state: TetrisState = {
+	const state: BlocksState = {
 		width: BOARD_WIDTH,
 		height: BOARD_HEIGHT,
 		board: createEmptyBoard(BOARD_WIDTH, BOARD_HEIGHT),
@@ -924,7 +924,7 @@ export async function tetrisCommand(ctx: CommandContext): Promise<void> {
 			if (state.gameOver) {
 				// Space to restart after game over
 				if (key === " " || keyCode === 32) {
-					resetTetrisGame(state, BOARD_WIDTH, BOARD_HEIGHT, INITIAL_DROP_SPEED);
+					resetBlocksGame(state, BOARD_WIDTH, BOARD_HEIGHT, INITIAL_DROP_SPEED);
 				}
 				// Q to quit
 				if (key === "q" || key === "Q" || keyCode === 81) {
@@ -1098,7 +1098,7 @@ export async function tetrisCommand(ctx: CommandContext): Promise<void> {
 		}
 
 		// Render game
-		renderTetris(ctx, state, isFirstFrame);
+		renderBlocks(ctx, state, isFirstFrame);
 		isFirstFrame = false;
 
 		await sleep(FRAME_DELAY);
