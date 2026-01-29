@@ -115,8 +115,10 @@ function calculateFontScale(): number {
 
 // Calculate font scale once on page load
 const FONT_SCALE = calculateFontScale();
-const LOGICAL_WIDTH = FONT_SCALE < 1.0 ? window.innerWidth / FONT_SCALE : window.innerWidth;
-const LOGICAL_HEIGHT = FONT_SCALE < 1.0 ? window.innerHeight / FONT_SCALE : window.innerHeight;
+const LOGICAL_WIDTH =
+	FONT_SCALE < 1.0 ? window.innerWidth / FONT_SCALE : window.innerWidth;
+const LOGICAL_HEIGHT =
+	FONT_SCALE < 1.0 ? window.innerHeight / FONT_SCALE : window.innerHeight;
 
 async function runScene(): Promise<void> {
 	const container = document.getElementById("container");
@@ -202,8 +204,10 @@ async function runScene(): Promise<void> {
 			newLogicalWidth = window.innerWidth;
 			newLogicalHeight = window.innerHeight;
 		} else {
-			newLogicalWidth = FONT_SCALE < 1.0 ? window.innerWidth / FONT_SCALE : window.innerWidth;
-			newLogicalHeight = FONT_SCALE < 1.0 ? window.innerHeight / FONT_SCALE : window.innerHeight;
+			newLogicalWidth =
+				FONT_SCALE < 1.0 ? window.innerWidth / FONT_SCALE : window.innerWidth;
+			newLogicalHeight =
+				FONT_SCALE < 1.0 ? window.innerHeight / FONT_SCALE : window.innerHeight;
 		}
 
 		renderer.setSize(newLogicalWidth, newLogicalHeight);

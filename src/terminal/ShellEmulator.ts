@@ -13,6 +13,7 @@ import { blocksCommand } from "./blocks";
 import { chessCommand } from "./chess";
 import { cvCommand } from "./cv";
 import { donutCommand } from "./donut";
+import { feedCommand } from "./feed";
 import { flappyBirdCommand } from "./flappybird";
 import { gameOfLifeCommand } from "./gameoflife";
 import { matrixCommand } from "./matrix";
@@ -398,6 +399,14 @@ function initFileSystem(): void {
 		size: 8192,
 		permissions: "-rwxr-xr-x",
 		modified: "Dec 28 00:00",
+		parent: "Programs",
+	});
+	virtualFileSystem.set("Programs/feed", {
+		name: "feed",
+		isDirectory: false,
+		size: 4096,
+		permissions: "-rwxr-xr-x",
+		modified: "Jan 29 00:00",
 		parent: "Programs",
 	});
 }
@@ -1011,6 +1020,9 @@ registerCommand("./life", gameOfLifeCommand);
 
 // Memory - classic card matching game
 registerCommand("./memory", memoryCommand);
+
+// Feed - dev.to RSS feed reader
+registerCommand("./feed", feedCommand);
 
 // mpg123 - MP3 audio player with visual equalizer
 registerCommand("mpg123", mpg123Command);

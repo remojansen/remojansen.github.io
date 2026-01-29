@@ -31,8 +31,8 @@ export async function accessCommand(ctx: CommandContext): Promise<void> {
 		ctx.terminal.writeln("  --help, -h Show this help message");
 		ctx.terminal.writeln("");
 		ctx.terminal.writeln("Examples:");
-		ctx.terminal.writeln("  access mainframe node01");
-		ctx.terminal.writeln("  access production web-server-1");
+		ctx.terminal.writeln("  access main program");
+		ctx.terminal.writeln("  access main security");
 		return;
 	}
 
