@@ -269,6 +269,11 @@
 			"description": "A WebGL-based CRT terminal renderer for XTerm.js and Electron terminal app with authentic retro effects."
 		},
 		{
+			"project": "touch-coop",
+			"url": "https://github.com/SlaneyEE/touch-coop",
+			"description": "A library that enables couch co-op gaming on web games, using mobile devices as controllers."
+		},
+		{
 			"project": "fresh-onion",
 			"url": "https://github.com/remojansen/fresh-onion",
 			"description": "A utility library for enforcing architectural boundaries in layered Node.js projects.\n  It is ideal for applications that implement a Hexagonal/Onion/Clean architecture."
