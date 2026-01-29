@@ -7,10 +7,13 @@
  */
 
 // Import game commands from separate modules
+import { accessCommand } from "./access";
 import { arkanoidCommand } from "./arkanoid";
+import { blocksCommand } from "./blocks";
 import { chessCommand } from "./chess";
 import { cvCommand } from "./cv";
 import { donutCommand } from "./donut";
+import { feedCommand } from "./feed";
 import { flappyBirdCommand } from "./flappybird";
 import { gameOfLifeCommand } from "./gameoflife";
 import { matrixCommand } from "./matrix";
@@ -20,7 +23,6 @@ import { mpg123Command } from "./mpg123";
 import { pongCommand } from "./pong";
 import { snakeCommand } from "./snake";
 import { spaceInvadersCommand } from "./space-invaders";
-import { blocksCommand } from "./blocks";
 
 /**
  * Key handler function type for games and interactive apps
@@ -399,6 +401,14 @@ function initFileSystem(): void {
 		modified: "Dec 28 00:00",
 		parent: "Programs",
 	});
+	virtualFileSystem.set("Programs/feed", {
+		name: "feed",
+		isDirectory: false,
+		size: 4096,
+		permissions: "-rwxr-xr-x",
+		modified: "Jan 29 00:00",
+		parent: "Programs",
+	});
 }
 
 // Initialize the file system
@@ -584,6 +594,7 @@ registerCommand("help", (ctx) => {
 	ctx.terminal.writeln("  cat      - Display file contents");
 	ctx.terminal.writeln("  ffplay   - Play video files");
 	ctx.terminal.writeln("  mpg123   - Play MP3 audio files");
+	ctx.terminal.writeln("  access   - Connect to remote cluster node");
 });
 
 // CD command - change directory
@@ -1010,8 +1021,14 @@ registerCommand("./life", gameOfLifeCommand);
 // Memory - classic card matching game
 registerCommand("./memory", memoryCommand);
 
+// Feed - dev.to RSS feed reader
+registerCommand("./feed", feedCommand);
+
 // mpg123 - MP3 audio player with visual equalizer
 registerCommand("mpg123", mpg123Command);
+
+// access - Easter egg command (Jurassic Park reference)
+registerCommand("access", accessCommand);
 
 /**
  * Get tab completions for a partial path

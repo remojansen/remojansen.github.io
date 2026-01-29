@@ -10,8 +10,8 @@
  * - CV display and other custom commands
  */
 
-import * as THREE from "three";
 import { TerminalFrame, TerminalText } from "cool-retro-term-renderer";
+import * as THREE from "three";
 import { XTermAdapter } from "./terminal/XTermAdapter";
 
 // Audio controller interface
@@ -95,11 +95,49 @@ function setupAudio(camera: THREE.Camera): AudioControls {
 	};
 }
 
+/**
+ * Calculate a font scale factor based on screen height (applied once on load)
+ * This ensures games and content remain playable on smaller screens
+ * Reference: 1080p (1080px height) = scale 1.0
+ */
+function calculateFontScale(): number {
+	const screenHeight = window.innerHeight;
+	const referenceHeight = 1080; // Base reference height (1080p)
+	const minScale = 0.65; // Minimum scale for very small screens
+	const maxScale = 1.0; // Maximum scale (no scaling up)
+
+	// Calculate scale based on screen height ratio
+	const scale = screenHeight / referenceHeight;
+
+	// Clamp between min and max
+	return Math.min(maxScale, Math.max(minScale, scale));
+}
+
+// Calculate font scale once on page load
+const FONT_SCALE = calculateFontScale();
+const LOGICAL_WIDTH =
+	FONT_SCALE < 1.0 ? window.innerWidth / FONT_SCALE : window.innerWidth;
+const LOGICAL_HEIGHT =
+	FONT_SCALE < 1.0 ? window.innerHeight / FONT_SCALE : window.innerHeight;
+
 async function runScene(): Promise<void> {
 	const container = document.getElementById("container");
 
 	if (!container) {
 		throw new Error("Container element not found");
+	}
+
+	console.log(
+		`Screen height: ${window.innerHeight}px, Font scale: ${FONT_SCALE.toFixed(2)}`,
+	);
+
+	// Apply CSS transform to scale the container content
+	// This effectively reduces the font size for smaller screens
+	if (FONT_SCALE < 1.0) {
+		container.style.transform = `scale(${FONT_SCALE})`;
+		container.style.transformOrigin = "top left";
+		container.style.width = `${100 / FONT_SCALE}%`;
+		container.style.height = `${100 / FONT_SCALE}%`;
 	}
 
 	// Create the scene
@@ -112,23 +150,20 @@ async function runScene(): Promise<void> {
 	// Setup audio
 	const audioControls = setupAudio(camera);
 
-	// Create the renderer
+	// Create the renderer - use logical size for the scaled container
 	const renderer = new THREE.WebGLRenderer({ antialias: true });
-	renderer.setSize(window.innerWidth, window.innerHeight);
+	renderer.setSize(LOGICAL_WIDTH, LOGICAL_HEIGHT);
 	renderer.setPixelRatio(window.devicePixelRatio);
 	renderer.setClearColor(0x000000);
 	container.appendChild(renderer.domElement);
 
-	// Create the terminal text
-	const terminalText = new TerminalText(window.innerWidth, window.innerHeight);
+	// Create the terminal text with logical dimensions
+	const terminalText = new TerminalText(LOGICAL_WIDTH, LOGICAL_HEIGHT);
 	terminalText.mesh.position.z = 0;
 	scene.add(terminalText.mesh);
 
-	// Create the terminal frame
-	const terminalFrame = new TerminalFrame(
-		window.innerWidth,
-		window.innerHeight,
-	);
+	// Create the terminal frame with logical dimensions
+	const terminalFrame = new TerminalFrame(LOGICAL_WIDTH, LOGICAL_HEIGHT);
 	terminalFrame.mesh.position.z = 0.1;
 	scene.add(terminalFrame.mesh);
 
@@ -158,15 +193,37 @@ async function runScene(): Promise<void> {
 		xtermAdapter.focus();
 	});
 
-	// Handle window resize
-	window.addEventListener("resize", () => {
-		renderer.setSize(window.innerWidth, window.innerHeight);
-		terminalFrame.updateSize(window.innerWidth, window.innerHeight);
-		terminalText.updateSize(window.innerWidth, window.innerHeight);
+	// Handle window resize (uses fixed FONT_SCALE calculated on load)
+	const handleResize = () => {
+		// In fullscreen, use the screen dimensions directly
+		const isFullscreen = document.fullscreenElement !== null;
+		let newLogicalWidth: number;
+		let newLogicalHeight: number;
+
+		if (isFullscreen) {
+			newLogicalWidth = window.innerWidth;
+			newLogicalHeight = window.innerHeight;
+		} else {
+			newLogicalWidth =
+				FONT_SCALE < 1.0 ? window.innerWidth / FONT_SCALE : window.innerWidth;
+			newLogicalHeight =
+				FONT_SCALE < 1.0 ? window.innerHeight / FONT_SCALE : window.innerHeight;
+		}
+
+		renderer.setSize(newLogicalWidth, newLogicalHeight);
+		terminalFrame.updateSize(newLogicalWidth, newLogicalHeight);
+		terminalText.updateSize(newLogicalWidth, newLogicalHeight);
 		const gridSize = terminalText.getGridSize();
 		if (gridSize.cols > 0 && gridSize.rows > 0) {
 			xtermAdapter.resize(gridSize.cols, gridSize.rows);
 		}
+	};
+
+	window.addEventListener("resize", handleResize);
+	document.addEventListener("fullscreenchange", () => {
+		handleResize();
+		// Refocus terminal after fullscreen change
+		setTimeout(() => xtermAdapter.focus(), 100);
 	});
 
 	// Animation loop

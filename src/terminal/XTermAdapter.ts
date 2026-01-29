@@ -68,6 +68,10 @@ export class XTermAdapter {
 	// biome-ignore lint/correctness/noUnusedPrivateClassMembers: property is used via this.outputBuffer
 	private outputBuffer: string = "";
 
+	// Document-level keyboard handler for fullscreen mode
+	private boundFullscreenKeyHandler: ((event: KeyboardEvent) => void) | null =
+		null;
+
 	constructor(
 		terminalText: TerminalText,
 		cols: number = 80,
@@ -230,6 +234,61 @@ export class XTermAdapter {
 		this.xterm.onScroll(() => {
 			this.updateTerminalText();
 		});
+
+		// Setup document-level keyboard handler for fullscreen mode
+		// xterm's hidden container loses keyboard focus in fullscreen
+		this.boundFullscreenKeyHandler = (event: KeyboardEvent) => {
+			// Only intercept when in fullscreen mode
+			if (!document.fullscreenElement) {
+				return;
+			}
+
+			// Block all keyboard input on mobile devices
+			if (isMobileDevice()) {
+				return;
+			}
+
+			// Skip if a game handler is active (games use their own document-level listener)
+			if (this.gameKeyHandler) {
+				return;
+			}
+
+			// Forward the event to xterm by simulating focus and re-dispatching
+			// We handle special keys ourselves, let xterm handle printable chars
+			const key = event.key;
+			const keyCode = event.keyCode;
+
+			if (event.type === "keydown") {
+				// Handle special keys
+				if (key === "Enter" || keyCode === 13) {
+					this.handleEnter();
+					event.preventDefault();
+				} else if (key === "Backspace" || keyCode === 8) {
+					this.handleBackspace();
+					event.preventDefault();
+				} else if (key === "ArrowUp" || keyCode === 38) {
+					this.handleArrowUp();
+					event.preventDefault();
+				} else if (key === "ArrowDown" || keyCode === 40) {
+					this.handleArrowDown();
+					event.preventDefault();
+				} else if (key === "Tab" || keyCode === 9) {
+					this.handleTab();
+					event.preventDefault();
+				} else if (
+					key.length === 1 &&
+					!event.ctrlKey &&
+					!event.altKey &&
+					!event.metaKey
+				) {
+					// Printable character - add to current line
+					this.handlePrintableKey(key);
+					event.preventDefault();
+				}
+			}
+		};
+
+		document.addEventListener("keydown", this.boundFullscreenKeyHandler, true);
 
 		// Enable mouse wheel scrolling on the canvas by forwarding events to xterm
 		// Get the container element and forward wheel events
@@ -811,6 +870,26 @@ export class XTermAdapter {
 	}
 
 	/**
+	 * Handle printable character key (for fullscreen mode)
+	 */
+	private handlePrintableKey(key: string): void {
+		// Reset cursor blink on any keypress
+		this.terminalText.resetCursorBlink();
+
+		// Ignore if boot/BIOS not complete or command running
+		if (!this.bootComplete || !this.biosComplete || this.isCommandRunning) {
+			return;
+		}
+
+		// Clear selection when typing
+		this.terminalText.clearSelection();
+		this.currentLine += key;
+		this.xterm.write(key, () => {
+			this.updateTerminalText();
+		});
+	}
+
+	/**
 	 * Handle Backspace key - simple delete from end of currentLine
 	 * @returns false always since we handle it ourselves
 	 */
@@ -855,6 +934,14 @@ export class XTermAdapter {
 		// If waiting for boot, start the boot sequence
 		if (!this.bootComplete) {
 			this.bootComplete = true;
+
+			// Request fullscreen mode for immersive experience
+			const container = document.querySelector("#container");
+			if (container) {
+				container.requestFullscreen().catch(() => {
+					// Fullscreen request failed (user denied or not supported) - continue anyway
+				});
+			}
 
 			// Trigger the audio controls to start background music
 			if (this.audioControls) {
@@ -1185,6 +1272,14 @@ export class XTermAdapter {
 	 * Dispose of resources
 	 */
 	dispose(): void {
+		if (this.boundFullscreenKeyHandler) {
+			document.removeEventListener(
+				"keydown",
+				this.boundFullscreenKeyHandler,
+				true,
+			);
+			this.boundFullscreenKeyHandler = null;
+		}
 		this.xterm.dispose();
 		if (this.hiddenContainer.parentNode) {
 			this.hiddenContainer.parentNode.removeChild(this.hiddenContainer);

@@ -36,12 +36,24 @@
                 padding: 0;
                 box-sizing: border-box;
             }
-            body {
+            html, body {
                 overflow: hidden;
+                width: 100%;
+                height: 100%;
             }
             #container {
                 width: 100vw;
                 height: 100vh;
+                overflow: hidden;
+            }
+            #container:fullscreen {
+                width: 100%;
+                height: 100%;
+                background: black;
+            }
+            #container:fullscreen canvas {
+                width: 100%;
+                height: 100%;
             }
         </style>
     </head>

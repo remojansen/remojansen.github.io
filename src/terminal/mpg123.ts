@@ -20,9 +20,11 @@ let audioContext: AudioContext | null = null;
  */
 function getAudioContext(): AudioContext {
 	if (!audioContext) {
-		audioContext = new (window.AudioContext ||
+		audioContext = new (
+			window.AudioContext ||
 			(window as unknown as { webkitAudioContext: typeof AudioContext })
-				.webkitAudioContext)();
+				.webkitAudioContext
+		)();
 	}
 	return audioContext;
 }
@@ -342,9 +344,12 @@ export async function mpg123Command(ctx: CommandContext): Promise<void> {
 			let screen = "\x1b[H"; // Move cursor to top-left
 
 			// Header
-			screen += "\x1b[96m╔══════════════════════════════════════════════════════╗\x1b[0m\r\n";
-			screen += "\x1b[96m║\x1b[0m   \x1b[93m♪ mpg123 - MPEG Audio Player\x1b[0m                       \x1b[96m║\x1b[0m\r\n";
-			screen += "\x1b[96m╚══════════════════════════════════════════════════════╝\x1b[0m\r\n";
+			screen +=
+				"\x1b[96m╔══════════════════════════════════════════════════════╗\x1b[0m\r\n";
+			screen +=
+				"\x1b[96m║\x1b[0m   \x1b[93m♪ mpg123 - MPEG Audio Player\x1b[0m                       \x1b[96m║\x1b[0m\r\n";
+			screen +=
+				"\x1b[96m╚══════════════════════════════════════════════════════╝\x1b[0m\r\n";
 			screen += "\r\n";
 
 			// Now playing
@@ -372,7 +377,9 @@ export async function mpg123Command(ctx: CommandContext): Promise<void> {
 			screen += "\r\n";
 
 			// Status
-			const status = paused ? "\x1b[93m⏸  PAUSED\x1b[0m" : "\x1b[92m▶  PLAYING\x1b[0m";
+			const status = paused
+				? "\x1b[93m⏸  PAUSED\x1b[0m"
+				: "\x1b[92m▶  PLAYING\x1b[0m";
 			screen += `  Status: ${status}\r\n`;
 			screen += "\r\n";
 
