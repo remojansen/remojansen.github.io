@@ -37,7 +37,10 @@ function playFlipSound(): void {
 
 		oscillator.type = "sine";
 		oscillator.frequency.setValueAtTime(800, ctx.currentTime);
-		oscillator.frequency.exponentialRampToValueAtTime(400, ctx.currentTime + 0.1);
+		oscillator.frequency.exponentialRampToValueAtTime(
+			400,
+			ctx.currentTime + 0.1,
+		);
 
 		gainNode.gain.setValueAtTime(0.1, ctx.currentTime);
 		gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.1);
@@ -90,7 +93,10 @@ function playNoMatchSound(): void {
 
 		oscillator.type = "sawtooth";
 		oscillator.frequency.setValueAtTime(200, ctx.currentTime);
-		oscillator.frequency.exponentialRampToValueAtTime(100, ctx.currentTime + 0.2);
+		oscillator.frequency.exponentialRampToValueAtTime(
+			100,
+			ctx.currentTime + 0.2,
+		);
 
 		gainNode.gain.setValueAtTime(0.1, ctx.currentTime);
 		gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.2);
@@ -121,8 +127,14 @@ function playVictorySound(): void {
 			oscillator.frequency.setValueAtTime(freq, ctx.currentTime + i * 0.15);
 
 			gainNode.gain.setValueAtTime(0, ctx.currentTime + i * 0.15);
-			gainNode.gain.linearRampToValueAtTime(0.15, ctx.currentTime + i * 0.15 + 0.02);
-			gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + i * 0.15 + 0.25);
+			gainNode.gain.linearRampToValueAtTime(
+				0.15,
+				ctx.currentTime + i * 0.15 + 0.02,
+			);
+			gainNode.gain.exponentialRampToValueAtTime(
+				0.01,
+				ctx.currentTime + i * 0.15 + 0.25,
+			);
 
 			oscillator.start(ctx.currentTime + i * 0.15);
 			oscillator.stop(ctx.currentTime + i * 0.15 + 0.25);
@@ -168,11 +180,24 @@ interface MemoryState {
 
 // Card symbols (using box drawing and special characters for retro look)
 const CARD_SYMBOLS = [
-	"♠", "♥", "♦", "♣",
-	"★", "●", "■", "▲",
-	"♪", "☼", "◆", "○",
-	"△", "□", "◇", "♩",
-	"⬟", "⬢",
+	"♠",
+	"♥",
+	"♦",
+	"♣",
+	"★",
+	"●",
+	"■",
+	"▲",
+	"♪",
+	"☼",
+	"◆",
+	"○",
+	"△",
+	"□",
+	"◇",
+	"♩",
+	"⬟",
+	"⬢",
 ];
 
 /**
@@ -232,7 +257,7 @@ function renderMemory(
 
 	// Card dimensions
 	const cardWidth = 5;
-	const cardHeight = 3;
+	const _cardHeight = 3;
 
 	// Header
 	const headerWidth = state.cols * (cardWidth + 1) + 1;
@@ -241,7 +266,9 @@ function renderMemory(
 	const titlePaddingRight = headerWidth - title.length - titlePadding;
 
 	lines.push(`╔${"═".repeat(headerWidth)}╗`);
-	lines.push(`║${" ".repeat(titlePadding)}${title}${" ".repeat(titlePaddingRight)}║`);
+	lines.push(
+		`║${" ".repeat(titlePadding)}${title}${" ".repeat(titlePaddingRight)}║`,
+	);
 	lines.push(`╚${"═".repeat(headerWidth)}╝`);
 
 	// Stats line
@@ -293,9 +320,9 @@ function renderMemory(
 				bottomBorder = `>${bottomBorder.slice(1, -1)}<`;
 			}
 
-			cardLines[0] += topBorder + " ";
-			cardLines[1] += middleLine + " ";
-			cardLines[2] += bottomBorder + " ";
+			cardLines[0] += `${topBorder} `;
+			cardLines[1] += `${middleLine} `;
+			cardLines[2] += `${bottomBorder} `;
 		}
 
 		lines.push(cardLines[0]);
@@ -312,7 +339,8 @@ function renderMemory(
 		lines.push(statusLine);
 		lines.push("  Press SPACE to play again, Q to quit");
 	} else {
-		statusLine = "  ↑↓←→ = Move cursor  |  SPACE/ENTER = Flip card  |  Q = Quit";
+		statusLine =
+			"  ↑↓←→ = Move cursor  |  SPACE/ENTER = Flip card  |  Q = Quit";
 		lines.push(statusLine);
 	}
 
@@ -337,7 +365,9 @@ function renderMemory(
 export async function memoryCommand(ctx: CommandContext): Promise<void> {
 	// Check if key handler is available
 	if (!ctx.terminal.setKeyHandler || !ctx.terminal.clearKeyHandler) {
-		ctx.terminal.writeln("memory: error - terminal does not support game input");
+		ctx.terminal.writeln(
+			"memory: error - terminal does not support game input",
+		);
 		ctx.terminal.writeln("This game requires keyboard input capture.");
 		return;
 	}
@@ -492,7 +522,11 @@ export async function memoryCommand(ctx: CommandContext): Promise<void> {
 		}
 
 		// Handle flipping cards back after no match
-		if (state.waitingForFlip && state.firstSelection !== null && state.secondSelection !== null) {
+		if (
+			state.waitingForFlip &&
+			state.firstSelection !== null &&
+			state.secondSelection !== null
+		) {
 			// Render with revealed cards
 			renderMemory(ctx, state, isFirstFrame);
 			isFirstFrame = false;

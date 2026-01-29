@@ -7,7 +7,9 @@
  */
 
 // Import game commands from separate modules
+import { accessCommand } from "./access";
 import { arkanoidCommand } from "./arkanoid";
+import { blocksCommand } from "./blocks";
 import { chessCommand } from "./chess";
 import { cvCommand } from "./cv";
 import { donutCommand } from "./donut";
@@ -20,7 +22,6 @@ import { mpg123Command } from "./mpg123";
 import { pongCommand } from "./pong";
 import { snakeCommand } from "./snake";
 import { spaceInvadersCommand } from "./space-invaders";
-import { blocksCommand } from "./blocks";
 
 /**
  * Key handler function type for games and interactive apps
@@ -584,6 +585,7 @@ registerCommand("help", (ctx) => {
 	ctx.terminal.writeln("  cat      - Display file contents");
 	ctx.terminal.writeln("  ffplay   - Play video files");
 	ctx.terminal.writeln("  mpg123   - Play MP3 audio files");
+	ctx.terminal.writeln("  access   - Connect to remote cluster node");
 });
 
 // CD command - change directory
@@ -1012,6 +1014,9 @@ registerCommand("./memory", memoryCommand);
 
 // mpg123 - MP3 audio player with visual equalizer
 registerCommand("mpg123", mpg123Command);
+
+// access - Easter egg command (Jurassic Park reference)
+registerCommand("access", accessCommand);
 
 /**
  * Get tab completions for a partial path

@@ -10,8 +10,8 @@
  * - CV display and other custom commands
  */
 
-import * as THREE from "three";
 import { TerminalFrame, TerminalText } from "cool-retro-term-renderer";
+import * as THREE from "three";
 import { XTermAdapter } from "./terminal/XTermAdapter";
 
 // Audio controller interface
