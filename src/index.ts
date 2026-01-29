@@ -192,9 +192,19 @@ async function runScene(): Promise<void> {
 	});
 
 	// Handle window resize (uses fixed FONT_SCALE calculated on load)
-	window.addEventListener("resize", () => {
-		const newLogicalWidth = FONT_SCALE < 1.0 ? window.innerWidth / FONT_SCALE : window.innerWidth;
-		const newLogicalHeight = FONT_SCALE < 1.0 ? window.innerHeight / FONT_SCALE : window.innerHeight;
+	const handleResize = () => {
+		// In fullscreen, use the screen dimensions directly
+		const isFullscreen = document.fullscreenElement !== null;
+		let newLogicalWidth: number;
+		let newLogicalHeight: number;
+
+		if (isFullscreen) {
+			newLogicalWidth = window.innerWidth;
+			newLogicalHeight = window.innerHeight;
+		} else {
+			newLogicalWidth = FONT_SCALE < 1.0 ? window.innerWidth / FONT_SCALE : window.innerWidth;
+			newLogicalHeight = FONT_SCALE < 1.0 ? window.innerHeight / FONT_SCALE : window.innerHeight;
+		}
 
 		renderer.setSize(newLogicalWidth, newLogicalHeight);
 		terminalFrame.updateSize(newLogicalWidth, newLogicalHeight);
@@ -203,6 +213,13 @@ async function runScene(): Promise<void> {
 		if (gridSize.cols > 0 && gridSize.rows > 0) {
 			xtermAdapter.resize(gridSize.cols, gridSize.rows);
 		}
+	};
+
+	window.addEventListener("resize", handleResize);
+	document.addEventListener("fullscreenchange", () => {
+		handleResize();
+		// Refocus terminal after fullscreen change
+		setTimeout(() => xtermAdapter.focus(), 100);
 	});
 
 	// Animation loop
