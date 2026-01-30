@@ -177,6 +177,13 @@ async function runScene(): Promise<void> {
 		xtermAdapter.resize(gridSize.cols, gridSize.rows);
 	}
 
+	// Force a refresh after the first render frame to ensure boot prompt is visible
+	requestAnimationFrame(() => {
+		if (gridSize.cols > 0 && gridSize.rows > 0) {
+			xtermAdapter.resize(gridSize.cols, gridSize.rows);
+		}
+	});
+
 	// Listen for grid size changes and resize xterm
 	terminalText.onGridSizeChange((cols, rows) => {
 		console.log(`Grid size changed: ${cols}x${rows}`);
