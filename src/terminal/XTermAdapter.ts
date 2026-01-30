@@ -109,9 +109,8 @@ export class XTermAdapter {
 		// Open terminal in hidden container
 		this.xterm.open(this.hiddenContainer);
 
-		// Show boot prompt first, wait for Enter to start BIOS sequence
-		// Delay slightly to ensure renderer is fully initialized
-		setTimeout(() => this.showBootPrompt(), 500);
+		// Boot prompt is shown via showBootPrompt() called from index.ts
+		// after terminal is fully initialized and resized
 
 		// Attach keyboard listener to intercept arrow keys BEFORE xterm processes them
 		// This allows us to use Up/Down for command history instead of cursor movement
@@ -478,8 +477,9 @@ export class XTermAdapter {
 
 	/**
 	 * Show the initial boot prompt (or mobile message if on mobile device)
+	 * Called from index.ts after terminal is fully initialized
 	 */
-	private showBootPrompt(): void {
+	public showBootPrompt(): void {
 		if (isMobileDevice()) {
 			const mobileMessage =
 				"Sorry, this site is\r\n" +

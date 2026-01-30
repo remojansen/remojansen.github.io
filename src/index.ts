@@ -177,11 +177,17 @@ async function runScene(): Promise<void> {
 		xtermAdapter.resize(gridSize.cols, gridSize.rows);
 	}
 
-	// Force a refresh after the first render frame to ensure boot prompt is visible
+	// Show boot prompt after terminal is fully initialized and first frame rendered
+	// Use double requestAnimationFrame to ensure layout and paint are truly complete
+	// This is more reliable across different display types and refresh rates
 	requestAnimationFrame(() => {
-		if (gridSize.cols > 0 && gridSize.rows > 0) {
-			xtermAdapter.resize(gridSize.cols, gridSize.rows);
-		}
+		requestAnimationFrame(() => {
+			if (gridSize.cols > 0 && gridSize.rows > 0) {
+				xtermAdapter.resize(gridSize.cols, gridSize.rows);
+			}
+			// Show boot prompt after resize is complete
+			xtermAdapter.showBootPrompt();
+		});
 	});
 
 	// Listen for grid size changes and resize xterm
