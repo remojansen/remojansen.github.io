@@ -935,14 +935,6 @@ export class XTermAdapter {
 		if (!this.bootComplete) {
 			this.bootComplete = true;
 
-			// Request fullscreen mode for immersive experience
-			const container = document.querySelector("#container");
-			if (container) {
-				container.requestFullscreen().catch(() => {
-					// Fullscreen request failed (user denied or not supported) - continue anyway
-				});
-			}
-
 			// Trigger the audio controls to start background music
 			if (this.audioControls) {
 				this.audioControls.startBackgroundMusic();
