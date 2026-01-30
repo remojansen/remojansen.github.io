@@ -110,7 +110,8 @@ export class XTermAdapter {
 		this.xterm.open(this.hiddenContainer);
 
 		// Show boot prompt first, wait for Enter to start BIOS sequence
-		this.showBootPrompt();
+		// Delay slightly to ensure renderer is fully initialized
+		setTimeout(() => this.showBootPrompt(), 500);
 
 		// Attach keyboard listener to intercept arrow keys BEFORE xterm processes them
 		// This allows us to use Up/Down for command history instead of cursor movement
@@ -491,13 +492,15 @@ export class XTermAdapter {
 				"a desktop or laptop\r\n" +
 				"to enjoy the full\r\n" +
 				"experience.";
-			this.xterm.write(mobileMessage);
-			this.updateTerminalText();
+			this.xterm.write(mobileMessage, () => {
+				this.updateTerminalText();
+			});
 			return;
 		}
 		const bootMessage = "Press ENTER to initiate the BIOS boot sequence... ";
-		this.xterm.write(bootMessage);
-		this.updateTerminalText();
+		this.xterm.write(bootMessage, () => {
+			this.updateTerminalText();
+		});
 	}
 
 	/**
