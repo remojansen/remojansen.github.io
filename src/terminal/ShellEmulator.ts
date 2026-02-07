@@ -128,7 +128,7 @@ let currentDirectory = "";
  * Resolve a path relative to current directory
  * Handles . .. and absolute paths (starting with ~ or /)
  */
-function resolvePath(path: string): string {
+export function resolvePath(path: string): string {
 	// Empty path means current directory
 	if (!path || path === ".") {
 		return currentDirectory;

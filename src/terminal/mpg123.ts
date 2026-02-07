@@ -9,6 +9,7 @@
  */
 
 import type { CommandContext, KeyHandler } from "./ShellEmulator";
+import { resolvePath } from "./ShellEmulator";
 
 /**
  * Audio context singleton for the player
@@ -178,24 +179,8 @@ export async function mpg123Command(ctx: CommandContext): Promise<void> {
 
 	const inputPath = ctx.args[1];
 
-	// Import resolvePath from ShellEmulator via dynamic resolution
-	// We need to resolve the path to check the virtual filesystem
-	let resolvedPath = inputPath;
-
-	// Handle relative paths
-	if (inputPath.startsWith("./")) {
-		resolvedPath = inputPath.slice(2);
-	} else if (!inputPath.startsWith("/") && !inputPath.startsWith("~")) {
-		// Relative path - prepend current working directory if needed
-		// For simplicity, we'll just use the path as-is since Music is at root
-	}
-
-	// Normalize path (remove leading ~/ or /)
-	if (resolvedPath.startsWith("~/")) {
-		resolvedPath = resolvedPath.slice(2);
-	} else if (resolvedPath.startsWith("/")) {
-		resolvedPath = resolvedPath.slice(1);
-	}
+	// Resolve the path relative to current working directory
+	const resolvedPath = resolvePath(inputPath);
 
 	// Check if file exists in our music files map
 	const audioUrl = musicFiles.get(resolvedPath);
