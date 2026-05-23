@@ -672,8 +672,8 @@ url:e,reason:"blocked_domain_not_allowlisted"},b.parentOrigin);throw new DOMExce
 
         /* Fixed Presentation Slide Bounds (1280x720) */
         .slide-container {
-            width: 80%;
-            height: 95%;
+            width: 100%;
+            height: 100%;
             background-color: #0a0a0c; /* Matte Black */
             border-radius: 12px;
             border: 1px solid #1f1f23;
@@ -821,7 +821,6 @@ url:e,reason:"blocked_domain_not_allowlisted"},b.parentOrigin);throw new DOMExce
         .styled-list li {
             position: relative;
             padding-left: 45px;
-            font-size: 20px;
             color: #a1a1aa;
         }
 
@@ -829,7 +828,6 @@ url:e,reason:"blocked_domain_not_allowlisted"},b.parentOrigin);throw new DOMExce
             position: absolute;
             left: 5px;
             top: 4px;
-            font-size: 20px;
             color: #ff6b00;
         }
 
@@ -876,6 +874,22 @@ url:e,reason:"blocked_domain_not_allowlisted"},b.parentOrigin);throw new DOMExce
 
         .table-layout tr:nth-child(even) td {
             background-color: #131316;
+        }
+
+        #slide10 .table-layout th {
+            padding: 10px 28px;
+        }
+
+        #slide10 .table-layout td {
+            padding: 10px 28px;
+        }
+
+        #slide3 .table-layout th {
+            padding: 10px 28px;
+        }
+
+        #slide3 .table-layout td {
+            padding: 10px 28px;
         }
 
         /* Image Sizing and Wrappers */
@@ -1235,7 +1249,7 @@ url:e,reason:"blocked_domain_not_allowlisted"},b.parentOrigin);throw new DOMExce
                 </div>
                 <h3 style="color: #22c55e; font-size: 24px;"><i class="fa-solid fa-circle-check"></i> Intent is Encoded</h3>
                 <p style="font-size: 20px; color: #ffffff; font-weight: 500;">
-                    AI reads the types, enums, and FK relationships as a complete blueprint. Generation is accurate on the first attempt. Compiler verifies type safety, database constraints guarantee data integrity, IO makes side effects visible — eliminating entire classes of edge cases.
+                    AI reads types and constraints directly — no inference needed, no hallucination.
                 </p>
                 <ul class="styled-list" style="gap: 12px; font-size: 15px;">
                     <li><i class="fa-solid fa-check" style="color: #22c55e;"></i> <strong>AI Blueprint:</strong> Types, enums, and FK relationships give AI a complete context map — generation is accurate on the first attempt.</li>
