@@ -1,0 +1,1662 @@
+<!DOCTYPE html>
+<!-- saved from url=(0132)blob:https://0r6ua8mmcfydjnpwlqfj0i7ubxbo1ji63rgna4etl7e5pwzic6-h906969431.scf.usercontent.goog/119203f2-0318-49a5-98f6-0f19097d56d0 -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script>(function(firebaseConfig, initialAuthToken, appId) {
+        window.__firebase_config = firebaseConfig;
+        window.__initial_auth_token = initialAuthToken;
+        window.__app_id = appId;
+            })("\n{\n  \"apiKey\": \"AIzaSyCqyCcs2R2e7AegGjvFAwG98wlamtbHvZY\",\n  \"authDomain\": \"bard-frontend.firebaseapp.com\",\n  \"projectId\": \"bard-frontend\",\n  \"storageBucket\": \"bard-frontend.firebasestorage.app\",\n  \"messagingSenderId\": \"175205271074\",\n  \"appId\": \"1:175205271074:web:2b7bd4d34d33bf38e6ec7b\"\n}\n","eyJhbGciOiJSUzI1NiIsImtpZCI6ImE1MTMzNTUyZGIzZmQ1ZWM5NjdlZWFkNjk3ZjNhZTgwYjliNzk1ZjQiLCJ0eXAiOiJKV1QifQ.eyJzdWIiOiJmaXJlYmFzZS1hZG1pbnNkay1mYnN2Y0BiYXJkLWZyb250ZW5kLmlhbS5nc2VydmljZWFjY291bnQuY29tIiwiYXVkIjoiaHR0cHM6Ly9pZGVudGl0eXRvb2xraXQuZ29vZ2xlYXBpcy5jb20vZ29vZ2xlLmlkZW50aXR5LmlkZW50aXR5dG9vbGtpdC52MS5JZGVudGl0eVRvb2xraXQiLCJ1aWQiOiIxNzM0MDg0NjkxNjk4MDQ4MDY1OSIsImlzcyI6ImZpcmViYXNlLWFkbWluc2RrLWZic3ZjQGJhcmQtZnJvbnRlbmQuaWFtLmdzZXJ2aWNlYWNjb3VudC5jb20iLCJjbGFpbXMiOnsiYXBwSWQiOiI1NWVjZGUwYmQ1OTYtcHJlc2VudGF0aW9uLmh0bWwtOTgwIn0sImV4cCI6MTc3OTM0NTA2MCwiaWF0IjoxNzc5MzQxNDYwLCJhbGciOiJSUzI1NiJ9.YnmO59CfS_SGe8S0Wdz0MsTW72mX9PUImI0nkYyqCgzNMQGfQK50e5fBvA1QS2Z6JUMYNvJuMKIcxdcOy-fvB6s3QxIMepxNGUtvApIv29oNQMMemnAflr1thsS5NhV7gm-VQ8YLHYjHML3VlT7DHTgq6TXurAsgu00m35_dTUMWM0_-vvyWRxIunHy3SSwMIjrst8ejQbuQJOU_DF_i864MUKPNmERFreshIYeZNr3cw0lx57kcE14o2eVjKUsQ-X-c9fgoE8MRJe_a-cPnDUn-Af7P7jjl0CgYgxWUN4qPOuH1Me541zZr9VJHoau3BPfn_o5UJZMzE3I_I87LyA","55ecde0bd596-presentation.html-980")</script><script>(function(){'use strict';var h=typeof Object.defineProperties=="function"?Object.defineProperty:function(a,b,d){if(a==Array.prototype||a==Object.prototype)return a;a[b]=d.value;return a};function l(a){a=["object"==typeof globalThis&&globalThis,a,"object"==typeof window&&window,"object"==typeof self&&self,"object"==typeof global&&global];for(var b=0;b<a.length;++b){var d=a[b];if(d&&d.Math==Math)return d}throw Error("Cannot find global object");}var n=l(this);
+function p(a,b){if(b)a:{var d=n;a=a.split(".");for(var c=0;c<a.length-1;c++){var e=a[c];if(!(e in d))break a;d=d[e]}a=a[a.length-1];c=d[a];b=b(c);b!=c&&b!=null&&h(d,a,{configurable:!0,writable:!0,value:b})}}function r(a){function b(c){return a.next(c)}function d(c){return a.throw(c)}return new Promise(function(c,e){function f(g){g.done?c(g.value):Promise.resolve(g.value).then(b,d).then(f,e)}f(a.next())})}function t(a){return r(a())}
+p("Object.values",function(a){return a?a:function(b){var d=[],c;for(c in b)Object.prototype.hasOwnProperty.call(b,c)&&d.push(b[c]);return d}});p("Array.prototype.includes",function(a){return a?a:function(b,d){var c=this;c instanceof String&&(c=String(c));var e=c.length;d=d||0;for(d<0&&(d=Math.max(d+e,0));d<e;d++){var f=c[d];if(f===b||Object.is(f,b))return!0}return!1}});/*
+
+ MIT License
+
+ Copyright (c) 2017-2023 W.Y.
+
+ Permission is hereby granted, free of charge, to any person obtaining a copy
+ of this software and associated documentation files (the "Software"), to deal
+ in the Software without restriction, including without limitation the rights
+ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ copies of the Software, and to permit persons to whom the Software is
+ furnished to do so, subject to the following conditions:
+
+ The above copyright notice and this permission notice shall be included in
+ all copies or substantial portions of the Software.
+
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ SOFTWARE.
+
+*/
+function u(a,b){var d=a.style;b.backgroundColor&&(d.backgroundColor=b.backgroundColor);b.width&&(d.width=`${b.width}px`);b.height&&(d.height=`${b.height}px`);var c=b.style;c!=null&&Object.keys(c).forEach(e=>{d[e]=c[e]})};var v=(()=>{var a=0;return()=>{a+=1;return`u${`0000${(Math.random()*1679616<<0).toString(36)}`.slice(-4)}${a}`}})();function w(a){var b=[];for(let d=0,c=a.length;d<c;d++)b.push(a[d]);return b}let x=null;function y(a={}){return x?x:a.l?x=a.l:x=w(window.getComputedStyle(document.documentElement))}function z(a,b){return(a=(a.ownerDocument.defaultView||window).getComputedStyle(a).getPropertyValue(b))?parseFloat(a.replace("px","")):0}
+function A(a,b={}){var d;if(!(d=b.width)){d=z(a,"border-left-width");var c=z(a,"border-right-width");d=a.clientWidth+d+c}(b=b.height)||(b=z(a,"border-top-width"),c=z(a,"border-bottom-width"),b=a.clientHeight+b+c);return{width:d,height:b}}function B(a){return new Promise((b,d)=>{var c=new Image;c.onload=()=>{c.decode().then(()=>{requestAnimationFrame(()=>b(c))})};c.onerror=d;c.crossOrigin="anonymous";c.decoding="async";c.src=a})}
+function C(a){return t(function*(){return Promise.resolve().then(()=>(new XMLSerializer).serializeToString(a)).then(encodeURIComponent).then(b=>`data:image/svg+xml;charset=utf-8,${b}`)})}
+function D(a,b,d){return t(function*(){var c=document.createElementNS("http://www.w3.org/2000/svg","svg"),e=document.createElementNS("http://www.w3.org/2000/svg","foreignObject");c.setAttribute("width",`${b}`);c.setAttribute("height",`${d}`);c.setAttribute("viewBox",`0 0 ${b} ${d}`);e.setAttribute("width","100%");e.setAttribute("height","100%");e.setAttribute("x","0");e.setAttribute("y","0");e.setAttribute("externalResourcesRequired","true");c.appendChild(e);e.appendChild(a);return C(c)})}
+var E=(a,b)=>{if(a instanceof b)return!0;a=Object.getPrototypeOf(a);return a===null?!1:a.constructor.name===b.name||E(a,b)};function F(a,b){return y(b).map(d=>{var c=a.getPropertyValue(d),e=a.getPropertyPriority(d);return`${d}: ${c}${e?" !important":""};`}).join(" ")}
+function G(a,b,d,c){a=window.getComputedStyle(a,d);var e=a.getPropertyValue("content");if(e!==""&&e!=="none"){var f=v();try{b.className=`${b.className} ${f}`}catch(k){return}e=document.createElement("style");var g=e.appendChild;d=`.${f}:${d}`;a.cssText?(c=a.getPropertyValue("content"),c=`${a.cssText} content: '${c.replace(/'|"/g,"")}';`):c=F(a,c);g.call(e,document.createTextNode(`${d}{${c}}`));b.appendChild(e)}};function H(a){return a.search(/^(data:)/)!==-1}function I(a,b,d){return t(function*(){var c=yield fetch(a,b);if(c.status===404)throw Error(`Resource "${c.url}" not found`);var e=yield c.blob();return new Promise((f,g)=>{var k=new FileReader;k.onerror=g;k.onloadend=()=>{try{f(d({o:c,result:k.result}))}catch(m){g(m)}};k.readAsDataURL(e)})})}const J={};function K(a,b,d){var c=a.replace(/\?.*/,"");d&&(c=a);/ttf|otf|eot|woff2?/i.test(c)&&(c=c.replace(/.*\//,""));return b?`[${b}]${c}`:c}
+function L(a,b,d){return t(function*(){var c=K(a,b,d.C);if(J[c]!=null)return J[c];d.u&&(a+=(/\?/.test(a)?"&":"?")+(new Date).getTime());try{let f=yield I(a,d.i,({o:g,result:k})=>{b||(b=g.headers.get("Content-Type")||"");return k.split(/,/)[1]});var e=`data:${b};base64,${f}`}catch(f){e=d.B||""}return J[c]=e})};const M={P:"application/font-woff",R:"application/font-woff",N:"application/font-truetype",v:"application/vnd.ms-fontobject",H:"image/png",F:"image/jpeg",D:"image/jpeg",A:"image/gif",M:"image/tiff",L:"image/svg+xml",O:"image/webp"};function N(a){return(a=/\.([^./]*?)$/g.exec(a))?a[1]:""};function O(a){return t(function*(){var b=a.toDataURL();return b==="data:,"?a.cloneNode(!1):B(b)})}function aa(a,b){return t(function*(){if(a.currentSrc){var d=document.createElement("canvas");let c=d.getContext("2d");d.width=a.clientWidth;d.height=a.clientHeight;c==null||c.drawImage(a,0,0,d.width,d.height);d=d.toDataURL();return B(d)}d=a.poster;d=yield L(d,M[N(d).toLowerCase()]||"",b);return B(d)})}
+function ba(a,b){return t(function*(){try{let d;if(a==null?0:(d=a.contentDocument)==null?0:d.body)return yield P(a.contentDocument.body,b,!0)}catch(d){}return a.cloneNode(!1)})}function ca(a,b){return t(function*(){return E(a,HTMLCanvasElement)?O(a):E(a,HTMLVideoElement)?aa(a,b):E(a,HTMLIFrameElement)?ba(a,b):a.cloneNode(a.tagName!=null&&a.tagName.toUpperCase()==="SVG")})}
+function da(a,b,d){return t(function*(){if(b.tagName!=null&&b.tagName.toUpperCase()==="SVG")return b;var c=[];if(a.tagName!=null&&a.tagName.toUpperCase()==="SLOT"&&a.assignedNodes)c=w(a.assignedNodes());else{let e;if(E(a,HTMLIFrameElement)&&((e=a.contentDocument)==null?0:e.body))c=w(a.contentDocument.body.childNodes);else{let f;c=w(((f=a.shadowRoot)!=null?f:a).childNodes)}}if(c.length===0||E(a,HTMLVideoElement))return b;yield c.reduce((e,f)=>e.then(()=>P(f,d)).then(g=>{g&&b.appendChild(g)}),Promise.resolve());
+return b})}function ea(a,b,d){var c=b.style;if(c){var e=window.getComputedStyle(a);e.cssText?(c.cssText=e.cssText,c.transformOrigin=e.transformOrigin):y(d).forEach(f=>{var g=e.getPropertyValue(f);f==="font-size"&&g.endsWith("px")&&(g=`${Math.floor(parseFloat(g.substring(0,g.length-2)))-.1}px`);E(a,HTMLIFrameElement)&&f==="display"&&g==="inline"&&(g="block");f==="d"&&b.getAttribute("d")&&(g=`path(${b.getAttribute("d")})`);c.setProperty(f,g,e.getPropertyPriority(f))})}}
+function fa(a,b){E(a,HTMLSelectElement)&&(b=Array.from(b.children).find(d=>a.value===d.getAttribute("value")))&&b.setAttribute("selected","")}
+function ha(a,b){return t(function*(){var d=a.querySelectorAll?a.querySelectorAll("use"):[];if(d.length===0)return a;var c={};for(var e=0;e<d.length;e++){var f=d[e].getAttribute("xlink:href");if(f){let g=document.querySelector(f);a.querySelector(f)||!g||c[f]||(c[f]=yield P(g,b,!0))}}d=Object.values(c);if(d.length){c=document.createElementNS("http://www.w3.org/1999/xhtml","svg");c.setAttribute("xmlns","http://www.w3.org/1999/xhtml");c.style.position="absolute";c.style.width="0";c.style.height="0";
+c.style.overflow="hidden";c.style.display="none";e=document.createElementNS("http://www.w3.org/1999/xhtml","defs");c.appendChild(e);for(f=0;f<d.length;f++)e.appendChild(d[f]);a.appendChild(c)}return a})}
+function P(a,b,d){return t(function*(){return d||!b.filter||b.filter(a)?Promise.resolve(a).then(c=>ca(c,b)).then(c=>da(a,c,b)).then(c=>{E(c,Element)&&(ea(a,c,b),G(a,c,":before",b),G(a,c,":after",b),E(a,HTMLTextAreaElement)&&(c.textContent=a.value),E(a,HTMLInputElement)&&c.setAttribute("value",a.value),fa(a,c));return c}).then(c=>ha(c,b)):null})};const Q=/url\((['"]?)([^'"]+?)\1\)/g,ia=/url\([^)]+\)\s*format\((["']?)([^"']+)\1\)/g,ja=/src:\s*(?:url\([^)]+\)\s*format\([^)]+\)[,;]\s*)+/g;function ka(a){var b=[];a.replace(Q,(d,c,e)=>{b.push(e);return d});return b.filter(d=>!H(d))}
+function la(a,b,d,c){return t(function*(){try{let e=d?(new URL(b,d||void 0)).toString():b,f;f=yield L(e,M[N(b).toLowerCase()]||"",c);return a.replace(new RegExp(`(url\\(['"]?)(${b.replace(/([.*+?^${}()|\[\]\/\\])/g,"\\$1")})(['"]?\\))`,"g"),`$1${f}$3`)}catch(e){}return a})}function ma(a,{I:b}){return b?a.replace(ja,d=>{for(;;){let [c,,e]=ia.exec(d)||[];if(!e)return"";if(e===b)return`src: ${c};`}}):a}
+function R(a,b,d){return t(function*(){if(a.search(Q)===-1)return a;var c=ma(a,d);return ka(c).reduce((e,f)=>e.then(g=>la(g,f,b,d)),Promise.resolve(c))})};function S(a,b,d){return t(function*(){var c,e=(c=b.style)==null?void 0:c.getPropertyValue(a);return e?(c=yield R(e,null,d),b.style.setProperty(a,c,b.style.getPropertyPriority(a)),!0):!1})}function na(a,b){return t(function*(){(yield S("background",a,b))||(yield S("background-image",a,b));(yield S("mask",a,b))||(yield S("-webkit-mask",a,b))||(yield S("mask-image",a,b))||(yield S("-webkit-mask-image",a,b))})}
+function oa(a,b){return t(function*(){var d=E(a,HTMLImageElement);if(d&&!H(a.src)||E(a,SVGImageElement)&&!H(a.href.baseVal)){var c=d?a.src:a.href.baseVal,e=yield L(c,M[N(c).toLowerCase()]||"",b);yield new Promise((f,g)=>{a.onload=f;a.onerror=b.m?(...k)=>{try{f(b.m(...k))}catch(m){g(m)}}:g;a.decode&&(a.decode=f);a.loading==="lazy"&&(a.loading="eager");d?(a.srcset="",a.src=e):a.href.baseVal=e})}})}
+function pa(a,b){return t(function*(){var d=w(a.childNodes).map(c=>T(c,b));yield Promise.all(d).then(()=>a)})}function T(a,b){return t(function*(){E(a,Element)&&(yield na(a,b),yield oa(a,b),yield pa(a,b))})};const U={};function V(a){return t(function*(){var b=U[a];if(b!=null)return b;b=yield(yield fetch(a)).text();b={url:a,cssText:b};return U[a]=b})}function W(a,b){return t(function*(){var d=a.cssText,c=/url\(["']?([^"')]+)["']?\)/g,e=(d.match(/url\([^)]+\)/g)||[]).map(f=>t(function*(){var g=f.replace(c,"$1");g.startsWith("https://")||(g=(new URL(g,a.url)).href);return I(g,b.i,({result:k})=>{d=d.replace(f,`url(${k})`);return[f,k]})}));return Promise.all(e).then(()=>d)})}
+function X(a){if(a==null)return[];var b=[];a=a.replace(/(\/\*[\s\S]*?\*\/)/gi,"");for(var d=RegExp("((@.*?keyframes [\\s\\S]*?){([\\s\\S]*?}\\s*?)})","gi");;){var c=d.exec(a);if(c===null)break;b.push(c[0])}a=a.replace(d,"");d=/@import[\s\S]*?url\([^)]*\)[\s\S]*?;/gi;for(c=RegExp("((\\s*?(?:\\/\\*[\\s\\S]*?\\*\\/)?\\s*?@media[\\s\\S]*?){([\\s\\S]*?)}\\s*?})|(([\\s\\S]*?){([\\s\\S]*?)})","gi");;){let e=d.exec(a);if(e===null)if(e=c.exec(a),e===null)break;else d.lastIndex=c.lastIndex;else c.lastIndex=
+d.lastIndex;b.push(e[0])}return b}
+function qa(a,b){return t(function*(){var d=[],c=[];a.forEach(e=>{if("cssRules"in e)try{w(e.cssRules||[]).forEach((f,g)=>{if(f.type===CSSRule.IMPORT_RULE){let k=g+1;f=V(f.href).then(m=>W(m,b)).then(m=>X(m).forEach(q=>{try{e.insertRule(q,q.startsWith("@import")?k+=1:e.cssRules.length)}catch(Da){}})).catch(()=>{});c.push(f)}})}catch(f){let g=a.find(k=>k.href==null)||document.styleSheets[0];e.href!=null&&c.push(V(e.href).then(k=>W(k,b)).then(k=>X(k).forEach(m=>{g.insertRule(m,g.cssRules.length)})).catch(()=>
+{}))}});return Promise.all(c).then(()=>{a.forEach(e=>{if("cssRules"in e)try{w(e.cssRules||[]).forEach(f=>{d.push(f)})}catch(f){}});return d})})}function ra(a){return a.filter(b=>b.type===CSSRule.FONT_FACE_RULE).filter(b=>b.style.getPropertyValue("src").search(Q)!==-1)}function sa(a,b){return t(function*(){if(a.ownerDocument==null)throw Error("Provided element is not within a Document");var d=w(a.ownerDocument.styleSheets);d=yield qa(d,b);return ra(d)})}
+function ta(a){function b(c){(c.style.fontFamily||getComputedStyle(c).fontFamily).split(",").forEach(e=>{d.add(e.trim().replace(/["']/g,""))});Array.from(c.children).forEach(e=>{e instanceof HTMLElement&&b(e)})}var d=new Set;b(a);return d}function ua(a,b){return t(function*(){var d=yield sa(a,b),c=ta(a);return(yield Promise.all(d.filter(e=>c.has(e.style.fontFamily.trim().replace(/["']/g,""))).map(e=>R(e.cssText,e.parentStyleSheet?e.parentStyleSheet.href:null,b)))).join("\n")})}
+function va(a,b){return t(function*(){var d=b.j!=null?b.j:b.K?null:yield ua(a,b);if(d){let c=document.createElement("style");c.appendChild(document.createTextNode(d));a.firstChild?a.insertBefore(c,a.firstChild):a.appendChild(c)}})};function wa(a,b={}){return t(function*(){var {width:d,height:c}=A(a,b),e=yield P(a,b,!0);yield va(e,b);yield T(e,b);u(e,b);return yield D(e,d,c)})}
+function xa(a,b={}){return t(function*(){var {width:d,height:c}=A(a,b),e=yield wa(a,b);e=yield B(e);var f=document.createElement("canvas"),g=f.getContext("2d"),k=b.G||window.devicePixelRatio||1,m=b.h||d,q=b.g||c;f.width=m*k;f.height=q*k;!b.J&&(f.width>16384||f.height>16384)&&(f.width>16384&&f.height>16384?f.width>f.height?(f.height*=16384/f.width,f.width=16384):(f.width*=16384/f.height,f.height=16384):f.width>16384?(f.height*=16384/f.width,f.width=16384):(f.width*=16384/f.height,f.height=16384));
+f.style.width=`${m}`;f.style.height=`${q}`;b.backgroundColor&&(g.fillStyle=b.backgroundColor,g.fillRect(0,0,f.width,f.height));g.drawImage(e,0,0,f.width,f.height);return f})}function ya(a,b={}){return t(function*(){return(yield xa(a,b)).toDataURL()})};const za=["gemini.google.com","corp.google.com","proxy.googlers.com"];function Y(){return document.body.querySelectorAll('[class*="animate"]').length>0}function Z(a){return t(function*(){try{return yield ya(a,{h:a.offsetWidth,g:a.offsetHeight})}catch(d){var b=a.offsetHeight;let c=document.createElement("canvas");c.width=a.offsetWidth;c.height=b;return c.toDataURL("image/png")}})}
+function Aa(){return t(function*(){var a=document.body.offsetWidth,b=document.body.offsetHeight,d=document.body.cloneNode(!0);d.querySelectorAll('[class*="animate"]').forEach(c=>{c.classList.remove(...Array.from(c.classList).filter(e=>e.startsWith("animate")))});d.style.width=`${a}px`;d.style.height=`${b}px`;return d})}
+function Ba(a){return t(function*(){var b=document.body;if(Y()){var d=yield Aa();b=d;document.body.appendChild(d)}d=yield Z(b);Y()&&document.body.removeChild(b);window.parent.postMessage({type:"SEND_SCREENSHOT",image:d,topOffset:document.documentElement.scrollTop},a.origin)})}function Ca(a){return t(function*(){var b={type:"SEND_SCREENSHOT_FOR_DATA_VISUALIZATION",image:yield Z(document.body),topOffset:0};window.parent.postMessage(b,a.origin)})}
+window.addEventListener("message",a=>t(function*(){if(za.some(d=>a.origin.includes(d))){var b=a.data;b&&(b.type==="MAKE_SCREENSHOT"&&(yield Ba(a)),b.type==="MAKE_SCREENSHOT_FOR_DATA_VISUALIZATION"&&(yield Ca(a)))}}));
+})();</script><script>(function() {
+  // Ensure this script is executed only once
+  if (window.firebaseAuthBridgeScriptLoaded) {
+    return;
+  }
+  window.firebaseAuthBridgeScriptLoaded = true;
+
+  let nextTokenPromiseId = 0;
+
+  // Stores { resolve, reject } for ongoing token requests
+  const pendingTokenPromises = {};
+
+  // Listen for messages from the Host Application
+  window.addEventListener('message', function(event) {
+
+    const messageData = event.data;
+
+  if (messageData && messageData.type === 'RESOLVE_NEW_FIREBASE_TOKEN') {
+      const { success, token, error, promiseId } = messageData ?? {};
+      if (pendingTokenPromises[promiseId]) {
+        if (success) {
+          pendingTokenPromises[promiseId].resolve(token);
+        } else {
+          pendingTokenPromises[promiseId].reject(new Error(error || 'Token refresh failed from host.'));
+        }
+        delete pendingTokenPromises[promiseId];
+      }
+    }
+  });
+
+  // Expose a function for the Generated App to request a new Firebase token
+  window.requestNewFirebaseToken = function() {
+    const currentPromiseId = nextTokenPromiseId++;
+    const promise = new Promise((resolve, reject) => {
+      pendingTokenPromises[currentPromiseId] = { resolve, reject };
+    });
+    if (window.parent && window.parent !== window) {
+      window.parent.postMessage({
+        type: 'REQUEST_NEW_FIREBASE_TOKEN',
+        promiseId: currentPromiseId
+      }, '*');
+    } else {
+      pendingTokenPromises[currentPromiseId].reject(new Error('No parent window to request token from.'));
+      delete pendingTokenPromises[currentPromiseId];
+    }
+    return promise;
+  };
+})();</script><script>
+let realOriginalGetUserMedia = null;
+if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+  realOriginalGetUserMedia = navigator.mediaDevices.getUserMedia.bind(navigator.mediaDevices);
+}
+
+(function() {
+  if (navigator.mediaDevices && navigator.mediaDevices.__proto__) {
+    try {
+      Object.defineProperty(navigator.mediaDevices.__proto__, 'getUserMedia', {
+        get: function() {
+          return undefined; // Or throw an error
+        },
+        configurable: false
+      });
+    } catch (error) {
+      console.error("Error defining prototype getter:", error);
+    }
+  }
+})();
+
+(function() {
+  const pendingMediaResolvers = {};
+  let nextMediaPromiseId = 0;
+
+  function requestMediaPermissions(constraints) {
+    const mediaPromiseId = nextMediaPromiseId++;
+    const promise = new Promise((resolve, reject) => {
+      pendingMediaResolvers[mediaPromiseId] = (granted) => {
+        delete pendingMediaResolvers[mediaPromiseId];
+        resolve(granted);
+      };
+    });
+
+    window.parent.postMessage({
+      type: 'requestMediaPermission',
+      constraints: constraints,
+      promiseId: mediaPromiseId,
+    }, '*');
+
+    return promise;
+  }
+
+  let originalGetUserMedia = realOriginalGetUserMedia;
+
+  function interceptGetUserMedia() {
+    if (navigator.mediaDevices) {
+      Object.defineProperty(navigator.mediaDevices, 'getUserMedia', {
+        value: function(constraints) {
+          return requestMediaPermissions(constraints).then((granted) => {
+            if (granted) {
+              if (originalGetUserMedia) {
+                return originalGetUserMedia(constraints);
+              } else {
+                throw new Error("Original getUserMedia not available.");
+              }
+            } else {
+              throw new DOMException('Permission denied', 'NotAllowedError');
+            }
+          });
+        },
+        writable: false,
+        configurable: false
+      });
+    }
+  }
+
+  interceptGetUserMedia();
+
+  const observer = new MutationObserver(function(mutationsList, observer) {
+    for (const mutation of mutationsList) {
+      if (mutation.type === 'reconfigured' && mutation.name === 'getUserMedia' && mutation.object === navigator.mediaDevices) {
+        interceptGetUserMedia();
+      } else if (mutation.type === 'attributes' && mutation.attributeName === 'getUserMedia' && mutation.target === navigator.mediaDevices) {
+        interceptGetUserMedia();
+      } else if (mutation.type === 'childList' && mutation.addedNodes) {
+        mutation.addedNodes.forEach(node => {
+          if (node === navigator.mediaDevices) {
+            interceptGetUserMedia();
+          }
+        });
+      }
+    }
+  });
+
+  function interceptSpeechRecognition() {
+    if (!window.SpeechRecognition && !window.webkitSpeechRecognition) {
+      return;
+    }
+
+    const OriginalSpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+    const SpeechRecognitionWrapper = function(...args) {
+      const recognizer = new OriginalSpeechRecognition(...args);
+      const originalStart = recognizer.start.bind(recognizer);
+
+      recognizer.start = function() {
+        requestMediaPermissions({ audio: true }).then(granted => {
+          if (granted) {
+            originalStart();
+          } else {
+            const errorEvent = new SpeechRecognitionErrorEvent('error');
+            errorEvent.error = 'not-allowed'; // This is the standard error for permission denial.
+            recognizer.dispatchEvent(errorEvent);
+          }
+        });
+      };
+
+      return recognizer;
+    };
+
+    SpeechRecognitionWrapper.prototype = OriginalSpeechRecognition.prototype;
+    SpeechRecognitionWrapper.prototype.constructor = SpeechRecognitionWrapper;
+
+    if (window.SpeechRecognition) {
+      window.SpeechRecognition = SpeechRecognitionWrapper;
+    }
+    if (window.webkitSpeechRecognition) {
+      window.webkitSpeechRecognition = SpeechRecognitionWrapper;
+    }
+  }
+
+  interceptSpeechRecognition();
+
+  window.addEventListener('message', function(event) {
+    if (event.data) {
+      if (event.data.type === 'resolveMediaPermission') {
+        const { promiseId, granted } = event.data;
+        if (pendingMediaResolvers[promiseId]) {
+          pendingMediaResolvers[promiseId](granted);
+        }
+      }
+    }
+  });
+
+})();</script><script ws-interception-config="{&quot;parentOrigin&quot;:&quot;https://gemini.google.com&quot;,&quot;proxiedDomains&quot;:[]}">(function(){'use strict';var u=typeof Object.defineProperties=="function"?Object.defineProperty:function(b,d,e){if(b==Array.prototype||b==Object.prototype)return b;b[d]=e.value;return b};function v(b){b=["object"==typeof globalThis&&globalThis,b,"object"==typeof window&&window,"object"==typeof self&&self,"object"==typeof global&&global];for(var d=0;d<b.length;++d){var e=b[d];if(e&&e.Math==Math)return e}throw Error("Cannot find global object");}var w=v(this);
+function y(b,d){if(d)a:{var e=w;b=b.split(".");for(var h=0;h<b.length-1;h++){var k=b[h];if(!(k in e))break a;e=e[k]}b=b[b.length-1];h=e[b];d=d(h);d!=h&&d!=null&&u(e,b,{configurable:!0,writable:!0,value:d})}}function z(b){function d(h){return b.next(h)}function e(h){return b.throw(h)}return new Promise(function(h,k){function m(n){n.done?h(n.value):Promise.resolve(n.value).then(d,e).then(m,k)}m(b.next())})}y("globalThis",function(b){return b||w});/*
+
+ Copyright The Closure Library Authors.
+ SPDX-License-Identifier: Apache-2.0
+*/
+function A(b,d){function e(){}e.prototype=d.prototype;b.i=d.prototype;b.prototype=new e;b.prototype.constructor=b;b.g=function(h,k,m){for(var n=Array(arguments.length-2),p=2;p<arguments.length;p++)n[p-2]=arguments[p];return d.prototype[k].apply(h,n)}};function B(b,d,e="*"){function h(a){if(typeof a==="string")return F.encode(a).buffer;if(a instanceof ArrayBuffer)return a.slice(0);if(ArrayBuffer.isView(a))return a.buffer.slice(a.byteOffset,a.byteOffset+a.byteLength);throw Error("Invalid data type");}function k(a){a=h(a);var f={type:"send",data:new Uint8Array(a)},g;(g=r)==null||g.postMessage(f,[a])}function m(){if(!r)throw Error("Data port not captured yet.");r.onmessage=a=>{if(a.data.type==="message"){a=new MessageEvent("message",{data:G.decode(a.data.data)});
+let f;(f=c.onmessage)==null||f.call(c,a);c.dispatchEvent(a)}}}function n(){if(!t)throw Error("Control port not captured yet.");t.onmessage=a=>{switch(a.data.type){case "open":l=1;var f=new Event("open"),g;(g=c.onopen)==null||g.call(c,f);c.dispatchEvent(f);q.forEach(H=>{k(H)});q=[];break;case "close":g=a.data;l=3;g=new CloseEvent("close",{code:g.code,reason:g.reason,wasClean:g.wasClean});(f=c.onclose)==null||f.call(c,g);c.dispatchEvent(g);break;case "error":l=3;f=new Event("error");let x;(x=c.onerror)==
+null||x.call(c,f);c.dispatchEvent(f)}}}function p(a){return z(function*(){var f=new MessageChannel;t=f.port1;var g=new MessageChannel;r=g.port1;n();m();window.parent.postMessage({type:"websocket_open",portOrdering:["control","data"],url:b,protocols:a||[],connectionId:I},e,[f.port2,g.port2])}())}var c=Reflect.construct(EventTarget,[],new.target);c.CONNECTING=0;c.OPEN=1;c.CLOSING=2;c.CLOSED=3;c.url=b;c.binaryType="arraybuffer";c.protocol="";c.h="";var l=0,t=null,r=null,q=[],F=new TextEncoder,G=new TextDecoder;
+c.onopen=null;c.onmessage=null;c.onclose=null;c.onerror=null;Object.defineProperty(c,"readyState",{get:()=>l,enumerable:!0,configurable:!0});Object.defineProperty(c,"bufferedAmount",{get:()=>{var a=0;q.forEach(f=>{a+=typeof f==="string"?f.length:f.byteLength});return a},enumerable:!0,configurable:!0});var I=function(){var a;return((a=globalThis.crypto)==null?0:a.randomUUID)?globalThis.crypto.randomUUID():"xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g,f=>{var g=Math.random()*16|0;return(f===
+"x"?g:g&3|8).toString(16)})}();c.send=a=>{if(l===1)a instanceof Blob?a.arrayBuffer().then(f=>{k(f)}):k(a);else if(l===0)if(typeof a==="string")q.push(a);else if(a instanceof ArrayBuffer||ArrayBuffer.isView(a))q.push(h(a));else throw Error("Sending Blob is not supported before the connection is open.");else console.debug("WebSocket send called in CLOSING or CLOSED state; ignored.")};c.close=(a=1E3,f="")=>{if(l!==2&&l!==3){l=2;a={type:"close",code:a,reason:f,wasClean:a===1E3};var g;(g=t)==null||g.postMessage(a)}};
+Promise.resolve().then(()=>p(d));return c}A(B,EventTarget);var C=document.currentScript,D=C==null?void 0:C.getAttribute("ws-interception-config");if(!D)throw Error("WebSocket Interceptor: Missing ws-interception-config attribute in the script tag.");var E=JSON.parse(D);if(!E.parentOrigin||typeof E.parentOrigin!=="string")throw Error("WebSocket Interceptor: Invalid parentOrigin in ws-interception-config");
+(function(b){var d=Object.getOwnPropertyDescriptor(window,"WebSocket");if(!d||d.writable||d.configurable)d=Object.assign(function(e,h){try{let k=(new URL(e)).hostname;if(b.proxiedDomains.some(m=>k===m||k.endsWith(`.${m}`)))return new B(e,h,b.parentOrigin)}catch(k){throw window.parent.postMessage({type:"websocket_blocked",url:e,reason:"blocked_invalid_url"},b.parentOrigin),new DOMException(`WebSocket connection to '${e}' is not allowed in Canvas.`,"SecurityError");}window.parent.postMessage({type:"websocket_blocked",
+url:e,reason:"blocked_domain_not_allowlisted"},b.parentOrigin);throw new DOMException(`WebSocket connection to '${e}' is not allowed in Canvas.`,"SecurityError");},{CONNECTING:0,OPEN:1,CLOSING:2,CLOSED:3}),Object.defineProperty(window,"WebSocket",{value:d,writable:!1,configurable:!1})})({proxiedDomains:E.proxiedDomains||[],parentOrigin:E.parentOrigin});}).call(this);
+</script><script>((function(modelInformation) {
+  const originalFetch = window.fetch;
+  // TODO: b/421908508 - Move these out of the script and match all generative AI model calls.
+  let googleLlmBaseApiUrls = [
+    'https://generativelanguage.googleapis.com/v1beta/models/' + modelInformation.textModelName + ':streamGenerateContent',
+    'https://generativelanguage.googleapis.com/v1beta/models/' + modelInformation.textModelName + ':generateContent',
+    'https://generativelanguage.googleapis.com/v1beta/models/' + modelInformation.imageModelName + ':predict',
+    'https://generativelanguage.googleapis.com/v1beta/models/' + modelInformation.imageModelName + ':predictLongRunning',
+    'https://generativelanguage.googleapis.com/v1beta/models/' + modelInformation.imageEditModelName + ':generateContent',
+    'https://generativelanguage.googleapis.com/v1beta/models/' + modelInformation.imageTransformModelName + ':generateContent',
+    'https://generativelanguage.googleapis.com/v1beta/models/' + modelInformation.videoModelName + ':predict',
+    'https://generativelanguage.googleapis.com/v1beta/models/' + modelInformation.videoModelName + ':predictLongRunning',
+    'https://generativelanguage.googleapis.com/v1beta/models/' + modelInformation.ttsModelName + ':generateContent',
+  ];
+  modelInformation.deprecatedTextModelNames.forEach((modelName) => {
+    googleLlmBaseApiUrls.push(
+      'https://generativelanguage.googleapis.com/v1beta/models/' + modelName + ':streamGenerateContent',
+      'https://generativelanguage.googleapis.com/v1beta/models/' + modelName + ':generateContent',
+    );
+  });
+  modelInformation.deprecatedImageModelNames.forEach((modelName) => {
+    googleLlmBaseApiUrls.push(
+      'https://generativelanguage.googleapis.com/v1beta/models/' + modelName + ':predict',
+      'https://generativelanguage.googleapis.com/v1beta/models/' + modelName + ':predictLongRunning',
+      'https://generativelanguage.googleapis.com/v1beta/models/' + modelName + ':generateContent',
+      'https://generativelanguage.googleapis.com/v1beta/models/' + modelName + ':streamGenerateContent',
+    );
+  });
+  modelInformation.deprecatedGenerateImageModelNames.forEach((modelName) => {
+    googleLlmBaseApiUrls.push(
+      'https://generativelanguage.googleapis.com/v1beta/models/' + modelName + ':generateContent',
+      'https://generativelanguage.googleapis.com/v1beta/models/' + modelName + ':streamGenerateContent',
+    );
+  });
+
+  const pendingFetchResolvers = {};
+  let nextPromiseId = 0;
+
+  function handleStringInput(input, optionsArgument) {
+    const actualUrl = input;
+    const fetchCallArgs = [actualUrl, optionsArgument];
+    const effectiveOptions = optionsArgument || {};
+    const bodyForApiKeyCheck = effectiveOptions.body;
+    const bodyForPostMessage = effectiveOptions.body;
+    return { actualUrl, fetchCallArgs, effectiveOptions, bodyForApiKeyCheck, bodyForPostMessage };
+  }
+
+  function handleRequestInput(input, optionsArgument) {
+    const actualUrl = input.url;
+    const fetchCallArgs = [input, optionsArgument];
+    const effectiveOptions = { method: input.method, headers: new Headers(input.headers) };
+    let bodyForApiKeyCheck;
+    let bodyForPostMessage;
+
+    if (optionsArgument) {
+      if (optionsArgument.method) effectiveOptions.method = optionsArgument.method;
+      if (optionsArgument.headers) effectiveOptions.headers = new Headers(optionsArgument.headers);
+      if ('body' in optionsArgument) {
+        bodyForApiKeyCheck = optionsArgument.body;
+        bodyForPostMessage = optionsArgument.body;
+      } else {
+        bodyForApiKeyCheck = undefined;
+        bodyForPostMessage = input.body;
+      }
+    } else {
+      bodyForApiKeyCheck = undefined;
+      bodyForPostMessage = input.body;
+    }
+    return { actualUrl, fetchCallArgs, effectiveOptions, bodyForApiKeyCheck, bodyForPostMessage };
+  }
+
+  window.fetch = function(input, optionsArgument) {
+    let actualUrl;
+    let fetchCallArgs;
+    let effectiveOptions = {};
+    let bodyForApiKeyCheck;
+    let bodyForPostMessage;
+
+    if (typeof input === 'string') {
+      ({actualUrl, fetchCallArgs, effectiveOptions, bodyForApiKeyCheck, bodyForPostMessage} = handleStringInput(input, optionsArgument));
+    } else if (input instanceof Request) {
+      ({actualUrl, fetchCallArgs, effectiveOptions, bodyForApiKeyCheck, bodyForPostMessage} = handleRequestInput(input, optionsArgument));
+    } else {
+      return originalFetch.apply(window, [input, optionsArgument]);
+    }
+
+    effectiveOptions.method = effectiveOptions.method || 'GET';
+    if (!effectiveOptions.headers) {
+      effectiveOptions.headers = new Headers();
+    }
+
+
+    if (typeof actualUrl === 'string' && googleLlmBaseApiUrls.some((url) => actualUrl.startsWith(url))) {
+      let apiKeyIsNull = true;
+
+      const regex = new RegExp("models/([^:]+)");
+      const modelNameMatch = actualUrl.match(regex);
+      const modelName = modelNameMatch ? modelNameMatch[1] : 'unspecified';
+
+
+      try {
+        const urlObject = new URL(actualUrl);  // Use URL object for robust parsing
+        const apiKeyParam = urlObject.searchParams.get('key');
+        if (apiKeyParam) {
+          apiKeyIsNull = false;
+        }
+      } catch (e) {
+        // Continue checks even if URL parsing fails
+      }
+
+      if (apiKeyIsNull && effectiveOptions.headers) {
+        const h = new Headers(effectiveOptions.headers);
+        const apiKeyHeaderValue = h.get('X-API-Key') || h.get('x-api-key');
+        if (apiKeyHeaderValue) {
+          apiKeyIsNull = false;
+          return originalFetch.apply(window, fetchCallArgs);
+        }
+      }
+
+      if (apiKeyIsNull && effectiveOptions.method && ['POST', 'PUT', 'PATCH'].includes(effectiveOptions.method.toUpperCase()) && typeof bodyForApiKeyCheck === 'string') {
+        try {
+          const bodyData = JSON.parse(bodyForApiKeyCheck);
+          if (bodyData && bodyData.apiKey) {
+            apiKeyIsNull = false;
+            return originalFetch.apply(window, fetchCallArgs);
+          }
+        } catch (e) {
+          // Ignore JSON parsing errors
+        }
+      }
+
+      if(apiKeyIsNull) {
+        const promiseId = nextPromiseId++;
+        const promise = new Promise((resolve) => {
+          pendingFetchResolvers[promiseId] = (resolvedResponse) => {
+            delete pendingFetchResolvers[promiseId];
+            resolve(resolvedResponse);
+          };
+        });
+
+        let serializedBodyForPostMessage;
+        if (typeof bodyForPostMessage === 'string' || bodyForPostMessage == null) {
+            serializedBodyForPostMessage = bodyForPostMessage;
+        } else if (bodyForPostMessage instanceof ReadableStream) {
+            serializedBodyForPostMessage = null;
+        } else {
+            try {
+                serializedBodyForPostMessage = JSON.stringify(bodyForPostMessage);
+            } catch (e) {
+                serializedBodyForPostMessage = null;
+            }
+        }
+
+        const messageOptions = {
+            method: effectiveOptions.method,
+            headers: Object.fromEntries(new Headers(effectiveOptions.headers).entries()),
+            body: serializedBodyForPostMessage
+        };
+
+        window.parent.postMessage({
+          type: 'requestFetch',
+          url: actualUrl,
+          modelName: modelName,
+          options: messageOptions,
+          promiseId: promiseId,
+        }, '*');
+
+        return promise;
+      }
+      return originalFetch.apply(window, fetchCallArgs);
+    }
+    return originalFetch.apply(window, fetchCallArgs);
+  };
+
+  window.addEventListener('message', function(event) {
+    if (event.data && event.data.type === 'resolveFetch') {
+      const { promiseId, response } = event.data;
+      if (pendingFetchResolvers[promiseId]) {
+        try {
+          const reconstructedResponse = new Response(response.body, {
+            status: response.status,
+            statusText: response.statusText,
+            headers: new Headers(response.headers),
+          });
+          pendingFetchResolvers[promiseId](reconstructedResponse);
+        } catch (error) {
+          pendingFetchResolvers[promiseId](new Response(null, { status: 500, statusText: "Interceptor Response Reconstruction Error" }));
+        }
+      }
+    }
+  });
+
+}))({"textModelName":"gemini-3-flash-preview","imageModelName":"imagen-4.0-generate-001","imageEditModelName":"gemini-3.1-flash-image-preview","imageTransformModelName":"gemini-3-pro-image-preview-11-2025","videoModelName":"veo-2.0-generate-001","ttsModelName":"gemini-2.5-flash-preview-tts","deprecatedTextModelNames":["gemini-2.0-flash","gemini-2.5-flash","gemini-2.5-flash-preview-04-17","gemini-2.5-flash-preview-05-20","gemini-2.5-flash-preview-09-2025"],"deprecatedImageModelNames":["imagen-3.0-generate-001","imagen-3.0-generate-002"],"deprecatedGenerateImageModelNames":["gemini-2.5-flash-image-preview","gemini-2.5-flash-image"]})</script><script>(function(){'use strict';function a(){window.parent.postMessage({type:"interaction"},"*")}window.addEventListener("click",a,{capture:!0,passive:!0});window.addEventListener("touchstart",a,{capture:!0,passive:!0});window.addEventListener("keydown",a,{capture:!0,passive:!0});}).call(this);
+</script><script>(function() {
+  const originalConsoleLog = console.log;
+  const originalConsoleError = console.error;
+
+    /**
+   * Normalizes an error event or a promise rejection reason into a structured error object.
+   * @param {*} errorEventOrReason The error object or reason.
+   * @return {object} Structured error data { message, name, stack }.
+   */
+  function getErrorObject(errorEventOrReason) {
+    if (errorEventOrReason instanceof Error) {
+      return {
+        message: errorEventOrReason.message,
+        name: errorEventOrReason.name,
+        stack: errorEventOrReason.stack,
+      };
+    }
+    // Fallback for non-Error objects.
+    try {
+      return {
+        message: JSON.stringify(errorEventOrReason),
+        name: 'UnknownErrorType',
+        stack: null,
+      };
+    } catch (e) {
+      return {
+        message: String(errorEventOrReason),
+        name: 'UnknownErrorTypeNonStringifiable',
+        stack: null,
+      };
+    }
+  }
+
+  /**
+   * Converts an array of arguments (from log/error) into a single string.
+   * Handles Error objects specially to include their message and stack.
+   * @param {Array<*>} args - Arguments passed to console methods.
+   * @return {string} A string representation of the arguments.
+   */
+  function stringifyArgs(args) {
+    return args
+      .map((arg) => {
+        if (arg instanceof Error) {
+          const {message, stack} = arg;
+          return `Error: ${message}${stack ? ('\nStack: ' + stack) : ''}`;
+        }
+        if (typeof arg === 'object' && arg !== null) {
+          try {
+            return JSON.stringify(arg);
+          } catch (error) {
+            return '[Circular Object]';
+          }
+        } else {
+          return String(arg);
+        }
+      })
+      .join(' ');
+  }
+
+  console.log = function(...args) {
+    const logString = stringifyArgs(args);
+    window.parent.postMessage({ type: 'log', message: logString }, '*');
+    originalConsoleLog.apply(console, args);
+  };
+
+  console.error = function(...args) {
+    let errorData;
+    if (args.length > 0 && args[0] instanceof Error) {
+      const err = args[0];
+      // If the first arg is an Error, capture its details.
+      errorData = {
+        type: 'error',
+        source: 'CONSOLE_ERROR',
+        ...getErrorObject(err),
+        rawArgsString: stringifyArgs(args.slice(1)),
+        timestamp: new Date().toISOString(),
+      };
+    } else {
+      // If not an Error object, treat all args as a general error message.
+      errorData = {
+        type: 'error',
+        source: 'CONSOLE_ERROR',
+        message: stringifyArgs(args),
+        name: 'ConsoleLoggedError',
+        stack: null,
+        timestamp: new Date().toISOString(),
+      };
+    }
+    window.parent.postMessage(errorData, '*');
+    originalConsoleError.apply(console, args);
+  };
+
+  // Listen for global unhandled synchronous errors.
+  window.addEventListener('error', function(event) {
+    const errorDetails = event.error ? getErrorObject(event.error) : {
+      message: event.message,
+      name: 'GlobalError',
+      stack: null,
+      filename: event.filename,
+      lineno: event.lineno,
+      colno: event.colno,
+    };
+
+    window.parent.postMessage({
+      type: 'error',
+      source: 'global',
+      ...errorDetails,
+      message: errorDetails.message || event.message,
+      timestamp: new Date().toISOString(),
+    }, '*');
+  });
+
+  // Listen for unhandled promise rejections (asynchronous errors).
+  window.addEventListener('unhandledrejection', function(event) {
+    const errorDetails = getErrorObject(event.reason);
+
+    window.parent.postMessage({
+      type: 'error',
+      source: 'unhandledrejection',
+      ...errorDetails,
+      message: errorDetails.message || 'Unhandled Promise Rejection',
+      timestamp: new Date().toISOString(),
+    }, '*');
+  });
+
+})();</script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Good Friction: Why Constraints Are the Secret Lubricant of AI-Assisted Shipping</title>
+    <!-- Premium Font Integration -->
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&amp;family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        /* 1. SETUP & CORE DESIGN PRINCIPLES */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #000000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            color: #e4e4e7;
+        }
+
+        .slide-container {
+            display: none;
+        }
+
+        .slide-container.active {
+            display: flex;
+        }
+
+        #fade-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000000;
+            z-index: 9999;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        #fade-overlay.visible {
+            opacity: 1;
+        }
+
+        #start-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000000;
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.5s ease;
+        }
+
+        #start-overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        #start-btn {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 2px solid #ff6b00;
+            background: rgba(255, 107, 0, 0.1);
+            color: #ff6b00;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s ease, transform 0.2s ease;
+            letter-spacing: 0.05em;
+        }
+
+        #start-btn:hover {
+            background: rgba(255, 107, 0, 0.2);
+            transform: scale(1.05);
+        }
+
+        /* Fixed Presentation Slide Bounds (1280x720) */
+        .slide-container {
+            width: 80%;
+            height: 95%;
+            background-color: #0a0a0c; /* Matte Black */
+            border-radius: 12px;
+            border: 1px solid #1f1f23;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8);
+            padding: 60px 80px;
+            flex-direction: column;
+            justify-content: flex-start;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Abstract Premium Geometric Background Details (ShipItCon Orange glow) */
+        .slide-container::before {
+            content: '';
+            position: absolute;
+            top: -200px;
+            right: -200px;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255, 107, 0, 0.04) 0%, rgba(10, 10, 12, 0) 70%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .slide-container::after {
+            content: '';
+            position: absolute;
+            bottom: -150px;
+            left: -150px;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(255, 107, 0, 0.02) 0%, rgba(10, 10, 12, 0) 70%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Typography Presets */
+        h1, h2, h3, h4 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        /* Slide Titles (Restricted to max 40 chars, uniform alignment) */
+        .slide-title {
+            font-size: 52px;
+            font-weight: 700;
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+            margin-bottom: 35px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            z-index: 2;
+        }
+
+        .slide-title::after {
+            content: '';
+            flex-grow: 1;
+            height: 1px;
+            background: linear-gradient(90deg, #ff6b00 0%, rgba(255, 107, 0, 0.05) 100%);
+        }
+
+        p, li, th, td {
+            font-size: 18px;
+            line-height: 1.5;
+            color: #a1a1aa; /* Zinc 400 */
+        }
+
+        .highlight-orange {
+            color: #ff6b00 !important; /* ShipItCon Signature Orange */
+        }
+
+        .content-area {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            width: 100%;
+            z-index: 2;
+        }
+
+        /* Two-Column Configurations (stacked vertical) */
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            align-items: start;
+            width: 100%;
+        }
+
+        /* Two-Column Horizontal (side by side) */
+        .two-column-horizontal {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+            width: 100%;
+        }
+
+        /* Two-Column Tiled layout with matching size constraints */
+        .two-column.tiled {
+            grid-template-columns: 1fr 1fr;
+            align-items: stretch;
+            gap: 30px;
+        }
+
+        .tile-card {
+            background-color: #111113; /* Zinc 900 */
+            border: 1px solid #1f1f23;
+            border-radius: 12px;
+            padding: 35px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            transition: border-color 0.3s ease;
+        }
+
+        .tile-card:hover {
+            border-color: #ff6b00;
+        }
+
+        .tile-card h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #ffffff;
+        }
+
+        .tile-card p {
+            font-size: 16px;
+            color: #a1a1aa;
+        }
+
+        /* Integrated Custom Bullet Layout */
+        .styled-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .styled-list li {
+            position: relative;
+            padding-left: 45px;
+            font-size: 20px;
+            color: #a1a1aa;
+        }
+
+        .styled-list li i {
+            position: absolute;
+            left: 5px;
+            top: 4px;
+            font-size: 20px;
+            color: #ff6b00;
+        }
+
+        .styled-list li strong {
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        /* Standardized High-Contrast Tables */
+        .table-layout {
+            width: 100%;
+            background-color: #111113;
+            border-radius: 12px;
+            border: 1px solid #1f1f23;
+            overflow: hidden;
+            margin-bottom: 25px;
+        }
+
+        .table-layout table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        .table-layout th {
+            background-color: #161619;
+            color: #ffffff;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            font-size: 20px;
+            padding: 20px 28px;
+            border-bottom: 1px solid #1f1f23;
+        }
+
+        .table-layout td {
+            padding: 20px 28px;
+            border-bottom: 1px solid #1f1f23;
+            font-size: 19px;
+        }
+
+        .table-layout tr:last-child td {
+            border-bottom: none;
+        }
+
+        .table-layout tr:nth-child(even) td {
+            background-color: #131316;
+        }
+
+        /* Image Sizing and Wrappers */
+        .image-wrapper {
+            border-radius: 12px;
+            border: 1px solid #1f1f23;
+            overflow: hidden;
+            height: 380px;
+            width: 100%;
+            background-color: #111113;
+        }
+
+        .image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Code Block Displays (IDE sandbox mockups) */
+        .code-container {
+            background-color: #060608;
+            border-radius: 12px;
+            border: 1px solid #1f1f23;
+            padding: 24px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            color: #cbd5e1;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .code-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #1c1c20;
+            padding-bottom: 12px;
+            margin-bottom: 16px;
+        }
+
+        .code-dots {
+            display: flex;
+            gap: 6px;
+        }
+
+        .code-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        .code-lang {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #71717a;
+            font-weight: 700;
+        }
+
+        /* Editorial Consultant Quotes */
+        .highlight-quote {
+            padding: 18px 0;
+            font-size: 24px;
+            font-weight: 500;
+            color: #ffffff;
+            line-height: 1.45;
+            margin-top: 15px;
+        }
+
+        /* Unified Footer System */
+        .slide-footer {
+            position: absolute;
+            bottom: 30px;
+            left: 80px;
+            right: 80px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #1f1f23;
+            padding-top: 15px;
+            font-size: 12px;
+            color: #52525b;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Slide 1: Title Slide (Brand Dark) -->
+    <div class="slide-container" id="slide1">
+        <div class="content-area" style="justify-content: space-between; height: 100%; padding: 40px 0;">
+            <div>
+                <a href="https://shipitcon.com" style="display: flex; align-items: center; text-decoration: none; margin-bottom: 25px; gap: 15px;">
+                    <img src="https://shipitcon.com/wp-content/uploads/2023/05/ship-it-con-v2-1.png" alt="ShipItCon" style="height: 50px; width: auto; object-fit: contain;">
+                    <div style="display: flex; flex-direction: column; gap: 2px;">
+                        <span style="font-size: 14px; font-weight: 600; color: #ffffff; text-transform: uppercase;">ShipItCon</span>
+                        <span style="font-size: 14px; font-weight: 600; color: #ff6b00; letter-spacing: 0.05em;">#SIC2026</span>
+                        <span style="font-size: 13px; font-weight: 500; color: #a1a1aa; text-transform: uppercase; letter-spacing: 0.1em;">Friction</span>
+                    </div>
+                </a>
+                <h1 style="font-size: 150px; line-height: 1.15; font-weight: 700; letter-spacing: -0.02em; color: #ff6b00;">
+                    Good Friction
+                </h1>
+                <p style="font-size: 60px; color: #a1a1aa; margin-top: 30px; max-width: 90%; line-height: 1.4; font-family: 'Space Grotesk', sans-serif; font-weight: 500;">
+                    Why Constraints Are the Secret Lubricant of AI-Assisted Shipping
+                </p>
+            </div>
+            
+            <div style="display: flex; align-items: center; gap: 20px; border-top: 1px solid #1f1f23; padding-top: 30px;">
+                <div>
+                    <div style="font-size: 18px; font-weight: 700; color: #ff6b00;">by Remo H. Jansen</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide: About Me -->
+    <div class="slide-container" id="slide-about">
+        <h2 class="slide-title">About Me</h2>
+        <div class="content-area">
+            <div class="two-column-horizontal">
+
+                <div class="image-wrapper" style="height: auto; aspect-ratio: 1 / 1; width: 100%;">
+                    <img src="https://shipitcon.com/wp-content/uploads/2026/05/remo.jpeg" alt="Remo H. Jansen">
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 20px;">
+                    <h3 style="font-size: 32px; color: #ff6b00; font-weight: 700;">Remo H. Jansen</h3>
+                    <p style="font-size: 18px; color: #a1a1aa; line-height: 1.5;">
+                        Tech Lead at Marsh — Former Microsoft MVP &amp; Author of InversifyJS
+                    </p>
+                    <div style="display: flex; gap: 25px; margin-top: 15px;">
+                        <a href="https://www.remojansen.com" style="display: flex; align-items: center; gap: 10px; color: #a1a1aa; text-decoration: none; font-size: 15px;">
+                            <i class="fa-solid fa-globe" style="color: #ff6b00; font-size: 18px;"></i>
+                            www.remojansen.com
+                        </a>
+                        <a href="https://dev.to/remojansen" style="display: flex; align-items: center; gap: 10px; color: #a1a1aa; text-decoration: none; font-size: 15px;">
+                            <i class="fa-solid fa-blog" style="color: #ff6b00; font-size: 18px;"></i>
+                            dev.to/remojansen
+                        </a>
+                    </div>
+                    <div style="margin-top: 25px;">
+                        <div style="font-size: 13px; text-transform: uppercase; letter-spacing: 0.1em; color: #52525b; margin-bottom: 10px; font-weight: 600;">Talk to me about</div>
+                        <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+                            <span style="background: rgba(255, 107, 0, 0.08); border: 1px solid #ff6b00; color: #ff6b00; padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: 500;">Developer Experience</span>
+                            <span style="background: rgba(255, 107, 0, 0.08); border: 1px solid #ff6b00; color: #ff6b00; padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: 500;">High Performance Teams</span>
+                            <span style="background: rgba(255, 107, 0, 0.08); border: 1px solid #ff6b00; color: #ff6b00; padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: 500;">SDLCM</span>
+                            <span style="background: rgba(255, 107, 0, 0.08); border: 1px solid #ff6b00; color: #ff6b00; padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: 500;">AI & Agents</span>
+                            <span style="background: rgba(255, 107, 0, 0.08); border: 1px solid #ff6b00; color: #ff6b00; padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: 500;">Open Source</span>
+                            <span style="background: rgba(255, 107, 0, 0.08); border: 1px solid #ff6b00; color: #ff6b00; padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: 500;">TypeScript</span>
+                            <span style="background: rgba(255, 107, 0, 0.08); border: 1px solid #ff6b00; color: #ff6b00; padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: 500;">Web Development</span>
+                            <span style="background: rgba(255, 107, 0, 0.08); border: 1px solid #ff6b00; color: #ff6b00; padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: 500;">Dependency Injection</span>
+                            <span style="background: rgba(255, 107, 0, 0.08); border: 1px solid #ff6b00; color: #ff6b00; padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: 500;">SOLID</span>
+                        </div>
+                    </div>
+                    <div style="margin-top: 15px;">
+                        <div style="font-size: 13px; text-transform: uppercase; letter-spacing: 0.1em; color: #52525b; margin-bottom: 10px; font-weight: 600;">Currently hacking</div>
+                        <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+                            <span style="background: rgba(255, 107, 0, 0.08); border: 1px solid #ff6b00; color: #ff6b00; padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: 500;">Custom 3D Engine (Vulkan, C++)</span>
+                            <span style="background: rgba(255, 107, 0, 0.08); border: 1px solid #ff6b00; color: #ff6b00; padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: 500;">Digital Experience Platform SaaS</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="slide-footer">
+            <span style="color: #ff6b00;">#SIC2026</span>
+            <span>WWW.REMOJANSEN.COM</span>
+        </div>
+    </div>
+
+    <!-- Slide 2: We Optimized for Speed -->
+    <div class="slide-container" id="slide2">
+        <h2 class="slide-title">We Optimized for Speed</h2>
+        <div class="content-area">
+            <div class="two-column">
+                <div style="display: flex; flex-direction: column; gap: 20px;">
+                    <p style="font-size: 24px; color: #ffffff; font-weight: 500;">
+                        For years, standard developer experience focused entirely on removing friction to ship as fast as possible, even when the long-term benefits were sacrificed:
+                    </p>
+                    <ul class="styled-list">
+                        <li>
+                            <i class="fa-solid fa-bolt"></i>
+                            <strong class="highlight-orange">Dynamic types took over static types:</strong> We moved from C++/Java to JavaScript/Python. Compilation that verified correctness across the entire application was seen as friction. Even when complexity forced us to retrofit type systems (TypeScript, Python type hints), they remained optional, structural, and with no runtime guarantees — the dynamic foundation stayed.
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-database"></i>
+                            <strong class="highlight-orange">NoSQL exploded:</strong> We moved from SQL to NoSQL. Predefined schemas and database-enforced constraints were seen as rigidity slowing teams down.
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-cubes"></i>
+                            <strong class="highlight-orange">Explicit architectures stayed niche:</strong> Whether it was Haskell's explicit effects, the actor model for distributed computing, or architectures like hexagonal (AKA ports and adapters, SOLID, onion) — anything that demanded upfront design discipline failed to become mainstream at the expense of speed.
+                        </li>
+                    </ul>
+                    <p style="font-size: 22px; color: #ffffff; font-weight: 500; margin-top: 15px;">
+                        This absolute removal of friction "made sense" when writing code was the primary human bottleneck.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+        <div class="slide-footer">
+            <span style="color: #ff6b00;">#SIC2026</span>
+            <span>WWW.REMOJANSEN.COM</span>
+        </div>
+    </div>
+
+    <!-- Slide 3: AI Flips the Equation (Table Layout) -->
+    <div class="slide-container" id="slide3">
+        <h2 class="slide-title">AI Flips the Equation</h2>
+        <div class="content-area">
+            <p style="font-size: 22px; color: #a1a1aa; margin-bottom: 25px;">
+                Generative models can synthesize massive blocks of software near-instantaneously. However, this flips our developmental bottlenecks upside down.
+            </p>
+            <div class="table-layout">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width: 30%;">Phase</th>
+                            <th style="width: 35%;">Traditional Era (Before AI)</th>
+                            <th style="width: 35%; color: #ff6b00;">AI-Assisted Era (Now)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Writing Code</strong></td>
+                            <td>Expensive, slow, constrained by physical key inputs</td>
+                            <td><span class="highlight-orange">Virtually free, instantaneous</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Verification</strong></td>
+                            <td>Manageable; author reviews localized logic mappings</td>
+                            <td><span class="highlight-orange">Extremely expensive, cognitively taxing</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <p style="font-size: 22px; color: #ffffff; font-weight: 500; margin-top: 15px;">
+                <span class="highlight-orange">The core engineering roadblock has shifted from generating output to verifying correctness.</span> Optimizing for speed of writing no longer makes sense — we now need to optimize for speed of verification.
+            </p>
+        </div>
+        <div class="slide-footer">
+            <span style="color: #ff6b00;">#SIC2026</span>
+            <span>WWW.REMOJANSEN.COM</span>
+        </div>
+    </div>
+
+    <!-- Slide 4: Rigidity is No Longer Friction (Two-Column Tiled Text) -->
+    <div class="slide-container" id="slide4">
+        <h2 class="slide-title">Rigidity is No Longer Friction</h2>
+        <div class="content-area">
+            <p style="font-size: 22px; color: #a1a1aa; margin-bottom: 30px;">
+                In the age of AI, rigidity is no longer inherently friction. When a system's constraints are implicit, they generate friction — AI can't see them, humans can't verify them. But when constraints are explicit, they become a lubricant — enabling faster verification, clearer generation, and safer iteration. The axis that matters is no longer <strong>Rigidity vs. Flexibility</strong> but <strong class="highlight-orange">Implicit vs. Explicit</strong>.
+            </p>
+            <div class="two-column tiled">
+                <div class="tile-card" style="border-top: 3px solid #71717a;">
+                    <h3><i class="fa-solid fa-eye-slash" style="color: #71717a;"></i> Implicit Systems</h3>
+                    <ul class="styled-list" style="gap: 10px; font-size: 15px;">
+                        <li><i class="fa-solid fa-circle" style="font-size:6px; top:8px; color:#ef4444;"></i> Cannot be formally verified — correctness depends on runtime observation.</li>
+                        <li><i class="fa-solid fa-circle" style="font-size:6px; top:8px; color:#ef4444;"></i> No data integrity guarantees — constraints are assumed, not enforced.</li>
+                        <li><i class="fa-solid fa-circle" style="font-size:6px; top:8px; color:#ef4444;"></i> Code patterns built on inference &amp; runtime conventions.</li>
+                        <li><i class="fa-solid fa-circle" style="font-size:6px; top:8px; color:#ef4444;"></i> Bugs are discovered downstream at runtime.</li>
+                        <li><i class="fa-solid fa-circle" style="font-size:6px; top:8px; color:#ef4444;"></i> Logic relies heavily on tribal developer memory.</li>
+                    </ul>
+                </div>
+                <div class="tile-card" style="border-top: 3px solid #ff6b00;">
+                    <h3><i class="fa-solid fa-eye" style="color: #ff6b00;"></i> <span class="highlight-orange">Explicit Systems</span></h3>
+                    <ul class="styled-list" style="gap: 10px; font-size: 15px;">
+                        <li><i class="fa-solid fa-circle" style="font-size:6px; top:8px; color:#22c55e;"></i> Can be formally verified — correctness is provable before execution.</li>
+                        <li><i class="fa-solid fa-circle" style="font-size:6px; top:8px; color:#22c55e;"></i> Data integrity is enforced at the system boundary — constraints are declared and guaranteed.</li>
+                        <li><i class="fa-solid fa-circle" style="font-size:6px; top:8px; color:#22c55e;"></i> Express and enforce structures directly inside code syntax.</li>
+                        <li><i class="fa-solid fa-circle" style="font-size:6px; top:8px; color:#22c55e;"></i> Capture failures instantly with compile-time assertions.</li>
+                        <li><i class="fa-solid fa-circle" style="font-size:6px; top:8px; color:#22c55e;"></i> Establish static, machine-readable validation contracts.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="slide-footer">
+            <span style="color: #ff6b00;">#SIC2026</span>
+            <span>WWW.REMOJANSEN.COM</span>
+        </div>
+    </div>
+
+    <!-- Slide 5: Implicit = Hidden Intent (Code Block Layout) -->
+    <div class="slide-container" id="slide5">
+        <h2 class="slide-title">Implicit = Hidden Intent</h2>
+        <div class="content-area">
+            <div style="display: flex; flex-direction: column; gap: 20px;">
+                <div class="code-container">
+                    <div class="code-header">
+                        <div class="code-dots">
+                            <span class="code-dot" style="background-color: #ef4444;"></span>
+                            <span class="code-dot" style="background-color: #fbbf24;"></span>
+                            <span class="code-dot" style="background-color: #34d399;"></span>
+                        </div>
+                        <span class="code-lang">JavaScript + MongoDB + Promises</span>
+                    </div>
+                    <pre style="margin: 0;"><span style="color: #71717a;">// No schema, no constraints, no effect tracking</span>
+<span style="color: #f472b6;">async function</span> <span style="color: #60a5fa;">createOrder</span>(userId, product, status) {
+  <span style="color: #f472b6;">await</span> db.<span style="color: #e2e8f0;">collection</span>(<span style="color: #38bdf8;">'orders'</span>).<span style="color: #e2e8f0;">insertOne</span>({
+    userId,          <span style="color: #71717a;">// AI: what type? what table? does it reference anything?</span>
+    product,
+    status,          <span style="color: #71717a;">// AI: what values are valid? has to guess from usage</span>
+    createdAt: <span style="color: #f472b6;">new</span> <span style="color: #fbbf24;">Date</span>()
+  });
+  <span style="color: #f472b6;">await</span> <span style="color: #60a5fa;">notifyWarehouse</span>(product); <span style="color: #71717a;">// AI: is this required? what if it fails?</span>
+}</pre>
+                </div>
+                <h3 style="color: #ea580c; font-size: 24px;"><i class="fa-solid fa-triangle-exclamation"></i> Intent is Hidden</h3>
+                <p style="font-size: 20px; color: #ffffff; font-weight: 500;">
+                    AI must infer everything from patterns — hallucinations are inevitable.
+                </p>
+                <ul class="styled-list" style="gap: 12px; font-size: 15px;">
+                    <li><i class="fa-solid fa-ban" style="color: #ef4444;"></i> <strong>AI Blind Spots:</strong> No types, no schema, no declared effects — AI is forced to guess relationships, valid values, and side effects.</li>
+                    <li><i class="fa-solid fa-ban" style="color: #ef4444;"></i> <strong>Review Drag:</strong> Pull requests require manual tracing or runtime sandbox runs to verify validity.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="slide-footer">
+            <span style="color: #ff6b00;">#SIC2026</span>
+            <span>WWW.REMOJANSEN.COM</span>
+        </div>
+    </div>
+
+    <!-- Slide 6: Explicit = Encoded Intent (Code Block Layout) -->
+    <div class="slide-container" id="slide6">
+        <h2 class="slide-title">Explicit = Encoded Intent</h2>
+        <div class="content-area">
+            <div style="display: flex; flex-direction: column; gap: 20px;">
+                <div class="code-container">
+                    <div class="code-header">
+                        <div class="code-dots">
+                            <span class="code-dot" style="background-color: #ef4444;"></span>
+                            <span class="code-dot" style="background-color: #fbbf24;"></span>
+                            <span class="code-dot" style="background-color: #34d399;"></span>
+                        </div>
+                        <span class="code-lang">TypeScript + PostgreSQL + IO</span>
+                    </div>
+                    <pre style="margin: 0;"><span style="color: #f472b6;">type</span> <span style="color: #fbbf24;">OrderStatus</span> = <span style="color: #38bdf8;">'pending'</span> | <span style="color: #38bdf8;">'shipped'</span> | <span style="color: #38bdf8;">'delivered'</span>; <span style="color: #71717a;">// AI: exact valid values</span>
+
+<span style="color: #f472b6;">type</span> <span style="color: #fbbf24;">CreateOrder</span> = {
+  userId: <span style="color: #38bdf8;">string</span>;       <span style="color: #71717a;">// AI: FK → users.id, knows the relationship</span>
+  product: <span style="color: #38bdf8;">string</span>;
+  status: <span style="color: #fbbf24;">OrderStatus</span>;  <span style="color: #71717a;">// AI: constrained set, will never generate "shiped"</span>
+};
+
+<span style="color: #f472b6;">function</span> <span style="color: #60a5fa;">createOrder</span>(order: <span style="color: #fbbf24;">CreateOrder</span>): <span style="color: #fbbf24;">IO</span>&lt;<span style="color: #fbbf24;">Result</span>&lt;<span style="color: #fbbf24;">Order</span>, <span style="color: #fbbf24;">ConstraintError</span>&gt;&gt; {
+  <span style="color: #f472b6;">return</span> <span style="color: #60a5fa;">pipe</span>(
+    <span style="color: #60a5fa;">query</span>(<span style="color: #38bdf8;">'INSERT INTO orders (user_id, product, status) VALUES ($1, $2, $3)'</span>,
+      [order.userId, order.product, order.status]),
+    <span style="color: #60a5fa;">flatMap</span>(o =&gt; <span style="color: #60a5fa;">notifyWarehouse</span>(o.product).<span style="color: #e2e8f0;">map</span>(() =&gt; o)) <span style="color: #71717a;">// AI: error handling enforced by compiler</span>
+  );
+}</pre>
+                </div>
+                <h3 style="color: #22c55e; font-size: 24px;"><i class="fa-solid fa-circle-check"></i> Intent is Encoded</h3>
+                <p style="font-size: 20px; color: #ffffff; font-weight: 500;">
+                    AI reads the types, enums, and FK relationships as a complete blueprint. Generation is accurate on the first attempt. Compiler verifies type safety, database constraints guarantee data integrity, IO makes side effects visible — eliminating entire classes of edge cases.
+                </p>
+                <ul class="styled-list" style="gap: 12px; font-size: 15px;">
+                    <li><i class="fa-solid fa-check" style="color: #22c55e;"></i> <strong>AI Blueprint:</strong> Types, enums, and FK relationships give AI a complete context map — generation is accurate on the first attempt.</li>
+                    <li><i class="fa-solid fa-check" style="color: #22c55e;"></i> <strong>Layered Verification:</strong> Compiler catches type errors, DB enforces enums and foreign keys, IO declares side effects. Errors are impossible to miss.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="slide-footer">
+            <span style="color: #ff6b00;">#SIC2026</span>
+            <span>WWW.REMOJANSEN.COM</span>
+        </div>
+    </div>
+
+    <!-- Slide 7: Better Output, Faster Verification -->
+    <div class="slide-container" id="slide7">
+        <h2 class="slide-title">Better Output, Faster Verification</h2>
+        <div class="content-area">
+            <p style="font-size: 22px; color: #a1a1aa; margin-bottom: 30px;">
+                Explicit constraints accelerate AI-assisted development on two levels:
+            </p>
+            <div class="two-column tiled">
+                <div class="tile-card" style="border-top: 3px solid #ff6b00;">
+                    <h3><i class="fa-solid fa-brain" style="color: #ff6b00;"></i> <span class="highlight-orange">1. Richer AI Context</span></h3>
+                    <ul class="styled-list" style="gap: 10px; font-size: 15px;">
+                        <li><i class="fa-solid fa-circle" style="font-size:6px; top:8px; color:#22c55e;"></i> Types, schemas, and contracts act as a compressed blueprint of your system's intent.</li>
+                        <li><i class="fa-solid fa-circle" style="font-size:6px; top:8px; color:#22c55e;"></i> AI doesn't need to guess relationships, valid values, or boundaries — they're declared.</li>
+                        <li><i class="fa-solid fa-circle" style="font-size:6px; top:8px; color:#22c55e;"></i> The more you formally encode up front, the fewer hallucinations and the more accurate the generated code.</li>
+                    </ul>
+                </div>
+                <div class="tile-card" style="border-top: 3px solid #ff6b00;">
+                    <h3><i class="fa-solid fa-layer-group" style="color: #ff6b00;"></i> <span class="highlight-orange">2. Layered Verification</span></h3>
+                    <ul class="styled-list" style="gap: 10px; font-size: 15px;">
+                        <li><i class="fa-solid fa-circle" style="font-size:6px; top:8px; color:#22c55e;"></i> Each explicit constraint adds a verification layer: compiler → database → contracts → effect system.</li>
+                        <li><i class="fa-solid fa-circle" style="font-size:6px; top:8px; color:#22c55e;"></i> AI-generated code passes through multiple automated checkpoints before reaching production.</li>
+                        <li><i class="fa-solid fa-circle" style="font-size:6px; top:8px; color:#22c55e;"></i> More layers = more confidence in correctness without human review for every line.</li>
+                    </ul>
+                </div>
+            </div>
+            <p style="font-size: 20px; color: #ffffff; font-weight: 500; margin-top: 25px;">
+                Constraints don't slow you down — they compress the verification loop from hours of manual review to seconds of automated checks.
+            </p>
+        </div>
+        <div class="slide-footer">
+            <span style="color: #ff6b00;">#SIC2026</span>
+            <span>WWW.REMOJANSEN.COM</span>
+        </div>
+    </div>
+
+    <!-- Slide 8: The DX Paradox (Chart Right Layout) -->
+    <div class="slide-container" id="slide8">
+        <h2 class="slide-title">The DX Paradox</h2>
+        <div class="content-area">
+            <div class="two-column-horizontal">
+                <div style="display: flex; flex-direction: column; gap: 20px;">
+                    <p style="font-size: 24px; color: #ffffff; font-weight: 500; line-height: 1.45;">
+                        The exact fluid design setups we chose to make human typing fast now create extreme drag for AI-assisted workflows:
+                    </p>
+                    <ul class="styled-list" style="gap: 14px;">
+                        <li>
+                            <i class="fa-solid fa-triangle-exclamation" style="color: #ff6b00;"></i>
+                            <strong>Dynamic types:</strong> AI has no blueprint of your system — it guesses signatures, invents properties, and generates code that looks correct but breaks at runtime. Every output requires manual verification.
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-triangle-exclamation" style="color: #ff6b00;"></i>
+                            <strong>Schema-less databases:</strong> Without declared relationships and constraints, AI generates queries against assumed structures. No FK, no enums — data corruption happens silently.
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-triangle-exclamation" style="color: #ff6b00;"></i>
+                            <strong>No explicit side effects:</strong> Without explicit side effects, we can't be sure AI handles them correctly — making human code review inevitable.
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-triangle-exclamation" style="color: #ff6b00;"></i>
+                            <strong>No concurrency model:</strong> Without explicit boundaries for parallel computation (like the actor model), AI generates code with shared mutable state, race conditions, and deadlocks.
+                        </li>
+                    </ul>
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 20px;">
+                    <ul class="styled-list" style="gap: 14px;">
+                        <li>
+                            <i class="fa-solid fa-triangle-exclamation" style="color: #ff6b00;"></i>
+                            <strong>No architecture tests:</strong> Without tests enforcing structural boundaries and dependency rules, AI crosses layers, imports forbidden modules, and breaks architectural intent — while unit tests still pass.
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-triangle-exclamation" style="color: #ff6b00;"></i>
+                            <strong>No explicit memory ownership:</strong> Without ownership rules (like Rust's borrow checker), AI generates memory leaks and use-after-free bugs that only surface in production.
+                        </li>
+                    </ul>
+                    <div style="background-color: #111113; border: 1px solid #1f1f23; border-radius: 12px; padding: 25px; flex: 1; display: flex; flex-direction: column;">
+                        <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: #52525b; margin-bottom: 12px; font-weight: 600;">Shipping Velocity Over Time</div>
+                        <svg viewBox="0 0 400 280" style="width: 100%; flex: 1;" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Grid lines -->
+                            <line x1="50" y1="30" x2="50" y2="240" stroke="#1f1f23" stroke-width="1"/>
+                            <line x1="50" y1="240" x2="380" y2="240" stroke="#1f1f23" stroke-width="1"/>
+                            <line x1="50" y1="170" x2="380" y2="170" stroke="#1f1f23" stroke-width="0.5" stroke-dasharray="4"/>
+                            <line x1="50" y1="100" x2="380" y2="100" stroke="#1f1f23" stroke-width="0.5" stroke-dasharray="4"/>
+
+                            <!-- No Constraints (white/gray) - fast start, then plateaus and crashes -->
+                            <path d="M 50 220 C 100 120, 140 80, 180 75 C 220 70, 260 90, 300 140 C 330 175, 350 210, 380 225" fill="none" stroke="#71717a" stroke-width="2.5" stroke-linecap="round"/>
+
+                            <!-- Bad Constraints (red) - slow all the way -->
+                            <path d="M 50 230 C 100 225, 150 220, 200 215 C 250 210, 300 208, 380 205" fill="none" stroke="#ef4444" stroke-width="2.5" stroke-linecap="round"/>
+
+                            <!-- Good Constraints (orange/green) - slower start, sustained growth -->
+                            <path d="M 50 235 C 100 200, 140 160, 180 130 C 220 100, 260 75, 300 55 C 330 42, 360 35, 380 32" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round"/>
+
+                            <!-- Crossover annotation -->
+                            <line x1="195" y1="30" x2="195" y2="240" stroke="#ff6b00" stroke-width="0.8" stroke-dasharray="3" opacity="0.5"/>
+                            <text x="198" y="45" font-size="8" fill="#ff6b00" font-family="Inter, sans-serif">AI amplifies gap</text>
+
+                            <!-- Y-axis label -->
+                            <text x="12" y="140" font-size="8" fill="#52525b" font-family="Inter, sans-serif" transform="rotate(-90, 12, 140)">Features Shipped</text>
+
+                            <!-- X-axis label -->
+                            <text x="200" y="265" font-size="8" fill="#52525b" font-family="Inter, sans-serif" text-anchor="middle">Project Maturity / Complexity →</text>
+
+                            <!-- Legend -->
+                            <line x1="60" y1="278" x2="80" y2="278" stroke="#71717a" stroke-width="2"/>
+                            <text x="84" y="280" font-size="7.5" fill="#71717a" font-family="Inter, sans-serif">No Constraints</text>
+
+                            <line x1="170" y1="278" x2="190" y2="278" stroke="#ef4444" stroke-width="2"/>
+                            <text x="194" y="280" font-size="7.5" fill="#ef4444" font-family="Inter, sans-serif">Bad Constraints</text>
+
+                            <line x1="285" y1="278" x2="305" y2="278" stroke="#22c55e" stroke-width="2"/>
+                            <text x="309" y="280" font-size="7.5" fill="#22c55e" font-family="Inter, sans-serif">Good Constraints</text>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="slide-footer">
+            <span style="color: #ff6b00;">#SIC2026</span>
+            <span>WWW.REMOJANSEN.COM</span>
+        </div>
+    </div>
+
+    <!-- Slide 9: Two Audiences Now (Two-Column Tiled Layout) -->
+    <div class="slide-container" id="slide9">
+        <h2 class="slide-title">Two Audiences Now</h2>
+        <div class="content-area">
+            <p style="font-size: 22px; color: #a1a1aa; margin-bottom: 30px;">
+                Our code syntax is no longer written purely to be compiled down for local servers; it has <strong class="highlight-orange">two readers</strong>:
+            </p>
+            <div class="two-column tiled">
+                <div class="tile-card" style="border-left: 4px solid #71717a;">
+                    <h3 style="color: #ffffff;"><i class="fa-solid fa-users" style="color: #71717a;"></i> 1. Human Engineers</h3>
+                    <p style="margin-bottom: 12px; font-size: 18px; color: #a1a1aa;">
+                        Need semantic code layouts and clear logical separation to parse complex software modules and safely review pull requests.
+                    </p>
+                    <ul class="styled-list" style="gap: 10px; font-size: 15px;">
+                        <li><i class="fa-solid fa-circle" style="font-size:6px; top:8px; color:#71717a;"></i> Can a human review and comfortably extend this code?</li>
+                        <li><i class="fa-solid fa-circle" style="font-size:6px; top:8px; color:#71717a;"></i> Are boundaries and responsibilities clear at a glance?</li>
+                        <li><i class="fa-solid fa-circle" style="font-size:6px; top:8px; color:#71717a;"></i> Is the cognitive load manageable during code review?</li>
+                    </ul>
+                </div>
+                <div class="tile-card" style="border-left: 4px solid #ff6b00;">
+                    <h3 style="color: #ff6b00;"><i class="fa-solid fa-robot"></i> 2. AI Agents</h3>
+                    <p style="margin-bottom: 12px; font-size: 18px; color: #a1a1aa;">
+                        Require clear interfaces, complete types, and schema boundaries to execute stable, hallucination-free edits.
+                    </p>
+                    <ul class="styled-list" style="gap: 10px; font-size: 15px;">
+                        <li><i class="fa-solid fa-circle" style="font-size:6px; top:8px; color:#ff6b00;"></i> Is the contract explicit enough for compilers to auto-verify?</li>
+                        <li><i class="fa-solid fa-circle" style="font-size:6px; top:8px; color:#ff6b00;"></i> Can AI read the full intent without guessing?</li>
+                        <li><i class="fa-solid fa-circle" style="font-size:6px; top:8px; color:#ff6b00;"></i> Are constraints machine-readable, not just human-readable?</li>
+                    </ul>
+                </div>
+            </div>
+            <div style="margin-top: 25px;">
+                <h3 style="font-size: 20px; color: #ff6b00; margin-bottom: 10px;"><i class="fa-solid fa-face-tired"></i> Being an LLM is hard</h3>
+                <p style="font-size: 18px; color: #a1a1aa; line-height: 1.5;">
+                    You write code once, you read it a hundred times. We've all felt the pain of returning to our own code months later and thinking "who wrote this?" Well, for an LLM — every single prompt is their first day at a new company. No onboarding, no tribal knowledge, no memory. Just whatever context is in the repo.
+                </p>
+            </div>
+        </div>
+        <div class="slide-footer">
+            <span style="color: #ff6b00;">#SIC2026</span>
+            <span>WWW.REMOJANSEN.COM</span>
+        </div>
+    </div>
+
+    <!-- Slide 10: What Rises in Value (Table Layout) -->
+    <div class="slide-container" id="slide10">
+        <h2 class="slide-title">What Rises in Value</h2>
+        <div class="content-area">
+            <p style="font-size: 22px; color: #a1a1aa; margin-bottom: 25px;">
+                As the costs of writing code fall toward zero, architectures, tools, languages, and patterns that prioritize easy, machine-executable verification are surging in value.
+            </p>
+            <div class="table-layout">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width: 50%;">Flexibility-First (Slow AI Verification)</th>
+                            <th style="width: 50%; color: #ff6b00;">Explicitness-First (Fast AI Verification)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Schema-less Document Databases (NoSQL)</td>
+                            <td><strong style="color: #ffffff;">Database Enforced Constraints (SQL)</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Dynamic Types (JS / Python)</td>
+                            <td><strong style="color: #ffffff;">Static Types (TS / Rust / Go)</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Loosely-typed APIs (REST)</td>
+                            <td><strong style="color: #ffffff;">Type Safe Contracts (Protobuf / gRPC)</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Implicit, undocumented side effects</td>
+                            <td><strong style="color: #ffffff;">Explicit, Declaratively Modeled Effects (FP)</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Untracked Memory Management (C/C++)</td>
+                            <td><strong style="color: #ffffff;">Explicit Memory Ownership (Rust)</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Shared State Concurrency (Threads/Locks)</td>
+                            <td><strong style="color: #ffffff;">Explicit Message Passing (Actor Model)</strong></td>
+                        </tr>
+                        <tr>
+                            <td>External Documentation (Confluence / Wikis)</td>
+                            <td><strong style="color: #ffffff;">In-Repo Documentation (Markdown / ADRs)</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p style="font-size: 22px; color: #a1a1aa; margin-top: 25px;">
+                We must optimize for <span class="highlight-orange">richer AI context</span> and <span class="highlight-orange">faster automated verification</span>.
+            </p>
+        </div>
+        <div class="slide-footer">
+            <span style="color: #ff6b00;">#SIC2026</span>
+            <span>WWW.REMOJANSEN.COM</span>
+        </div>
+    </div>
+
+    <!-- Slide 11: Good Friction vs. Bad Friction (Tile Layout) -->
+    <div class="slide-container" id="slide11">
+        <h2 class="slide-title">Good Friction vs. Bad Friction</h2>
+        <div class="content-area">
+            <p style="font-size: 22px; color: #a1a1aa; margin-bottom: 30px;">
+                Not all friction is equal. Some slows you down and invites AI to hallucinate. Some catches mistakes before your users do.
+            </p>
+            <div class="two-column tiled">
+                <div class="tile-card" style="border-top: 4px solid #ef4444;">
+                    <h3 style="color: #ef4444;"><i class="fa-solid fa-hand-fist"></i> Bad Friction (Eliminate)</h3>
+                    <ul class="styled-list" style="gap: 12px; font-size: 15px;">
+                        <li><i class="fa-solid fa-xmark" style="color: #ef4444;"></i> Flaky unit tests that cry wolf until everyone ignores them</li>
+                        <li><i class="fa-solid fa-xmark" style="color: #ef4444;"></i> Stateful distributed systems nobody can reason about</li>
+                        <li><i class="fa-solid fa-xmark" style="color: #ef4444;"></i> Unpredictable side effects hidden deep in the call stack</li>
+                        <li><i class="fa-solid fa-xmark" style="color: #ef4444;"></i> Shared mutable state across service boundaries</li>
+                    </ul>
+                </div>
+                <div class="tile-card" style="border-top: 4px solid #22c55e;">
+                    <h3 style="color: #22c55e;"><i class="fa-solid fa-road"></i> Good Friction (Adopt)</h3>
+                    <ul class="styled-list" style="gap: 12px; font-size: 15px;">
+                        <li><i class="fa-solid fa-check" style="color: #22c55e;"></i> Type errors that catch null references before production</li>
+                        <li><i class="fa-solid fa-check" style="color: #22c55e;"></i> Foreign keys that make invalid states unrepresentable</li>
+                        <li><i class="fa-solid fa-check" style="color: #22c55e;"></i> Type-safe protocols (protobuf) that catch breaking changes at compile time</li>
+                        <li><i class="fa-solid fa-check" style="color: #22c55e;"></i> Ownership rules that prevent memory leaks at compile time</li>
+                        <li><i class="fa-solid fa-check" style="color: #22c55e;"></i> Effect systems that make side effects visible in the type signature</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="slide-footer">
+            <span style="color: #ff6b00;">#SIC2026</span>
+            <span>WWW.REMOJANSEN.COM</span>
+        </div>
+    </div>
+
+    <!-- Slide 12: Speculation: If AI Stalls... (Image Right Layout) -->
+    <div class="slide-container" id="slide12">
+        <h2 class="slide-title">Predictions</h2>
+        <div class="content-area">
+            <div class="two-column-horizontal">
+                <div style="display: flex; flex-direction: column; gap: 15px;">
+                    <p style="font-size: 18px; color: #ffffff; font-weight: 500;">
+                        If AI models reach a plateau, tools and practices that encode verification through explicitness will rise in popularity:
+                    </p>
+                    <ul class="styled-list" style="gap: 10px; font-size: 15px;">
+                        <li>
+                            <i class="fa-solid fa-code"></i>
+                            <strong>Static types become non-negotiable</strong> — TypeScript already won JavaScript. Python type hints and validated configs are next.
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-diagram-project"></i>
+                            <strong>Effect systems go mainstream</strong> — Side effects tracked in the type signature, not buried in runtime surprises.
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-file-contract"></i>
+                            <strong>Schema-first protocols replace documentation</strong> — Protobuf, GraphQL schemas, and OpenAPI as the single source of truth.
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-database"></i>
+                            <strong>NoSQL takes a hit</strong> — Foreign keys and constraints win over "flexible" document stores with no guarantees.
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-vial"></i>
+                            <strong>Architecture tests replace architecture diagrams</strong> — Executable rules, not Confluence pages nobody reads.
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-cubes"></i>
+                            <strong>Explicit architecture patterns gain adoption</strong> (e.g. Actor Model, Hexagonal Architecture) — Replacing "best practices" wikis with enforceable structure.
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <div style="background-color: #111113; border: 1px solid #1f1f23; border-radius: 12px; padding: 25px; height: 380px; display: flex; flex-direction: column;">
+                        <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: #52525b; margin-bottom: 12px; font-weight: 600;">Demand for Explicit Systems Over Time</div>
+                        <svg viewBox="0 0 400 280" style="width: 100%; flex: 1;" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Grid lines -->
+                            <line x1="50" y1="30" x2="50" y2="240" stroke="#1f1f23" stroke-width="1"/>
+                            <line x1="50" y1="240" x2="380" y2="240" stroke="#1f1f23" stroke-width="1"/>
+                            <line x1="50" y1="170" x2="380" y2="170" stroke="#1f1f23" stroke-width="0.5" stroke-dasharray="4"/>
+                            <line x1="50" y1="100" x2="380" y2="100" stroke="#1f1f23" stroke-width="0.5" stroke-dasharray="4"/>
+
+                            <!-- AI is Exponential (gray) - stays flat -->
+                            <path d="M 50 170 C 100 168, 150 165, 200 163 C 250 161, 300 160, 380 158" fill="none" stroke="#71717a" stroke-width="2.5" stroke-linecap="round"/>
+
+                            <!-- AI Plateaus (orange) - rises steadily -->
+                            <path d="M 50 200 C 100 185, 150 160, 200 130 C 250 100, 300 70, 350 50 C 365 44, 375 40, 380 38" fill="none" stroke="#ff6b00" stroke-width="2.5" stroke-linecap="round"/>
+
+                            <!-- Y-axis label -->
+                            <text x="10" y="140" font-size="8" fill="#52525b" font-family="Inter, sans-serif" transform="rotate(-90, 10, 140)">Explicit Systems Adoption</text>
+
+                            <!-- X-axis label -->
+                            <text x="215" y="265" font-size="8" fill="#52525b" font-family="Inter, sans-serif" text-anchor="middle">Time →</text>
+
+                            <!-- Legend -->
+                            <line x1="90" y1="278" x2="110" y2="278" stroke="#ff6b00" stroke-width="2"/>
+                            <text x="114" y="280" font-size="7.5" fill="#ff6b00" font-family="Inter, sans-serif">If AI Plateaus</text>
+
+                            <line x1="230" y1="278" x2="250" y2="278" stroke="#71717a" stroke-width="2"/>
+                            <text x="254" y="280" font-size="7.5" fill="#71717a" font-family="Inter, sans-serif">If AI is Exponential</text>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="slide-footer">
+            <span style="color: #ff6b00;">#SIC2026</span>
+            <span>WWW.REMOJANSEN.COM</span>
+        </div>
+    </div>
+
+    <!-- Slide 14: Thank You / Ending Slide (Clean & Centered) -->
+    <div class="slide-container" id="slide14">
+        <div class="content-area" style="text-align: center; justify-content: center; align-items: center; gap: 25px;">
+            <div style="width: 80px; height: 80px; background-color: rgba(255, 107, 0, 0.1); border: 2px dashed #ff6b00; border-radius: 50%; display: grid; place-items: center; color: #ff6b00; margin-bottom: 10px;">
+                <i class="fa-solid fa-hands-clapping" style="font-size: 36px;"></i>
+            </div>
+            <h1 style="font-size: 60px; letter-spacing: -0.02em; color: #ff6b00;">Thank You</h1>
+            <p style="font-size: 22px; color: #a1a1aa; font-weight: 400; max-width: 600px; line-height: 1.5; margin-bottom: 10px;">
+                Let's make our systems explicit and ship even faster.
+            </p>
+            
+            <div style="display: flex; gap: 40px; margin-top: 25px; border-top: 1px solid #1f1f23; padding-top: 25px; width: 60%; justify-content: center;">
+                <div style="text-align: center;">
+                    <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: #52525b; margin-bottom: 5px;">Speaker</div>
+                    <div style="font-size: 32px; font-weight: 700; color: #ff6b00;">Remo H. Jansen</div>
+                </div>
+            </div>
+        </div>
+        <div class="slide-footer">
+            <span style="color: #ff6b00;">#SIC2026</span>
+            <span>WWW.REMOJANSEN.COM</span>
+        </div>
+    </div>
+
+
+<div id="start-overlay">
+    <button id="start-btn">Start</button>
+</div>
+<div id="fade-overlay"></div>
+<script>
+(function() {
+    const slides = document.querySelectorAll('.slide-container');
+    let current = 0;
+    let transitioning = false;
+    let started = false;
+
+    document.getElementById('start-btn').addEventListener('click', () => {
+        document.documentElement.requestFullscreen().catch(() => {});
+        const startOverlay = document.getElementById('start-overlay');
+        startOverlay.classList.add('hidden');
+        setTimeout(() => {
+            startOverlay.remove();
+            slides[current].classList.add('active');
+            started = true;
+        }, 500);
+    });
+
+    document.addEventListener('keydown', function startHandler(e) {
+        if (!started && e.key === 'Enter') {
+            document.getElementById('start-btn').click();
+            document.removeEventListener('keydown', startHandler);
+        }
+    });
+
+    function goToSlide(index) {
+        if (!started || transitioning || index === current || index < 0 || index >= slides.length) return;
+        transitioning = true;
+        const overlay = document.getElementById('fade-overlay');
+        overlay.classList.add('visible');
+        setTimeout(() => {
+            slides[current].classList.remove('active');
+            current = index;
+            slides[current].classList.add('active');
+            overlay.classList.remove('visible');
+            setTimeout(() => { transitioning = false; }, 300);
+        }, 300);
+    }
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+            goToSlide(current + 1);
+        } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+            goToSlide(current - 1);
+        }
+    });
+})();
+</script>
+</body></html>
