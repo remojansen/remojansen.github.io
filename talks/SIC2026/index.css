@@ -1,0 +1,676 @@
+/* 1. SETUP & CORE DESIGN PRINCIPLES */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #000000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+    color: #e4e4e7;
+}
+
+#slides-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    flex: 1;
+}
+
+/* Every slide sits in the same absolute box; only `.active` is visible and the
+   cross-fade is pure CSS -- JS only moves the class. */
+.slide-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 40px 80px 0;
+    background-color: #0a0a0c;
+    /* Matte Black */
+    border-radius: 12px;
+    border: 1px solid #1f1f23;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    overflow: hidden;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.35s ease, visibility 0.35s ease;
+}
+
+.slide-container.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Staged blocks: add data-fade="true" to reveal a block on its own key press.
+   They still occupy their space while hidden, so the layout never jumps. */
+[data-fade] {
+    opacity: 0;
+    transition: opacity 0.35s ease;
+}
+
+[data-fade].revealed {
+    opacity: 1;
+}
+
+#start-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000000;
+    z-index: 10000;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    align-items: center;
+    justify-content: center;
+}
+
+#start-error {
+    max-width: 520px;
+    text-align: center;
+    font-size: 14px;
+    color: #a1a1aa;
+}
+
+#start-btn {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 2px solid #ff6b00;
+    background: rgba(255, 107, 0, 0.1);
+    color: #ff6b00;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease;
+    letter-spacing: 0.05em;
+}
+
+#start-btn:hover {
+    background: rgba(255, 107, 0, 0.2);
+    transform: scale(1.05);
+}
+
+#start-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Abstract Premium Geometric Background Details (ShipItCon Orange glow) */
+.slide-container::before {
+    content: '';
+    position: absolute;
+    top: -200px;
+    right: -200px;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(255, 107, 0, 0.04) 0%, rgba(10, 10, 12, 0) 70%);
+    z-index: 0;
+    pointer-events: none;
+}
+
+.slide-container::after {
+    content: '';
+    position: absolute;
+    bottom: -150px;
+    left: -150px;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(255, 107, 0, 0.02) 0%, rgba(10, 10, 12, 0) 70%);
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* Typography Presets */
+h1,
+h2,
+h3,
+h4 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+/* Slide Titles (Restricted to max 40 chars, uniform alignment) */
+.slide-title {
+    font-size: 52px;
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin-bottom: 35px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    z-index: 2;
+}
+
+.slide-title::after {
+    content: '';
+    flex-grow: 1;
+    height: 1px;
+    background: linear-gradient(90deg, #ff6b00 0%, rgba(255, 107, 0, 0.05) 100%);
+}
+
+p,
+li,
+th,
+td {
+    font-size: 18px;
+    line-height: 1.5;
+    color: #a1a1aa;
+    /* Zinc 400 */
+}
+
+.highlight-orange {
+    color: #ff6b00 !important;
+    /* ShipItCon Signature Orange */
+}
+
+.content-area {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    width: 100%;
+    z-index: 2;
+    min-height: 0;
+    overflow: hidden;
+}
+
+/* Two-Column Configurations (stacked vertical) */
+.two-column {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+    align-items: start;
+    width: 100%;
+}
+
+/* Two-Column Horizontal (side by side) */
+.two-column-horizontal {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    align-items: start;
+    width: 100%;
+    min-height: 0;
+    overflow: hidden;
+}
+
+/* Two-Column Tiled layout with matching size constraints */
+.two-column.tiled {
+    grid-template-columns: 1fr 1fr;
+    align-items: stretch;
+    gap: 30px;
+}
+
+.tile-card {
+    background-color: #111113;
+    /* Zinc 900 */
+    border: 1px solid #1f1f23;
+    border-radius: 12px;
+    padding: 35px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    transition: border-color 0.3s ease;
+}
+
+.tile-card:hover {
+    border-color: #ff6b00;
+}
+
+.tile-card h3 {
+    font-size: 24px;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #ffffff;
+}
+
+.tile-card p {
+    font-size: 16px;
+    color: #a1a1aa;
+}
+
+/* Integrated Custom Bullet Layout */
+.styled-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.styled-list li {
+    position: relative;
+    padding-left: 45px;
+    color: #a1a1aa;
+}
+
+.styled-list li i {
+    position: absolute;
+    left: 5px;
+    top: 4px;
+    color: #ff6b00;
+}
+
+.styled-list li strong {
+    color: #ffffff;
+    font-weight: 600;
+}
+
+/* Slide 6 & 8: Smaller bullet points */
+#slide6 .styled-list li {
+    font-size: 16px;
+}
+
+#slide8 .styled-list li {
+    font-size: 16px;
+}
+
+/* Standardized High-Contrast Tables */
+.table-layout {
+    width: 100%;
+    background-color: #111113;
+    border-radius: 12px;
+    border: 1px solid #1f1f23;
+    overflow: hidden;
+    margin-bottom: 25px;
+}
+
+.table-layout table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.table-layout th {
+    background-color: #161619;
+    color: #ffffff;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 20px;
+    padding: 20px 28px;
+    border-bottom: 1px solid #1f1f23;
+}
+
+.table-layout td {
+    padding: 20px 28px;
+    border-bottom: 1px solid #1f1f23;
+    font-size: 19px;
+}
+
+.table-layout tr:last-child td {
+    border-bottom: none;
+}
+
+.table-layout tr:nth-child(even) td {
+    background-color: #131316;
+}
+
+#slide10 .table-layout th {
+    padding: 10px 28px;
+}
+
+#slide10 .table-layout td {
+    padding: 10px 28px;
+}
+
+#slide3 .table-layout th {
+    padding: 10px 28px;
+}
+
+#slide3 .table-layout td {
+    padding: 10px 28px;
+}
+
+/* Image Sizing and Wrappers */
+.image-wrapper {
+    border-radius: 12px;
+    border: 1px solid #1f1f23;
+    overflow: hidden;
+    height: 380px;
+    width: 100%;
+    background-color: #111113;
+}
+
+.image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Code blocks. The <pre> owns the box and the type, so a bare <pre> (terminal
+   output) looks the same as a <pre><code class="language-*"> that hljs colours. */
+pre {
+    background-color: #060608;
+    border-radius: 12px;
+    border: 1px solid #1f1f23;
+    padding: 24px;
+    margin: 0;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #cbd5e1;
+    white-space: pre;
+    overflow-x: auto;
+}
+
+/* The hljs theme ships its own box and base colour -- defer to the <pre>.
+   Token spans keep the theme's colours. */
+pre code.hljs {
+    background: transparent;
+    padding: 0;
+    font: inherit;
+    color: inherit;
+}
+
+/* Editorial Consultant Quotes */
+.highlight-quote {
+    padding: 18px 0;
+    font-size: 24px;
+    font-weight: 500;
+    color: #ffffff;
+    line-height: 1.45;
+    margin-top: 15px;
+}
+
+/* Unified Footer System */
+.slide-footer {
+    margin-top: auto;
+    flex-shrink: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #1f1f23;
+    padding: 10px 0;
+    font-size: 12px;
+    color: #52525b;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    z-index: 10;
+}
+
+/* ===== Desktop non-fullscreen: scale down when viewport is short ===== */
+@media (min-width: 1025px) and (max-height: 750px) {
+    .slide-container {
+        padding: 25px 60px 0;
+    }
+
+    .slide-title {
+        font-size: 42px;
+        margin-bottom: 20px;
+    }
+
+    .styled-list {
+        gap: 10px;
+    }
+
+    .styled-list li {
+        font-size: 15px;
+    }
+
+    .tile-card {
+        padding: 20px;
+    }
+
+    .tile-card h3 {
+        font-size: 20px;
+        margin-bottom: 8px;
+    }
+
+    pre {
+        padding: 16px;
+        font-size: 12px;
+    }
+
+    .table-layout th {
+        padding: 12px 20px;
+        font-size: 16px;
+    }
+
+    .table-layout td {
+        padding: 12px 20px;
+        font-size: 15px;
+    }
+
+    .two-column.tiled {
+        gap: 20px;
+    }
+
+    p,
+    li,
+    th,
+    td {
+        font-size: 16px;
+    }
+}
+
+/* ===== RESPONSIVE: Mobile & Tablet ===== */
+@media (max-width: 1024px) {
+    body {
+        height: auto;
+        width: auto;
+        overflow: auto;
+        padding: 20px;
+        gap: 30px;
+    }
+
+    #slides-container {
+        position: relative;
+        width: 100%;
+        height: auto;
+    }
+
+    /* Mobile/tablet: nothing is staged, so never leave a block faded out. */
+    [data-fade] {
+        opacity: 1 !important;
+    }
+
+    /* Mobile/tablet: stack every slide, no deck navigation. */
+    .slide-container {
+        position: relative !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        width: 100%;
+        height: auto;
+        min-height: auto;
+        padding: 30px 20px;
+        border-radius: 12px;
+    }
+
+    .slide-title {
+        font-size: 28px;
+        margin-bottom: 20px;
+    }
+
+    .two-column-horizontal {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+
+    .two-column.tiled {
+        grid-template-columns: 1fr;
+    }
+
+    .tile-card {
+        padding: 20px;
+    }
+
+    .tile-card h3 {
+        font-size: 18px;
+    }
+
+    .table-layout th,
+    .table-layout td {
+        padding: 12px 14px;
+        font-size: 14px;
+    }
+
+    .image-wrapper {
+        height: 250px;
+    }
+
+    pre {
+        padding: 16px;
+        font-size: 11px;
+    }
+
+    .slide-footer {
+        position: relative;
+        bottom: auto;
+        left: auto;
+        right: auto;
+        margin-top: 20px;
+    }
+
+    .styled-list li {
+        padding-left: 30px;
+        font-size: 14px;
+    }
+
+    p,
+    li,
+    th,
+    td {
+        font-size: 15px;
+    }
+
+    /* Title slide responsive */
+    #slide1 h1 {
+        font-size: 48px !important;
+    }
+
+    #slide1 p {
+        font-size: 22px !important;
+    }
+
+    .highlight-quote {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 600px) {
+    body {
+        padding: 10px;
+        gap: 20px;
+    }
+
+    .slide-container {
+        padding: 20px 15px;
+    }
+
+    .slide-title {
+        font-size: 22px;
+        margin-bottom: 15px;
+    }
+
+    #slide1 h1 {
+        font-size: 36px !important;
+    }
+
+    #slide1 p {
+        font-size: 18px !important;
+    }
+
+    .table-layout th,
+    .table-layout td {
+        padding: 8px 10px;
+        font-size: 12px;
+    }
+
+    pre {
+        padding: 12px;
+        font-size: 10px;
+    }
+
+    .image-wrapper {
+        height: 180px;
+    }
+}
+
+@media print {
+
+    @page {
+        size: landscape;
+        margin: 0;
+    }
+
+    html,
+    body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: auto;
+        overflow: visible !important;
+        background: #0a0a0c !important;
+    }
+
+    body {
+        display: block;
+    }
+
+    .slide-container,
+    .slide-container.active {
+        position: relative !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+
+        width: 100vw;
+        height: 100vh;
+
+        aspect-ratio: 16 / 9;
+
+        box-sizing: border-box;
+        border-radius: 0;
+        box-shadow: none;
+        overflow: hidden;
+
+        break-after: page;
+        page-break-after: always;
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+
+    .slide-container:first-of-type {
+        break-before: auto;
+        page-break-before: auto;
+    }
+
+    #start-overlay {
+        display: none !important;
+    }
+
+    [data-fade] {
+        opacity: 1 !important;
+    }
+
+    * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+}
+
+.hljs {
+    background: black !important;
+}
