@@ -1,0 +1,111 @@
+<div class="slide-container" id="slide8">
+        <h2 class="slide-title">The DX Paradox</h2>
+        <div class="content-area">
+            <div class="two-column-horizontal">
+                <div style="display: flex; flex-direction: column; gap: 20px;">
+                    <p style="font-size: 22px; color: #a1a1aa; margin-bottom: 30px;">
+                        The exact fluid design setups we chose to make human typing fast now create extreme drag for
+                        AI-assisted workflows:
+                    </p>
+                    <ul class="styled-list" style="gap: 14px;">
+                        <li data-fade="true">
+                            <i class="fa-solid fa-triangle-exclamation" style="color: #ff6b00;"></i>
+                            <strong>Dynamic types:</strong> AI has no blueprint of your system — it guesses signatures,
+                            invents properties, and generates code that looks correct but breaks at runtime. Every
+                            output requires manual verification.
+                        </li>
+                        <li data-fade="true">
+                            <i class="fa-solid fa-triangle-exclamation" style="color: #ff6b00;"></i>
+                            <strong>Schema-less databases:</strong> Without declared relationships and constraints, AI
+                            generates queries against assumed structures. No FK, no enums — data corruption happens
+                            silently.
+                        </li>
+                        <li data-fade="true">
+                            <i class="fa-solid fa-triangle-exclamation" style="color: #ff6b00;"></i>
+                            <strong>No explicit side effects:</strong> Without explicit side effects, we can't be sure
+                            AI handles them correctly — making human code review inevitable.
+                        </li>
+                        <li data-fade="true">
+                            <i class="fa-solid fa-triangle-exclamation" style="color: #ff6b00;"></i>
+                            <strong>No concurrency model:</strong> Without explicit boundaries for parallel computation
+                            (like the actor model), AI generates code with shared mutable state, race conditions, and
+                            deadlocks.
+                        </li>
+                        <li data-fade="true">
+                            <i class="fa-solid fa-triangle-exclamation" style="color: #ff6b00;"></i>
+                            <strong>No architecture tests:</strong> Without tests enforcing structural boundaries and
+                            dependency rules, AI crosses layers, imports forbidden modules, and breaks architectural
+                            intent — while unit tests still pass.
+                        </li>
+                        <li data-fade="true">
+                            <i class="fa-solid fa-triangle-exclamation" style="color: #ff6b00;"></i>
+                            <strong>No explicit memory ownership:</strong> Without ownership rules (like Rust's borrow
+                            checker), AI generates memory leaks and use-after-free bugs that only surface in production.
+                        </li>
+                    </ul>
+                </div>
+                <div data-fade="true" style="display: flex; flex-direction: column; gap: 20px;">
+                    <div
+                        style="background-color: #111113; border: 1px solid #1f1f23; border-radius: 12px; padding: 25px; flex: 1; display: flex; flex-direction: column;">
+                        <div
+                            style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: #52525b; margin-bottom: 12px; font-weight: 600;">
+                            Shipping Velocity Over Time</div>
+                        <svg viewBox="0 0 400 280" style="width: 100%; flex: 1;" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Grid lines -->
+                            <line x1="50" y1="30" x2="50" y2="240" stroke="#1f1f23" stroke-width="1" />
+                            <line x1="50" y1="240" x2="380" y2="240" stroke="#1f1f23" stroke-width="1" />
+                            <line x1="50" y1="170" x2="380" y2="170" stroke="#1f1f23" stroke-width="0.5"
+                                stroke-dasharray="4" />
+                            <line x1="50" y1="100" x2="380" y2="100" stroke="#1f1f23" stroke-width="0.5"
+                                stroke-dasharray="4" />
+
+                            <!-- No Constraints (white/gray) - fast start, then plateaus and crashes -->
+                            <path
+                                d="M 50 220 C 100 120, 140 80, 180 75 C 220 70, 260 90, 300 140 C 330 175, 350 210, 380 225"
+                                fill="none" stroke="#71717a" stroke-width="2.5" stroke-linecap="round" />
+
+                            <!-- Bad Constraints (red) - slow all the way -->
+                            <path d="M 50 230 C 100 225, 150 220, 200 215 C 250 210, 300 208, 380 205" fill="none"
+                                stroke="#ef4444" stroke-width="2.5" stroke-linecap="round" />
+
+                            <!-- Good Constraints (orange/green) - slower start, sustained growth -->
+                            <path
+                                d="M 50 235 C 100 200, 140 160, 180 130 C 220 100, 260 75, 300 55 C 330 42, 360 35, 380 32"
+                                fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round" />
+
+                            <!-- Crossover annotation -->
+                            <line x1="195" y1="30" x2="195" y2="240" stroke="#ff6b00" stroke-width="0.8"
+                                stroke-dasharray="3" opacity="0.5" />
+                            <text x="198" y="45" font-size="8" fill="#ff6b00" font-family="Inter, sans-serif">AI
+                                amplifies gap</text>
+
+                            <!-- Y-axis label -->
+                            <text x="12" y="140" font-size="8" fill="#52525b" font-family="Inter, sans-serif"
+                                transform="rotate(-90, 12, 140)">Features Shipped</text>
+
+                            <!-- X-axis label -->
+                            <text x="200" y="265" font-size="8" fill="#52525b" font-family="Inter, sans-serif"
+                                text-anchor="middle">Project Maturity / Complexity →</text>
+
+                            <!-- Legend -->
+                            <line x1="60" y1="278" x2="80" y2="278" stroke="#71717a" stroke-width="2" />
+                            <text x="84" y="280" font-size="7.5" fill="#71717a" font-family="Inter, sans-serif">No
+                                Constraints</text>
+
+                            <line x1="170" y1="278" x2="190" y2="278" stroke="#ef4444" stroke-width="2" />
+                            <text x="194" y="280" font-size="7.5" fill="#ef4444" font-family="Inter, sans-serif">Bad
+                                Constraints</text>
+
+                            <line x1="285" y1="278" x2="305" y2="278" stroke="#22c55e" stroke-width="2" />
+                            <text x="309" y="280" font-size="7.5" fill="#22c55e" font-family="Inter, sans-serif">Good
+                                Constraints</text>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="slide-footer">
+            <span style="color: #ff6b00;">#SIC2026</span>
+            <span>WWW.REMOJANSEN.COM</span>
+        </div>
+    </div>

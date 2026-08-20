@@ -1,0 +1,38 @@
+<div class="slide-container" id="slide6">
+        <h2 class="slide-title">Explicit = Encoded Intent</h2>
+        <div class="content-area">
+            <div style="display: flex; flex-direction: column; gap: 20px;">
+                <pre><code class="language-typescript">type OrderStatus = 'pending' | 'shipped' | 'delivered'; // AI: exact valid values
+
+type CreateOrder = {
+  userId: string;       // AI: FK → users.id, knows the relationship
+  product: string;
+  status: OrderStatus;  // AI: constrained set, will never generate "shiped"
+};
+
+function createOrder(order: CreateOrder): IO&lt;Result&lt;Order, ConstraintError&gt;&gt; {
+  return pipe(
+    query('INSERT INTO orders (user_id, product, status) VALUES ($1, $2, $3)', [order.userId, order.product, order.status]),
+    flatMap(o =&gt; notifyWarehouse(o.product).map(() =&gt; o)) // AI: error handling enforced by compiler
+  );
+}</code></pre>
+                <h3 data-fade="true" style="color: #22c55e; font-size: 24px;"><i class="fa-solid fa-circle-check"></i> Intent is Encoded
+                </h3>
+                <p data-fade="true" style="font-size: 20px; color: #ffffff; font-weight: 500;">
+                    AI reads types and constraints directly — no inference needed, no hallucination.
+                </p>
+                <ul class="styled-list" style="gap: 12px; font-size: 15px;">
+                    <li data-fade="true"><i class="fa-solid fa-check" style="color: #22c55e;"></i> <strong>AI Blueprint:</strong> Types,
+                        enums, and FK relationships give AI a complete context map — generation is accurate on the first
+                        attempt.</li>
+                    <li data-fade="true"><i class="fa-solid fa-check" style="color: #22c55e;"></i> <strong>Layered Verification:</strong>
+                        Compiler catches type errors, DB enforces enums and foreign keys, IO declares side effects.
+                        Errors are impossible to miss.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="slide-footer">
+            <span style="color: #ff6b00;">#SIC2026</span>
+            <span>WWW.REMOJANSEN.COM</span>
+        </div>
+    </div>

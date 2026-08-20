@@ -1,0 +1,33 @@
+<div class="slide-container" id="slide5">
+        <h2 class="slide-title">Implicit = Hidden Intent</h2>
+        <div class="content-area">
+            <div style="display: flex; flex-direction: column; gap: 20px;">
+                <pre><code class="language-javascript">// No schema, no constraints, no effect tracking
+async function createOrder(userId, product, status) {
+  await db.collection('orders').insertOne({
+    userId,          // AI: what type? what table? does it reference anything?
+    product,
+    status,          // AI: what values are valid? has to guess from usage
+    createdAt: new Date()
+  });
+  await notifyWarehouse(product); // AI: is this required? what if it fails?
+}</code></pre>
+                <h3 data-fade="true" style="color: #ea580c; font-size: 24px;"><i class="fa-solid fa-triangle-exclamation"></i> Intent is
+                    Hidden</h3>
+                <p data-fade="true" style="font-size: 20px; color: #ffffff; font-weight: 500;">
+                    AI must infer everything from patterns — hallucinations are inevitable.
+                </p>
+                <ul class="styled-list" style="gap: 12px; font-size: 15px;">
+                    <li data-fade="true"><i class="fa-solid fa-ban" style="color: #ef4444;"></i> <strong>AI Blind Spots:</strong> No
+                        types, no schema, no declared effects — AI is forced to guess relationships, valid values, and
+                        side effects.</li>
+                    <li data-fade="true"><i class="fa-solid fa-ban" style="color: #ef4444;"></i> <strong>Review Drag:</strong> Pull
+                        requests require manual tracing or runtime sandbox runs to verify validity.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="slide-footer">
+            <span style="color: #ff6b00;">#SIC2026</span>
+            <span>WWW.REMOJANSEN.COM</span>
+        </div>
+    </div>
