@@ -19,6 +19,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.2/highlight.min.js"></script>
 
     <link rel="stylesheet" href="index.css">
+    <script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js"></script>
 </head>
 
 <body>
@@ -129,6 +130,29 @@
                     + 'e.g. `npx serve slides` -- fetch() does not work on file:// URLs.';
                 console.error(error);
             });
+
+        // Remote control via PeerJS when ?remote=true
+        if (new URLSearchParams(location.search).get('remote') === 'true') {
+            const PEER_ID = 'sic2026-slides-receiver';
+            const peer = new Peer(PEER_ID);
+            let remoteConn = null;
+            function sendPos() {
+                if (remoteConn?.open) remoteConn.send({ slide: current + 1, total: slides.length });
+            }
+            peer.on('connection', (conn) => {
+                console.log('[remote] clicker connected');
+                remoteConn = conn;
+                conn.on('open', () => sendPos());
+                conn.on('data', (cmd) => {
+                    if (cmd === 'next') next();
+                    else if (cmd === 'prev') previous();
+                    else if (cmd === 'start') { if (overlay.parentNode) start(); }
+                    sendPos();
+                });
+            });
+            peer.on('open', () => console.log('[remote] listening as', PEER_ID));
+            peer.on('error', (err) => console.error('[remote]', err));
+        }
     </script>
 </body>
 

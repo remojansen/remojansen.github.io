@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Slide Clicker</title>
+    <script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #09090b; color: #fff;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            height: 100dvh; gap: 24px;
+            -webkit-user-select: none; user-select: none;
+        }
+        #status {
+            font-size: 14px; color: #71717a; text-align: center;
+        }
+        #status.connected { color: #22c55e; }
+        #status.error { color: #ef4444; }
+        #start-screen, #control-screen { display: flex; flex-direction: column; align-items: center; gap: 24px; }
+        #control-screen { display: none; width: 100%; padding: 0 24px; }
+        button {
+            border: none; border-radius: 16px; font-size: 20px; font-weight: 600;
+            cursor: pointer; transition: opacity .15s;
+        }
+        button:active { opacity: .7; }
+        #start-btn {
+            background: #ff6b00; color: #fff; padding: 20px 48px; font-size: 24px;
+        }
+        .nav-row {
+            display: flex; gap: 16px; width: 100%;
+        }
+        .nav-btn {
+            flex: 1; padding: 48px 0; font-size: 28px;
+            background: #1f1f23; color: #fff;
+        }
+        #prev-btn { border-radius: 16px 4px 4px 16px; }
+        #next-btn { border-radius: 4px 16px 16px 4px; }
+        #timer {
+            font-size: 64px; font-weight: 700; font-variant-numeric: tabular-nums;
+            color: #fff; text-align: center;
+        }
+        #timer.warning { color: #ff6b00; }
+        #timer.danger { color: #ef4444; }
+    </style>
+</head>
+<body>
+    <div id="status">Connecting…</div>
+
+    <div id="start-screen">
+        <button id="start-btn" type="button" disabled>START</button>
+    </div>
+
+    <div id="control-screen">
+        <div id="timer">15:00</div>
+        <div id="slide-pos" style="font-size: 18px; color: #71717a; text-align: center;">Slide — / —</div>
+        <div class="nav-row">
+            <button class="nav-btn" id="prev-btn">← PREV</button>
+            <button class="nav-btn" id="next-btn">NEXT →</button>
+        </div>
+    </div>
+
+    <script>
+        const PEER_ID = 'sic2026-slides-receiver';
+        const statusEl = document.getElementById('status');
+        const startScreen = document.getElementById('start-screen');
+        const controlScreen = document.getElementById('control-screen');
+        const timerEl = document.getElementById('timer');
+        let conn = null;
+
+        // Connect to the presentation
+        const peer = new Peer();
+        peer.on('open', () => {
+            conn = peer.connect(PEER_ID, { reliable: true });
+            conn.on('open', () => {
+                statusEl.textContent = 'Connected';
+                statusEl.className = 'connected';
+                document.getElementById('start-btn').disabled = false;
+            });
+            conn.on('data', (data) => {
+                if (data && data.slide != null) {
+                    document.getElementById('slide-pos').textContent = `Slide ${data.slide} / ${data.total}`;
+                }
+            });
+            conn.on('close', () => {
+                statusEl.textContent = 'Disconnected';
+                statusEl.className = 'error';
+            });
+        });
+        peer.on('error', (err) => {
+            statusEl.textContent = 'Error: ' + err.type;
+            statusEl.className = 'error';
+        });
+
+        function send(cmd) { if (conn && conn.open) conn.send(cmd); }
+
+        // Start button
+        document.getElementById('start-btn').addEventListener('click', () => {
+            send('start');
+            startScreen.style.display = 'none';
+            controlScreen.style.display = 'flex';
+            startCountdown();
+        });
+
+        // Nav buttons
+        document.getElementById('prev-btn').addEventListener('click', () => send('prev'));
+        document.getElementById('next-btn').addEventListener('click', () => send('next'));
+
+        // 15-minute countdown
+        let remaining = 15 * 60;
+        function startCountdown() {
+            const tick = setInterval(() => {
+                remaining--;
+                if (remaining <= 0) { remaining = 0; clearInterval(tick); }
+                const m = Math.floor(remaining / 60);
+                const s = remaining % 60;
+                timerEl.textContent = `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+                if (remaining <= 60) timerEl.className = 'danger';
+                else if (remaining <= 3 * 60) timerEl.className = 'warning';
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
