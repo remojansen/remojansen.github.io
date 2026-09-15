@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Building for Agents layers">
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="62%" r="55%">
+      <stop offset="0%" stop-color="#7dd957" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#7dd957" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="l1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#cdeeb0"/>
+      <stop offset="100%" stop-color="#7dd957"/>
+    </linearGradient>
+    <linearGradient id="l2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#a6f36f"/>
+      <stop offset="100%" stop-color="#5fbb3f"/>
+    </linearGradient>
+    <filter id="soft" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="0.6"/>
+    </filter>
+  </defs>
+
+  <rect width="64" height="64" rx="14" fill="#0a0d0b"/>
+  <ellipse cx="32" cy="42" rx="26" ry="20" fill="url(#glow)"/>
+
+  <g filter="url(#soft)">
+    <!-- top layer (dimmest) -->
+    <polygon points="32,10 53,20 32,30 11,20" fill="#7dd957" opacity="0.34"/>
+    <!-- second -->
+    <polygon points="32,20 53,30 32,40 11,30" fill="#7dd957" opacity="0.52"/>
+    <!-- third -->
+    <polygon points="32,29 53,39 32,49 11,39" fill="url(#l1)" opacity="0.78"/>
+
+    <!-- bottom slab (brightest, with thickness) -->
+    <polygon points="11,45 32,55 53,45 53,49 32,59 11,49" fill="#3f7a2c"/>
+    <polygon points="32,38 53,48 32,58 11,48" fill="url(#l2)"/>
+  </g>
+</svg>

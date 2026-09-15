@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Building for Agents — Verifying AI-Generated Code at Scale | Remo H. Jansen</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg" />
+<meta name="description" content="Building for Agents by Remo H. Jansen is the complete framework for building systems that harness AI coding agents while keeping control over correctness. Make your data, domain rules, side effects, contracts, concurrency, and architecture explicit and verifiable." />
+<meta name="author" content="Remo H. Jansen" />
+<meta name="keywords" content="Building for Agents, Remo H. Jansen, verifying AI-generated code, AI coding agents, software architecture, explicitness, verification, TypeScript, finite state machines, gRPC, XState, Effect, agentic engineering" />
+<meta name="robots" content="index, follow" />
+<meta name="theme-color" content="#0a0d0b" />
+<link rel="canonical" href="https://www.remojansen.com/building-for-agents/" />
+
+<!-- Open Graph -->
+<meta property="og:type" content="book" />
+<meta property="og:site_name" content="Building for Agents" />
+<meta property="og:title" content="Building for Agents — Verifying AI-Generated Code at Scale" />
+<meta property="og:description" content="The complete framework for building software that harnesses AI coding agents while retaining control over system correctness." />
+<meta property="og:url" content="https://www.remojansen.com/building-for-agents/" />
+<meta property="og:image" content="https://www.remojansen.com/building-for-agents/mockup.jpeg" />
+<meta property="og:image:alt" content="Building for Agents book cover by Remo H. Jansen" />
+<meta property="og:locale" content="en_US" />
+<meta property="book:author" content="Remo H. Jansen" />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="@RemoHJansen" />
+<meta name="twitter:creator" content="@RemoHJansen" />
+<meta name="twitter:title" content="Building for Agents — Verifying AI-Generated Code at Scale" />
+<meta name="twitter:description" content="The complete framework for building software that harnesses AI coding agents while retaining control over system correctness." />
+<meta name="twitter:image" content="https://www.remojansen.com/building-for-agents/mockup.jpeg" />
+<meta name="twitter:image:alt" content="Building for Agents book cover by Remo H. Jansen" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Book",
+  "name": "Building for Agents: Verifying AI-Generated Code at Scale",
+  "author": {
+    "@type": "Person",
+    "name": "Remo H. Jansen",
+    "url": "https://www.remojansen.com",
+    "sameAs": [
+      "https://github.com/remojansen",
+      "https://www.linkedin.com/in/remojansen",
+      "https://twitter.com/RemoHJansen"
+    ]
+  },
+  "inLanguage": "en",
+  "bookFormat": "https://schema.org/Paperback",
+  "datePublished": "2026",
+  "image": "https://www.remojansen.com/building-for-agents/mockup.jpeg",
+  "url": "https://www.remojansen.com/building-for-agents/",
+  "description": "The complete, end-to-end framework for building software that harnesses AI coding agents while retaining control over system correctness — making data, domain rules, side effects, service contracts, concurrency, and architecture explicit and machine-verifiable."
+}
+</script>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="#top"><span class="mark"><svg viewBox="0 0 64 64" aria-hidden="true"><defs><radialGradient id="ng" cx="50%" cy="62%" r="55%"><stop offset="0%" stop-color="#7dd957" stop-opacity=".55"/><stop offset="100%" stop-color="#7dd957" stop-opacity="0"/></radialGradient><linearGradient id="na" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#cdeeb0"/><stop offset="100%" stop-color="#7dd957"/></linearGradient><linearGradient id="nb" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#a6f36f"/><stop offset="100%" stop-color="#5fbb3f"/></linearGradient></defs><rect width="64" height="64" rx="14" fill="#0a0d0b"/><ellipse cx="32" cy="42" rx="26" ry="20" fill="url(#ng)"/><polygon points="32,10 53,20 32,30 11,20" fill="#7dd957" opacity=".34"/><polygon points="32,20 53,30 32,40 11,30" fill="#7dd957" opacity=".52"/><polygon points="32,29 53,39 32,49 11,39" fill="url(#na)" opacity=".78"/><polygon points="11,45 32,55 53,45 53,49 32,59 11,49" fill="#3f7a2c"/><polygon points="32,38 53,48 32,58 11,48" fill="url(#nb)"/></svg></span> Building for Agents</a>
+    <nav class="nav-links">
+      <a href="#learn">What You'll Learn</a>
+      <a href="#audience">Who It's For</a>
+      <a href="#author">Author</a>
+      <a class="btn btn-primary" href="#get">Get the Book</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-bg"><img src="hero.jpeg" alt="Building for Agents book on a desk in a modern office" /></div>
+  <div class="wrap hero-inner">
+    <div class="hero-copy">
+      <h1>Building for Agents</h1>
+      <p class="sub">Verifying AI-Generated Code at Scale</p>
+      <p class="lede">As code generation becomes abundant, <b style="color:var(--text)">verification</b> becomes our primary responsibility. The complete framework for harnessing AI coding agents while keeping control over correctness.</p>
+      <div class="cta">
+        <a class="btn btn-primary" href="#get">Get the Book →</a>
+        <a class="btn btn-ghost" href="#learn">Look Inside</a>
+      </div>
+      <div class="meta"><b>By Remo H. Jansen</b></div>
+    </div>
+    </div>
+</section>
+
+<!-- QUOTE -->
+<section class="quote-band">
+  <div class="wrap">
+    <blockquote>
+      “The bottleneck in software development has permanently shifted. Writing code is no longer the hard part — <span class="accent">verification is.</span>”
+    </blockquote>
+  </div>
+</section>
+
+<!-- WHY IT MATTERS -->
+<section id="why">
+  <div class="wrap">
+    <div class="section-head center">
+      <p class="eyebrow">Why This Book, Why Now</p>
+      <h2>For years we optimized for speed. AI just flipped the equation.</h2>
+      <p>For over a decade our whole industry pulled in the same direction: strip out anything that slowed us down. Static types gave way to dynamic ones, rigid schemas to NoSQL, and the more disciplined architectures never quite went mainstream. That made sense while writing code was the hard part — so any friction felt like something worth cutting. AI has quietly erased that assumption.</p>
+    </div>
+
+    <div class="shift">
+      <div class="shift-card">
+        <span class="shift-tag">Before AI</span>
+        <p><b>Writing code</b> was expensive and slow — the real constraint on shipping.</p>
+        <p><b>Verification</b> was manageable: a human author reviewed localized logic they had just written.</p>
+      </div>
+      <div class="shift-arrow" aria-hidden="true">→</div>
+      <div class="shift-card accent">
+        <span class="shift-tag">Now</span>
+        <p><b>Writing code</b> is virtually free and instantaneous — agents synthesize it in seconds.</p>
+        <p><b>Verification</b> is now the expensive, cognitively taxing bottleneck. It is our primary job.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IMPLICIT VS EXPLICIT -->
+<section id="axis" style="background:linear-gradient(180deg,var(--bg-2),var(--bg))">
+  <div class="wrap">
+    <div class="section-head center" style="margin:0 auto 40px">
+      <h2 style="font-size:clamp(1.6rem,3.2vw,2.2rem)">The axis that matters is no longer rigidity vs. flexibility — it's <span style="color:var(--green-2)">implicit vs. explicit</span>.</h2>
+      <p>Think about the constraints in your own codebase. The implicit ones — the rules that live in a teammate's head or an unwritten convention — are exactly where things quietly break: an agent can't see them, and a reviewer can't easily check them. Make those same rules explicit and they stop being a tax. They become the thing that lets you verify a change in seconds and actually trust the code an agent hands you.</p>
+    </div>
+
+    <div class="compare">
+      <div class="compare-col implicit">
+        <h3><span class="dot red"></span> Implicit systems</h3>
+        <ul>
+          <li>Cannot be formally verified — correctness depends on runtime observation</li>
+          <li>No data-integrity guarantees — constraints are assumed, not enforced</li>
+          <li>Bugs surface downstream, at runtime, in production</li>
+          <li>Logic survives only in tribal developer memory</li>
+        </ul>
+      </div>
+      <div class="compare-col explicit">
+        <h3><span class="dot green"></span> Explicit systems</h3>
+        <ul>
+          <li>Correctness is provable before execution</li>
+          <li>Data integrity enforced at the boundary — declared and guaranteed</li>
+          <li>Compile-time assertions catch failures instantly</li>
+          <li>Machine-readable contracts give both humans and agents static guarantees</li>
+        </ul>
+      </div>
+    </div>
+
+    <p style="text-align:center;color:var(--muted);margin-top:36px;font-size:1.05rem;max-width:60ch;margin-left:auto;margin-right:auto">
+      This book is the practical, end-to-end blueprint for making that shift — turning implicit assumptions into explicit, verifiable constraints so AI-generated code can be trusted at scale.
+    </p>
+  </div>
+</section>
+
+<!-- WHAT YOU'LL LEARN -->
+<section id="learn">
+  <div class="wrap">
+    <div class="section-head center">
+      <p class="eyebrow">What You Will Learn</p>
+      <h2>Make correctness an enforced reality — not an unwritten expectation</h2>
+      <p>A clear, layered framework for answering the questions that matter when agents write your code.</p>
+    </div>
+    <div class="learn-groups">
+        <div class="learn-group">
+          <div class="learn-group-head">
+            <span class="learn-part">Part I</span>
+            <h3 class="learn-part-title">Why Explicitness Matters</h3>
+          </div>
+          <ul class="learn-list">
+            <li><span class="ic">1</span><div><h3>The Shift in Friction</h3><p>How AI moves the real bottleneck from writing code to verifying it.</p></div></li>
+            <li><span class="ic">2</span><div><h3>Good Friction vs. Bad</h3><p>Telling verifiable guardrails apart from the friction that just slows you down.</p></div></li>
+            <li><span class="ic">3</span><div><h3>Multi-Layer Verification</h3><p>Making verification a first-class architectural concern across the whole stack.</p></div></li>
+          </ul>
+        </div>
+        <div class="learn-group">
+          <div class="learn-group-head">
+            <span class="learn-part">Part II</span>
+            <h3 class="learn-part-title">Making Constraints Explicit</h3>
+          </div>
+          <ul class="learn-list">
+            <li><span class="ic">4</span><div><h3>Explicit Data Constraints</h3><p>Make the shape and invariants of your data so explicit that an AI agent literally cannot persist an illegal record.</p></div></li>
+            <li><span class="ic">5</span><div><h3>Explicit Side Effects</h3><p>Surface async routines, resource lifetimes, and failure modes in your function signatures instead of leaving them implicit.</p></div></li>
+            <li><span class="ic">6</span><div><h3>Explicit Domain Rules</h3><p>Encode business workflows as finite state machines so invalid transitions become impossible to represent.</p></div></li>
+          </ul>
+        </div>
+        <div class="learn-group">
+          <div class="learn-group-head">
+            <span class="learn-part">Part III</span>
+            <h3 class="learn-part-title">Making Systems Explicit</h3>
+          </div>
+          <ul class="learn-list">
+            <li><span class="ic">7</span><div><h3>Explicit Service Contracts</h3><p>Turn service boundaries into machine-readable contracts that both humans and agents must respect.</p></div></li>
+            <li><span class="ic">8</span><div><h3>Explicit Concurrency</h3><p>Make retries, idempotency, and partial-failure semantics explicit rather than hoping the agent “gets it right”.</p></div></li>
+            <li><span class="ic">9</span><div><h3>Explicit Architecture</h3><p>Enforce module boundaries and dependency rules automatically so agents cannot quietly violate them.</p></div></li>
+          </ul>
+        </div>
+    </div>
+    <div class="appendix">
+      <p class="appendix-label">The Appendices</p>
+      <div class="appendix-cards">
+        <div class="appendix-card">
+          <span class="appendix-tag">Appendix A</span>
+          <h4>More on Verification</h4>
+          <p>Advanced strategies, the “Enforced &gt; Verified” principle, TDD workflows built for AI agents, and end-to-end browser/system checks with tools like Playwright.</p>
+        </div>
+        <div class="appendix-card">
+          <span class="appendix-tag">Appendix B</span>
+          <h4>Existing Codebases</h4>
+          <p>Incrementally introducing explicit constraints into legacy, highly implicit systems — no full rewrite required — via boundary enforcement and type-level vs. runtime assurances.</p>
+        </div>
+        <div class="appendix-card">
+          <span class="appendix-tag">Appendix C</span>
+          <h4>Constraints Beyond the Code</h4>
+          <p>Surfacing production, security, compliance, and business context that lives outside the code so agents stop making “correct but unacceptable” changes.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AUDIENCE -->
+<section id="audience" style="background:linear-gradient(180deg,var(--bg-2),var(--bg))">
+  <div class="wrap">
+    <div class="section-head center">
+      <p class="eyebrow">Who This Book Is For</p>
+      <h2>Engineers building real systems alongside AI agents</h2>
+      <p>Senior developers, staff and principal engineers, architects, tech leads, and engineering managers who set development practice. You know how to build software — this book helps you structure it to survive an era of abundant code generation. No ML or LLM-internals background required.</p>
+    </div>
+  </div>
+</section>
+
+<!-- AUTHOR -->
+<section id="author">
+  <div class="wrap">
+    <div class="section-head"><p class="eyebrow">About the Author</p></div>
+    <div class="author-card">
+      <img src="author.jpg" alt="Remo H. Jansen" />
+      <div>
+        <h3>Remo H. Jansen</h3>
+        <p class="role">Technical Lead at Marsh · Former Microsoft MVP · Author of InversifyJS</p>
+        <p>Remo is a software engineer based in Ireland who helped pioneer AI-driven development on core enterprise systems — delivering a production trading platform for the London specialty insurance market ahead of schedule and under budget. He writes and speaks about how explicitness and verification are reshaping software engineering in the agentic era.</p>
+        <div class="author-links">
+          <a href="https://www.remojansen.com" target="_blank" rel="noopener">🌐 remojansen.com</a>
+          <a href="https://www.linkedin.com/in/remojansen" target="_blank" rel="noopener">in LinkedIn</a>
+          <a href="https://github.com/remojansen" target="_blank" rel="noopener">⌥ GitHub</a>
+          <a href="https://twitter.com/RemoHJansen" target="_blank" rel="noopener">✦ @RemoHJansen</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final" id="get" style="background:linear-gradient(180deg,var(--bg-2),var(--bg))">
+  <div class="wrap final-inner">
+    <div class="final-media"><img src="mockup.jpeg" alt="Building for Agents book cover" /></div>
+    <div class="final-copy">
+      <p class="eyebrow">Verify AI-Generated Code at Scale</p>
+      <h2>When agents write the code, verification is your edge</h2>
+      <p>Code generation is now abundant and cheap — trust is not. <em>Building for Agents</em> gives you the multi-layer framework to make correctness explicit and machine-verifiable, so you can ship AI-generated code at scale with confidence instead of hope.</p>
+      <div class="cta final-cta">
+      <a class="btn btn-primary" href="https://www.remojansen.com" target="_blank" rel="noopener">Get the Book →</a>
+      <a class="btn btn-ghost" href="#learn">Explore the Chapters</a>
+    </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-inner">
+    <div>© 2026 Remo H. Jansen · <em>Building for Agents</em></div>
+    <div style="display:flex;gap:20px">
+      <a href="https://www.remojansen.com" target="_blank" rel="noopener">Website</a>
+      <a href="https://github.com/remojansen" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://twitter.com/RemoHJansen" target="_blank" rel="noopener">Twitter</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
