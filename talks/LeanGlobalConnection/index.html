@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lean Global Connection 2026 - Remo H. Jansen</title>
+    <style>
+        html {
+            font-size: clamp(16px, min(1.5625vw, 2.7778vh), 24px);
+        }
+
+        :root {
+            --primary: #3761CF;
+            --primary-light: #8EA9FA;
+            --accent: #F0784F;
+            --highlight: #F2D45C;
+            --white: #F5F7FB;
+            --dark-bg: #081725;
+            --card-bg: #10263B;
+            --gray: #A5B5C7;
+            --text-color: #DCE5EF;
+            --border-color: #29435A;
+            --diagram-bg: #091C2C;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: "Ubuntu", "Avenir Next", Avenir, "Segoe UI", sans-serif;
+        }
+
+        body {
+            width: 100vw;
+            height: 100vh;
+            height: 100dvh;
+            overflow: hidden;
+            background: var(--dark-bg);
+            color: var(--white);
+        }
+
+        .deck-container {
+            width: 100vw;
+            height: 100vh;
+            height: 100dvh;
+            background:
+                radial-gradient(ellipse at 88% 4%, rgba(55, 97, 207, 0.14), transparent 40%),
+                linear-gradient(145deg, #0A1C2C, var(--dark-bg) 68%);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .deck-container:fullscreen {
+            width: 100vw;
+            height: 100vh;
+            height: 100dvh;
+        }
+
+        .start-screen {
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            padding: clamp(28px, 5vw, 96px);
+            background:
+                radial-gradient(ellipse at 88% 4%, rgba(55, 97, 207, 0.14), transparent 40%),
+                linear-gradient(145deg, #0A1C2C, var(--dark-bg) 68%);
+        }
+
+        .start-screen[hidden] {
+            display: none;
+        }
+
+        .start-screen h1 {
+            max-width: 18ch;
+        }
+
+        .start-screen p {
+            color: var(--gray);
+        }
+
+        .start-button {
+            margin-top: 2rem;
+            padding: 0.9rem 1.5rem;
+            border: 0;
+            border-radius: 6px;
+            background: var(--accent);
+            color: var(--white);
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .start-button:hover {
+            filter: brightness(1.12);
+        }
+
+        .start-button:focus-visible {
+            outline: 3px solid var(--white);
+            outline-offset: 4px;
+        }
+
+        .start-status {
+            margin-top: 1rem;
+            color: var(--accent);
+        }
+
+        .start-status:empty {
+            display: none;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            padding: clamp(24px, 5.8vh, 64px) clamp(28px, 5vw, 96px);
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 1rem;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .slide.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        /* Typography & Layout */
+        h1 { font-size: 3.1rem; color: var(--white); font-weight: 700; line-height: 1.12; letter-spacing: -0.035em; margin-bottom: 16px; }
+        h2 { font-size: 2.15rem; color: var(--white); font-weight: 700; line-height: 1.12; margin-bottom: 18px; letter-spacing: -0.035em; }
+        h3 { font-size: 1.35rem; color: var(--accent); font-weight: 650; margin-bottom: 10px; letter-spacing: -0.015em; }
+        p, li { font-size: 1.2rem; line-height: 1.5; color: var(--text-color); }
+        ul { display: grid; gap: 0.45rem; list-style: none; margin-top: 12px; }
+        li {
+            position: relative;
+            margin: 0;
+            padding: 0.6rem 0.9rem 0.6rem 2.3rem;
+            background: rgba(255, 255, 255, 0.035);
+            border: 1px solid rgba(255, 255, 255, 0.055);
+            border-left: 3px solid rgba(142, 169, 250, 0.7);
+            border-radius: 8px;
+        }
+        li::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 1rem;
+            width: 0.42rem;
+            height: 0.42rem;
+            border-radius: 50%;
+            background: var(--primary-light);
+            box-shadow: 0 0 0 4px rgba(142, 169, 250, 0.1);
+            transform: translateY(-50%);
+        }
+        li strong { color: var(--primary-light); }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: var(--primary-light);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            margin-bottom: 8px;
+        }
+
+        .speaker-name {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--highlight);
+            margin-top: 10px;
+        }
+
+        .speaker-title {
+            font-size: 1rem;
+            color: var(--gray);
+            margin-bottom: 15px;
+        }
+
+        .article-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.55rem;
+            margin-top: 1rem;
+            padding: 0.75rem 1.2rem;
+            border: 1px solid rgba(142, 169, 250, 0.48);
+            border-radius: 999px;
+            background: rgba(55, 97, 207, 0.16);
+            color: var(--primary-light);
+            font-size: 1rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+        }
+
+        .article-link::after {
+            content: "↗";
+            font-size: 1.1em;
+        }
+
+        .article-link:hover {
+            transform: translateY(-2px);
+            border-color: var(--primary-light);
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .article-link:focus-visible {
+            outline: 3px solid var(--highlight);
+            outline-offset: 4px;
+        }
+
+        /* Two Column Layout */
+        .columns {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 36px;
+            align-items: start;
+            flex-grow: 1;
+            margin: 10px 0;
+        }
+
+        .about-columns {
+            grid-template-columns: minmax(140px, 0.72fr) 1.2fr 1fr;
+            gap: clamp(16px, 2vw, 32px);
+            align-items: center;
+        }
+
+        .speaker-photo {
+            width: 100%;
+            max-width: 300px;
+            aspect-ratio: 1;
+            object-fit: cover;
+            object-position: center 40%;
+            border: 3px solid rgba(142, 169, 250, 0.8);
+            border-radius: 50%;
+            box-shadow: 0 0 0 8px rgba(55, 97, 207, 0.14), 0 18px 48px rgba(0, 0, 0, 0.3);
+        }
+
+        .agenda-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px 28px;
+            flex-grow: 1;
+            align-content: center;
+        }
+
+        .agenda-item {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--white);
+            padding: 14px 18px;
+            background: var(--card-bg);
+            border-left: 3px solid var(--primary);
+            border-radius: 8px;
+            border-top: 1px solid var(--border-color);
+            border-right: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            font-size: 1.05rem;
+        }
+
+        th, td {
+            padding: 14px 18px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            background-color: var(--card-bg);
+            color: var(--white);
+            font-weight: 600;
+            border-top: 1px solid var(--border-color);
+        }
+
+        tr:nth-child(even) { background-color: rgba(255, 255, 255, 0.025); }
+
+        .process-table {
+            table-layout: fixed;
+            border-collapse: separate;
+            border-spacing: 0 0.5rem;
+            margin-top: 0;
+        }
+
+        .process-table th {
+            padding: 0.5rem 1.1rem;
+            background: transparent;
+            border: 0;
+            color: var(--primary-light);
+            font-size: 0.86rem;
+            letter-spacing: 0.09em;
+            text-transform: uppercase;
+        }
+
+        .process-table th:first-child,
+        .process-table td:first-child {
+            width: 44%;
+            text-align: left;
+        }
+
+        .process-table th:nth-child(2),
+        .process-table td:nth-child(2),
+        .process-table th:nth-child(3),
+        .process-table td:nth-child(3) {
+            width: 28%;
+            text-align: right;
+        }
+
+        .process-table th:nth-child(3) {
+            color: var(--accent);
+        }
+
+        .process-table td {
+            padding: 1rem 1.1rem;
+            background: rgba(255, 255, 255, 0.035);
+            border-top: 1px solid rgba(255, 255, 255, 0.055);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.055);
+            font-variant-numeric: tabular-nums;
+        }
+
+        .process-table td:first-child {
+            border-left: 3px solid var(--primary);
+            border-radius: 9px 0 0 9px;
+            color: var(--white);
+            font-weight: 600;
+        }
+
+        .process-table td:nth-child(2) {
+            background: rgba(55, 97, 207, 0.11);
+            color: var(--primary-light);
+            font-weight: 700;
+        }
+
+        .process-table td:last-child {
+            border-right: 1px solid rgba(240, 120, 79, 0.2);
+            border-radius: 0 9px 9px 0;
+            background: rgba(240, 120, 79, 0.09);
+            color: #FF9A75;
+            font-weight: 700;
+        }
+
+        .process-table tbody tr:hover td {
+            filter: brightness(1.12);
+        }
+
+        /* Footer */
+        footer {
+            width: 100%;
+            padding-top: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.9rem;
+            color: var(--gray);
+            font-weight: 500;
+            margin-top: auto;
+        }
+
+        footer span {
+            color: var(--accent);
+        }
+
+        /* Slide specific styling helpers */
+        .center-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            flex-grow: 1;
+        }
+
+        .sketch-box {
+            background: var(--card-bg);
+            border: 2px dashed var(--accent);
+            padding: 18px 22px;
+            border-radius: 8px;
+            text-align: center;
+            font-family: monospace;
+            font-weight: bold;
+            color: var(--white);
+        }
+
+        .diagram-panel {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: clamp(12px, 2vw, 24px);
+        }
+
+        .diagram-svg {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        .diagram-title {
+            fill: var(--gray);
+            font: 700 16px "Ubuntu", "Avenir Next", Avenir, sans-serif;
+            letter-spacing: 1.5px;
+        }
+
+        .diagram-text {
+            fill: var(--white);
+            font: 600 17px "Ubuntu", "Avenir Next", Avenir, sans-serif;
+        }
+
+        .diagram-small {
+            fill: var(--gray);
+            font: 500 14px "Ubuntu", "Avenir Next", Avenir, sans-serif;
+        }
+
+        .diagram-node {
+            fill: var(--diagram-bg);
+            stroke: var(--border-color);
+            stroke-width: 2;
+        }
+
+        .diagram-arrow {
+            stroke: var(--gray);
+            stroke-width: 2.5;
+            fill: none;
+        }
+
+        .diagram-accent {
+            fill: var(--accent);
+        }
+
+        .diagram-accent-stroke {
+            stroke: var(--accent);
+        }
+
+        .diagram-emphasis {
+            fill: rgba(240, 120, 79, 0.12);
+            stroke: var(--accent);
+            stroke-width: 2;
+        }
+
+        .diagram-blue {
+            fill: rgba(55, 97, 207, 0.24);
+            stroke: var(--primary-light);
+            stroke-width: 2;
+        }
+
+        @media (max-width: 700px) {
+            .diagram-panel {
+                padding: 10px;
+            }
+
+            .diagram-title {
+                font-size: 20px;
+            }
+
+            .diagram-text {
+                font-size: 20px;
+            }
+
+            .diagram-small {
+                font-size: 17px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="deck-container">
+    <section class="start-screen" id="start-screen" aria-labelledby="start-title">
+        <div class="subtitle">Lean Global Connection 2026</div>
+        <h1 id="start-title">Revisiting the Toyota Production System <span style="color: var(--accent);">in the Age of AI Coding Agents</span></h1>
+        <p>Remo H. Jansen · Technical Lead at Marsh</p>
+        <button class="start-button" id="start-button" type="button">Start presentation</button>
+        <button class="start-button" id="continue-button" type="button" hidden>Continue without fullscreen</button>
+        <p class="start-status" id="start-status" role="status" aria-live="polite"></p>
+    </section>
+
+    <!-- Slide 1: Title -->
+    <div class="slide active">
+        <div></div>
+        <div class="center-content" style="align-items: flex-start; text-align: left;">
+            <div class="subtitle">Lean Global Connection 2026</div>
+            <h1>Revisiting the Toyota<br>Production System (TPS)<br><span style="color: var(--accent);">in the Age of AI Coding Agents</span></h1>
+            <p class="speaker-name" style="margin-top: 20px;">Remo H. Jansen</p>
+            <p class="speaker-title" style="margin-bottom: 0;">Technical Lead at Marsh</p>
+        </div>
+        <footer>
+            <div>#LeanGlobalConnection</div>
+            <div>www.remojansen.com</div>
+        </footer>
+    </div>
+
+    <!-- Slide 2: About the Speaker -->
+    <div class="slide">
+        <div>
+            <div class="subtitle">About the Speaker</div>
+            <h2>Remo H. Jansen</h2>
+        </div>
+        <div class="columns about-columns">
+            <img class="speaker-photo" src="./remo.jpeg" alt="Remo H. Jansen">
+            <div>
+                <p style="font-size: 1.15rem; font-weight: 600; color: var(--white); margin-bottom: 12px;">Technical Lead at Marsh · Wexford, Ireland</p>
+                <ul>
+                    <li>Published author & open-source contributor</li>
+                    <li>Creator of InversifyJS — widely used TypeScript dependency-injection framework</li>
+                    <li>Author of <em>Learning TypeScript</em></li>
+                    <li>Former Microsoft MVP with a long history in the TS & JS communities</li>
+                </ul>
+            </div>
+            <div style="background: var(--card-bg); padding: 20px; border-radius: 8px; border-left: 4px solid var(--accent); border: 1px solid var(--border-color);">
+                <p>My work focuses on software architecture, developer productivity, modern web engineering, and the impact of AI on how we build software.</p>
+                <p style="margin-top: 12px;">My talks explore the boundary between software engineering and the psychology, culture, and social dynamics that shape high-performing teams.</p>
+            </div>
+        </div>
+        <footer>
+            <div>#LeanGlobalConnection</div>
+            <div>www.remojansen.com</div>
+        </footer>
+    </div>
+
+    <!-- Slide 3: Agenda -->
+    <div class="slide">
+        <div>
+            <div class="subtitle">Agenda</div>
+            <h2>Revisiting the Toyota Production System (TPS) in the Age of AI Coding Agents</h2>
+        </div>
+        <div class="agenda-grid">
+            <div class="agenda-item">01 Why manufacturing ideas still matter</div>
+            <div class="agenda-item">05 Quality at source & WIP limits</div>
+            <div class="agenda-item">02 The bottleneck has moved</div>
+            <div class="agenda-item">06 The economics of inspection</div>
+            <div class="agenda-item">03 Jidoka & the Software Andon Cord</div>
+            <div class="agenda-item">07 Process control, Kaizen & traceability</div>
+            <div class="agenda-item">04 Poka-yoke — mistake-proofing</div>
+            <div class="agenda-item">08 The quality system is deliverable</div>
+        </div>
+        <footer>
+            <div>#LeanGlobalConnection</div>
+            <div>www.remojansen.com</div>
+        </footer>
+    </div>
+
+    <!-- Slide 4: Why manufacturing ideas still matter -->
+    <div class="slide">
+        <div>
+            <div class="subtitle">Context</div>
+            <h2>Why Manufacturing Ideas Still Matter</h2>
+        </div>
+        <div class="columns">
+            <div>
+                <p style="margin-bottom: 12px;">Software has borrowed a surprising amount from manufacturing. Some of the most influential ideas trace back to Toyota:</p>
+                <ul>
+                    <li>Lean Software Development & Kanban</li>
+                    <li>Limiting work in progress & reducing waste</li>
+                    <li>Optimizing flow, continuous improvement & pull systems</li>
+                </ul>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 12px;">
+                <div style="background: var(--card-bg); padding: 12px 16px; border-radius: 6px; border-left: 4px solid var(--accent); border: 1px solid var(--border-color);">
+                    <h3 style="font-size: 1.05rem; margin-bottom: 4px;">JIDOKA</h3>
+                    <p style="font-size: 0.9rem;">Automation with a human touch: when an abnormality is detected, the process stops rather than continuing to produce defects.</p>
+                </div>
+                <div style="background: var(--card-bg); padding: 12px 16px; border-radius: 6px; border-left: 4px solid var(--accent); border: 1px solid var(--border-color);">
+                    <h3 style="font-size: 1.05rem; margin-bottom: 4px;">JUST-IN-TIME</h3>
+                    <p style="font-size: 0.9rem;">Produce what is needed, when needed, in the amount needed — matching production to actual demand.</p>
+                </div>
+            </div>
+        </div>
+        <footer>
+            <div>#LeanGlobalConnection</div>
+            <div>www.remojansen.com</div>
+        </footer>
+    </div>
+
+    <!-- Slide 5: The Software Bottleneck Is Moving -->
+    <div class="slide">
+        <div>
+            <div class="subtitle">The Shift</div>
+            <h2>The Software Bottleneck Is Moving</h2>
+        </div>
+        <div class="columns">
+            <div>
+                <p>For most of software history, the constraint was production capacity — humans writing, reviewing, and testing code. We addressed this via:</p>
+                <ul>
+                    <li>IDEs for faster navigation & writing</li>
+                    <li>Expressive languages & frameworks</li>
+                    <li>Automated CI build & test pipelines</li>
+                    <li>Agile & Kanban for flow</li>
+                </ul>
+            </div>
+            <div style="background: var(--card-bg); padding: 20px; border-radius: 8px; border: 1px solid var(--border-color);">
+                <h3 style="color: var(--accent);">Enter AI Coding Agents</h3>
+                <p style="font-size: 0.95rem; margin-top: 8px;">An agent can read a codebase, modify dozens of files, run commands, and iterate without waiting for human typing speed.</p>
+                <p style="font-size: 0.95rem; margin-top: 10px; font-weight: 600; color: var(--white);">Production capacity skyrockets. The new bottleneck is Verification.</p>
+            </div>
+        </div>
+        <footer>
+            <div>#LeanGlobalConnection</div>
+            <div>www.remojansen.com</div>
+        </footer>
+    </div>
+
+    <!-- Slide 6: Traditional vs AI Coding Agents -->
+    <div class="slide">
+        <div>
+            <div class="subtitle">Comparison</div>
+            <h2>Traditional Software vs. AI Coding Agents</h2>
+        </div>
+        <div class="center-content" style="gap: 18px;">
+            <div class="diagram-panel" style="width: 100%;">
+                <svg class="diagram-svg" viewBox="0 0 960 360" role="img" aria-label="Comparison of balanced human production and verification with AI production outpacing verification">
+                    <text class="diagram-title" x="24" y="34">TRADITIONAL SOFTWARE</text>
+                    <rect class="diagram-blue" x="24" y="58" width="270" height="74" rx="8"/>
+                    <text class="diagram-text" x="159" y="89" text-anchor="middle">Human writes code</text>
+                    <text class="diagram-small" x="159" y="113" text-anchor="middle">production capacity</text>
+                    <path class="diagram-arrow" d="M310 95h42m-10-8 10 8-10 8"/>
+                    <rect class="diagram-node" x="368" y="58" width="250" height="74" rx="8"/>
+                    <text class="diagram-text" x="493" y="89" text-anchor="middle">Verification</text>
+                    <text class="diagram-small" x="493" y="113" text-anchor="middle">inspection capacity</text>
+                    <text class="diagram-small" x="24" y="160">Production and verification stay relatively balanced.</text>
+
+                    <line x1="24" y1="184" x2="936" y2="184" stroke="#29435A" stroke-width="1"/>
+                    <text class="diagram-title" x="24" y="218">AI CODING AGENTS</text>
+                    <rect class="diagram-emphasis" x="24" y="240" width="500" height="74" rx="8"/>
+                    <text class="diagram-text" x="274" y="271" text-anchor="middle">AI agent writes code</text>
+                    <text class="diagram-small" x="274" y="295" text-anchor="middle">production capacity surges</text>
+                    <path class="diagram-arrow diagram-accent-stroke" d="M540 277h42m-10-8 10 8-10 8"/>
+                    <rect class="diagram-node" x="598" y="240" width="220" height="74" rx="8"/>
+                    <text class="diagram-text" x="708" y="271" text-anchor="middle">Verification</text>
+                    <text class="diagram-small" x="708" y="295" text-anchor="middle">new bottleneck</text>
+                    <text class="diagram-text" x="24" y="346">Slower verification creates an unverified queue.</text>
+                </svg>
+            </div>
+            <p style="font-size: 1rem; font-weight: 600; color: var(--white);">The challenge: increase speed without increasing defect escape rates.</p>
+        </div>
+        <footer>
+            <div>#LeanGlobalConnection</div>
+            <div>www.remojansen.com</div>
+        </footer>
+    </div>
+
+    <!-- Slide 7: Looking at the Factory Floor Again -->
+    <div class="slide">
+        <div>
+            <div class="subtitle">Core Questions</div>
+            <h2>Looking at the Factory Floor Again</h2>
+        </div>
+        <p style="margin-bottom: 15px;">Software has no physical assembly line, but the underlying challenges are identical. We must ask:</p>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; flex-grow: 1; align-content: center;">
+            <div class="sketch-box" style="text-align: left; font-family: inherit; font-weight: normal;">
+                <strong style="color: var(--accent);">01.</strong> How do you prevent defects?
+            </div>
+            <div class="sketch-box" style="text-align: left; font-family: inherit; font-weight: normal;">
+                <strong style="color: var(--accent);">02.</strong> How do you detect problems as early as possible?
+            </div>
+            <div class="sketch-box" style="text-align: left; font-family: inherit; font-weight: normal;">
+                <strong style="color: var(--accent);">03.</strong> What should happen when an abnormality occurs?
+            </div>
+            <div class="sketch-box" style="text-align: left; font-family: inherit; font-weight: normal;">
+                <strong style="color: var(--accent);">04.</strong> How much unfinished work should be allowed to accumulate?
+            </div>
+            <div class="sketch-box" style="text-align: left; font-family: inherit; font-weight: normal;">
+                <strong style="color: var(--accent);">05.</strong> How do you improve the process rather than inspect output?
+            </div>
+            <div class="sketch-box" style="text-align: left; font-family: inherit; font-weight: normal;">
+                <strong style="color: var(--accent);">06.</strong> How do you speed up without letting defects escape?
+            </div>
+        </div>
+        <footer>
+            <div>#LeanGlobalConnection</div>
+            <div>www.remojansen.com</div>
+        </footer>
+    </div>
+
+    <!-- Slide 8: Jidoka & The Software Andon Cord -->
+    <div class="slide">
+        <div>
+            <div class="subtitle">Automation with a Human Touch</div>
+            <h2>Jidoka & The Software Andon Cord</h2>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 14px; justify-content: center; flex-grow: 1;">
+            <p>If a machine detects an abnormality, it stops. Build quality directly into the process rather than inspecting at the end.</p>
+            <div class="diagram-panel">
+                <svg class="diagram-svg" viewBox="0 0 1100 370" role="img" aria-label="Conventional automation finds a problem after production, while Jidoka stops as soon as an abnormality is detected">
+                    <text class="diagram-title" x="24" y="30">CONVENTIONAL: INSPECT AT THE END</text>
+                    <g>
+                        <rect class="diagram-node" x="24" y="52" width="170" height="72" rx="8"/>
+                        <text class="diagram-text" x="109" y="96" text-anchor="middle">Produce</text>
+                        <path class="diagram-arrow" d="M202 88h20m-9-8 9 8-9 8"/>
+                        <rect class="diagram-node" x="232" y="52" width="170" height="72" rx="8"/>
+                        <text class="diagram-text" x="317" y="96" text-anchor="middle">Produce</text>
+                        <path class="diagram-arrow" d="M410 88h20m-9-8 9 8-9 8"/>
+                        <rect class="diagram-node" x="440" y="52" width="170" height="72" rx="8"/>
+                        <text class="diagram-text" x="525" y="96" text-anchor="middle">Produce</text>
+                        <path class="diagram-arrow" d="M618 88h20m-9-8 9 8-9 8"/>
+                        <rect class="diagram-node" x="648" y="52" width="170" height="72" rx="8"/>
+                        <text class="diagram-text" x="733" y="96" text-anchor="middle">Inspect</text>
+                        <path class="diagram-arrow" d="M826 88h20m-9-8 9 8-9 8"/>
+                        <rect class="diagram-emphasis" x="856" y="52" width="220" height="72" rx="8"/>
+                        <text class="diagram-text" x="966" y="82" text-anchor="middle">Discover</text>
+                        <text class="diagram-text" x="966" y="105" text-anchor="middle">problem</text>
+                    </g>
+
+                    <text class="diagram-title diagram-accent" x="24" y="180">JIDOKA: DETECT, THEN STOP</text>
+                    <g>
+                        <rect class="diagram-node" x="24" y="202" width="190" height="72" rx="8"/>
+                        <text class="diagram-text" x="119" y="246" text-anchor="middle">Produce</text>
+                        <path class="diagram-arrow" d="M222 238h22m-9-8 9 8-9 8"/>
+                        <rect class="diagram-node" x="254" y="202" width="190" height="72" rx="8"/>
+                        <text class="diagram-text" x="349" y="246" text-anchor="middle">Produce</text>
+                        <path class="diagram-arrow" d="M452 238h22m-9-8 9 8-9 8"/>
+                        <rect class="diagram-emphasis" x="484" y="202" width="330" height="72" rx="8"/>
+                        <text class="diagram-text" x="649" y="246" text-anchor="middle">Detect abnormality</text>
+                        <path class="diagram-arrow diagram-accent-stroke" d="M822 238h22m-9-8 9 8-9 8"/>
+                        <rect class="diagram-emphasis" x="854" y="202" width="222" height="72" rx="8"/>
+                        <text class="diagram-text diagram-accent" x="965" y="246" text-anchor="middle">STOP</text>
+                    </g>
+                    <text class="diagram-small" x="24" y="326">Stop further changes, investigate the cause, fix, verify, then continue.</text>
+                </svg>
+            </div>
+            <p style="font-size: 0.95rem;">A Jidoka-inspired agent is designed to stop within clear constraints—not to keep retrying while unverified state accumulates.</p>
+        </div>
+        <footer>
+            <div>#LeanGlobalConnection</div>
+            <div>www.remojansen.com</div>
+        </footer>
+    </div>
+
+    <!-- Slide 9: Every Invariant Can Be an Andon Cord -->
+    <div class="slide">
+        <div>
+            <div class="subtitle">Control Mechanisms</div>
+            <h2>Every Invariant Can Be an Andon Cord</h2>
+        </div>
+        <div style="display: flex; flex-direction: column; justify-content: center; flex-grow: 1; gap: 15px;">
+            <p>An Andon signal isn't just a passive dashboard warning; it's an active control mechanism where the agent loses permission to proceed until fixed.</p>
+            <ul>
+                <li><strong>Type error</strong> that would crash the program ➔ Compile / type-check fails</li>
+                <li><strong>Broken interface</strong> between services ➔ Contract test fails</li>
+                <li><strong>Security rule</strong> violated ➔ Policy engine blocks</li>
+                <li><strong>Database change</strong> destroying data ➔ Migration safety check stops agent</li>
+                <li><strong>Drop in test coverage</strong> or <strong>performance budget</strong> exceeded</li>
+            </ul>
+        </div>
+        <footer>
+            <div>#LeanGlobalConnection</div>
+            <div>www.remojansen.com</div>
+        </footer>
+    </div>
+
+    <!-- Slide 10: Poka-yoke — Mistake-Proofing -->
+    <div class="slide">
+        <div>
+            <div class="subtitle">Fail-Safe Design</div>
+            <h2>Poka-yoke — Mistake-Proofing the Environment</h2>
+        </div>
+        <div class="columns">
+            <div>
+                <p style="margin-bottom: 12px;">We tend to ask: <em>“How can we detect whether the agent made a mistake?”</em></p>
+                <p style="margin-bottom: 15px; font-weight: 600; color: var(--white);">A far better question: <em>“Can we make it impossible for the agent to make this particular mistake?”</em></p>
+                <div style="background: var(--card-bg); padding: 12px 16px; border-radius: 6px; border-left: 4px solid var(--accent); border: 1px solid var(--border-color);">
+                    <h3 style="font-size: 0.95rem; margin-bottom: 4px;">CORE DESIGN PRINCIPLE</h3>
+                    <p style="font-size: 0.85rem;">Don’t teach the agent not to make a mistake when you can design the system so the mistake cannot be made.</p>
+                </div>
+            </div>
+            <div class="diagram-panel" style="align-self: center;">
+                <svg class="diagram-svg" viewBox="0 0 700 330" role="img" aria-label="A policy layer filters database operations, allowing safe actions and blocking destructive ones">
+                    <rect class="diagram-node" x="20" y="107" width="125" height="74" rx="8"/>
+                    <text class="diagram-text" x="82" y="151" text-anchor="middle">Agent</text>
+                    <path class="diagram-arrow" d="M153 144h26m-10-8 10 8-10 8"/>
+                    <rect class="diagram-node" x="187" y="107" width="160" height="74" rx="8"/>
+                    <text class="diagram-text" x="267" y="138" text-anchor="middle">Database</text>
+                    <text class="diagram-text" x="267" y="160" text-anchor="middle">tool</text>
+                    <path class="diagram-arrow" d="M355 144h26m-10-8 10 8-10 8"/>
+                    <rect class="diagram-blue" x="389" y="107" width="156" height="74" rx="8"/>
+                    <text class="diagram-text" x="467" y="138" text-anchor="middle">Policy</text>
+                    <text class="diagram-text" x="467" y="160" text-anchor="middle">layer</text>
+                    <path class="diagram-arrow" d="M553 126h18v-47h16m-10-8 10 8-10 8"/>
+                    <rect class="diagram-node" x="597" y="43" width="98" height="72" rx="8"/>
+                    <text class="diagram-small" x="646" y="73" text-anchor="middle">Allowed</text>
+                    <text class="diagram-small" x="646" y="94" text-anchor="middle">operation</text>
+                    <path class="diagram-arrow diagram-accent-stroke" d="M553 162h18v53h16m-10-8 10 8-10 8"/>
+                    <rect class="diagram-emphasis" x="597" y="184" width="98" height="72" rx="8"/>
+                    <text class="diagram-small diagram-accent" x="646" y="213" text-anchor="middle">Denied</text>
+                    <text class="diagram-small" x="646" y="235" text-anchor="middle">unsafe action</text>
+                    <text class="diagram-title" x="20" y="300">SAFE CAPABILITIES IN. UNSAFE OPERATIONS NEVER EXPOSED.</text>
+                </svg>
+                <p style="font-size: 0.9rem; color: var(--gray); text-align: center;">The same fail-safe boundary can protect dependencies, secrets, migrations, and permissions.</p>
+            </div>
+        </div>
+        <footer>
+            <div>#LeanGlobalConnection</div>
+            <div>www.remojansen.com</div>
+        </footer>
+    </div>
+
+    <!-- Slide 11: Quality at the Source & WIP Limits -->
+    <div class="slide">
+        <div>
+            <div class="subtitle">Just-in-Time Control</div>
+            <h2>Quality at the Source & WIP Limits for Uncertainty</h2>
+        </div>
+        <div class="columns">
+            <div>
+                <p>Accumulating unverified changes exponentially increases diagnostic search space. Introduce a Verification Debt budget:</p>
+                <ul>
+                    <li>Unchecked Invariant = +1</li>
+                    <li>Unvalidated Dependency = +1</li>
+                    <li>Unverified Integration = +1</li>
+                </ul>
+            </div>
+            <div class="diagram-panel" style="align-self: center;">
+                <h3 style="font-size: 1.05rem;">Verification Debt Thresholds</h3>
+                <svg class="diagram-svg" viewBox="0 0 600 300" role="img" aria-label="As verification debt rises from zero to five, the agent moves from free progress to required verification to a full stop">
+                    <path d="M70 94h460" stroke="#29435A" stroke-width="12" stroke-linecap="round"/>
+                    <path d="M70 94h230" stroke="#8EA9FA" stroke-width="12" stroke-linecap="round"/>
+                    <path d="M300 94h230" stroke="#F0784F" stroke-width="12" stroke-linecap="round"/>
+                    <circle cx="70" cy="94" r="20" fill="#8EA9FA" stroke="#F5F7FB" stroke-width="3"/>
+                    <circle cx="300" cy="94" r="20" fill="#F0784F" stroke="#F5F7FB" stroke-width="3"/>
+                    <circle cx="530" cy="94" r="20" fill="#091C2C" stroke="#F0784F" stroke-width="4"/>
+                    <text class="diagram-title" x="70" y="46" text-anchor="middle">DEBT 0</text>
+                    <text class="diagram-title" x="300" y="46" text-anchor="middle">DEBT 3</text>
+                    <text class="diagram-title diagram-accent" x="530" y="46" text-anchor="middle">DEBT 5</text>
+                    <text class="diagram-text" x="70" y="157" text-anchor="middle">Proceed</text>
+                    <text class="diagram-small" x="70" y="182" text-anchor="middle">freely</text>
+                    <text class="diagram-text" x="300" y="157" text-anchor="middle">Verify</text>
+                    <text class="diagram-small" x="300" y="182" text-anchor="middle">before next action</text>
+                    <text class="diagram-text diagram-accent" x="530" y="157" text-anchor="middle">Stop</text>
+                    <text class="diagram-small" x="530" y="182" text-anchor="middle">no more changes</text>
+                    <rect class="diagram-node" x="65" y="218" width="470" height="66" rx="8"/>
+                    <text class="diagram-small" x="300" y="239" text-anchor="middle">Unchecked invariant +1</text>
+                    <text class="diagram-small" x="300" y="258" text-anchor="middle">Unvalidated dependency +1</text>
+                    <text class="diagram-small" x="300" y="277" text-anchor="middle">Unverified integration +1</text>
+                </svg>
+            </div>
+        </div>
+        <footer>
+            <div>#LeanGlobalConnection</div>
+            <div>www.remojansen.com</div>
+        </footer>
+    </div>
+
+    <!-- Slide 12: The Economics of Inspection -->
+    <div class="slide">
+        <div>
+            <div class="subtitle">Tiered Verification Pipeline</div>
+            <h2>The Economics of Inspection</h2>
+        </div>
+        <div class="columns">
+            <div>
+                <p>Catch cheap defects cheaply through a tiered inspection pipeline before invoking slow, expensive verifications.</p>
+                <p style="margin-top: 12px; font-size: 0.9rem; color: var(--gray);">An agent inserting a simple syntax error should be blocked in seconds by the first layer, not via a 45-minute E2E test suite.</p>
+            </div>
+            <div class="diagram-panel">
+                <svg class="diagram-svg" viewBox="0 0 700 500" role="img" aria-label="Nine verification layers progress from fast, cheap syntax checks to slow, expensive human approval">
+                    <text class="diagram-title" x="24" y="24">FAST / CHEAP</text>
+                    <path d="M650 45v390m-8-10 8 10 8-10" stroke="#A5B5C7" stroke-width="2.5" fill="none"/>
+                    <rect class="diagram-blue" x="24" y="38" width="575" height="40" rx="6"/>
+                    <text class="diagram-text" x="42" y="64">1  Syntax / parsing</text>
+                    <rect class="diagram-blue" x="24" y="82" width="575" height="40" rx="6"/>
+                    <text class="diagram-text" x="42" y="108">2  Type checking</text>
+                    <rect class="diagram-blue" x="24" y="126" width="575" height="40" rx="6"/>
+                    <text class="diagram-text" x="42" y="152">3  Static analysis</text>
+                    <rect class="diagram-blue" x="24" y="170" width="575" height="40" rx="6"/>
+                    <text class="diagram-text" x="42" y="196">4  Unit tests</text>
+                    <rect class="diagram-blue" x="24" y="214" width="575" height="40" rx="6"/>
+                    <text class="diagram-text" x="42" y="240">5  Contract tests</text>
+                    <rect class="diagram-blue" x="24" y="258" width="575" height="40" rx="6"/>
+                    <text class="diagram-text" x="42" y="284">6  Integration tests</text>
+                    <rect class="diagram-blue" x="24" y="302" width="575" height="40" rx="6"/>
+                    <text class="diagram-text" x="42" y="328">7  E2E / behavioral</text>
+                    <rect class="diagram-emphasis" x="24" y="346" width="575" height="40" rx="6"/>
+                    <text class="diagram-text" x="42" y="372">8  Adversarial verification</text>
+                    <rect class="diagram-emphasis" x="24" y="390" width="575" height="40" rx="6"/>
+                    <text class="diagram-text" x="42" y="416">9  Human approval</text>
+                    <text class="diagram-title diagram-accent" x="24" y="468">SLOW / EXPENSIVE</text>
+                </svg>
+            </div>
+        </div>
+        <footer>
+            <div>#LeanGlobalConnection</div>
+            <div>www.remojansen.com</div>
+        </footer>
+    </div>
+
+    <!-- Slide 13: Process Control & Human Review -->
+    <div class="slide">
+        <div>
+            <div class="subtitle">Statistical Process Control</div>
+            <h2>Process Control & Human Review</h2>
+        </div>
+        <div style="display: flex; flex-direction: column; justify-content: center; flex-grow: 1;">
+            <table class="process-table">
+                <thead>
+                    <tr>
+                        <th>Metric</th>
+                        <th>Target Baseline</th>
+                        <th>Out-of-Control State</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Compile Failures / 1k Changes</td><td>0.7%</td><td>4.8%</td></tr>
+                    <tr><td>Test Failures / 1k Changes</td><td>3.1%</td><td>8.2%</td></tr>
+                    <tr><td>Reverted Changes</td><td>0.9%</td><td>5.7%</td></tr>
+                    <tr><td>Security Findings</td><td>0.03%</td><td>0.11%</td></tr>
+                </tbody>
+            </table>
+            <p style="font-size: 0.95rem; margin-top: 15px;">When supervising dozens of agents, human roles shift from reviewing line-by-line code to evaluating production process integrity.</p>
+        </div>
+        <footer>
+            <div>#LeanGlobalConnection</div>
+            <div>www.remojansen.com</div>
+        </footer>
+    </div>
+
+    <!-- Slide 14: Kaizen & End-to-End Traceability -->
+    <div class="slide">
+        <div>
+            <div class="subtitle">Continuous Improvement</div>
+            <h2>Kaizen & End-to-End Traceability</h2>
+        </div>
+        <div class="columns">
+            <div>
+                <p style="font-size: 0.95rem; margin-bottom: 8px;">Every failure permanently updates system constraints:</p>
+                <div class="diagram-panel">
+                    <svg class="diagram-svg" viewBox="0 0 700 280" role="img" aria-label="Kaizen loop: contain a failed test, find the abnormality and its root cause, fix it, then prevent a recurrence">
+                        <rect class="diagram-emphasis" x="8" y="62" width="118" height="82" rx="8"/>
+                        <text class="diagram-text" x="67" y="96" text-anchor="middle">Test</text>
+                        <text class="diagram-text" x="67" y="119" text-anchor="middle">fails</text>
+                        <path class="diagram-arrow" d="M130 103h13m-8-7 8 7-8 7"/>
+                        <rect class="diagram-node" x="151" y="62" width="118" height="82" rx="8"/>
+                        <text class="diagram-text" x="210" y="108" text-anchor="middle">Contain</text>
+                        <path class="diagram-arrow" d="M273 103h13m-8-7 8 7-8 7"/>
+                        <rect class="diagram-node" x="294" y="62" width="118" height="82" rx="8"/>
+                        <text class="diagram-text" x="353" y="96" text-anchor="middle">Identify</text>
+                        <text class="diagram-text" x="353" y="119" text-anchor="middle">cause</text>
+                        <path class="diagram-arrow" d="M416 103h13m-8-7 8 7-8 7"/>
+                        <rect class="diagram-node" x="437" y="62" width="118" height="82" rx="8"/>
+                        <text class="diagram-text" x="496" y="96" text-anchor="middle">Fix &amp;</text>
+                        <text class="diagram-text" x="496" y="119" text-anchor="middle">verify</text>
+                        <path class="diagram-arrow" d="M559 103h13m-8-7 8 7-8 7"/>
+                        <rect class="diagram-blue" x="580" y="62" width="112" height="82" rx="8"/>
+                        <text class="diagram-small" x="636" y="96" text-anchor="middle">Update</text>
+                        <text class="diagram-small" x="636" y="117" text-anchor="middle">constraints</text>
+                        <path d="M636 152v60H67v-4m-8 8 8-8 8 8" stroke="#F0784F" stroke-width="2.5" fill="none"/>
+                        <text class="diagram-small diagram-accent" x="352" y="239" text-anchor="middle">Learning makes the next cycle safer.</text>
+                    </svg>
+                </div>
+                <p style="font-size: 0.85rem; margin-top: 10px; font-weight: 600;">Shift diagnosis from <em>“Who wrote this code?”</em> to <em>“What production process generated this code and where did it fail?”</em></p>
+            </div>
+            <div class="diagram-panel" style="align-self: center;">
+                <h3 style="font-size: 0.95rem;">Complete Provenance Chain</h3>
+                <svg class="diagram-svg" viewBox="0 0 780 240" role="img" aria-label="Trace a change from requirement through agent session, model, context and tools, verification, human approval, and commit">
+                    <rect class="diagram-node" x="8" y="65" width="98" height="92" rx="8"/>
+                    <text class="diagram-small" x="57" y="105" text-anchor="middle">Require-</text>
+                    <text class="diagram-small" x="57" y="126" text-anchor="middle">ment</text>
+                    <path class="diagram-arrow" d="M108 111h9m-7-5 7 5-7 5"/>
+                    <rect class="diagram-node" x="122" y="65" width="98" height="92" rx="8"/>
+                    <text class="diagram-small" x="171" y="105" text-anchor="middle">Agent</text>
+                    <text class="diagram-small" x="171" y="126" text-anchor="middle">session</text>
+                    <path class="diagram-arrow" d="M222 111h9m-7-5 7 5-7 5"/>
+                    <rect class="diagram-node" x="236" y="65" width="98" height="92" rx="8"/>
+                    <text class="diagram-small" x="285" y="105" text-anchor="middle">Model /</text>
+                    <text class="diagram-small" x="285" y="126" text-anchor="middle">version</text>
+                    <path class="diagram-arrow" d="M336 111h9m-7-5 7 5-7 5"/>
+                    <rect class="diagram-node" x="350" y="65" width="98" height="92" rx="8"/>
+                    <text class="diagram-small" x="399" y="105" text-anchor="middle">Context</text>
+                    <text class="diagram-small" x="399" y="126" text-anchor="middle">&amp; tools</text>
+                    <path class="diagram-arrow" d="M450 111h9m-7-5 7 5-7 5"/>
+                    <rect class="diagram-blue" x="464" y="65" width="98" height="92" rx="8"/>
+                    <text class="diagram-small" x="513" y="105" text-anchor="middle">Verify</text>
+                    <text class="diagram-small" x="513" y="126" text-anchor="middle">logs</text>
+                    <path class="diagram-arrow" d="M564 111h9m-7-5 7 5-7 5"/>
+                    <rect class="diagram-node" x="578" y="65" width="98" height="92" rx="8"/>
+                    <text class="diagram-small" x="627" y="105" text-anchor="middle">Human</text>
+                    <text class="diagram-small" x="627" y="126" text-anchor="middle">approval</text>
+                    <path class="diagram-arrow" d="M678 111h9m-7-5 7 5-7 5"/>
+                    <rect class="diagram-emphasis" x="692" y="65" width="80" height="92" rx="8"/>
+                    <text class="diagram-small" x="732" y="116" text-anchor="middle">Commit</text>
+                    <text class="diagram-title" x="8" y="204">TRACE THE PROCESS, NOT JUST THE AUTHOR.</text>
+                </svg>
+            </div>
+        </div>
+        <footer>
+            <div>#LeanGlobalConnection</div>
+            <div>www.remojansen.com</div>
+        </footer>
+    </div>
+
+    <!-- Slide 15: The Quality System Is the Deliverable -->
+    <div class="slide">
+        <div>
+            <div class="subtitle">Conclusion</div>
+            <h2>The Quality System Is the Deliverable</h2>
+        </div>
+        <div style="display: flex; flex-direction: column; justify-content: center; flex-grow: 1; gap: 15px;">
+            <div style="background: var(--card-bg); padding: 20px; border-radius: 8px; border-left: 5px solid var(--accent); border: 1px solid var(--border-color);">
+                <p style="font-size: 1.1rem; font-weight: 600; color: var(--white);">A mediocre agent operating inside an exceptional verification environment will consistently outperform a brilliant agent operating inside a weak one.</p>
+            </div>
+            <ul>
+                <li><strong>Mistakes must be cheap</strong> — Caught early, contained, inexpensive to fix.</li>
+                <li><strong>Mistakes must be visible</strong> — Andon signals that stop the process, not silent dashboards.</li>
+                <li><strong>Mistakes must be corrected quickly</strong> — Root-cause learning that permanently updates constraints.</li>
+            </ul>
+        </div>
+        <footer>
+            <div>#LeanGlobalConnection</div>
+            <div>www.remojansen.com</div>
+        </footer>
+    </div>
+
+    <!-- Slide 16: The Most Important Question -->
+    <div class="slide">
+        <div>
+            <div class="subtitle">Final Thought</div>
+            <h2>The Most Important Question</h2>
+        </div>
+        <div class="center-content" style="gap: 20px;">
+            <p style="font-size: 1.15rem; color: var(--gray);">The most important question in modern software development is no longer <br><strong style="color: var(--white);">“How do we build software faster?”</strong></p>
+            <div style="background: rgba(240, 120, 79, 0.12); padding: 20px; border-radius: 8px; border: 2px solid var(--accent);">
+                <p style="font-size: 1.25rem; font-weight: 700; color: var(--accent);">“How do we build a system that produces software extremely fast without letting defects escape just as fast?”</p>
+            </div>
+        </div>
+        <footer>
+            <div>#LeanGlobalConnection</div>
+            <div>www.remojansen.com</div>
+        </footer>
+    </div>
+
+    <!-- Slide 17: Thank You / Q&A -->
+    <div class="slide">
+        <div></div>
+        <div class="center-content">
+            <h1 style="font-size: 2.8rem; color: var(--white);">THANK YOU</h1>
+            <p style="font-size: 1.4rem; color: var(--accent); font-weight: 600; margin: 12px 0;">Questions?</p>
+            <p class="speaker-name" style="margin-top: 15px;">Remo H. Jansen</p>
+            <p class="speaker-title">Lean Global Connection 2026<br>Designing Human-Centered Organizations in the Age of AI</p>
+            <a class="article-link" href="https://dev.to/remojansen/revisiting-the-toyota-production-system-tps-in-the-age-of-coding-agents-2bb5" target="_blank" rel="noopener noreferrer">Read the article for more information</a>
+        </div>
+        <footer>
+            <div>#LeanGlobalConnection</div>
+            <div>www.remojansen.com</div>
+        </footer>
+    </div>
+
+</div>
+
+<script>
+    let currentSlide = 0;
+    let presentationStarted = false;
+    const deck = document.querySelector('.deck-container');
+    const startScreen = document.querySelector('#start-screen');
+    const startButton = document.querySelector('#start-button');
+    const continueButton = document.querySelector('#continue-button');
+    const startStatus = document.querySelector('#start-status');
+    const slides = document.querySelectorAll('.slide');
+
+    function beginPresentation() {
+        presentationStarted = true;
+        startScreen.hidden = true;
+    }
+
+    startButton.addEventListener('click', async () => {
+        if (!deck.requestFullscreen) {
+            startStatus.textContent = 'Fullscreen is not supported by this browser. You can continue in this window.';
+            continueButton.hidden = false;
+            return;
+        }
+
+        try {
+            await deck.requestFullscreen();
+            beginPresentation();
+        } catch {
+            startStatus.textContent = 'Fullscreen could not be started. You can continue in this window.';
+            continueButton.hidden = false;
+        }
+    });
+
+    continueButton.addEventListener('click', beginPresentation);
+
+    function showSlide(index) {
+        slides.forEach(slide => slide.classList.remove('active'));
+        if (index >= slides.length) currentSlide = 0;
+        else if (index < 0) currentSlide = slides.length - 1;
+        else currentSlide = index;
+        slides[currentSlide].classList.add('active');
+    }
+
+    function nextSlide() { showSlide(currentSlide + 1); }
+    function prevSlide() { showSlide(currentSlide - 1); }
+
+    // Keyboard navigation (Arrow keys or Spacebar)
+    document.addEventListener('keydown', (e) => {
+        if (!presentationStarted) return;
+
+        if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+            e.preventDefault();
+            nextSlide();
+        }
+        if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+            e.preventDefault();
+            prevSlide();
+        }
+    });
+</script>
+
+</body>
+</html>
