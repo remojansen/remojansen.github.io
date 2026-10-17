@@ -201,6 +201,61 @@
             transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
         }
 
+        .article-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+
+        .article-links .article-link {
+            margin-top: 0;
+        }
+
+        .qr-promo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.35rem;
+            width: clamp(112px, 12vw, 190px);
+            padding: 0.5rem;
+            border-radius: 0.85rem;
+            background: var(--accent);
+            color: var(--white);
+            box-shadow: 0 10px 32px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            z-index: 1;
+        }
+
+        .qr-promo img {
+            display: block;
+            width: 100%;
+            aspect-ratio: 1;
+            padding: 0.3rem;
+            border-radius: 0.55rem;
+            background: #fff;
+            object-fit: contain;
+        }
+
+        .qr-promo span {
+            font-size: 0.64rem;
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: 0.08em;
+            white-space: nowrap;
+        }
+
+        .qr-promo--corner {
+            position: absolute;
+            right: clamp(28px, 5vw, 96px);
+            bottom: calc(clamp(24px, 5.8vh, 64px) + 55px);
+        }
+
+        .qr-promo--centered {
+            margin-bottom: 0.6rem;
+        }
+
         .article-link::after {
             content: "↗";
             font-size: 1.1em;
@@ -232,6 +287,14 @@
             grid-template-columns: minmax(140px, 0.72fr) 1.2fr 1fr;
             gap: clamp(16px, 2vw, 32px);
             align-items: center;
+        }
+
+        .factory-floor-questions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            flex-grow: 1;
+            align-content: center;
         }
 
         .speaker-photo {
@@ -357,6 +420,80 @@
             filter: brightness(1.12);
         }
 
+        .industrial-comparisons {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px;
+            flex-grow: 1;
+            align-content: center;
+        }
+
+        .revolution-card {
+            min-width: 0;
+            padding: 14px;
+            border: 1px solid var(--border-color);
+            border-top: 3px solid var(--primary);
+            border-radius: 9px;
+            background: var(--card-bg);
+        }
+
+        .revolution-card:last-child {
+            border-top-color: var(--accent);
+        }
+
+        .revolution-card h3 {
+            margin-bottom: 8px;
+            color: var(--white);
+            font-size: 1rem;
+        }
+
+        .revolution-comparison {
+            width: 100%;
+            margin-top: 0;
+            border-collapse: collapse;
+            table-layout: fixed;
+            font-size: 0.78rem;
+        }
+
+        .revolution-comparison th,
+        .revolution-comparison td {
+            padding: 0.42rem 0.4rem;
+            text-align: left;
+            line-height: 1.3;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .revolution-comparison th {
+            color: var(--primary-light);
+            font-size: 0.68rem;
+            letter-spacing: 0.07em;
+            text-transform: uppercase;
+        }
+
+        .revolution-comparison th:first-child,
+        .revolution-comparison td:first-child {
+            width: 23%;
+            color: var(--gray);
+            font-weight: 700;
+        }
+
+        .revolution-comparison th:last-child {
+            color: var(--accent);
+        }
+
+        .revolution-comparison tr:last-child td {
+            border-bottom: 0;
+        }
+
+        .revolution-comparison td:last-child {
+            color: var(--white);
+            font-weight: 600;
+        }
+
+        .revolution-card:last-child .revolution-comparison td:last-child {
+            color: var(--primary-light);
+        }
+
         /* Footer */
         footer {
             width: 100%;
@@ -458,6 +595,124 @@
         }
 
         @media (max-width: 700px) {
+            html {
+                font-size: 16px;
+            }
+
+            body {
+                width: 100%;
+                height: auto;
+                min-height: 100vh;
+                min-height: 100dvh;
+                overflow-x: hidden;
+                overflow-y: auto;
+            }
+
+            .deck-container {
+                width: 100%;
+                height: auto;
+                min-height: 100vh;
+                min-height: 100dvh;
+                display: block;
+                overflow: visible;
+            }
+
+            .start-screen {
+                display: none;
+            }
+
+            .slide {
+                position: relative;
+                top: auto;
+                left: auto;
+                width: 100%;
+                height: auto;
+                min-height: 100vh;
+                min-height: 100svh;
+                padding: max(24px, env(safe-area-inset-top)) 20px max(24px, env(safe-area-inset-bottom));
+                display: flex;
+                justify-content: flex-start;
+                gap: 1.25rem;
+                opacity: 1;
+                transition: none;
+            }
+
+            .slide.active {
+                display: flex;
+                opacity: 1;
+            }
+
+            h1 {
+                font-size: clamp(2rem, 8vw, 3rem);
+            }
+
+            h2 {
+                font-size: clamp(1.65rem, 7vw, 2rem);
+            }
+
+            h3 {
+                font-size: 1.2rem;
+            }
+
+            p, li {
+                font-size: 1rem;
+            }
+
+            .columns,
+            .about-columns {
+                grid-template-columns: minmax(0, 1fr);
+                gap: 18px;
+                flex-grow: 0;
+            }
+
+            .center-content {
+                flex-grow: 0;
+            }
+
+            .speaker-photo {
+                width: min(55vw, 200px);
+                justify-self: center;
+            }
+
+            .factory-floor-questions {
+                grid-template-columns: minmax(0, 1fr);
+                flex-grow: 0;
+            }
+
+            .industrial-comparisons {
+                grid-template-columns: minmax(0, 1fr);
+                flex-grow: 0;
+            }
+
+            .revolution-card {
+                padding: 12px;
+            }
+
+            .revolution-comparison {
+                font-size: 0.8rem;
+            }
+
+            .qr-promo--corner {
+                position: static;
+                align-self: flex-end;
+                margin-top: auto;
+            }
+
+            footer {
+                flex-wrap: wrap;
+                gap: 8px 16px;
+                margin-top: 1rem;
+                font-size: 0.75rem;
+            }
+
+            .diagram-panel {
+                overflow-x: auto;
+            }
+
+            .diagram-svg {
+                min-width: 600px;
+            }
+
             .diagram-panel {
                 padding: 10px;
             }
@@ -497,6 +752,10 @@
             <p class="speaker-name" style="margin-top: 20px;">Remo H. Jansen</p>
             <p class="speaker-title" style="margin-bottom: 0;">Technical Lead at Marsh</p>
         </div>
+        <div class="qr-promo qr-promo--corner">
+            <img src="./qr.svg" alt="QR code to get the slides">
+            <span>GET THE SLIDES</span>
+        </div>
         <footer>
             <div>#LeanGlobalConnection</div>
             <div>www.remojansen.com</div>
@@ -521,7 +780,7 @@
                 </ul>
             </div>
             <div style="background: var(--card-bg); padding: 20px; border-radius: 8px; border-left: 4px solid var(--accent); border: 1px solid var(--border-color);">
-                <p>My work focuses on software architecture, developer productivity, modern web engineering, and the impact of AI on how we build software.</p>
+                <p>My work focuses on software architecture, developer productivity, modern web engineering, and the impact of AI, including the industrialisation of software production.</p>
                 <p style="margin-top: 12px;">My talks explore the boundary between software engineering and the psychology, culture, and social dynamics that shape high-performing teams.</p>
             </div>
         </div>
@@ -531,52 +790,43 @@
         </footer>
     </div>
 
-    <!-- Slide 3: Agenda -->
+    <!-- Slide 3: The Industrial Revolution of Software -->
     <div class="slide">
         <div>
-            <div class="subtitle">Agenda</div>
-            <h2>Revisiting the Toyota Production System (TPS) in the Age of AI Coding Agents</h2>
+            <div class="subtitle">A Historical Parallel</div>
+            <h2>The Industrial Revolution of Software</h2>
         </div>
-        <div class="agenda-grid">
-            <div class="agenda-item">01 Why manufacturing ideas still matter</div>
-            <div class="agenda-item">05 Quality at source & WIP limits</div>
-            <div class="agenda-item">02 The bottleneck has moved</div>
-            <div class="agenda-item">06 The economics of inspection</div>
-            <div class="agenda-item">03 Jidoka & the Software Andon Cord</div>
-            <div class="agenda-item">07 Process control, Kaizen & traceability</div>
-            <div class="agenda-item">04 Poka-yoke — mistake-proofing</div>
-            <div class="agenda-item">08 The quality system is deliverable</div>
-        </div>
-        <footer>
-            <div>#LeanGlobalConnection</div>
-            <div>www.remojansen.com</div>
-        </footer>
-    </div>
-
-    <!-- Slide 4: Why manufacturing ideas still matter -->
-    <div class="slide">
-        <div>
-            <div class="subtitle">Context</div>
-            <h2>Why Manufacturing Ideas Still Matter</h2>
-        </div>
-        <div class="columns">
-            <div>
-                <p style="margin-bottom: 12px;">Software has borrowed a surprising amount from manufacturing. Some of the most influential ideas trace back to Toyota:</p>
-                <ul>
-                    <li>Lean Software Development & Kanban</li>
-                    <li>Limiting work in progress & reducing waste</li>
-                    <li>Optimizing flow, continuous improvement & pull systems</li>
-                </ul>
-            </div>
-            <div style="display: flex; flex-direction: column; gap: 12px;">
-                <div style="background: var(--card-bg); padding: 12px 16px; border-radius: 6px; border-left: 4px solid var(--accent); border: 1px solid var(--border-color);">
-                    <h3 style="font-size: 1.05rem; margin-bottom: 4px;">JIDOKA</h3>
-                    <p style="font-size: 0.9rem;">Automation with a human touch: when an abnormality is detected, the process stops rather than continuing to produce defects.</p>
-                </div>
-                <div style="background: var(--card-bg); padding: 12px 16px; border-radius: 6px; border-left: 4px solid var(--accent); border: 1px solid var(--border-color);">
-                    <h3 style="font-size: 1.05rem; margin-bottom: 4px;">JUST-IN-TIME</h3>
-                    <p style="font-size: 0.9rem;">Produce what is needed, when needed, in the amount needed — matching production to actual demand.</p>
-                </div>
+        <div style="display: flex; flex-direction: column; justify-content: center; flex-grow: 1; gap: 12px;">
+            <p style="font-size: 0.95rem;">The Industrial Revolution was not simply machines replacing labour. It transformed the entire production system. Software is entering a similar shift.</p>
+            <div class="industrial-comparisons">
+                <section class="revolution-card" aria-labelledby="manufacturing-revolution-title">
+                    <h3 id="manufacturing-revolution-title">Manufacturing Industrial Revolution</h3>
+                    <table class="revolution-comparison">
+                        <thead><tr><th scope="col">Shift</th><th scope="col">Before</th><th scope="col">After</th></tr></thead>
+                        <tbody>
+                            <tr><td>Tools</td><td>Hand tools</td><td>Machines</td></tr>
+                            <tr><td>Production</td><td>Small workshops</td><td>Factories</td></tr>
+                            <tr><td>Power</td><td>Human &amp; animal</td><td>Steam &amp; electricity</td></tr>
+                            <tr><td>Networks</td><td>Local transport</td><td>Canals &amp; railways</td></tr>
+                            <tr><td>Methods</td><td>Individual craft</td><td>Standardised processes</td></tr>
+                            <tr><td>Work</td><td>Hands-on production</td><td>Factory operation &amp; management</td></tr>
+                        </tbody>
+                    </table>
+                </section>
+                <section class="revolution-card" aria-labelledby="software-revolution-title">
+                    <h3 id="software-revolution-title">Software Industrial Revolution</h3>
+                    <table class="revolution-comparison">
+                        <thead><tr><th scope="col">Shift</th><th scope="col">Before</th><th scope="col">After</th></tr></thead>
+                        <tbody>
+                            <tr><td>Tools</td><td>Engineers write code</td><td>Coding agents implement</td></tr>
+                            <tr><td>Production</td><td>Small squads</td><td>Agentic software factories</td></tr>
+                            <tr><td>Power</td><td>Human typing</td><td>Compute &amp; datacentres</td></tr>
+                            <tr><td>Networks</td><td>Manual handoffs</td><td>APIs, orchestration &amp; CI/CD</td></tr>
+                            <tr><td>Methods</td><td>Ad hoc tasks</td><td>Specs, interfaces &amp; evaluation</td></tr>
+                            <tr><td>Work</td><td>Implement every step</td><td>Design &amp; operate production systems</td></tr>
+                        </tbody>
+                    </table>
+                </section>
             </div>
         </div>
         <footer>
@@ -585,7 +835,7 @@
         </footer>
     </div>
 
-    <!-- Slide 5: The Software Bottleneck Is Moving -->
+    <!-- Slide 4: The Software Bottleneck Is Moving -->
     <div class="slide">
         <div>
             <div class="subtitle">The Shift</div>
@@ -593,18 +843,17 @@
         </div>
         <div class="columns">
             <div>
-                <p>For most of software history, the constraint was production capacity — humans writing, reviewing, and testing code. We addressed this via:</p>
+                <p>Traditional engineering capacity scaled with the people available to write, review, and test. Agentic production can grow without matching headcount when architecture, workflows, verification, and compute allocation improve.</p>
                 <ul>
-                    <li>IDEs for faster navigation & writing</li>
-                    <li>Expressive languages & frameworks</li>
-                    <li>Automated CI build & test pipelines</li>
-                    <li>Agile & Kanban for flow</li>
+                    <li>Scarce inputs shift to intent, context, coordination, and verification</li>
+                    <li>Weak boundaries and unclear work create cost and rework</li>
+                    <li>More agents or generated lines do not mean more value</li>
                 </ul>
             </div>
             <div style="background: var(--card-bg); padding: 20px; border-radius: 8px; border: 1px solid var(--border-color);">
                 <h3 style="color: var(--accent);">Enter AI Coding Agents</h3>
                 <p style="font-size: 0.95rem; margin-top: 8px;">An agent can read a codebase, modify dozens of files, run commands, and iterate without waiting for human typing speed.</p>
-                <p style="font-size: 0.95rem; margin-top: 10px; font-weight: 600; color: var(--white);">Production capacity skyrockets. The new bottleneck is Verification.</p>
+                <p style="font-size: 0.95rem; margin-top: 10px; font-weight: 600; color: var(--white);">Measure valuable, reliable software delivered — at what cost, and with how much human intervention.</p>
             </div>
         </div>
         <footer>
@@ -613,7 +862,7 @@
         </footer>
     </div>
 
-    <!-- Slide 6: Traditional vs AI Coding Agents -->
+    <!-- Slide 5: Traditional vs AI Coding Agents -->
     <div class="slide">
         <div>
             <div class="subtitle">Comparison</div>
@@ -652,6 +901,38 @@
         </footer>
     </div>
 
+    <!-- Slide 6: Why manufacturing ideas still matter -->
+    <div class="slide">
+        <div>
+            <div class="subtitle">Context</div>
+            <h2>Why Manufacturing Ideas Still Matter</h2>
+        </div>
+        <div class="columns">
+            <div>
+                <p style="margin-bottom: 12px;">Software has borrowed a surprising amount from manufacturing. Some of the most influential ideas trace back to Toyota:</p>
+                <ul>
+                    <li>Lean Software Development & Kanban</li>
+                    <li>Limiting work in progress & reducing waste</li>
+                    <li>Optimizing flow, continuous improvement & pull systems</li>
+                </ul>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 12px;">
+                <div style="background: var(--card-bg); padding: 12px 16px; border-radius: 6px; border-left: 4px solid var(--accent); border: 1px solid var(--border-color);">
+                    <h3 style="font-size: 1.05rem; margin-bottom: 4px;">JIDOKA</h3>
+                    <p style="font-size: 0.9rem;">Automation with a human touch: when an abnormality is detected, the process stops rather than continuing to produce defects.</p>
+                </div>
+                <div style="background: var(--card-bg); padding: 12px 16px; border-radius: 6px; border-left: 4px solid var(--accent); border: 1px solid var(--border-color);">
+                    <h3 style="font-size: 1.05rem; margin-bottom: 4px;">JUST-IN-TIME</h3>
+                    <p style="font-size: 0.9rem;">Produce what is needed, when needed, in the amount needed — matching production to actual demand.</p>
+                </div>
+            </div>
+        </div>
+        <footer>
+            <div>#LeanGlobalConnection</div>
+            <div>www.remojansen.com</div>
+        </footer>
+    </div>
+
     <!-- Slide 7: Looking at the Factory Floor Again -->
     <div class="slide">
         <div>
@@ -659,7 +940,7 @@
             <h2>Looking at the Factory Floor Again</h2>
         </div>
         <p style="margin-bottom: 15px;">Software has no physical assembly line, but the underlying challenges are identical. We must ask:</p>
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; flex-grow: 1; align-content: center;">
+        <div class="factory-floor-questions">
             <div class="sketch-box" style="text-align: left; font-family: inherit; font-weight: normal;">
                 <strong style="color: var(--accent);">01.</strong> How do you prevent defects?
             </div>
@@ -1000,7 +1281,36 @@
         </footer>
     </div>
 
-    <!-- Slide 15: The Quality System Is the Deliverable -->
+    <!-- Slide 15: Engineers Build the Factories -->
+    <div class="slide">
+        <div>
+            <div class="subtitle">The Engineer's New Centre of Gravity</div>
+            <h2>Engineers Build the Factories That Build Software</h2>
+        </div>
+        <div class="columns">
+            <div>
+                <p>In a modern factory, robots assemble the cars; people design the line, set quality controls, and decide what to build. Software is moving towards the same division of work.</p>
+                <ul>
+                    <li>Design architecture and boundaries for delegation</li>
+                    <li>Define intent and break it into verifiable tasks</li>
+                    <li>Build verification, orchestration, and feedback systems</li>
+                    <li>Operate the factory: flow, failures, cost, and improvement</li>
+                </ul>
+            </div>
+            <div style="display: flex; flex-direction: column; justify-content: center; gap: 18px;">
+                <div style="background: rgba(240, 120, 79, 0.12); padding: 20px; border-radius: 8px; border: 2px solid var(--accent);">
+                    <p style="font-size: 1.15rem; font-weight: 700; color: var(--accent);">Building software and building the system that builds software are related — but different disciplines.</p>
+                </div>
+                <p>Not every engineer stops coding. Architecture, complex debugging, and high-stakes decisions still need direct human judgment and accountability. The centre of gravity simply moves.</p>
+            </div>
+        </div>
+        <footer>
+            <div>#LeanGlobalConnection</div>
+            <div>www.remojansen.com</div>
+        </footer>
+    </div>
+
+    <!-- Slide 16: The Quality System Is the Deliverable -->
     <div class="slide">
         <div>
             <div class="subtitle">Conclusion</div>
@@ -1015,6 +1325,7 @@
                 <li><strong>Mistakes must be visible</strong> — Andon signals that stop the process, not silent dashboards.</li>
                 <li><strong>Mistakes must be corrected quickly</strong> — Root-cause learning that permanently updates constraints.</li>
             </ul>
+            <p style="font-size: 0.95rem; text-align: center;">The factory is not the datacentre: the same models and compute produce different results when specs, workflows, isolation, and feedback loops differ.</p>
         </div>
         <footer>
             <div>#LeanGlobalConnection</div>
@@ -1022,7 +1333,7 @@
         </footer>
     </div>
 
-    <!-- Slide 16: The Most Important Question -->
+    <!-- Slide 17: The Most Important Question -->
     <div class="slide">
         <div>
             <div class="subtitle">Final Thought</div>
@@ -1031,7 +1342,7 @@
         <div class="center-content" style="gap: 20px;">
             <p style="font-size: 1.15rem; color: var(--gray);">The most important question in modern software development is no longer <br><strong style="color: var(--white);">“How do we build software faster?”</strong></p>
             <div style="background: rgba(240, 120, 79, 0.12); padding: 20px; border-radius: 8px; border: 2px solid var(--accent);">
-                <p style="font-size: 1.25rem; font-weight: 700; color: var(--accent);">“How do we build a system that produces software extremely fast without letting defects escape just as fast?”</p>
+                <p style="font-size: 1.25rem; font-weight: 700; color: var(--accent);">“How do we build a production system that produces software extremely fast without letting defects escape just as fast?”</p>
             </div>
         </div>
         <footer>
@@ -1040,15 +1351,22 @@
         </footer>
     </div>
 
-    <!-- Slide 17: Thank You / Q&A -->
+    <!-- Slide 18: Thank You / Q&A -->
     <div class="slide">
         <div></div>
         <div class="center-content">
+            <div class="qr-promo qr-promo--centered">
+                <img src="./qr.svg" alt="QR code to get the slides">
+                <span>GET THE SLIDES</span>
+            </div>
             <h1 style="font-size: 2.8rem; color: var(--white);">THANK YOU</h1>
             <p style="font-size: 1.4rem; color: var(--accent); font-weight: 600; margin: 12px 0;">Questions?</p>
             <p class="speaker-name" style="margin-top: 15px;">Remo H. Jansen</p>
             <p class="speaker-title">Lean Global Connection 2026<br>Designing Human-Centered Organizations in the Age of AI</p>
-            <a class="article-link" href="https://dev.to/remojansen/revisiting-the-toyota-production-system-tps-in-the-age-of-coding-agents-2bb5" target="_blank" rel="noopener noreferrer">Read the article for more information</a>
+            <div class="article-links">
+                <a class="article-link" href="https://dev.to/remojansen/revisiting-the-toyota-production-system-tps-in-the-age-of-coding-agents-2bb5" target="_blank" rel="noopener noreferrer">Learn More about the TPS</a>
+                <a class="article-link" href="https://dev.to/remojansen/the-industrial-revolution-of-software-is-here-14f6" target="_blank" rel="noopener noreferrer">Learn More about the Agentic Revolution</a>
+            </div>
         </div>
         <footer>
             <div>#LeanGlobalConnection</div>
