@@ -1,0 +1,2269 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080b1a">
+  <meta name="description" content="How Coding Agents Killed Sprints — an offline, 16-slide presentation by Remo H. Jansen.">
+  <title>How Coding Agents Killed Sprints</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #080b1a;
+      color: #f6f7fb;
+      font-synthesis: none;
+      text-rendering: optimizeLegibility;
+      --cyan: #28d9e9;
+      --accent: #f27958;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body { width: 100%; height: 100%; margin: 0; }
+
+    body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #080b1a;
+    }
+
+    .presentation {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      background: #080b1a;
+    }
+
+    .stage {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+    }
+
+    .slide-frame {
+      position: relative;
+      position: relative;
+      width: min(100vw, calc(100dvh * 16 / 9));
+      max-height: 100dvh;
+      aspect-ratio: 16 / 9;
+      container-type: inline-size;
+      transition: opacity .24s ease-in-out;
+    }
+
+    .slide-frame.is-transitioning { opacity: 0; }
+
+    .slide-reveal-item {
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .24s ease-in-out;
+    }
+
+    .slide-reveal-item.is-revealed {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .slide-counter {
+      position: absolute;
+      z-index: 10;
+      top: 3.5%;
+      right: 5%;
+      padding: .35cqw .65cqw;
+      border: 1px solid rgba(40, 217, 233, .3);
+      border-radius: .5cqw;
+      background: rgba(8, 11, 26, .55);
+      color: var(--cyan);
+      font: 700 1cqw/1.3 ui-monospace, SFMono-Regular, Menlo, monospace;
+      letter-spacing: .08em;
+    }
+
+    .cover-slide {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+      padding: 5%;
+      background:
+        radial-gradient(circle at 74% 34%, rgba(40, 217, 233, .12), transparent 38%),
+        #080b1a;
+      color: #f6f7fb;
+    }
+
+    .cover-kicker,
+    .content-slide-section {
+      margin: 0;
+      color: var(--cyan);
+      font: 700 1cqw/1.4 ui-monospace, SFMono-Regular, Menlo, monospace;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .cover-copy {
+      position: absolute;
+      top: 39%;
+      right: 5%;
+      left: 5%;
+    }
+
+    .cover-title {
+      max-width: 90%;
+      margin: 0;
+      font-size: 5cqw;
+      line-height: 1.08;
+      letter-spacing: -.045em;
+    }
+
+    .cover-title-accent {
+      color: var(--cyan);
+    }
+
+    .cover-subtitle {
+      margin: 1.4cqw 0 0;
+      color: #c58bff;
+      font-size: 1.9cqw;
+      font-weight: 650;
+    }
+
+    .cover-author {
+      position: absolute;
+      right: 5%;
+      bottom: 8%;
+      left: 5%;
+      padding-top: 1.3cqw;
+      border-top: 1px solid rgba(215, 224, 243, .2);
+    }
+
+    .cover-author-name {
+      margin: 0;
+      font-size: 1.7cqw;
+      font-weight: 700;
+    }
+
+    .cover-author-site {
+      margin: .4cqw 0 0;
+      color: rgba(215, 224, 243, .72);
+      font-size: 1.2cqw;
+    }
+
+    .cover-qr {
+      position: absolute;
+      right: 5%;
+      bottom: 19%;
+      width: 15cqw;
+      margin: 0;
+      padding: .9cqw;
+      border: 2px solid rgba(40, 217, 233, .85);
+      border-radius: 1.8cqw;
+      background: rgba(40, 217, 233, .08);
+      box-shadow: 0 1cqw 2.5cqw rgba(0, 0, 0, .25);
+    }
+
+    .cover-qr img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 1;
+      padding: .6cqw;
+      border-radius: 1.1cqw;
+      background: #fff;
+    }
+
+    .cover-qr figcaption {
+      margin: .7cqw 0 .1cqw;
+      color: var(--cyan);
+      font-size: 1.15cqw;
+      font-weight: 800;
+      letter-spacing: .04em;
+      text-align: center;
+    }
+
+    .content-slide {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      display: flex;
+      overflow: hidden;
+      flex-direction: column;
+      padding: 5% 5% 7%;
+      background:
+        radial-gradient(circle at 78% 28%, rgba(40, 217, 233, .08), transparent 38%),
+        #080b1a;
+      color: #f6f7fb;
+    }
+
+    .content-slide-title {
+      margin: .5cqw 0 0;
+      font-size: 3.35cqw;
+      line-height: 1.1;
+      letter-spacing: -.035em;
+    }
+
+    .content-slide-body {
+      display: grid;
+      flex: 1;
+      min-height: 0;
+      grid-auto-rows: minmax(0, 1fr);
+      gap: 1.4cqw;
+      margin-top: 2.4cqw;
+    }
+
+    .content-slide-body[data-count="1"] { grid-template-columns: 1fr; }
+    .content-slide-body[data-count="2"] { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .content-slide-body[data-count="3"] { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .content-slide-body[data-count="4"],
+    .content-slide-body[data-count="5"] { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .content-slide-body[data-count="6"] { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .content-slide-body[data-closing="true"] {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0;
+      margin-top: 0;
+    }
+    .content-slide-body[data-has-quote="true"] { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .content-slide-body[data-velocity-trap="true"] {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      align-content: stretch;
+      gap: 1.1cqw;
+      margin-top: 1.5cqw;
+    }
+    .velocity-trap-column {
+      display: grid;
+      min-height: 0;
+      gap: .7cqw;
+    }
+    .velocity-trap-column--context {
+      grid-template-rows: repeat(3, minmax(0, 1fr));
+    }
+    .velocity-trap-column--symptoms {
+      grid-template-rows: repeat(4, minmax(0, 1fr));
+    }
+    .velocity-trap-column .content-slide-card {
+      justify-content: flex-start;
+      padding: .8cqw 1.1cqw;
+    }
+    .velocity-trap-column .content-slide-card h2 {
+      font-size: 1.15cqw;
+    }
+    .velocity-trap-column .content-slide-card p {
+      margin-top: .35cqw;
+      font-size: 1.2cqw;
+      line-height: 1.35;
+    }
+    .velocity-trap-column .content-slide-card--quote {
+      justify-content: center;
+      padding: .8cqw 1.1cqw;
+    }
+    .velocity-trap-column .content-slide-card--quote p {
+      font-size: 1.3cqw;
+    }
+    .content-slide-body[data-agent-shift="true"] {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-auto-rows: auto;
+      align-content: start;
+      gap: 1.2cqw 2.2cqw;
+      margin-top: 2.4cqw;
+    }
+    .content-slide-body[data-agent-shift="true"] .content-slide-card:nth-child(-n+3) {
+      position: relative;
+      overflow: visible;
+      min-height: 16cqw;
+      justify-content: flex-start;
+      padding: 1.6cqw;
+    }
+    .content-slide-body[data-agent-shift="true"] .content-slide-card h2 {
+      font-size: 1.2cqw;
+    }
+    .content-slide-body[data-agent-shift="true"] .content-slide-card p {
+      font-size: 1.8cqw;
+      line-height: 1.4;
+    }
+    .content-slide-body[data-agent-shift="true"] .content-slide-card:last-child {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 3fr;
+      align-items: start;
+      gap: 1.5cqw;
+      padding: 1.6cqw;
+    }
+    .content-slide-body[data-agent-shift="true"] .content-slide-card:last-child h2 {
+      color: var(--accent);
+    }
+    .content-slide-body[data-agent-shift="true"] .content-slide-card:last-child p {
+      margin-top: 0;
+      font-size: 1.5cqw;
+    }
+    .content-slide-body[data-compact="true"] {
+      align-content: start;
+      grid-auto-rows: auto;
+      gap: 1cqw;
+      margin-top: 2.4cqw;
+    }
+
+    .content-slide-body[data-compact="true"] .content-slide-card {
+      padding: 1.6cqw;
+    }
+
+    .content-slide-body[data-compact="true"] .content-slide-card h2 {
+      font-size: 1.8cqw;
+    }
+
+    .content-slide-body[data-compact="true"] .content-slide-card p {
+      font-size: 1.7cqw;
+    }
+
+    .content-slide-body[data-compact="true"] .content-slide-card p.content-slide-item {
+      margin-top: .55cqw;
+    }
+    .content-slide-body[data-compact="true"] .content-slide-warning {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 3fr;
+      align-items: start;
+      gap: 1.5cqw;
+    }
+    .content-slide-body[data-compact="true"] .content-slide-warning h2 {
+      color: var(--accent);
+      font-size: 1.1cqw;
+    }
+    .content-slide-body[data-compact="true"] .content-slide-warning p {
+      margin-top: 0;
+      font-size: 1.55cqw;
+    }
+
+    .content-slide-body[data-case-study="true"] .content-slide-card {
+      justify-content: flex-start;
+    }
+    .content-slide-body[data-case-study="true"] {
+      grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr);
+      align-content: start;
+      grid-auto-rows: auto;
+      gap: 1.5cqw;
+      margin-top: 2.8cqw;
+    }
+    .content-slide-body[data-case-study="true"] .content-slide-card h2 {
+      font-size: 1.35cqw;
+    }
+    .content-slide-body[data-case-study="true"] .content-slide-card {
+      padding: 2cqw;
+      border-radius: 1.4cqw;
+    }
+    .content-slide-body[data-case-study="true"] .content-slide-card p {
+      font-size: 1.7cqw;
+      line-height: 1.4;
+    }
+    .case-study-card--domain {
+      border-left: 3px solid var(--cyan);
+      background: linear-gradient(145deg, rgba(40, 217, 233, .14), rgba(12, 18, 39, .94) 70%);
+    }
+    .case-study-card--domain p.content-slide-item::before {
+      display: none;
+    }
+    .case-study-card--domain p.content-slide-item {
+      padding-left: 0;
+    }
+    .case-study-card--domain p:first-of-type {
+      margin-top: 1.6cqw;
+      color: #f6f7fb;
+      font-size: 3cqw;
+      font-weight: 800;
+      line-height: 1.12;
+    }
+    .case-study-card--domain p:last-of-type {
+      margin-top: 1.2cqw;
+      color: rgba(240, 243, 250, .78);
+      font-size: 1.75cqw;
+    }
+    .case-study-card--mission {
+      border-color: rgba(242, 121, 88, .5);
+      background: linear-gradient(145deg, rgba(242, 121, 88, .1), rgba(12, 18, 39, .94) 70%);
+    }
+    .case-study-card--mission h2 {
+      color: var(--accent);
+    }
+    .case-study-card--mission p:first-of-type {
+      margin-top: 1.3cqw;
+      font-size: 2.35cqw;
+      font-weight: 750;
+      line-height: 1.2;
+    }
+    .content-slide-body[data-information-context="true"] {
+      grid-template-columns: minmax(0, 1fr);
+      align-content: start;
+      grid-auto-rows: auto;
+      gap: .7cqw;
+      margin-top: 1.8cqw;
+    }
+    .content-slide[data-information-context="true"] { padding: 5% 5% 5%; }
+    .content-slide-body[data-information-context="true"] .content-slide-card {
+      display: grid;
+      grid-template-columns: 13cqw minmax(0, 1fr);
+      align-items: start;
+      gap: .7cqw 1cqw;
+      padding: .4cqw 1cqw;
+      border-left: 3px solid var(--cyan);
+      background: linear-gradient(100deg, rgba(40, 217, 233, .09), rgba(12, 18, 39, .9) 30%);
+    }
+    .content-slide-body[data-information-context="true"] .content-slide-card:nth-child(2) {
+      border-left-color: #a58bfa;
+      background: linear-gradient(100deg, rgba(165, 139, 250, .1), rgba(12, 18, 39, .9) 30%);
+    }
+    .content-slide-body[data-information-context="true"] .content-slide-card h2 {
+      grid-column: 1;
+      grid-row: 1;
+      align-self: center;
+      font-size: 1.4cqw;
+    }
+    .information-context-points {
+      display: grid;
+      grid-column: 2;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: .3cqw 1cqw;
+    }
+    .content-slide-body[data-information-context="true"] .information-context-points p {
+      margin: 0;
+      font-size: 1.5cqw;
+      line-height: 1.25;
+    }
+    .content-slide-body[data-unexpected-delivery="true"] {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-rows: minmax(0, 1.8fr) minmax(0, 1fr);
+      align-content: stretch;
+    }
+    .content-slide-body[data-unexpected-delivery="true"] .content-slide-card:first-child {
+      grid-column: 1;
+      grid-row: 2;
+    }
+    .content-slide-body[data-unexpected-delivery="true"] .content-slide-card:nth-child(2) {
+      grid-column: 2;
+      grid-row: 2;
+    }
+    .content-slide-body[data-unexpected-delivery="true"] .content-slide-card {
+      justify-content: flex-start;
+      padding: 1.1cqw 1.4cqw;
+    }
+    .content-slide-body[data-unexpected-delivery="true"] .content-slide-card h2 {
+      font-size: 1.25cqw;
+    }
+    .content-slide-body[data-unexpected-delivery="true"] .content-slide-card p {
+      font-size: 1.45cqw;
+      line-height: 1.4;
+    }
+    .content-slide-body[data-unexpected-delivery="true"] .unexpected-delivery-summary {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      grid-template-rows: auto auto 1fr;
+      gap: .35cqw;
+    }
+    .content-slide-body[data-unexpected-delivery="true"] .unexpected-delivery-summary h2 {
+      grid-column: 1;
+    }
+    .content-slide-body[data-unexpected-delivery="true"] .unexpected-delivery-lead {
+      margin: 0;
+      font-size: 1.25cqw;
+      line-height: 1.25;
+      font-weight: 650;
+    }
+    .unexpected-delivery-metric-summary strong {
+      color: var(--cyan);
+      font-weight: 800;
+    }
+    .unexpected-delivery-visual {
+      grid-column: 1 / -1;
+      grid-row: 1;
+      justify-self: center;
+      min-width: 0;
+      min-height: 0;
+      width: 56%;
+      margin: 0;
+      overflow: hidden;
+      padding: .6cqw;
+      border: 1px solid rgba(40, 217, 233, .3);
+      border-radius: 1cqw;
+      background: rgba(12, 18, 39, .88);
+    }
+    .unexpected-delivery-visual img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 22%;
+    }
+    .content-slide-body[data-count="5"] .content-slide-card:last-child { grid-column: 1 / -1; }
+
+    .content-slide-card {
+      display: flex;
+      min-width: 0;
+      overflow: hidden;
+      flex-direction: column;
+      justify-content: center;
+      padding: 1.6cqw;
+      border: 1px solid rgba(40, 217, 233, .3);
+      border-radius: 1cqw;
+      background: rgba(12, 18, 39, .88);
+    }
+
+    .content-slide-card--quote {
+      grid-column: 1 / -1;
+      border-color: rgba(242, 121, 88, .55);
+      background: rgba(242, 121, 88, .08);
+    }
+
+    .content-slide-card--callout {
+      border-color: rgba(242, 121, 88, .5);
+      background: rgba(242, 121, 88, .08);
+    }
+
+    .content-slide-body[data-top-aligned="true"] .content-slide-card {
+      justify-content: flex-start;
+      padding: .8cqw 1.1cqw;
+    }
+    .content-slide-body[data-top-aligned="true"] .content-slide-card > p:first-child {
+      margin-top: 0;
+    }
+    .content-slide-body[data-practice-one="true"] {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      align-content: start;
+      grid-auto-rows: auto;
+      gap: .7cqw 1.2cqw;
+      margin-top: 1.8cqw;
+    }
+    .content-slide-body[data-practice-one="true"] .content-slide-card {
+      padding: .8cqw 1.1cqw;
+    }
+    .content-slide-body[data-practice-one="true"] .content-slide-card h2 {
+      font-size: 1.4cqw;
+    }
+    .content-slide-body[data-practice-one="true"] .content-slide-card p {
+      font-size: 1.7cqw;
+      line-height: 1.35;
+    }
+    .content-slide-body[data-practice-one="true"] .content-slide-card p.content-slide-item {
+      margin-top: .4cqw;
+    }
+    .content-slide-body[data-collaboration="true"] {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      align-content: start;
+      grid-auto-rows: auto;
+      gap: 1.2cqw;
+      margin-top: 1.8cqw;
+    }
+    .content-slide-body[data-collaboration="true"] .content-slide-card {
+      justify-content: flex-start;
+      padding: .8cqw 1.1cqw;
+    }
+    .content-slide-body[data-collaboration="true"] .content-slide-card h2 {
+      font-size: 1.5cqw;
+    }
+    .content-slide-body[data-collaboration="true"] .content-slide-card p {
+      font-size: 1.7cqw;
+      line-height: 1.3;
+    }
+    .content-slide-body[data-collaboration="true"] .content-slide-card p.content-slide-item {
+      margin-top: .4cqw;
+    }
+    .content-slide-body[data-rethinking-development="true"] {
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      grid-template-rows: auto auto;
+      grid-auto-rows: auto;
+      align-content: space-evenly;
+      gap: .9cqw;
+      margin-top: 1.2cqw;
+    }
+    .content-slide-body[data-rethinking-development="true"] .content-slide-card:nth-child(1) {
+      grid-area: 1 / 1 / 2 / 3;
+    }
+    .content-slide-body[data-rethinking-development="true"] .content-slide-card:nth-child(2) {
+      grid-area: 1 / 3 / 2 / 5;
+    }
+    .content-slide-body[data-rethinking-development="true"] .content-slide-card:nth-child(3) {
+      grid-area: 1 / 5 / 2 / 7;
+    }
+    .content-slide-body[data-rethinking-development="true"] .content-slide-card:nth-child(-n+3) {
+      justify-content: flex-start;
+      padding: .55cqw .75cqw;
+    }
+    .content-slide-body[data-rethinking-development="true"] .content-slide-card:nth-child(-n+3) h2 {
+      font-size: 1.4cqw;
+    }
+    .content-slide-body[data-rethinking-development="true"] .content-slide-card:nth-child(-n+3) p {
+      font-size: 1.6cqw;
+      line-height: 1.25;
+    }
+    .content-slide-body[data-rethinking-development="true"] .content-slide-card:nth-child(-n+3) p.content-slide-item {
+      margin-top: .18cqw;
+      padding-left: 1.1cqw;
+    }
+    .content-slide-body[data-rethinking-development="true"] .content-slide-card--key-lesson {
+      grid-area: 2 / 1 / 3 / 4;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      gap: .25cqw;
+      padding: .55cqw .75cqw;
+      border-color: rgba(113, 230, 158, .65);
+      background: rgba(66, 176, 111, .12);
+    }
+    .content-slide-body[data-rethinking-development="true"] .content-slide-card--key-lesson h2 {
+      color: #71e69e;
+      font-size: 1.4cqw;
+    }
+    .content-slide-body[data-rethinking-development="true"] .content-slide-card--key-lesson p {
+      margin: 0;
+      font-size: 1.7cqw;
+      font-weight: 650;
+      line-height: 1.2;
+    }
+    .content-slide-body[data-rethinking-development="true"] .content-slide-card--key-lesson p.content-slide-item {
+      margin-top: .18cqw;
+      padding-left: 1.1cqw;
+    }
+    .content-slide-body[data-rethinking-development="true"] .content-slide-card--key-tools {
+      grid-area: 2 / 4 / 3 / 7;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      gap: .25cqw;
+      padding: .55cqw .75cqw;
+      border-color: rgba(255, 209, 102, .7);
+      background: rgba(255, 209, 102, .12);
+    }
+    .content-slide-body[data-rethinking-development="true"] .content-slide-card--key-tools h2 {
+      color: #ffd166;
+      font-size: 1.4cqw;
+    }
+    .content-slide-body[data-rethinking-development="true"] .content-slide-card--key-tools p {
+      margin: 0;
+      font-size: 1.55cqw;
+      font-weight: 650;
+      line-height: 1.2;
+    }
+    .content-slide-body[data-rethinking-development="true"] .content-slide-card--key-tools p.content-slide-item {
+      margin-top: .18cqw;
+      padding-left: 1.1cqw;
+    }
+    .content-slide-body[data-rethinking-development="true"] .content-slide-card--key-tools p.content-slide-item {
+      margin-top: .18cqw;
+      padding-left: 1.1cqw;
+    }
+    .content-slide-body[data-rethinking-development="true"] .content-slide-card--key-tools strong {
+      color: #fff1c2;
+      font-weight: 800;
+    }
+    .content-slide-body[data-performance-monitoring="true"] {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-rows: auto auto auto;
+      grid-auto-rows: auto;
+      align-content: space-evenly;
+      gap: .7cqw;
+      margin-top: 1.2cqw;
+    }
+    .content-slide-body[data-performance-monitoring="true"] .content-slide-card:nth-child(1) {
+      grid-area: 1 / 1 / 2 / 3;
+      display: grid;
+      grid-template-columns: max-content minmax(0, 1fr);
+      align-items: center;
+      column-gap: 1.2cqw;
+    }
+    .content-slide-body[data-performance-monitoring="true"] .content-slide-card:nth-child(2) {
+      grid-area: 2 / 1 / 3 / 2;
+    }
+    .content-slide-body[data-performance-monitoring="true"] .content-slide-card:nth-child(3) {
+      grid-area: 2 / 2 / 3 / 3;
+    }
+    .content-slide-body[data-performance-monitoring="true"] .content-slide-card--key-lesson {
+      grid-area: 3 / 1 / 4 / 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      gap: .25cqw;
+      border-color: rgba(113, 230, 158, .65);
+      background: rgba(66, 176, 111, .12);
+    }
+    .content-slide-body[data-performance-monitoring="true"][data-count="5"] .content-slide-card--key-tools {
+      grid-column: 2 / 3;
+      grid-area: 3 / 2 / 4 / 3;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      gap: .25cqw;
+      border-color: rgba(255, 209, 102, .7);
+      background: rgba(255, 209, 102, .12);
+    }
+    .content-slide-body[data-performance-monitoring="true"] .content-slide-card {
+      justify-content: flex-start;
+      padding: .55cqw .75cqw;
+    }
+    .content-slide-body[data-performance-monitoring="true"] .content-slide-card h2 {
+      font-size: 1.4cqw;
+    }
+    .content-slide-body[data-performance-monitoring="true"] .content-slide-card--key-lesson h2 {
+      color: #71e69e;
+    }
+    .content-slide-body[data-performance-monitoring="true"] .content-slide-card--key-tools h2 {
+      color: #ffd166;
+    }
+    .content-slide-body[data-performance-monitoring="true"] .content-slide-card p {
+      font-size: 1.5cqw;
+      line-height: 1.25;
+    }
+    .content-slide-body[data-performance-monitoring="true"] .content-slide-card:nth-child(1) p,
+    .content-slide-body[data-performance-monitoring="true"] .content-slide-card--key-lesson p,
+    .content-slide-body[data-performance-monitoring="true"] .content-slide-card--key-tools p {
+      margin: 0;
+    }
+    .content-slide-body[data-performance-monitoring="true"] .content-slide-card--key-lesson p,
+    .content-slide-body[data-performance-monitoring="true"] .content-slide-card--key-tools p {
+      font-weight: 650;
+      line-height: 1.2;
+    }
+    .content-slide-body[data-performance-monitoring="true"] .content-slide-card--key-tools strong {
+      color: #fff1c2;
+      font-weight: 800;
+    }
+    .content-slide-body[data-performance-monitoring="true"] .content-slide-card p.content-slide-item {
+      margin-top: .18cqw;
+      padding-left: 1.1cqw;
+    }
+    .content-slide-body[data-key-takeaways="true"] {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-rows: auto auto auto;
+      grid-auto-rows: auto;
+      align-content: space-evenly;
+      gap: .7cqw;
+      margin-top: 1.2cqw;
+    }
+    .content-slide-body[data-key-takeaways="true"] .content-slide-card {
+      justify-content: flex-start;
+      padding: .55cqw .7cqw;
+    }
+    .content-slide-body[data-key-takeaways="true"] .content-slide-card:nth-child(1) {
+      grid-area: 1 / 1 / 2 / 2;
+    }
+    .content-slide-body[data-key-takeaways="true"] .content-slide-card:nth-child(2) {
+      grid-area: 1 / 2 / 2 / 3;
+    }
+    .content-slide-body[data-key-takeaways="true"] .content-slide-card:nth-child(3) {
+      grid-area: 1 / 3 / 2 / 4;
+    }
+    .content-slide-body[data-key-takeaways="true"] .content-slide-card:nth-child(4) {
+      grid-area: 2 / 1 / 3 / 2;
+    }
+    .content-slide-body[data-key-takeaways="true"] .content-slide-card:nth-child(5) {
+      grid-area: 2 / 2 / 3 / 3;
+    }
+    .content-slide-body[data-key-takeaways="true"] .content-slide-card:nth-child(6) {
+      grid-area: 2 / 3 / 3 / 4;
+    }
+    .content-slide-body[data-key-takeaways="true"] .content-slide-card:nth-child(7) {
+      grid-area: 3 / 1 / 4 / 4;
+      display: grid;
+      grid-template-columns: max-content minmax(0, 1fr);
+      align-items: center;
+      column-gap: 1cqw;
+    }
+    .content-slide-body[data-key-takeaways="true"] .content-slide-card h2 {
+      font-size: 1.25cqw;
+    }
+    .content-slide-body[data-key-takeaways="true"] .content-slide-card p {
+      margin-top: .2cqw;
+      font-size: 1.35cqw;
+      line-height: 1.2;
+    }
+    .content-slide-body[data-key-takeaways="true"] .content-slide-card:nth-child(7) p {
+      margin: 0;
+      font-size: 1.4cqw;
+    }
+    .content-slide-body[data-information-context="true"] .content-slide-card {
+      padding: .55cqw 1.1cqw;
+    }
+    .content-slide-body[data-information-context="true"] .content-slide-card p.content-slide-item {
+      margin-top: .15cqw;
+    }
+    .content-slide-body[data-practice-one="true"] .content-slide-card--key-lesson,
+    .content-slide-body[data-information-context="true"] .content-slide-card--key-lesson,
+    .content-slide-body[data-collaboration="true"] .content-slide-card--key-lesson {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: max-content minmax(0, 1fr);
+      align-items: center;
+      gap: 1cqw;
+      padding: .6cqw .9cqw;
+      border-color: rgba(113, 230, 158, .65);
+      background: rgba(66, 176, 111, .12);
+    }
+    .content-slide-body[data-practice-one="true"] .content-slide-card--key-lesson h2,
+    .content-slide-body[data-information-context="true"] .content-slide-card--key-lesson h2,
+    .content-slide-body[data-collaboration="true"] .content-slide-card--key-lesson h2 {
+      color: #71e69e;
+      font-size: 1.1cqw;
+    }
+    .content-slide-body[data-practice-one="true"] .content-slide-card--key-lesson p,
+    .content-slide-body[data-information-context="true"] .content-slide-card--key-lesson p,
+    .content-slide-body[data-collaboration="true"] .content-slide-card--key-lesson p {
+      margin: 0;
+      font-size: 1.5cqw;
+      font-weight: 650;
+      line-height: 1.3;
+    }
+    .content-slide-body[data-collaboration="true"] .content-slide-card--key-lesson p {
+      font-size: 1.7cqw;
+    }
+    .content-slide-body[data-information-context="true"] .content-slide-card--key-tools,
+    .content-slide-body[data-practice-one="true"] .content-slide-card--key-tools,
+    .content-slide-body[data-collaboration="true"] .content-slide-card--key-tools {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: max-content minmax(0, 1fr);
+      align-items: center;
+      gap: 1.5cqw;
+      padding: .9cqw 1.2cqw;
+      border-color: rgba(255, 209, 102, .7);
+      background: rgba(255, 209, 102, .12);
+    }
+    .content-slide-body[data-information-context="true"] .content-slide-card--key-tools h2,
+    .content-slide-body[data-practice-one="true"] .content-slide-card--key-tools h2,
+    .content-slide-body[data-collaboration="true"] .content-slide-card--key-tools h2 {
+      color: #ffd166;
+      font-size: 1.1cqw;
+    }
+    .content-slide-body[data-information-context="true"] .content-slide-card--key-tools p,
+    .content-slide-body[data-practice-one="true"] .content-slide-card--key-tools p,
+    .content-slide-body[data-collaboration="true"] .content-slide-card--key-tools p {
+      margin: 0;
+      font-size: 1.4cqw;
+      font-weight: 650;
+      line-height: 1.3;
+    }
+    .content-slide-body[data-information-context="true"] .content-slide-card--key-tools strong,
+    .content-slide-body[data-practice-one="true"] .content-slide-card--key-tools strong,
+    .content-slide-body[data-collaboration="true"] .content-slide-card--key-tools strong {
+      color: #fff1c2;
+      font-weight: 800;
+    }
+    .content-slide-body[data-collaboration="true"] .content-slide-card--key-lesson,
+    .content-slide-body[data-collaboration="true"] .content-slide-card--key-tools {
+      grid-column: auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: stretch;
+      gap: .25cqw;
+      padding: .5cqw .75cqw;
+    }
+    .content-slide-body[data-collaboration="true"] .content-slide-card--key-lesson p,
+    .content-slide-body[data-collaboration="true"] .content-slide-card--key-tools p {
+      font-size: 1.15cqw;
+      line-height: 1.2;
+    }
+    .content-slide-body[data-information-context="true"] .content-slide-card--key-lesson {
+      gap: 1cqw;
+      padding: .6cqw .9cqw;
+    }
+    .content-slide-body[data-information-context="true"] .content-slide-card--key-lesson p {
+      font-size: 1.4cqw;
+    }
+
+    .content-slide-card h2 {
+      margin: 0;
+      color: var(--cyan);
+      font: 700 1.1cqw/1.4 ui-monospace, SFMono-Regular, Menlo, monospace;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .content-slide-card p {
+      margin: .7cqw 0 0;
+      color: rgba(240, 243, 250, .92);
+      font-size: 1.25cqw;
+      line-height: 1.45;
+    }
+
+    .content-slide-card p.content-slide-item {
+      margin-top: .45cqw;
+      padding-left: 1.1cqw;
+    }
+
+    .content-slide-card p.content-slide-item::before {
+      content: "•";
+      display: inline-block;
+      width: 1.1cqw;
+      margin-left: -1.1cqw;
+      color: var(--cyan);
+    }
+
+    .content-slide-card--quote p,
+    .content-slide-card--callout p {
+      font-size: 1.55cqw;
+      font-weight: 650;
+    }
+
+    .content-slide-warning {
+      grid-column: 1 / -1;
+    }
+
+    .closing-thanks {
+      display: flex;
+      min-width: 0;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding-right: 2cqw;
+      border-right: 1px solid rgba(40, 217, 233, .45);
+      text-align: center;
+    }
+
+    .closing-qr {
+      width: 12.5cqw;
+      margin: 0 0 1.2cqw;
+      padding: .8cqw;
+      border: 2px solid rgba(40, 217, 233, .85);
+      border-radius: 1.8cqw;
+      background: rgba(40, 217, 233, .08);
+      box-shadow: 0 1cqw 2.5cqw rgba(0, 0, 0, .25);
+    }
+
+    .closing-qr img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 1;
+      padding: .6cqw;
+      border-radius: 1.1cqw;
+      background: #fff;
+    }
+
+    .closing-qr figcaption {
+      margin: .7cqw 0 .1cqw;
+      color: var(--cyan);
+      font-size: 1.15cqw;
+      font-weight: 800;
+      letter-spacing: .04em;
+      text-align: center;
+    }
+
+    .closing-thanks h2 {
+      margin: 0;
+      font-size: 3cqw;
+      line-height: 1.05;
+    }
+
+    .closing-question {
+      margin-top: .5cqw;
+      color: rgba(215, 224, 243, .82);
+      font-size: 1.5cqw;
+    }
+
+    .closing-links {
+      display: flex;
+      min-width: 0;
+      min-height: 0;
+      flex-direction: column;
+      padding-left: 2cqw;
+    }
+
+    .closing-links h2 {
+      margin: 0 0 .8cqw;
+      color: var(--cyan);
+      font-size: 1.7cqw;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    .closing-links-list {
+      display: grid;
+      flex: 1;
+      min-height: 0;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-rows: repeat(6, minmax(0, 1fr));
+      gap: .35cqw 1.2cqw;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .closing-links-list li {
+      min-width: 0;
+      padding: .35cqw 0;
+      border-bottom: 1px solid rgba(215, 224, 243, .14);
+    }
+
+    .closing-links-list a {
+      display: block;
+      color: rgba(240, 243, 250, .9);
+      font-size: 1.05cqw;
+      font-weight: 600;
+      line-height: 1.35;
+      overflow-wrap: anywhere;
+      text-decoration: none;
+    }
+
+    .closing-links-list a:hover,
+    .closing-links-list a:focus-visible {
+      color: var(--cyan);
+      text-decoration: underline;
+      text-underline-offset: .2em;
+    }
+
+    .content-slide-metric strong {
+      display: block;
+      color: var(--cyan);
+      font-size: 2.7cqw;
+      line-height: 1.1;
+    }
+
+    .content-slide-metric span {
+      display: block;
+      margin-top: .5cqw;
+      font-size: 1.15cqw;
+    }
+
+    .speaker-profile {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+      padding: 5% 5% 6%;
+      background:
+        radial-gradient(circle at 20% 50%, rgba(40, 217, 233, .12), transparent 30%),
+        #080b1a;
+      color: #f6f7fb;
+    }
+
+    .speaker-profile-layout {
+      display: grid;
+      grid-template-columns: 36% minmax(0, 1fr);
+      align-items: center;
+      gap: 4%;
+      height: 100%;
+    }
+
+    .speaker-profile-person {
+      display: flex;
+      min-width: 0;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1.8cqw;
+    }
+
+    .speaker-profile-header {
+      width: 100%;
+    }
+
+    .speaker-profile-kicker,
+    .speaker-profile-card h2 {
+      margin: 0;
+      color: var(--cyan);
+      font: 700 1cqw/1.4 ui-monospace, SFMono-Regular, Menlo, monospace;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .speaker-profile-name {
+      margin: .35cqw 0 .65cqw;
+      font-size: 3.2cqw;
+      line-height: 1.05;
+      letter-spacing: -.04em;
+    }
+
+    .speaker-profile-role {
+      margin: 0 0 .3cqw;
+      color: var(--cyan);
+      font-size: 1.7cqw;
+      font-weight: 700;
+    }
+
+    .speaker-profile-location {
+      margin: 0;
+      color: rgba(215, 224, 243, .82);
+      font-size: 1.25cqw;
+    }
+
+    .speaker-profile-photo {
+      width: 18cqw;
+      max-width: 100%;
+      aspect-ratio: 1;
+      border: 2px solid rgba(40, 217, 233, .8);
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 0 36px rgba(40, 217, 233, .16);
+    }
+
+    .speaker-profile-content {
+      display: flex;
+      min-width: 0;
+      flex-direction: column;
+      justify-content: center;
+      gap: 2cqw;
+    }
+
+    .speaker-profile-details {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.2cqw;
+    }
+
+    .speaker-profile-card {
+      padding: 1.2cqw 1.6cqw;
+      border: 1px solid rgba(40, 217, 233, .32);
+      border-radius: .8cqw;
+      background: rgba(12, 18, 39, .88);
+    }
+
+    .speaker-profile-card p {
+      margin: .4cqw 0 0;
+      color: rgba(240, 243, 250, .94);
+      font-size: 1.15cqw;
+      line-height: 1.5;
+    }
+
+    .speaker-profile-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .45cqw;
+      margin-top: .7cqw;
+    }
+
+    .speaker-profile-tag {
+      padding: .3cqw .6cqw;
+      border: 1px solid rgba(40, 217, 233, .3);
+      border-radius: 999px;
+      background: rgba(40, 217, 233, .06);
+      color: rgba(240, 243, 250, .94);
+      font-size: .9cqw;
+      line-height: 1.2;
+      white-space: nowrap;
+    }
+
+    .advice-bridge {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+      padding: 5% 5% 6%;
+      background:
+        radial-gradient(circle at 50% 42%, rgba(145, 91, 221, .13), transparent 42%),
+        #080b1a;
+      color: #f6f7fb;
+    }
+
+    .advice-bridge-kicker {
+      margin: 0;
+      color: var(--cyan);
+      font: 700 1cqw/1.4 ui-monospace, SFMono-Regular, Menlo, monospace;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .advice-bridge-title {
+      margin: .5cqw 0 2.4cqw;
+      font-size: 3.4cqw;
+      line-height: 1.1;
+      letter-spacing: -.035em;
+    }
+
+    .advice-bridge-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2cqw;
+    }
+
+    .advice-bridge-card {
+      min-height: 22cqw;
+      padding: 2.1cqw 2.2cqw;
+      border: 1px solid rgba(40, 217, 233, .38);
+      border-radius: 1cqw;
+      background: rgba(12, 18, 39, .9);
+    }
+
+    .advice-bridge-card--judgment {
+      border-color: rgba(184, 108, 255, .5);
+    }
+
+    .advice-bridge-card h2 {
+      margin: 0;
+      color: var(--cyan);
+      font: 700 1.15cqw/1.4 ui-monospace, SFMono-Regular, Menlo, monospace;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    .advice-bridge-card--judgment h2 {
+      color: #c58bff;
+    }
+
+    .advice-bridge-card p {
+      margin: 1cqw 0 0;
+      color: rgba(240, 243, 250, .94);
+      font-size: 1.55cqw;
+      line-height: 1.45;
+    }
+
+    .advice-bridge-principle {
+      margin: 1.5cqw 0 0;
+      padding: 1.2cqw 1.4cqw;
+      border-left: 3px solid var(--accent);
+      background: rgba(242, 121, 88, .08);
+      font-size: 1.45cqw;
+      font-weight: 650;
+      line-height: 1.4;
+    }
+
+    .advice-bridge-principle + .advice-bridge-principle {
+      margin-top: .7cqw;
+    }
+
+    .part-divider {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1.8cqw;
+      padding: 8%;
+      background:
+        radial-gradient(circle at 50% 46%, rgba(40, 217, 233, .1), transparent 44%),
+        #080b1a;
+      color: #f6f7fb;
+      text-align: center;
+    }
+
+    .part-divider-label {
+      margin: 0;
+      color: var(--cyan);
+      font: 700 2cqw/1.2 ui-monospace, SFMono-Regular, Menlo, monospace;
+      letter-spacing: .18em;
+    }
+
+    .part-divider-title {
+      max-width: 90%;
+      margin: 0;
+      font-size: 4.6cqw;
+      line-height: 1.1;
+      letter-spacing: -.035em;
+    }
+
+    .slide-footer {
+      position: absolute;
+      right: 2.6%;
+      bottom: 3%;
+      left: 2.6%;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      color: var(--cyan);
+      font-size: clamp(6px, .55cqw, 10px);
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-weight: 700;
+      letter-spacing: .12em;
+      line-height: 1.2;
+      text-transform: uppercase;
+      text-shadow: 0 1px 8px rgba(0, 0, 0, .9);
+      pointer-events: none;
+    }
+
+    .start-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      background: rgba(5, 8, 20, .64);
+      backdrop-filter: blur(5px);
+    }
+
+    .launch-card {
+      width: min(100%, 480px);
+      padding: clamp(28px, 6vw, 48px);
+      border: 1px solid rgba(40, 217, 233, .55);
+      border-radius: 24px;
+      background: rgba(8, 13, 29, .92);
+      box-shadow: 0 24px 80px rgba(0, 0, 0, .45);
+      text-align: center;
+    }
+
+    .launch-kicker {
+      margin: 0 0 12px;
+      color: var(--cyan);
+      font: 700 12px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+
+    .launch-title {
+      margin: 0;
+      font-size: clamp(24px, 5vw, 38px);
+      line-height: 1.12;
+    }
+
+    .launch-author {
+      margin: 12px 0 28px;
+      color: #b6c0d5;
+      font-size: 16px;
+    }
+
+    .start-button {
+      min-width: 180px;
+      min-height: 60px;
+      border: 0;
+      border-radius: 999px;
+      padding: 0 28px;
+      color: #111321;
+      background: var(--cyan);
+      box-shadow: 0 8px 28px rgba(40, 217, 233, .28);
+      font: inherit;
+      font-size: 18px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform .15s ease, background .15s ease;
+    }
+
+    .start-button:hover, .start-button:focus-visible {
+      transform: translateY(-2px);
+      background: #77f2ff;
+      outline: 3px solid rgba(40, 217, 233, .42);
+      outline-offset: 4px;
+    }
+
+    .start-help {
+      margin: 18px 0 0;
+      color: #aeb8cf;
+      font-size: 13px;
+    }
+
+    .start-error {
+      margin: 18px 0 0;
+      color: #ffb5a1;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      clip-path: inset(50%);
+    }
+
+    [hidden] { display: none !important; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <main class="presentation" aria-label="How Coding Agents Killed Sprints presentation" tabindex="-1">
+    <div class="stage">
+      <div class="slide-frame">
+        <section class="cover-slide" id="cover-slide" aria-label="Title slide" hidden>
+          <p class="cover-kicker">&gt;_ Azure &amp; GitHub Community Day · 2026</p>
+          <div class="cover-copy">
+            <h1 class="cover-title">How Coding Agents <span class="cover-title-accent">Killed Sprints</span></h1>
+            <p class="cover-subtitle">(and Finally Delivered the Agile Manifesto)</p>
+          </div>
+          <figure class="cover-qr">
+            <img src="qr.svg" alt="QR code to get the slides">
+            <figcaption>GET THE SLIDES</figcaption>
+          </figure>
+          <div class="cover-author">
+            <p class="cover-author-name">Remo H. Jansen</p>
+            <p class="cover-author-site">www.remojansen.com</p>
+          </div>
+        </section>
+        <section class="content-slide" id="content-slide" aria-label="Presentation slide" hidden>
+          <header>
+            <p class="content-slide-section" id="content-slide-section"></p>
+            <h1 class="content-slide-title" id="content-slide-title"></h1>
+          </header>
+          <div class="content-slide-body" id="content-slide-body"></div>
+        </section>
+        <section class="speaker-profile" id="speaker-profile" aria-label="Speaker profile" hidden>
+          <div class="speaker-profile-layout">
+            <div class="speaker-profile-person">
+              <header class="speaker-profile-header">
+                <p class="speaker-profile-kicker">Speaker Profile</p>
+                <h1 class="speaker-profile-name">Remo H. Jansen</h1>
+                <p class="speaker-profile-role">Technical Lead at Marsh</p>
+                <p class="speaker-profile-location">Wexford, Ireland</p>
+              </header>
+              <img class="speaker-profile-photo" src="remo-jansen-profile.jpg" alt="Remo Jansen">
+            </div>
+            <div class="speaker-profile-content">
+              <div class="speaker-profile-details">
+                <article class="speaker-profile-card">
+                  <h2>Open Source &amp; Community</h2>
+                  <p>Creator of InversifyJS, a contributor to the TypeScript and JavaScript communities, and a former Microsoft MVP.</p>
+                </article>
+                <article class="speaker-profile-card">
+                  <h2>International Speaker &amp; Published Author</h2>
+                  <p>Author of several books on TypeScript published by Packt Publishing.</p>
+                </article>
+                <article class="speaker-profile-card">
+                  <h2>Current Focus</h2>
+                  <p>Software architecture, developer productivity, modern web engineering, and AI's impact on software delivery.</p>
+                </article>
+                <article class="speaker-profile-card">
+                  <h2>Topics</h2>
+                  <div class="speaker-profile-tags" aria-label="Topics">
+                    <span class="speaker-profile-tag">JavaScript</span>
+                    <span class="speaker-profile-tag">TypeScript</span>
+                    <span class="speaker-profile-tag">Dependency Injection</span>
+                    <span class="speaker-profile-tag">NodeJS</span>
+                    <span class="speaker-profile-tag">React</span>
+                    <span class="speaker-profile-tag">SOLID</span>
+                    <span class="speaker-profile-tag">DevEx</span>
+                    <span class="speaker-profile-tag">High Performing Teams</span>
+                    <span class="speaker-profile-tag">Agentic SDLC</span>
+                    <span class="speaker-profile-tag">Applied Generative AI</span>
+                    <span class="speaker-profile-tag">Open Source</span>
+                    <span class="speaker-profile-tag">Software Architecture</span>
+                    <span class="speaker-profile-tag">Software Engineering</span>
+                    <span class="speaker-profile-tag">Azure</span>
+                    <span class="speaker-profile-tag">GitHub</span>
+                  </div>
+                </article>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="advice-bridge" id="advice-bridge" aria-label="Practical advice versus judgment-based advice" hidden>
+          <p class="advice-bridge-kicker">The Best Software Advice Is the Hardest to Follow</p>
+          <h1 class="advice-bridge-title">We Have a Bias Towards Practical Advice</h1>
+          <div class="advice-bridge-grid">
+            <article class="advice-bridge-card">
+              <h2>Practical Advice</h2>
+              <p>Clear rules with actions you can teach, review, and scale.</p>
+              <p class="advice-bridge-principle">Keep functions small.</p>
+              <p class="advice-bridge-principle">DRY.</p>
+            </article>
+            <article class="advice-bridge-card advice-bridge-card--judgment">
+              <h2>Judgment-Based Advice</h2>
+              <p>Principles that ask you to weigh trade-offs in context. Different situations can call for different answers.</p>
+              <p class="advice-bridge-principle">The wrong abstraction is more costly than duplication.</p>
+            </article>
+          </div>
+        </section>
+        <section class="part-divider" id="part-divider" aria-label="Part divider" hidden>
+          <p class="part-divider-label" id="part-divider-label"></p>
+          <h1 class="part-divider-title" id="part-divider-title"></h1>
+        </section>
+        <footer class="slide-footer" aria-label="Presentation footer">
+          <span>&gt;_ Azure &amp; GitHub Community Day · 2026</span>
+          <span>www.remojansen.com</span>
+        </footer>
+        <div class="slide-counter" id="slide-counter" aria-hidden="true"></div>
+      </div>
+      <section class="start-overlay" id="start-overlay" aria-labelledby="launch-title">
+        <div class="launch-card">
+          <p class="launch-kicker">Azure &amp; GitHub Community Day · 2026</p>
+          <h1 class="launch-title" id="launch-title">How Coding Agents Killed Sprints</h1>
+          <p class="launch-author">Remo H. Jansen</p>
+          <button class="start-button" id="start" type="button">Start</button>
+          <p class="start-help">Use the ← and → arrow keys to navigate</p>
+          <p class="start-error" id="start-error" role="alert" hidden></p>
+        </div>
+      </section>
+      <p class="visually-hidden" id="slide-announcement" aria-live="polite"></p>
+    </div>
+  </main>
+  <script>
+    "use strict";
+    const slides = [{"section":"Azure & GitHub Community Day · 2026","title":"How Coding Agents Killed Sprints","text":"Azure & GitHub Community Day · 2026\nHow Coding Agents Killed Sprints\n(and Finally Delivered the Agile Manifesto)\nRemo H. Jansen\nwww.remojansen.com"},{"section":"Speaker profile","title":"Remo H. Jansen","text":"Technical Lead\nwww.remojansen.com\n\nOpen Source & Author\nCreator of InversifyJS · Author of Learning TypeScript\n\nCommunity & Location\nFormer Microsoft MVP · International Speaker · Wexford, Ireland\n\nCurrent Focus\nSoftware architecture, developer productivity, and the impact of AI on team culture and software delivery."},{"section":"Core dichotomy","title":"Two Different Things Called “Agile”","text":"The Manifesto (2001)\nValues requiring judgement\nIndividuals & interactions\nWorking software over docs\nCustomer collaboration\nResponding to change\n\nCorporate Practice\nLegible, auditable rituals\nStory points & sizing\nSprint planning commitments\nVelocity tracking\nBurndown charts"},{"section":"Historical context","title":"Why the Ceremonies Exist","text":"“Writing code is the bottleneck — expensive, slow, and limited by human throughput.”\n\n20+ years of ceremonies were built to plan around and manage this scarce resource.\n\n1. Estimation → 2. Commitment → 3. Tracking → 4. Predictability Theatre"},{"section":"Goodhart’s law","title":"The Velocity Trap","text":"“When a measure becomes a target, it ceases to be a good measure.”\n\nPoints Inflation\nEstimates expand artificially to hit team velocity targets.\n\nScope Gaming\nSplitting tickets solely to inflate reported point velocity.\n\nDefending Commitments\nProtecting sprint metrics instead of shipping user value."},{"section":"Paradigm shift","title":"What Coding Agents Change","text":"The Bottleneck Moves\nProducing Code\n1. Verifying Generated Code\n2. Deciding What is Worth Building\n\nNon-Linear Throughput\nA “3-point” task can take days of correction. A “13-point” task can finish in one pass.\n\nPoint estimates become actively misleading."},{"section":"Economic re-evaluation","title":"The Real Opportunity","text":"Prototyping < Estimating\n\nIf producing and testing a working slice of software becomes cheaper than estimating it, the entire apparatus around estimation loses its justification.\n\nWe no longer need to accelerate Scrum. We can retire its unnecessary ceremonies."},{"section":"Case study context","title":"Broker WorkBench","text":"Platform Domain\nSpecialty Insurance\nComplex insurance and reinsurance placement platform designed for the London market.\n\nOrganizational Mandate\nAI Transformation Program\nBuilt inside our enterprise AI engineering initiative with explicit permission to question existing delivery ceremonies."},{"section":"Practice 01","title":"Encode the Roles... Then Dissolve Them","text":"1. Requirements Agent\nRefined raw inputs into structured specs.\n\n2. Sizing Agent\nGenerated story points with written justifications.\n\n3. Status Agent\nAutomated traceability and flow reporting.\n\nThe Key Realization\nOnce sprint commitments stopped, the sizing agent had no downstream consumer. We didn’t automate the ceremony — we retired it."},{"section":"Practice 02","title":"Executable Discovery","text":"Domain experts build disposable, prompt-driven prototypes.\n\nAgents extract behaviour (not implementation code) into backlog items.\n\nHuman review at both ends: engineer + product owner.\n\nThe requirement artifact becomes a running demonstration, not a textual ticket."},{"section":"Practice 03","title":"Continuous Flow Instead of Sprints","text":"Eliminated Proxies\nZero sprint commitments\nZero velocity targets\nZero story point gaming\n\nLive Flow Visibility\nReal-time delay hotspots\nActive WIP tracking\nDirect cost and outcome metrics"},{"section":"Practice 04","title":"Verification as the Bottleneck","text":"Strict Static Typing\nCompile-time correctness constraints.\n\nDeclarative Rules\nMachine-checkable domain logic.\n\nFSM in DB Schema\nIllegal states made unrepresentable.\n\nRule: Peer review relaxation is only permissible when backed by a strengthened automated floor."},{"section":"Observed results","title":"Impact vs. Original Scrum Plan","text":"~12m — Ahead of Schedule\n~60% — Of Original Cost\n50% — Team Size Needed\n1 Day — Same-Day Cycle Time\n\nCeremonies Removed: Estimation · Sprint Planning · Backlog Refinement · Grooming"},{"section":"Core takeaways","title":"5 Key Lessons","text":"1. Prototyping < Estimating: When prototyping costs less than estimating, estimation adds zero value.\n\n2. Retire, Don’t Automate: Prefer retiring unnecessary ceremonies rather than scripting them.\n\n3. Executable Requirements: Extract behaviour from prototypes; do not reuse draft prototype code.\n\n4. Verification is the Bottleneck: Code authoring is fast; automated verification is critical.\n\n5. Strengthened Automated Floor: Any relaxation of human review requires machine-checked gates."},{"section":"Philosophical conclusion","title":"The Deeper Point","text":"Much of corporate “Agile” is a set of proxies invented for a world where writing code was expensive. Coding agents change the underlying economics.\n\nThe Manifesto Restored\nWorking software over comprehensive documentation\nCustomer collaboration over contract negotiation\nResponding to change over following a plan"},{"section":"Experience report","title":"Honest Caveats · Questions?","text":"Honest Caveats\nSingle case study in a regulated domain\nSupported by strong executive sponsorship\nParticipant-authored experience report\nTrust-based review may not transfer everywhere\n\nQuestions?\nHappy to discuss the practices, the constraint layer, or the organizational transformation.\n\nThank You\nRemo H. Jansen · www.remojansen.com"}];
+    const historicalContextIndex = slides.findIndex(slide => slide.section === "Historical context");
+    if (historicalContextIndex === -1) throw new Error("Historical context slide was not found.");
+    slides.splice(historicalContextIndex, 1);
+    const economicReevaluationIndex = slides.findIndex(slide => slide.section === "Economic re-evaluation");
+    const caseStudyContextIndex = slides.findIndex(slide => slide.section === "Case study context");
+    if (economicReevaluationIndex === -1 || caseStudyContextIndex === -1) {
+      throw new Error("Economic re-evaluation or case study slide was not found.");
+    }
+    slides[caseStudyContextIndex].title = "A Real-World Example";
+    slides[caseStudyContextIndex].text = [
+      "The Domain",
+      "London Specialty Insurance",
+      "Complex Insurance and Reinsurance Trading Platform",
+      "",
+      "The Mission",
+      "Internal AI Transformation Program",
+      "Make heavy usage of AI Coding Agents",
+      "Permission to question existing SDLC"
+    ].join("\n");
+    slides[economicReevaluationIndex].section = "The first steps";
+    slides[economicReevaluationIndex].title = "Information Lost and Context";
+    slides[economicReevaluationIndex].text = [
+      "The Human Side",
+      "We moved from two-pizza teams to one-pizza teams to reduce handoffs.",
+      "Fewer handoffs preserve context and bring engineers closer to end users.",
+      "Engineers shift toward discovery: working with users to shape requirements and validate solutions.",
+      "Engineers become domain experts, taking on some product-owner and business-analyst responsibilities.",
+      "",
+      "The Agent Side",
+      "Code was in GitHub, issues in ADO, and documentation in Confluence—splitting the context.",
+      "We moved everything to GitHub so agents can work from the full picture.",
+      "Custom agents regularly check for drift between documentation and implementation."
+    ].join("\n");
+    [slides[economicReevaluationIndex], slides[caseStudyContextIndex]] =
+      [slides[caseStudyContextIndex], slides[economicReevaluationIndex]];
+    const roleExperimentIndex = slides.findIndex(slide => slide.section === "Practice 01");
+    if (roleExperimentIndex === -1) throw new Error("The role experiment slide was not found.");
+    slides[roleExperimentIndex].section = "The First Realization";
+    slides[roleExperimentIndex].title = "Rethinking the Process Is Better Than Automating It";
+    slides[roleExperimentIndex].text = [
+      [
+        "Initial Approach",
+        "Our first experiment was to make Scrum more efficient with custom agents.",
+        "Agents handled story refinement, story sizing, and sprint planning.",
+        "A traditional sprint's work could be implemented in one morning instead of one week.",
+        "Estimates became even less predictable—and ultimately irrelevant; verification became the main concern."
+      ].join("\n"),
+      [
+        "The Key Realization",
+        "Once sprint commitments stopped, the sizing agent had no downstream consumer.",
+        "Verification—not implementation—was the bottleneck. Estimation was useless, and Scrum ceremonies were irrelevant.",
+        "We kept only the retrospective, focusing our effort on discovery and verification.",
+        "We moved to Kanban, pulling work continuously and releasing organically as features were ready."
+      ].join("\n")
+    ].join("\n\n");
+    const executableDiscoveryIndex = slides.findIndex(slide => slide.section === "Practice 02");
+    if (executableDiscoveryIndex === -1) throw new Error("The executable discovery slide was not found.");
+    slides[executableDiscoveryIndex].section = "Rethinking Collaboration";
+    slides[executableDiscoveryIndex].title = "Executable Intent";
+    slides[executableDiscoveryIndex].text = [
+      [
+        "Business-led prototyping",
+        "End users vibe-code in an isolated, non-production repository with no deployments, secrets, or live integrations.",
+        "Instructions tell agents to prioritize learning: mock HTTP calls and external systems, and ask questions that surface non-functional requirements.",
+        "Each session produces a spec and working prototype; multiple stakeholders refine both until the feature is ready for development."
+      ].join("\n"),
+      [
+        "Engineering partnership",
+        "Engineers join the sessions—and bring ideas of their own—to prototype and test solutions alongside end users.",
+        "Custom agents pull approved features from the prototype repository into GitHub issues, capturing requirements and behaviour—not implementation.",
+        "Each issue links to the prototype for context; the prototype code is discarded."
+      ].join("\n")
+    ].join("\n\n");
+    const continuousFlowIndex = slides.findIndex(
+      slide => slide.section === "Practice 03" && slide.title === "Continuous Flow Instead of Sprints"
+    );
+    if (continuousFlowIndex === -1) throw new Error("The continuous-flow slide was not found.");
+    slides.splice(continuousFlowIndex, 1);
+    const observedResultsIndex = slides.findIndex(
+      slide => slide.section === "Observed results" && slide.title === "Impact vs. Original Scrum Plan"
+    );
+    if (observedResultsIndex === -1) throw new Error("The observed-results slide was not found.");
+    slides.splice(observedResultsIndex, 1);
+    const verificationSlideIndex = slides.findIndex(
+      slide => slide.section === "Practice 04" && slide.title === "Verification as the Bottleneck"
+    );
+    if (verificationSlideIndex === -1) throw new Error("The verification slide was not found.");
+    slides[verificationSlideIndex].section = "RETHINKING PERFORMANCE MONITORING";
+    slides[verificationSlideIndex].title = "Measuring outcomes";
+    slides[verificationSlideIndex].text = [
+      [
+        "OUTPUT IS NOT VALUE",
+        "We don't track velocity or count PRs, lines of code, or deployments; those measure activity, not value delivered. We measure outcomes instead."
+      ].join("\n"),
+      [
+        "BUSINESS OUTCOMES",
+        "Define OKRs for outcomes such as Cost per Transaction, Processing Time per Transaction, and Premium Volume.",
+        "Link each prototype and discovery experiment to a specific OKR.",
+        "Track OKR progress over time to see whether the experiment delivers business impact."
+      ].join("\n"),
+      [
+        "ENGINEERING FLOW",
+        "Monitor the bug-to-feature ratio and trends in delivered issues.",
+        "Count an issue as delivered only when its code changes are deployed to production; closed issues with no code changes don't count.",
+        "Track trends in issue cycle time and issue age."
+      ].join("\n")
+    ].join("\n\n");
+    slides.splice(verificationSlideIndex, 0, {
+      section: "RETHINKING DEVELOPMENT",
+      title: "Build the Factory Not the Product",
+      text: [
+        [
+          "ENGINEERS BUILD THE FACTORY",
+          "Design and operate the system that builds software.",
+          "Make specs, architecture, orchestration, and checks explicit.",
+          "Humans own judgment and accountability; agents implement bounded tasks."
+        ].join("\n"),
+        [
+          "OPTIMIZE VERIFIED FLOW",
+          "Pull valuable work continuously in small batches.",
+          "Limit unverified changes and shorten feedback loops.",
+          "Optimize verified outcomes—not code volume or agent count; release as features are ready."
+        ].join("\n"),
+        [
+          "BUILD QUALITY INTO THE SYSTEM",
+          "Make intent, constraints, and checks explicit at every boundary.",
+          "Verify continuously; stop on failures before defects spread.",
+          "Use failures and feedback to improve the production system."
+        ].join("\n")
+      ].join("\n\n")
+    });
+    const unexpectedDeliveryIndex = slides.findIndex(slide => slide.section === "Philosophical conclusion");
+    if (unexpectedDeliveryIndex === -1) throw new Error("The philosophical conclusion slide was not found.");
+    slides[unexpectedDeliveryIndex].section = "An unexpected outcome";
+    slides[unexpectedDeliveryIndex].title = "Coding Agents Killed Scrum";
+    slides[unexpectedDeliveryIndex].text = [
+      [
+        "RIP SCRUM",
+        "We removed most ceremonies.",
+        "No more estimation, sprint planning, sprint review, backlog refinement, or grooming."
+      ].join("\n"),
+      [
+        "The Agile Manifesto Delivered",
+        "We are now experiencing true Agile.",
+        "~12m — Ahead of Schedule",
+        "~60% — Of Original Cost",
+        "50% — Team Size",
+        "1.4 Days — Issue Cycle Time"
+      ].join("\n")
+    ].join("\n\n");
+    const keyLessonsIndex = slides.findIndex(slide => slide.section === "Core takeaways");
+    const experienceReportIndex = slides.findIndex(slide => slide.section === "Experience report");
+    if (keyLessonsIndex === -1 || experienceReportIndex === -1) {
+      throw new Error("The key lessons or experience report slide was not found.");
+    }
+    const experienceReportBlocks = slides[experienceReportIndex].text.trim().split(/\n\s*\n/);
+    const caveatsIndex = experienceReportBlocks.findIndex(block => block.startsWith("Honest Caveats\n"));
+    if (caveatsIndex === -1) throw new Error("The honest caveats block was not found.");
+    experienceReportBlocks.splice(caveatsIndex, 1);
+    slides[experienceReportIndex].text = experienceReportBlocks.join("\n\n");
+    slides[experienceReportIndex].section = "Closing";
+    slides[experienceReportIndex].title = "Thank You!";
+    slides[experienceReportIndex].text = "";
+    slides[keyLessonsIndex].section = "LESSONS AND CAVEATS";
+    slides[keyLessonsIndex].title = "Key Takeaways";
+    slides[keyLessonsIndex].text = [
+      [
+        "1. Revisit the Economics",
+        "When a working prototype is cheaper than estimating, prototype. Retire planning proxies that no longer guide value instead of merely automating them."
+      ].join("\n"),
+      [
+        "2. Keep Discovery Close",
+        "Bring engineers into user discovery and use safe, disposable prototypes to uncover behavior and non-functional needs—not to ship prototype code."
+      ].join("\n"),
+      [
+        "3. Build the Factory",
+        "Make specs, architecture, orchestration, and checks explicit. Humans own judgment and accountability; agents implement bounded tasks."
+      ].join("\n"),
+      [
+        "4. Optimize Continuous Flow",
+        "Pull valuable work in small batches, limit unverified changes, shorten feedback loops, and release when features are ready."
+      ].join("\n"),
+      [
+        "5. Make Verification First-Class",
+        "Treat the quality system as a deliverable and verification as an architectural concern. Relax peer review only behind a stronger automated floor."
+      ].join("\n"),
+      [
+        "6. Measure Outcomes, Not Activity",
+        "Link discovery to business OKRs; track bug-to-feature ratio, issues delivered with code changes deployed to production, issue cycle time and age. Don't use velocity, PR or line counts, or deployment counts as value proxies."
+      ].join("\n"),
+      [
+        "Honest Caveats",
+        "One regulated-domain case study with strong executive sponsorship. We were fortunate that business users were eager to learn, collaborate, and vibe-code without an engineering background; suitable participants may be harder to find in other organizations."
+      ].join("\n")
+    ].join("\n\n");
+    const [unexpectedOutcomeSlide] = slides.splice(unexpectedDeliveryIndex, 1);
+    slides.splice(keyLessonsIndex, 0, unexpectedOutcomeSlide);
+    const firstStepsIndex = slides.findIndex(slide => slide.section === "The first steps");
+    const partTwoContentIndex = slides.findIndex(slide => slide.section === "Paradigm shift");
+    if (firstStepsIndex === -1) throw new Error("The first steps slide was not found.");
+    if (partTwoContentIndex === -1) throw new Error("The part II starting slide was not found.");
+
+    const startButton = document.getElementById("start");
+    const startOverlay = document.getElementById("start-overlay");
+    const startError = document.getElementById("start-error");
+    const announcement = document.getElementById("slide-announcement");
+    const presentation = document.querySelector(".presentation");
+    const slideFrame = document.querySelector(".slide-frame");
+    const footer = document.querySelector(".slide-footer");
+    const coverSlide = document.getElementById("cover-slide");
+    const slideCounter = document.getElementById("slide-counter");
+    const contentSlide = document.getElementById("content-slide");
+    const contentSlideSection = document.getElementById("content-slide-section");
+    const contentSlideTitle = document.getElementById("content-slide-title");
+    const contentSlideBody = document.getElementById("content-slide-body");
+    const speakerProfile = document.getElementById("speaker-profile");
+    const adviceBridge = document.getElementById("advice-bridge");
+    const partDivider = document.getElementById("part-divider");
+    const partDividerLabel = document.getElementById("part-divider-label");
+    const partDividerTitle = document.getElementById("part-divider-title");
+    let current = 0;
+    let revealItems = [];
+    let revealedItemCount = 0;
+    let isSlideTransitioning = false;
+    let hasStartedPresentation = false;
+
+    const learnMoreArticles = [
+      {
+        title: "Why the Best Software Advice Is the Hardest to Follow",
+        url: "https://dev.to/remojansen/why-the-best-software-advice-is-the-hardest-to-follow-4kg8"
+      },
+      {
+        title: "From Rigidity to Explicitness: How AI Changes the Role of Constraints in Software",
+        url: "https://dev.to/remojansen/from-rigidity-to-explicitness-how-ai-changes-the-role-of-constraints-in-software-5cp5"
+      },
+      {
+        title: "Scrum Is Finally Dead—and We Have to Thank Coding Agents for That",
+        url: "https://dev.to/remojansen/scrum-is-finally-dead-and-we-have-to-thank-coding-agents-for-that-18bi"
+      },
+      {
+        title: "Revisiting the Toyota Production System (TPS) in the Age of Coding Agents",
+        url: "https://dev.to/remojansen/revisiting-the-toyota-production-system-tps-in-the-age-of-coding-agents-2bb5"
+      },
+      {
+        title: "When Code Gets Cheap, Verification Becomes Expensive: How AI Changes the Economics of Software",
+        url: "https://dev.to/remojansen/when-code-gets-cheap-verification-becomes-expensive-how-ai-changes-the-economics-of-software-632"
+      },
+      {
+        title: "The Industrial Revolution of Software Is Here",
+        url: "https://dev.to/remojansen/the-industrial-revolution-of-software-is-here-14f6"
+      },
+      {
+        title: "Mutation Testing with TypeScript: How to Verify Your Tests in the Age of AI Coding Agents",
+        url: "https://dev.to/remojansen/mutation-testing-with-typescript-how-to-verify-your-tests-in-the-age-of-ai-coding-agents-neh"
+      },
+      {
+        title: "The Agentic Manifesto: What Should the Agile Manifesto Look Like in the Age of AI?",
+        url: "https://dev.to/remojansen/the-agentic-manifesto-what-should-the-agile-manifesto-look-like-in-the-age-of-ai-3k1g"
+      },
+      {
+        title: "Maybe Enterprise Software Doesn't Have to Suck Anymore",
+        url: "https://dev.to/remojansen/maye-enterprise-software-doesnt-have-to-suck-anymore-2163"
+      },
+      {
+        title: "The Infinite Loop, Part I: The Problem",
+        url: "https://dev.to/remojansen/the-infinite-loop-part-i-the-problem-3clc"
+      },
+      {
+        title: "The Infinite Loop, Part II: The Solution",
+        url: "https://dev.to/remojansen/the-infinite-loop-part-ii-the-solution-hk3"
+      },
+      {
+        title: "The Infinite Loop, Part III: Agentic Software Engineering",
+        url: "https://dev.to/remojansen/the-infinite-loop-part-iii-agentic-software-engineering-1h5f"
+      }
+    ];
+
+    function appendText(parent, tag, text, className = "") {
+      const element = document.createElement(tag);
+      if (className) element.className = className;
+      element.textContent = text;
+      parent.append(element);
+      return element;
+    }
+
+    function renderContentSlide(slide, originalIndex) {
+      const isClosing = slide.section === "Closing";
+      contentSlideBody.dataset.rethinkingDevelopment = String(slide.section === "RETHINKING DEVELOPMENT");
+      contentSlideBody.dataset.performanceMonitoring = String(
+        slide.section === "RETHINKING PERFORMANCE MONITORING"
+      );
+      contentSlideBody.dataset.keyTakeaways = String(slide.section === "LESSONS AND CAVEATS");
+      contentSlide.dataset.informationContext = String(slide.title === "Information Lost and Context");
+      contentSlideSection.hidden = isClosing;
+      contentSlideTitle.hidden = isClosing;
+      contentSlideSection.textContent = isClosing ? "" : originalIndex === 2 ? "Core difference" : slide.section;
+      contentSlideTitle.textContent = isClosing ? "" : slide.title;
+      if (slide.section === "Closing") {
+        contentSlideBody.replaceChildren();
+        contentSlideBody.dataset.count = "2";
+        contentSlideBody.dataset.hasQuote = "false";
+        contentSlideBody.dataset.compact = "false";
+        contentSlideBody.dataset.caseStudy = "false";
+        contentSlideBody.dataset.topAligned = "false";
+        contentSlideBody.dataset.velocityTrap = "false";
+        contentSlideBody.dataset.agentShift = "false";
+        contentSlideBody.dataset.informationContext = "false";
+        contentSlideBody.dataset.unexpectedDelivery = "false";
+        contentSlideBody.dataset.practiceOne = "false";
+        contentSlideBody.dataset.closing = "true";
+
+        const thanks = document.createElement("section");
+        thanks.className = "closing-thanks";
+        thanks.setAttribute("aria-label", "Thank you and get the slides");
+        const qr = document.createElement("figure");
+        qr.className = "closing-qr";
+        const qrImage = document.createElement("img");
+        qrImage.src = "qr.svg";
+        qrImage.alt = "QR code to get the slides";
+        qr.append(qrImage);
+        appendText(qr, "figcaption", "GET THE SLIDES");
+        thanks.append(qr);
+        appendText(thanks, "h2", "Thank You!", "closing-thank-you");
+        appendText(thanks, "p", "Questions?", "closing-question");
+
+        const learnMore = document.createElement("section");
+        learnMore.className = "closing-links";
+        learnMore.setAttribute("aria-labelledby", "closing-links-title");
+        const learnMoreTitle = appendText(learnMore, "h2", "Learn More");
+        learnMoreTitle.id = "closing-links-title";
+        const articleList = document.createElement("ul");
+        articleList.className = "closing-links-list";
+        for (const article of learnMoreArticles) {
+          const item = document.createElement("li");
+          const link = appendText(item, "a", article.title);
+          link.href = article.url;
+          link.target = "_blank";
+          link.rel = "noopener noreferrer";
+          articleList.append(item);
+        }
+        learnMore.append(articleList);
+        contentSlideBody.append(thanks, learnMore);
+        return;
+      }
+      const blocks = slide.section === "Paradigm shift"
+        ? [
+            "Choose What Is Worth Building\nStill hard, but some discovery activities—like prototypes—are faster and cheaper now.",
+            "Producing Code\nGenerating code with agents is fast and cheap. We can produce very large changes in minutes and scale to thousands of agents writing code.",
+            "Verify Generated Code\nVerification is the new bottleneck. Agents can produce code so quickly that they can overwhelm our capacity to verify it.",
+            "Estimates go from inaccurate to useless\nHuman work was always hard to estimate accurately. A coding agent can complete both 3-point and 13-point tasks in minutes, so points no longer tell us how long the work will take."
+          ]
+        : slide.section === "Goodhart’s law"
+        ? [
+            "“When a measure becomes a target, it ceases to be a good measure.”",
+            "Uncertainty needs discovery\nSoftware work is full of unknowns; planning and estimates can’t resolve them. Discovery and experiments—such as prototypes—can. Scrum defines Sprints but no formal discovery phase and doesn’t explicitly promote user-centered design.",
+            "Metrics shape behavior\nTeams optimize what leaders measure. Sprint deadlines and burndown charts track tasks remaining—not customer value. Output pressure leaves less time for quality and technical debt, fueling burnout and attrition. Debt then slows delivery and erodes competitiveness. Measure outcomes, not activity.",
+            "Waterfall habits return\nScrum often followed Waterfall. Its time-boxes and estimates let managers accustomed to the old model bring familiar habits back, slowly eroding Agile principles until Sprints became mini-Waterfall cycles.",
+            "Points Inflation\nEstimates expand artificially to hit team velocity targets.",
+            "Scope Gaming\nSplitting tickets solely to inflate reported point velocity.",
+            "Defending Commitments\nProtecting sprint metrics instead of shipping user value."
+          ]
+        : slide.text.trim().split(/\n\s*\n/).filter(Boolean);
+      const isUnexpectedDelivery = slide.section === "An unexpected outcome";
+      if (originalIndex === 2) {
+        blocks[0] = blocks[0].replace("The Manifesto (2001)", "The Agile Manifesto (2001)");
+        blocks[0] = blocks[0].replace("Values requiring judgement", "Values requiring judgement\nHard to Implement");
+        blocks[1] = blocks[1]
+          .replace("Corporate Practice", "Scrum (1995)")
+          .replace("Legible, auditable rituals", "Actionable, auditable rituals\nEasy to Corrupt")
+          .replace("Velocity tracking\nBurndown charts", "Velocity tracking / Burndown charts")
+          .replace(
+            "Velocity tracking / Burndown charts",
+            "Velocity tracking / Burndown charts\nCustomer disconnect"
+          );
+      }
+      contentSlideBody.replaceChildren();
+      contentSlideBody.dataset.count = String(
+        blocks.length + (isUnexpectedDelivery ? 1 : 0) +
+        (slide.section === "RETHINKING PERFORMANCE MONITORING" ? 2 : 0)
+      );
+      contentSlideBody.dataset.hasQuote = String(blocks.some(block => block.trim().startsWith("“")));
+      contentSlideBody.dataset.compact = String(originalIndex === 2);
+      contentSlideBody.dataset.caseStudy = String(slide.section === "Case study context");
+      contentSlideBody.dataset.topAligned = String(
+        originalIndex >= firstStepsIndex || slide.section === "Case study context"
+      );
+      contentSlideBody.dataset.velocityTrap = String(slide.section === "Goodhart’s law");
+      contentSlideBody.dataset.agentShift = String(slide.section === "Paradigm shift");
+      contentSlideBody.dataset.informationContext = String(slide.title === "Information Lost and Context");
+      contentSlideBody.dataset.practiceOne = String(slide.section === "The First Realization");
+      contentSlideBody.dataset.collaboration = String(slide.section === "Rethinking Collaboration");
+      contentSlideBody.dataset.unexpectedDelivery = String(isUnexpectedDelivery);
+      contentSlideBody.dataset.closing = "false";
+      const cards = [];
+
+      for (const [blockIndex, block] of blocks.entries()) {
+        const lines = block.split("\n").map(line => line.trim()).filter(Boolean);
+        const card = document.createElement("article");
+        card.className = "content-slide-card";
+        if (slide.section === "Paradigm shift" && blockIndex === 3) {
+          card.classList.add("content-slide-card--callout");
+        }
+        if (slide.section === "Case study context") {
+          card.classList.add(blockIndex === 0 ? "case-study-card--domain" : "case-study-card--mission");
+        }
+        const firstLine = lines[0];
+        const quote = lines.length === 1 && firstLine.startsWith("“");
+
+        if (slide.title === "Information Lost and Context") {
+          appendText(card, "h2", firstLine);
+          const points = document.createElement("div");
+          points.className = "information-context-points";
+          for (const line of lines.slice(1)) {
+            appendText(points, "p", line, "content-slide-item");
+          }
+          card.append(points);
+        } else if (isUnexpectedDelivery && blockIndex === 1) {
+          card.classList.add("unexpected-delivery-summary");
+          appendText(card, "h2", firstLine);
+          appendText(card, "p", lines[1], "unexpected-delivery-lead");
+          const metrics = appendText(card, "p", "", "content-slide-item unexpected-delivery-metric-summary");
+          const metricSeparator = " — ";
+          for (const [metricIndex, line] of lines.slice(2).entries()) {
+            const separatorIndex = line.indexOf(metricSeparator);
+            if (separatorIndex === -1) throw new Error("An unexpected-outcome metric is malformed.");
+            if (metricIndex > 0) metrics.append(" · ");
+            appendText(metrics, "strong", line.slice(0, separatorIndex));
+            metrics.append(`${metricSeparator}${line.slice(separatorIndex + metricSeparator.length)}`);
+          }
+        } else if (slide.section === "Case study context") {
+          appendText(card, "h2", firstLine);
+          for (const line of lines.slice(1)) {
+            appendText(card, "p", line, "content-slide-item");
+          }
+        } else if (quote) {
+          card.classList.add("content-slide-card--quote");
+          appendText(card, "p", firstLine);
+        } else if (lines.length > 1) {
+          appendText(card, "h2", firstLine);
+          for (const line of lines.slice(1)) {
+            appendText(card, "p", line, lines.length > 2 ? "content-slide-item" : "");
+          }
+        } else {
+          const metric = firstLine.match(/^([~\d][^—]+)\s+—\s+(.+)$/);
+          const labeledLine = firstLine.match(/^([^:]{1,80}):\s*(.+)$/);
+          if (metric) {
+            card.classList.add("content-slide-metric");
+            appendText(card, "strong", metric[1]);
+            appendText(card, "span", metric[2]);
+          } else if (labeledLine) {
+            appendText(card, "h2", labeledLine[1]);
+            appendText(card, "p", labeledLine[2]);
+          } else {
+            if (firstLine.includes("→") || firstLine.includes("<")) {
+              card.classList.add("content-slide-card--callout");
+            }
+            appendText(card, "p", firstLine);
+          }
+        }
+
+        cards.push(card);
+      }
+
+      if (slide.section === "Goodhart’s law") {
+        const contextColumn = document.createElement("div");
+        contextColumn.className = "velocity-trap-column velocity-trap-column--context";
+        contextColumn.append(cards[1], cards[2], cards[3]);
+
+        const symptomsColumn = document.createElement("div");
+        symptomsColumn.className = "velocity-trap-column velocity-trap-column--symptoms";
+        symptomsColumn.append(cards[0], cards[4], cards[5], cards[6]);
+        contentSlideBody.append(contextColumn, symptomsColumn);
+      } else {
+        contentSlideBody.append(...cards);
+      }
+
+      if (
+        slide.section === "The First Realization" ||
+        slide.section === "Rethinking Collaboration" ||
+        slide.section === "RETHINKING DEVELOPMENT" ||
+        slide.section === "RETHINKING PERFORMANCE MONITORING" ||
+        slide.title === "Information Lost and Context"
+      ) {
+        const isInformationContext = slide.title === "Information Lost and Context";
+        const lesson = document.createElement("article");
+        lesson.className = "content-slide-card content-slide-card--key-lesson";
+        appendText(lesson, "h2", "Key Lesson");
+        if (slide.section === "RETHINKING DEVELOPMENT") {
+          appendText(
+            lesson,
+            "p",
+            "Verification is a first-class architectural concern: design constraints and checks into the system.",
+            "content-slide-item"
+          );
+          appendText(
+            lesson,
+            "p",
+            "The quality system is the main deliverable. A mediocre agent operating inside an exceptional verification environment will consistently outperform a brilliant agent operating inside a weak one.",
+            "content-slide-item"
+          );
+        } else if (slide.section === "RETHINKING PERFORMANCE MONITORING") {
+          appendText(
+            lesson,
+            "p",
+            "Measure customer and business outcomes, not activity. Use OKRs to assess value and engineering trends to improve delivery—not to score individuals."
+          );
+        } else {
+          appendText(
+            lesson,
+            "p",
+            slide.section === "Rethinking Collaboration"
+              ? "Building prototypes together strengthens business–engineering collaboration, builds domain expertise, and creates executable specs richer in context than any ticket."
+              : isInformationContext
+                ? "Keep knowledge connected and engineers close to users so people and agents can make better decisions."
+                : "AI is too profound a shift to use merely for automating the way we work today. To realize its full potential, we must rethink how we work from the ground up."
+          );
+        }
+        contentSlideBody.append(lesson);
+
+        if (
+          isInformationContext ||
+          slide.section === "The First Realization" ||
+          slide.section === "Rethinking Collaboration" ||
+          slide.section === "RETHINKING DEVELOPMENT" ||
+          slide.section === "RETHINKING PERFORMANCE MONITORING"
+        ) {
+          const tools = document.createElement("article");
+          tools.className = "content-slide-card content-slide-card--key-tools";
+          appendText(tools, "h2", "Key Tools");
+          if (slide.section === "RETHINKING DEVELOPMENT") {
+            const explicitChoices = appendText(tools, "p", "", "content-slide-item");
+            explicitChoices.append("Prefer explicit choices: ");
+            appendText(explicitChoices, "strong", "SQL over NoSQL");
+            explicitChoices.append(", ");
+            appendText(explicitChoices, "strong", "static types over dynamic types");
+            explicitChoices.append(", and ");
+            appendText(explicitChoices, "strong", "tRPC over REST");
+            explicitChoices.append(".");
+
+            const verificationTools = appendText(tools, "p", "", "content-slide-item");
+            verificationTools.append("Make ");
+            appendText(verificationTools, "strong", "side effects explicit");
+            verificationTools.append(" (Effect); use ");
+            appendText(verificationTools, "strong", "mutation testing");
+            verificationTools.append(" and architecture tests (");
+            appendText(verificationTools, "strong", "dependency-cruiser");
+            verificationTools.append(").");
+
+            const automation = appendText(tools, "p", "", "content-slide-item");
+            automation.append("Run the checks in ");
+            appendText(automation, "strong", "GitHub Actions");
+            automation.append(". Explicit constraints give agents richer context and make verification automatable.");
+          } else if (slide.section === "RETHINKING PERFORMANCE MONITORING") {
+            const summary = appendText(tools, "p", "");
+            summary.append("Use ");
+            appendText(summary, "strong", "GitHub Issues and PRs");
+            summary.append(" for delivery tracking, the ");
+            appendText(summary, "strong", "GitHub API");
+            summary.append(" for custom dashboards, and ");
+            appendText(summary, "strong", "issue labels");
+            summary.append(" to link work to OKRs.");
+          } else {
+            const summary = appendText(tools, "p", "");
+            if (slide.section === "The First Realization") {
+              summary.append("Use ");
+              appendText(summary, "strong", "GitHub Projects");
+              summary.append(" for the Kanban board and ");
+              appendText(summary, "strong", "GitHub Copilot");
+              summary.append(" for custom agents.");
+            } else if (slide.section === "Rethinking Collaboration") {
+              summary.append("Use ");
+              appendText(summary, "strong", "GitHub Issues");
+              summary.append(", the ");
+              appendText(summary, "strong", "GitHub MCP server");
+              summary.append(", ");
+              appendText(summary, "strong", "GitHub Copilot");
+              summary.append(", and ");
+              appendText(summary, "strong", "GitHub Agentic Workflows");
+              summary.append(".");
+            } else {
+              summary.append("Use ");
+              appendText(summary, "strong", "GitHub Copilot");
+              summary.append(" to capture team-meeting transcripts; use ");
+              appendText(summary, "strong", "custom agents");
+              summary.append(" to enrich docs and issues. Keep docs as ");
+              appendText(summary, "strong", "Markdown");
+              summary.append(" files in the ");
+              appendText(summary, "strong", "GitHub");
+              summary.append(" repo, with diagrams in ");
+              appendText(summary, "strong", "Mermaid");
+              summary.append(". Use ");
+              appendText(summary, "strong", "GitHub Copilot");
+              summary.append(" with ");
+              appendText(summary, "strong", "custom agents");
+              summary.append(" for vibe coding.");
+            }
+          }
+          contentSlideBody.append(tools);
+        }
+      }
+
+      if (isUnexpectedDelivery) {
+        const visual = document.createElement("figure");
+        visual.className = "unexpected-delivery-visual";
+        const image = document.createElement("img");
+        image.src = "coding-agents-killed-scrum.webp";
+        image.alt = "Coding agents celebrating around a gravestone marked Scrum 1986–2026";
+        visual.append(image);
+        contentSlideBody.append(visual);
+      }
+
+      if (originalIndex === 2) {
+        const warning = document.createElement("article");
+        warning.className = "content-slide-card content-slide-card--callout content-slide-warning";
+        appendText(warning, "h2", "Velocity is not part of Scrum");
+        appendText(
+          warning,
+          "p",
+          "Story points, sprint commitments, velocity and burndowns aren’t in the Scrum Guide. They give practical answers to questions Scrum leaves open, so people started treating them as part of Scrum. Books, training, managers and tools reinforced that idea."
+        );
+        contentSlideBody.append(warning);
+      }
+    }
+
+    function setRevealItemVisibility(item, visible) {
+      item.classList.add("slide-reveal-item");
+      item.classList.toggle("is-revealed", visible);
+      if (visible) {
+        item.removeAttribute("aria-hidden");
+        item.removeAttribute("inert");
+      } else {
+        item.setAttribute("aria-hidden", "true");
+        item.setAttribute("inert", "");
+      }
+    }
+
+    function render(index, revealAll = false) {
+      const totalSlides = slides.length + 3;
+      current = Math.max(0, Math.min(totalSlides - 1, index));
+      revealItems = [];
+      revealedItemCount = 0;
+      const isCover = current === 0;
+      const isSpeakerProfile = current === 1;
+      const isPartOne = current === 2;
+      const isAdviceBridge = current === 3;
+      const partTwoSlideIndex = partTwoContentIndex + 2;
+      const isPartTwo = current === partTwoSlideIndex;
+      const isPartDivider = isPartOne || isPartTwo;
+      const isContentSlide = current >= 4 && !isPartTwo;
+      const originalIndex = isContentSlide
+        ? current - (current > partTwoSlideIndex ? 3 : 2)
+        : 0;
+      const slide = slides[originalIndex];
+      coverSlide.hidden = !isCover;
+      contentSlide.hidden = !isContentSlide;
+      speakerProfile.hidden = !isSpeakerProfile;
+      adviceBridge.hidden = !isAdviceBridge;
+      partDivider.hidden = !isPartDivider;
+      if (isPartDivider) {
+        const sectionLabel = isPartOne ? "PART I: THE PATH BEHIND US" : "PART II: A NEW FRONTIER";
+        const partTitle = isPartOne
+          ? "What kept us away from the promise of the Agile Manifesto?"
+          : "How Coding Killed Scrum and Finally Delivered on the Promise of the Agile Manifesto?";
+        partDividerLabel.textContent = sectionLabel;
+        partDividerTitle.textContent = partTitle;
+        partDivider.setAttribute("aria-label", `${sectionLabel}: ${partTitle}`);
+      }
+      if (isContentSlide) renderContentSlide(slide, originalIndex);
+      revealItems = isContentSlide
+        ? slide.section === "Closing"
+          ? Array.from(contentSlideBody.querySelectorAll(".closing-thanks, .closing-links"))
+          : Array.from(contentSlideBody.querySelectorAll(".content-slide-card"))
+        : isSpeakerProfile
+          ? Array.from(speakerProfile.querySelectorAll(".speaker-profile-card"))
+          : isAdviceBridge
+            ? Array.from(adviceBridge.querySelectorAll(".advice-bridge-card"))
+            : [];
+      for (const item of revealItems) setRevealItemVisibility(item, false);
+      if (revealAll) {
+        for (const item of revealItems) setRevealItemVisibility(item, true);
+        revealedItemCount = revealItems.length;
+      }
+      footer.hidden = current === 0;
+      slideCounter.textContent = `${String(current + 1).padStart(2, "0")} / ${String(totalSlides).padStart(2, "0")}`;
+      const title = isSpeakerProfile
+        ? "Remo H. Jansen"
+        : isPartOne
+          ? "Part I: The Path Behind Us — What kept us away from the promise of the Agile Manifesto?"
+          : isPartTwo
+            ? "Part II: A New Frontier — How Coding Killed Scrum and Finally Delivered on the Promise of the Agile Manifesto?"
+        : isAdviceBridge
+            ? "We Have a Bias Towards Practical Advice"
+            : slide.title;
+      announcement.textContent = `Slide ${current + 1} of ${totalSlides}: ${title}`;
+    }
+
+    async function transitionToSlide(index, revealAll = false) {
+      if (isSlideTransitioning) return;
+      const target = Math.max(0, Math.min(slides.length + 2, index));
+      if (target === current) return;
+
+      isSlideTransitioning = true;
+      const fadeDuration = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : 240;
+      try {
+        if (fadeDuration) {
+          slideFrame.classList.add("is-transitioning");
+          await new Promise(resolve => setTimeout(resolve, fadeDuration));
+        }
+        render(target, revealAll);
+        if (fadeDuration) {
+          await new Promise(resolve => requestAnimationFrame(resolve));
+          slideFrame.classList.remove("is-transitioning");
+          await new Promise(resolve => setTimeout(resolve, fadeDuration));
+        }
+      } finally {
+        slideFrame.classList.remove("is-transitioning");
+        isSlideTransitioning = false;
+      }
+    }
+
+    async function navigateForward() {
+      if (isSlideTransitioning) return;
+      if (revealedItemCount < revealItems.length) {
+        setRevealItemVisibility(revealItems[revealedItemCount], true);
+        revealedItemCount += 1;
+        return;
+      }
+      await transitionToSlide(current + 1);
+    }
+
+    async function navigateBackward() {
+      if (isSlideTransitioning) return;
+      if (revealedItemCount > 0) {
+        revealedItemCount -= 1;
+        setRevealItemVisibility(revealItems[revealedItemCount], false);
+        return;
+      }
+      await transitionToSlide(current - 1, true);
+    }
+
+    async function startPresentation() {
+      startError.hidden = true;
+      if (typeof presentation.requestFullscreen !== "function") {
+        startError.textContent = "Full screen isn't supported by this browser.";
+        startError.hidden = false;
+        return;
+      }
+      try {
+        await presentation.requestFullscreen();
+      } catch (error) {
+        startError.textContent = `Couldn't enter full screen: ${error instanceof Error ? error.message : String(error)}`;
+        startError.hidden = false;
+      }
+    }
+
+    startButton.addEventListener("click", startPresentation);
+    document.addEventListener("fullscreenchange", () => {
+      const active = Boolean(document.fullscreenElement);
+      if (active) hasStartedPresentation = true;
+      startOverlay.hidden = active || hasStartedPresentation;
+      if (active) {
+        presentation.focus({ preventScroll: true });
+      } else if (!hasStartedPresentation) {
+        startButton.focus({ preventScroll: true });
+      } else {
+        presentation.focus({ preventScroll: true });
+      }
+    });
+    document.addEventListener("keydown", event => {
+      const fullscreen = Boolean(document.fullscreenElement);
+      if ((!fullscreen && !hasStartedPresentation) || event.altKey || event.ctrlKey || event.metaKey || event.repeat) return;
+      if (event.key === "Escape") {
+        if (!fullscreen) return;
+        event.preventDefault();
+        void document.exitFullscreen();
+      } else if (event.key === "ArrowRight") {
+        event.preventDefault();
+        void navigateForward();
+      } else if (event.key === "ArrowLeft") {
+        event.preventDefault();
+        void navigateBackward();
+      }
+    });
+
+    render(0);
+  </script>
+</body>
+</html>
