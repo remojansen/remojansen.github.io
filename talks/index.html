@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Talks and presentations by Remo H. Jansen.">
+    <title>Talks &amp; Presentations - Remo H. Jansen</title>
+    <style>
+        :root {
+            color-scheme: dark;
+            --screen: #00140d;
+            --screen-bright: #91ffd0;
+            --phosphor: #28ff9d;
+            --phosphor-dim: #0ebd78;
+            --phosphor-muted: #087d53;
+            --phosphor-line: rgba(40, 255, 157, 0.34);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            display: grid;
+            min-height: 100vh;
+            min-height: 100svh;
+            place-items: center;
+            padding: clamp(12px, 2.5vw, 36px);
+            background:
+                radial-gradient(ellipse at 50% 42%, #26302a 0, #101411 58%, #090c0a 100%);
+            color: var(--phosphor);
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+        }
+
+        .monitor {
+            width: min(1480px, 100%);
+            padding: clamp(12px, 1.8vw, 26px);
+            border: 1px solid rgba(220, 255, 232, 0.14);
+            border-radius: clamp(18px, 2.2vw, 32px);
+            background: linear-gradient(145deg, #454b46 0%, #202722 8%, #101713 18%, #242c26 100%);
+            box-shadow:
+                inset 0 2px 4px rgba(255, 255, 255, 0.12),
+                inset 0 -5px 12px rgba(0, 0, 0, 0.85),
+                0 24px 70px rgba(0, 0, 0, 0.72);
+        }
+
+        .screen {
+            position: relative;
+            min-height: min(850px, calc(100svh - 100px));
+            overflow: hidden;
+            padding: clamp(28px, 5vw, 70px);
+            border: 1px solid rgba(40, 255, 157, 0.12);
+            border-radius: clamp(10px, 1.4vw, 20px);
+            background:
+                radial-gradient(ellipse at 50% 40%, rgba(10, 85, 53, 0.3), transparent 72%),
+                linear-gradient(140deg, #00130c, var(--screen) 52%, #000b07);
+            box-shadow:
+                inset 0 0 45px rgba(0, 0, 0, 0.95),
+                inset 0 0 9px rgba(40, 255, 157, 0.12),
+                0 0 22px rgba(40, 255, 157, 0.08);
+        }
+
+        .screen::before,
+        .screen::after {
+            position: absolute;
+            z-index: 2;
+            inset: 0;
+            content: "";
+            pointer-events: none;
+        }
+
+        .screen::before {
+            background: repeating-linear-gradient(
+                to bottom,
+                transparent 0,
+                transparent 2px,
+                rgba(0, 0, 0, 0.18) 3px,
+                transparent 4px
+            );
+            opacity: 0.62;
+        }
+
+        .screen::after {
+            border-radius: inherit;
+            background: radial-gradient(ellipse at center, transparent 48%, rgba(0, 0, 0, 0.5) 100%);
+        }
+
+        .terminal {
+            position: relative;
+            z-index: 1;
+            width: min(1050px, 100%);
+            margin: 0 auto;
+            text-shadow: 0 0 7px rgba(40, 255, 157, 0.52);
+        }
+
+        .system-info {
+            color: var(--phosphor-dim);
+            font-size: clamp(0.8rem, 1.15vw, 1rem);
+            font-weight: 700;
+            line-height: 1.45;
+        }
+
+        .system-info p + p {
+            color: var(--phosphor-muted);
+        }
+
+        h1 {
+            margin-top: clamp(20px, 3vh, 34px);
+            color: var(--screen-bright);
+            font-size: clamp(2.4rem, 7vw, 6rem);
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            line-height: 1;
+            overflow-wrap: anywhere;
+            text-shadow:
+                0 0 3px var(--phosphor),
+                0 0 16px rgba(40, 255, 157, 0.72),
+                0 0 34px rgba(40, 255, 157, 0.4);
+        }
+
+        .page-subtitle {
+            margin-top: 0.9rem;
+            color: var(--phosphor);
+            font-size: clamp(0.9rem, 1.5vw, 1.15rem);
+            font-weight: 700;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+        }
+
+        .boot-log {
+            display: grid;
+            gap: 0.25rem;
+            margin-top: clamp(24px, 4vh, 42px);
+            color: var(--phosphor);
+            font-size: clamp(0.78rem, 1.05vw, 0.98rem);
+            line-height: 1.4;
+        }
+
+        .boot-line {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) auto;
+            gap: 1rem;
+        }
+
+        .boot-status {
+            color: var(--screen-bright);
+            white-space: nowrap;
+        }
+
+        .archive-heading {
+            margin-top: clamp(24px, 4vh, 40px);
+            padding-top: 0.75rem;
+            border-top: 1px dashed var(--phosphor-line);
+            color: var(--phosphor-dim);
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        .talk-list {
+            margin-top: 0.25rem;
+            list-style: none;
+        }
+
+        .talk-entry {
+            display: grid;
+            grid-template-columns: 3ch minmax(0, 1fr) auto;
+            align-items: center;
+            gap: clamp(10px, 2vw, 24px);
+            padding: clamp(12px, 1.7vh, 19px) 0.5rem;
+            border-bottom: 1px dashed var(--phosphor-line);
+        }
+
+        .entry-number {
+            align-self: start;
+            padding-top: 0.15rem;
+            color: var(--phosphor-muted);
+            font-size: 0.9rem;
+        }
+
+        .entry-event {
+            margin-bottom: 0.4rem;
+            color: var(--phosphor-dim);
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .entry-content h2 {
+            color: var(--screen-bright);
+            font-size: clamp(1rem, 1.6vw, 1.35rem);
+            font-weight: 700;
+            line-height: 1.3;
+        }
+
+        .entry-content p:last-child {
+            margin-top: 0.35rem;
+            color: var(--phosphor-dim);
+            font-size: clamp(0.8rem, 1vw, 0.92rem);
+            line-height: 1.45;
+        }
+
+        .talk-link {
+            color: var(--phosphor);
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-decoration: none;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        .talk-link:hover,
+        .talk-link:focus-visible {
+            color: var(--screen-bright);
+            text-decoration: underline;
+            text-underline-offset: 0.25em;
+        }
+
+        .talk-link:focus-visible {
+            outline: 1px dashed var(--screen-bright);
+            outline-offset: 5px;
+        }
+
+        .terminal-footer {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 0.8rem 1.5rem;
+            margin-top: clamp(24px, 4vh, 40px);
+            padding-top: 1rem;
+            border-top: 1px dashed var(--phosphor-line);
+            color: var(--phosphor-dim);
+            font-size: 0.85rem;
+        }
+
+        .prompt {
+            color: var(--screen-bright);
+            font-weight: 700;
+        }
+
+        @media (max-width: 700px) {
+            body {
+                padding: 10px;
+            }
+
+            .monitor {
+                padding: 10px;
+                border-radius: 16px;
+            }
+
+            .screen {
+                min-height: calc(100svh - 40px);
+                padding: 28px 18px;
+            }
+
+            h1 {
+                font-size: clamp(2.25rem, 13vw, 4rem);
+                letter-spacing: 0.025em;
+            }
+
+            .talk-entry {
+                grid-template-columns: 2ch minmax(0, 1fr);
+            }
+
+            .talk-link {
+                grid-column: 2;
+                justify-self: start;
+                padding-top: 0.2rem;
+            }
+
+            .terminal-footer {
+                flex-direction: column;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <main class="monitor">
+        <section class="screen" aria-labelledby="page-title">
+            <div class="terminal">
+                <header>
+                    <div class="system-info">
+                        <p>RetroOS v2.5.71 // REMOJANSEN.COM</p>
+                        <p>Personal talk archive · guest access</p>
+                    </div>
+                    <h1 id="page-title">REMOJANSEN.COM</h1>
+                    <p class="page-subtitle">Talk Archive // 2026</p>
+                </header>
+
+                <div class="boot-log" aria-label="System status">
+                    <p class="boot-line"><span>Loading talk archive...</span><span class="boot-status">[SUCCESS]</span></p>
+                    <p class="boot-line"><span>Indexing presentations</span><span class="boot-status">[SUCCESS]</span></p>
+                    <p class="boot-line"><span>Found 3 talks</span><span class="boot-status">[READY]</span></p>
+                </div>
+
+                <h2 class="archive-heading">Select a talk to open</h2>
+                <ol class="talk-list" aria-label="Talks and presentations">
+                    <li class="talk-entry">
+                        <span class="entry-number" aria-hidden="true">01</span>
+                        <div class="entry-content">
+                            <p class="entry-event">Shipit Con · 2026</p>
+                            <h2>Good Friction: Why Constraints Are the Secret Lubricant of AI-Assisted Shipping</h2>
+                            <p>Why constraints can help teams ship software with AI assistance.</p>
+                        </div>
+                        <a class="talk-link" href="./SIC2026">[ OPEN TALK ]</a>
+                    </li>
+                    <li class="talk-entry">
+                        <span class="entry-number" aria-hidden="true">02</span>
+                        <div class="entry-content">
+                            <p class="entry-event">Lean Global Connection · 2026</p>
+                            <h2>Revisiting the Toyota Production System (TPS) in the Age of AI Coding Agents</h2>
+                            <p>What the Toyota Production System can teach us about AI-enabled software production.</p>
+                        </div>
+                        <a class="talk-link" href="./LeanGlobalConnection">[ OPEN TALK ]</a>
+                    </li>
+                    <li class="talk-entry">
+                        <span class="entry-number" aria-hidden="true">03</span>
+                        <div class="entry-content">
+                            <p class="entry-event">Azure &amp; GitHub Community Day · 2026</p>
+                            <h2>How Coding Agents Killed Sprints</h2>
+                            <p>(and Finally Delivered the Agile Manifesto)</p>
+                        </div>
+                        <a class="talk-link" href="./AzureAndGitHubCommunityDay2026">[ OPEN TALK ]</a>
+                    </li>
+                </ol>
+
+                <footer class="terminal-footer">
+                    <p><span class="prompt">guest@remojansen.com ~ $</span></p>
+                    <p>Session ready · Select an OPEN TALK command to continue</p>
+                </footer>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

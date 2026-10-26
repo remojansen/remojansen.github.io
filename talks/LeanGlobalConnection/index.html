@@ -121,17 +121,37 @@
             width: 100%;
             height: 100%;
             padding: clamp(24px, 5.8vh, 64px) clamp(28px, 5vw, 96px);
-            display: none;
+            display: flex;
             flex-direction: column;
             justify-content: space-between;
             gap: 1rem;
             opacity: 0;
-            transition: opacity 0.3s ease-in-out;
+            visibility: hidden;
+            pointer-events: none;
+            transition: opacity 0.3s ease-in-out, visibility 0s linear 0.3s;
         }
 
         .slide.active {
-            display: flex;
             opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .reveal-item {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transform: translateY(10px);
+            transition: opacity 0.25s ease-in-out, transform 0.25s ease-in-out, visibility 0s linear 0.25s;
+        }
+
+        .reveal-item.is-revealed {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            transform: translateY(0);
+            transition: opacity 0.25s ease-in-out, transform 0.25s ease-in-out;
         }
 
         /* Typography & Layout */
@@ -143,23 +163,11 @@
         li {
             position: relative;
             margin: 0;
-            padding: 0.6rem 0.9rem 0.6rem 2.3rem;
+            padding: 0.6rem 0.9rem 0.6rem 1rem;
             background: rgba(255, 255, 255, 0.035);
             border: 1px solid rgba(255, 255, 255, 0.055);
             border-left: 3px solid rgba(142, 169, 250, 0.7);
             border-radius: 8px;
-        }
-        li::before {
-            content: "";
-            position: absolute;
-            top: 50%;
-            left: 1rem;
-            width: 0.42rem;
-            height: 0.42rem;
-            border-radius: 50%;
-            background: var(--primary-light);
-            box-shadow: 0 0 0 4px rgba(142, 169, 250, 0.1);
-            transform: translateY(-50%);
         }
         li strong { color: var(--primary-light); }
 
@@ -211,6 +219,82 @@
 
         .article-links .article-link {
             margin-top: 0;
+        }
+
+        .closing-slide-content {
+            display: grid;
+            grid-template-columns: minmax(240px, 0.85fr) minmax(0, 1.8fr);
+            gap: clamp(24px, 4vw, 64px);
+            align-items: stretch;
+            flex-grow: 1;
+            min-height: 0;
+            margin: 10px 0;
+        }
+
+        .closing-thanks {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding-right: clamp(18px, 2vw, 32px);
+            border-right: 1px solid var(--border-color);
+            text-align: center;
+        }
+
+        .closing-links {
+            display: flex;
+            min-width: 0;
+            min-height: 0;
+            flex-direction: column;
+        }
+
+        .closing-link-list {
+            display: grid;
+            flex: 1;
+            min-height: 0;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            grid-template-rows: repeat(6, minmax(0, 1fr));
+            gap: 0.35rem 1rem;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .closing-link-list li {
+            min-width: 0;
+            margin: 0;
+            padding: 0;
+            border: 0;
+            border-bottom: 1px solid var(--border-color);
+            border-radius: 0;
+            background: transparent;
+        }
+
+        .closing-link-list li::before {
+            content: none;
+        }
+
+        .closing-link-list .article-link {
+            display: block;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0.35rem 0.4rem;
+            border: 0;
+            border-radius: 0;
+            background: transparent;
+            font-size: 0.8rem;
+            font-weight: 400;
+        }
+
+        .closing-link-list .article-link::after {
+            content: none;
+        }
+
+        .closing-link-list .article-link:hover {
+            transform: none;
+            background: transparent;
+            color: var(--primary-light);
         }
 
         .qr-promo {
@@ -284,9 +368,23 @@
         }
 
         .about-columns {
-            grid-template-columns: minmax(140px, 0.72fr) 1.2fr 1fr;
+            grid-template-columns: minmax(260px, 0.95fr) minmax(0, 2fr);
             gap: clamp(16px, 2vw, 32px);
             align-items: center;
+        }
+
+        .about-cards {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+        }
+
+        .about-card {
+            background: var(--card-bg);
+            padding: 14px 20px;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent);
+            border: 1px solid var(--border-color);
         }
 
         .factory-floor-questions {
@@ -634,12 +732,23 @@
                 justify-content: flex-start;
                 gap: 1.25rem;
                 opacity: 1;
+                visibility: visible;
+                pointer-events: auto;
                 transition: none;
             }
 
             .slide.active {
                 display: flex;
                 opacity: 1;
+            }
+
+            .reveal-item,
+            .reveal-item.is-revealed {
+                opacity: 1;
+                visibility: visible;
+                pointer-events: auto;
+                transform: none;
+                transition: none;
             }
 
             h1 {
@@ -667,6 +776,23 @@
 
             .center-content {
                 flex-grow: 0;
+            }
+
+            .closing-slide-content {
+                grid-template-columns: minmax(0, 1fr);
+                gap: 24px;
+                flex-grow: 0;
+            }
+
+            .closing-thanks {
+                padding: 0 0 20px;
+                border-right: 0;
+                border-bottom: 1px solid var(--border-color);
+            }
+
+            .closing-link-list {
+                grid-template-columns: minmax(0, 1fr);
+                grid-template-rows: auto;
             }
 
             .speaker-photo {
@@ -729,6 +855,16 @@
                 font-size: 17px;
             }
         }
+
+        @media (prefers-reduced-motion: reduce) {
+            .slide,
+            .slide.active,
+            .reveal-item,
+            .reveal-item.is-revealed {
+                transition: none;
+                transform: none;
+            }
+        }
     </style>
 </head>
 <body>
@@ -764,26 +900,32 @@
 
     <!-- Slide 2: About the Speaker -->
     <div class="slide">
-        <div>
-            <div class="subtitle">About the Speaker</div>
+    <div class="columns about-columns">
+        <div class="about-profile">
+            <div class="subtitle">Speaker Profile</div>
             <h2>Remo H. Jansen</h2>
-        </div>
-        <div class="columns about-columns">
+            <p style="font-size: 1.15rem; font-weight: 600; color: var(--white); margin-bottom: 12px;">Technical Lead at Marsh<br>Wexford, Ireland</p>
             <img class="speaker-photo" src="./remo.jpeg" alt="Remo H. Jansen">
-            <div>
-                <p style="font-size: 1.15rem; font-weight: 600; color: var(--white); margin-bottom: 12px;">Technical Lead at Marsh · Wexford, Ireland</p>
-                <ul>
-                    <li>Published author & open-source contributor</li>
-                    <li>Creator of InversifyJS — widely used TypeScript dependency-injection framework</li>
-                    <li>Author of <em>Learning TypeScript</em></li>
-                    <li>Former Microsoft MVP with a long history in the TS & JS communities</li>
-                </ul>
+        </div>
+        <div class="about-cards">
+            <div class="about-card">
+                <p><strong>Open Source & Community</strong></p>
+                <p>Creator of InversifyJS, a contributor to the TypeScript and JavaScript communities, and a former Microsoft MVP.</p>
             </div>
-            <div style="background: var(--card-bg); padding: 20px; border-radius: 8px; border-left: 4px solid var(--accent); border: 1px solid var(--border-color);">
-                <p>My work focuses on software architecture, developer productivity, modern web engineering, and the impact of AI, including the industrialisation of software production.</p>
-                <p style="margin-top: 12px;">My talks explore the boundary between software engineering and the psychology, culture, and social dynamics that shape high-performing teams.</p>
+            <div class="about-card">
+                <p><strong>International Speaker & Published Author</strong></p>
+                <p>Author of several books on TypeScript published by Packt Publishing.</p>
+            </div>
+            <div class="about-card">
+                <p><strong>Current Focus</strong></p>
+                <p>Software architecture, developer productivity, modern web engineering, and AI's impact on software delivery.</p>
+            </div>
+            <div class="about-card">
+                <p><strong>Topics</strong></p>
+                <p>JavaScript, TypeScript, Dependency Injection, NodeJS, React, SOLID, DevEx, High Performing Teams, Agentic SDLC, Applied Generative AI, Open Source, Software Architecture, Software Engineering, Azure, and GitHub.</p>
             </div>
         </div>
+    </div>
         <footer>
             <div>#LeanGlobalConnection</div>
             <div>www.remojansen.com</div>
@@ -1325,7 +1467,6 @@
                 <li><strong>Mistakes must be visible</strong> — Andon signals that stop the process, not silent dashboards.</li>
                 <li><strong>Mistakes must be corrected quickly</strong> — Root-cause learning that permanently updates constraints.</li>
             </ul>
-            <p style="font-size: 0.95rem; text-align: center;">The factory is not the datacentre: the same models and compute produce different results when specs, workflows, isolation, and feedback loops differ.</p>
         </div>
         <footer>
             <div>#LeanGlobalConnection</div>
@@ -1353,20 +1494,32 @@
 
     <!-- Slide 18: Thank You / Q&A -->
     <div class="slide">
-        <div></div>
-        <div class="center-content">
-            <div class="qr-promo qr-promo--centered">
-                <img src="./qr.svg" alt="QR code to get the slides">
-                <span>GET THE SLIDES</span>
-            </div>
-            <h1 style="font-size: 2.8rem; color: var(--white);">THANK YOU</h1>
-            <p style="font-size: 1.4rem; color: var(--accent); font-weight: 600; margin: 12px 0;">Questions?</p>
-            <p class="speaker-name" style="margin-top: 15px;">Remo H. Jansen</p>
-            <p class="speaker-title">Lean Global Connection 2026<br>Designing Human-Centered Organizations in the Age of AI</p>
-            <div class="article-links">
-                <a class="article-link" href="https://dev.to/remojansen/revisiting-the-toyota-production-system-tps-in-the-age-of-coding-agents-2bb5" target="_blank" rel="noopener noreferrer">Learn More about the TPS</a>
-                <a class="article-link" href="https://dev.to/remojansen/the-industrial-revolution-of-software-is-here-14f6" target="_blank" rel="noopener noreferrer">Learn More about the Agentic Revolution</a>
-            </div>
+        <div class="closing-slide-content">
+            <section class="closing-thanks" aria-label="Thank you and get the slides">
+                <div class="qr-promo qr-promo--centered">
+                    <img src="./qr.svg" alt="QR code to get the slides">
+                    <span>GET THE SLIDES</span>
+                </div>
+                <h1 style="font-size: 2.8rem; color: var(--white);">Thank You!</h1>
+                <p style="font-size: 1.4rem; color: var(--accent); font-weight: 600; margin: 12px 0;">Questions?</p>
+            </section>
+            <section class="closing-links" aria-labelledby="closing-links-title">
+                <h2 id="closing-links-title">Learn More</h2>
+                <ul class="closing-link-list">
+                    <li><a class="article-link" href="https://dev.to/remojansen/why-the-best-software-advice-is-the-hardest-to-follow-4kg8" target="_blank" rel="noopener noreferrer">Why the Best Software Advice Is the Hardest to Follow</a></li>
+                    <li><a class="article-link" href="https://dev.to/remojansen/from-rigidity-to-explicitness-how-ai-changes-the-role-of-constraints-in-software-5cp5" target="_blank" rel="noopener noreferrer">From Rigidity to Explicitness: How AI Changes the Role of Constraints in Software</a></li>
+                    <li><a class="article-link" href="https://dev.to/remojansen/scrum-is-finally-dead-and-we-have-to-thank-coding-agents-for-that-18bi" target="_blank" rel="noopener noreferrer">Scrum Is Finally Dead—and We Have to Thank Coding Agents for That</a></li>
+                    <li><a class="article-link" href="https://dev.to/remojansen/revisiting-the-toyota-production-system-tps-in-the-age-of-coding-agents-2bb5" target="_blank" rel="noopener noreferrer">Revisiting the Toyota Production System (TPS) in the Age of Coding Agents</a></li>
+                    <li><a class="article-link" href="https://dev.to/remojansen/when-code-gets-cheap-verification-becomes-expensive-how-ai-changes-the-economics-of-software-632" target="_blank" rel="noopener noreferrer">When Code Gets Cheap, Verification Becomes Expensive: How AI Changes the Economics of Software</a></li>
+                    <li><a class="article-link" href="https://dev.to/remojansen/the-industrial-revolution-of-software-is-here-14f6" target="_blank" rel="noopener noreferrer">The Industrial Revolution of Software Is Here</a></li>
+                    <li><a class="article-link" href="https://dev.to/remojansen/mutation-testing-with-typescript-how-to-verify-your-tests-in-the-age-of-ai-coding-agents-neh" target="_blank" rel="noopener noreferrer">Mutation Testing with TypeScript: How to Verify Your Tests in the Age of AI Coding Agents</a></li>
+                    <li><a class="article-link" href="https://dev.to/remojansen/the-agentic-manifesto-what-should-the-agile-manifesto-look-like-in-the-age-of-ai-3k1g" target="_blank" rel="noopener noreferrer">The Agentic Manifesto: What Should the Agile Manifesto Look Like in the Age of AI?</a></li>
+                    <li><a class="article-link" href="https://dev.to/remojansen/maye-enterprise-software-doesnt-have-to-suck-anymore-2163" target="_blank" rel="noopener noreferrer">Maybe Enterprise Software Doesn't Have to Suck Anymore</a></li>
+                    <li><a class="article-link" href="https://dev.to/remojansen/the-infinite-loop-part-i-the-problem-3clc" target="_blank" rel="noopener noreferrer">The Infinite Loop, Part I: The Problem</a></li>
+                    <li><a class="article-link" href="https://dev.to/remojansen/the-infinite-loop-part-ii-the-solution-hk3" target="_blank" rel="noopener noreferrer">The Infinite Loop, Part II: The Solution</a></li>
+                    <li><a class="article-link" href="https://dev.to/remojansen/the-infinite-loop-part-iii-agentic-software-engineering-1h5f" target="_blank" rel="noopener noreferrer">The Infinite Loop, Part III: Agentic Software Engineering</a></li>
+                </ul>
+            </section>
         </div>
         <footer>
             <div>#LeanGlobalConnection</div>
@@ -1385,6 +1538,22 @@
     const continueButton = document.querySelector('#continue-button');
     const startStatus = document.querySelector('#start-status');
     const slides = document.querySelectorAll('.slide');
+    const revealGroupSelector = '.about-card, .revolution-card, .sketch-box, .diagram-panel, .process-table, .speaker-photo, .closing-thanks, .closing-links, [style*="background:"]';
+    const revealItemSelector = `${revealGroupSelector}, li, p`;
+    const revealItemsBySlide = Array.from(slides, (slide, index) => {
+        if (index === 0) return [];
+
+        const revealItems = [];
+        slide.querySelectorAll(revealItemSelector).forEach(item => {
+            if (item.matches('li') && item.closest('.closing-link-list')) return;
+            if (item.matches('p') && item.closest('footer')) return;
+            if (item.parentElement?.closest(revealGroupSelector)) return;
+            item.classList.add('reveal-item');
+            revealItems.push(item);
+        });
+        return revealItems;
+    });
+    let revealedItemCount = 0;
 
     function beginPresentation() {
         presentationStarted = true;
@@ -1410,15 +1579,35 @@
     continueButton.addEventListener('click', beginPresentation);
 
     function showSlide(index) {
-        slides.forEach(slide => slide.classList.remove('active'));
+        slides.forEach(slide => {
+            slide.classList.remove('active');
+            slide.querySelectorAll('.reveal-item.is-revealed').forEach(item => item.classList.remove('is-revealed'));
+        });
         if (index >= slides.length) currentSlide = 0;
         else if (index < 0) currentSlide = slides.length - 1;
         else currentSlide = index;
         slides[currentSlide].classList.add('active');
+        revealedItemCount = 0;
     }
 
-    function nextSlide() { showSlide(currentSlide + 1); }
-    function prevSlide() { showSlide(currentSlide - 1); }
+    function revealNext() {
+        const revealItems = revealItemsBySlide[currentSlide];
+        if (revealedItemCount < revealItems.length) {
+            revealItems[revealedItemCount].classList.add('is-revealed');
+            revealedItemCount += 1;
+            return;
+        }
+        showSlide(currentSlide + 1);
+    }
+
+    function hidePrevious() {
+        if (revealedItemCount > 0) {
+            revealedItemCount -= 1;
+            revealItemsBySlide[currentSlide][revealedItemCount].classList.remove('is-revealed');
+            return;
+        }
+        showSlide(currentSlide - 1);
+    }
 
     // Keyboard navigation (Arrow keys or Spacebar)
     document.addEventListener('keydown', (e) => {
@@ -1426,11 +1615,11 @@
 
         if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
             e.preventDefault();
-            nextSlide();
+            revealNext();
         }
         if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
             e.preventDefault();
-            prevSlide();
+            hidePrevious();
         }
     });
 </script>

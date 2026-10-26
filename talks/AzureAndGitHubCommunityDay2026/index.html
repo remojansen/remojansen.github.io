@@ -1359,6 +1359,425 @@
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; }
     }
+
+    @media (max-width: 767px), (pointer: coarse) {
+      html,
+      body {
+        width: 100%;
+        height: auto;
+        min-height: 100%;
+        overflow-x: hidden;
+        overflow-y: auto;
+      }
+
+      body {
+        min-height: 100svh;
+      }
+
+      .presentation {
+        position: relative;
+        inset: auto;
+        width: 100%;
+        height: auto;
+        min-height: 100svh;
+        overflow: visible;
+      }
+
+      .stage {
+        position: static;
+        inset: auto;
+        display: block;
+        width: 100%;
+        height: auto;
+        overflow: visible;
+      }
+
+      .stage > .slide-frame {
+        display: none;
+      }
+
+      .mobile-deck {
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        gap: 12px;
+        padding: 12px;
+        scroll-snap-type: y proximity;
+      }
+
+      .mobile-slide-frame {
+        position: relative;
+        display: flex;
+        width: 100%;
+        height: auto;
+        min-height: 70svh;
+        max-height: none;
+        flex-direction: column;
+        overflow: visible;
+        aspect-ratio: auto;
+        container-type: inline-size;
+        border: 1px solid rgba(40, 217, 233, .28);
+        border-radius: 14px;
+        background: #080b1a;
+        scroll-snap-align: start;
+      }
+
+      .mobile-slide-frame > section:not([hidden]) {
+        position: relative !important;
+        inset: auto !important;
+        z-index: auto;
+        width: 100%;
+        height: auto;
+        min-height: inherit;
+        max-height: none;
+        overflow: visible;
+        padding: 20px 16px;
+      }
+
+      .mobile-slide-frame > .cover-slide {
+        min-height: 70svh;
+        overflow: hidden;
+        padding: 20px;
+      }
+
+      .mobile-slide-frame .cover-kicker,
+      .mobile-slide-frame .content-slide-section,
+      .mobile-slide-frame .speaker-profile-kicker,
+      .mobile-slide-frame .advice-bridge-kicker {
+        max-width: calc(100% - 90px);
+        font-size: 10px;
+        line-height: 1.4;
+      }
+
+      .mobile-slide-frame .speaker-profile-kicker {
+        margin-right: auto;
+        margin-left: auto;
+      }
+
+      .mobile-slide-frame .cover-copy {
+        top: 34%;
+        right: 6%;
+        left: 6%;
+      }
+
+      .mobile-slide-frame .cover-title {
+        max-width: 100%;
+        font-size: clamp(32px, 9vw, 48px);
+      }
+
+      .mobile-slide-frame .cover-subtitle {
+        margin-top: 12px;
+        font-size: clamp(15px, 4vw, 19px);
+      }
+
+      .mobile-slide-frame .cover-qr {
+        right: 6%;
+        bottom: 18%;
+        width: clamp(72px, 20vw, 100px);
+        padding: 6px;
+        border-radius: 12px;
+      }
+
+      .mobile-slide-frame .cover-qr figcaption {
+        margin: 6px 0 2px;
+        font-size: 9px;
+      }
+
+      .mobile-slide-frame .cover-author {
+        right: 6%;
+        bottom: 6%;
+        left: 6%;
+        padding-top: 10px;
+      }
+
+      .mobile-slide-frame .cover-author-name {
+        font-size: 16px;
+      }
+
+      .mobile-slide-frame .cover-author-site {
+        margin-top: 4px;
+        font-size: 12px;
+      }
+
+      .mobile-slide-frame > .content-slide {
+        overflow: visible;
+        padding: 22px 16px 20px;
+      }
+
+      .mobile-slide-frame .content-slide-title {
+        margin-top: 6px;
+        font-size: clamp(28px, 8vw, 40px);
+      }
+
+      .mobile-slide-frame .content-slide-body {
+        display: flex !important;
+        min-height: 0;
+        flex: none;
+        flex-direction: column;
+        align-content: stretch;
+        gap: 12px;
+        margin-top: 18px !important;
+        overflow: visible;
+        grid-template-columns: 1fr !important;
+        grid-template-rows: auto !important;
+        grid-auto-rows: auto !important;
+      }
+
+      .mobile-slide-frame .velocity-trap-column {
+        display: contents;
+      }
+
+      .mobile-slide-frame .content-slide-card {
+        display: flex !important;
+        min-width: 0;
+        min-height: 0 !important;
+        flex: none;
+        flex-direction: column;
+        justify-content: flex-start;
+        overflow: visible;
+        padding: 14px !important;
+        border-radius: 12px;
+        grid-area: auto !important;
+      }
+
+      .mobile-slide-frame .content-slide-card h2 {
+        font-size: clamp(13px, 3.4vw, 16px) !important;
+        line-height: 1.3;
+      }
+
+      .mobile-slide-frame .content-slide-card p {
+        margin-top: .45em !important;
+        font-size: clamp(15px, 4vw, 18px) !important;
+        line-height: 1.4 !important;
+      }
+
+      .mobile-slide-frame .content-slide-card p.content-slide-item {
+        padding-left: 1.1em !important;
+      }
+
+      .mobile-slide-frame .information-context-points {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        grid-column: auto;
+      }
+
+      .mobile-slide-frame .information-context-points p {
+        margin: 0 !important;
+      }
+
+      .mobile-slide-frame .content-slide-card:nth-child(7) {
+        grid-column: auto !important;
+      }
+
+      .mobile-slide-frame .unexpected-delivery-visual {
+        width: 100%;
+        max-height: 280px;
+        padding: 8px;
+      }
+
+      .mobile-slide-frame .unexpected-delivery-visual img {
+        height: auto;
+      }
+
+      .mobile-slide-frame > .speaker-profile {
+        padding: 22px 16px;
+      }
+
+      .mobile-slide-frame .speaker-profile-layout {
+        display: flex;
+        height: auto;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 20px;
+      }
+
+      .mobile-slide-frame .speaker-profile-person {
+        gap: 14px;
+      }
+
+      .mobile-slide-frame .speaker-profile-header {
+        text-align: center;
+      }
+
+      .mobile-slide-frame .speaker-profile-name {
+        margin: 5px 0 8px;
+        font-size: 32px;
+      }
+
+      .mobile-slide-frame .speaker-profile-role {
+        margin-bottom: 4px;
+        font-size: 16px;
+      }
+
+      .mobile-slide-frame .speaker-profile-location {
+        font-size: 14px;
+      }
+
+      .mobile-slide-frame .speaker-profile-photo {
+        width: clamp(100px, 32vw, 150px);
+      }
+
+      .mobile-slide-frame .speaker-profile-content {
+        gap: 16px;
+      }
+
+      .mobile-slide-frame .speaker-profile-details {
+        gap: 12px;
+      }
+
+      .mobile-slide-frame .speaker-profile-card {
+        padding: 14px;
+        border-radius: 10px;
+      }
+
+      .mobile-slide-frame .speaker-profile-card h2 {
+        font-size: 12px;
+      }
+
+      .mobile-slide-frame .speaker-profile-card p {
+        margin-top: 7px;
+        font-size: 15px;
+      }
+
+      .mobile-slide-frame .speaker-profile-tags {
+        gap: 6px;
+        margin-top: 10px;
+      }
+
+      .mobile-slide-frame .speaker-profile-tag {
+        padding: 4px 8px;
+        font-size: 12px;
+      }
+
+      .mobile-slide-frame > .advice-bridge {
+        padding: 22px 16px;
+      }
+
+      .mobile-slide-frame .advice-bridge-title {
+        margin: 8px 0 18px;
+        font-size: clamp(28px, 8vw, 40px);
+      }
+
+      .mobile-slide-frame .advice-bridge-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      .mobile-slide-frame .advice-bridge-card {
+        min-height: 0;
+        padding: 16px;
+        border-radius: 12px;
+      }
+
+      .mobile-slide-frame .advice-bridge-card h2 {
+        font-size: 13px;
+      }
+
+      .mobile-slide-frame .advice-bridge-card p,
+      .mobile-slide-frame .advice-bridge-principle {
+        margin-top: 12px;
+        padding: 10px 12px;
+        font-size: 15px;
+      }
+
+      .mobile-slide-frame > .part-divider {
+        min-height: 60svh;
+        gap: 16px;
+        padding: 24px 18px;
+      }
+
+      .mobile-slide-frame .part-divider-label {
+        font-size: 12px;
+      }
+
+      .mobile-slide-frame .part-divider-title {
+        max-width: 100%;
+        font-size: clamp(30px, 8vw, 42px);
+      }
+
+      .mobile-slide-frame .content-slide-body[data-closing="true"] {
+        gap: 18px;
+      }
+
+      .mobile-slide-frame .closing-thanks {
+        padding: 0 0 18px;
+        border-right: 0;
+        border-bottom: 1px solid rgba(40, 217, 233, .45);
+      }
+
+      .mobile-slide-frame .closing-qr {
+        width: clamp(90px, 25vw, 120px);
+        margin-bottom: 12px;
+        padding: 6px;
+        border-radius: 12px;
+      }
+
+      .mobile-slide-frame .closing-qr figcaption {
+        margin: 6px 0 2px;
+        font-size: 9px;
+      }
+
+      .mobile-slide-frame .closing-thanks h2 {
+        font-size: 36px;
+      }
+
+      .mobile-slide-frame .closing-question {
+        margin-top: 6px;
+        font-size: 16px;
+      }
+
+      .mobile-slide-frame .closing-links {
+        padding-left: 0;
+      }
+
+      .mobile-slide-frame .closing-links h2 {
+        margin-bottom: 10px;
+        font-size: 16px;
+      }
+
+      .mobile-slide-frame .closing-links-list {
+        display: grid;
+        flex: none;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        gap: 8px;
+      }
+
+      .mobile-slide-frame .closing-links-list li {
+        padding: 6px 0;
+      }
+
+      .mobile-slide-frame .closing-links-list a {
+        font-size: 14px;
+      }
+
+      .mobile-slide-frame .slide-counter {
+        top: 10px;
+        right: 12px;
+        padding: 4px 7px;
+        border-radius: 6px;
+        font-size: 10px;
+      }
+
+      .mobile-slide-frame .slide-footer {
+        position: relative;
+        inset: auto;
+        gap: 8px;
+        margin: 0 14px 14px;
+        font-size: 9px;
+        text-shadow: none;
+      }
+
+      .mobile-slide-frame .slide-reveal-item {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .start-overlay {
+        display: none !important;
+      }
+    }
   </style>
 </head>
 <body>
@@ -1463,6 +1882,7 @@
         </footer>
         <div class="slide-counter" id="slide-counter" aria-hidden="true"></div>
       </div>
+      <div class="mobile-deck" id="mobile-deck" hidden aria-label="Scrollable presentation slides"></div>
       <section class="start-overlay" id="start-overlay" aria-labelledby="launch-title">
         <div class="launch-card">
           <p class="launch-kicker">Azure &amp; GitHub Community Day · 2026</p>
@@ -1687,6 +2107,8 @@
     const announcement = document.getElementById("slide-announcement");
     const presentation = document.querySelector(".presentation");
     const slideFrame = document.querySelector(".slide-frame");
+    const mobileDeck = document.getElementById("mobile-deck");
+    const mobileModeQuery = window.matchMedia("(max-width: 767px), (pointer: coarse)");
     const footer = document.querySelector(".slide-footer");
     const coverSlide = document.getElementById("cover-slide");
     const slideCounter = document.getElementById("slide-counter");
@@ -1704,6 +2126,7 @@
     let revealedItemCount = 0;
     let isSlideTransitioning = false;
     let hasStartedPresentation = false;
+    let mobileSlidesBuilt = false;
 
     const learnMoreArticles = [
       {
@@ -2060,7 +2483,7 @@
               summary.append(".");
             } else {
               summary.append("Use ");
-              appendText(summary, "strong", "GitHub Copilot");
+              appendText(summary, "strong", "Copilot");
               summary.append(" to capture team-meeting transcripts; use ");
               appendText(summary, "strong", "custom agents");
               summary.append(" to enrich docs and issues. Keep docs as ");
@@ -2175,6 +2598,44 @@
       announcement.textContent = `Slide ${current + 1} of ${totalSlides}: ${title}`;
     }
 
+    function buildMobileSlides() {
+      const savedIndex = current;
+      const totalSlides = slides.length + 3;
+      const mobileSlides = document.createDocumentFragment();
+      mobileDeck.replaceChildren();
+
+      for (let index = 0; index < totalSlides; index++) {
+        render(index, true);
+        const frame = slideFrame.cloneNode(true);
+        frame.classList.add("mobile-slide-frame");
+        frame.setAttribute("role", "group");
+        frame.setAttribute("aria-label", announcement.textContent);
+        for (const element of frame.querySelectorAll("[id]")) {
+          element.removeAttribute("id");
+        }
+        for (const element of frame.querySelectorAll("[aria-labelledby]")) {
+          element.removeAttribute("aria-labelledby");
+        }
+        mobileSlides.append(frame);
+      }
+
+      mobileDeck.append(mobileSlides);
+      mobileSlidesBuilt = true;
+      render(savedIndex);
+    }
+
+    function updatePresentationMode() {
+      if (mobileModeQuery.matches) {
+        if (!mobileSlidesBuilt) buildMobileSlides();
+        mobileDeck.hidden = false;
+        startOverlay.hidden = true;
+      } else {
+        mobileDeck.hidden = true;
+        startOverlay.hidden = Boolean(document.fullscreenElement) || hasStartedPresentation;
+        window.scrollTo(0, 0);
+      }
+    }
+
     async function transitionToSlide(index, revealAll = false) {
       if (isSlideTransitioning) return;
       const target = Math.max(0, Math.min(slides.length + 2, index));
@@ -2220,6 +2681,7 @@
     }
 
     async function startPresentation() {
+      if (mobileModeQuery.matches) return;
       startError.hidden = true;
       if (typeof presentation.requestFullscreen !== "function") {
         startError.textContent = "Full screen isn't supported by this browser.";
@@ -2238,7 +2700,7 @@
     document.addEventListener("fullscreenchange", () => {
       const active = Boolean(document.fullscreenElement);
       if (active) hasStartedPresentation = true;
-      startOverlay.hidden = active || hasStartedPresentation;
+      startOverlay.hidden = mobileModeQuery.matches || active || hasStartedPresentation;
       if (active) {
         presentation.focus({ preventScroll: true });
       } else if (!hasStartedPresentation) {
@@ -2249,7 +2711,7 @@
     });
     document.addEventListener("keydown", event => {
       const fullscreen = Boolean(document.fullscreenElement);
-      if ((!fullscreen && !hasStartedPresentation) || event.altKey || event.ctrlKey || event.metaKey || event.repeat) return;
+      if (mobileModeQuery.matches || (!fullscreen && !hasStartedPresentation) || event.altKey || event.ctrlKey || event.metaKey || event.repeat) return;
       if (event.key === "Escape") {
         if (!fullscreen) return;
         event.preventDefault();
@@ -2263,6 +2725,12 @@
       }
     });
 
+    if (typeof mobileModeQuery.addEventListener === "function") {
+      mobileModeQuery.addEventListener("change", updatePresentationMode);
+    } else {
+      mobileModeQuery.addListener(updatePresentationMode);
+    }
+    updatePresentationMode();
     render(0);
   </script>
 </body>
